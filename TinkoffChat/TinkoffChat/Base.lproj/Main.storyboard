@@ -29,14 +29,14 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Имя пользователя" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VIa-0f-fxs">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Имя пользователя" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="VIa-0f-fxs">
                                 <rect key="frame" x="16" y="54" width="288" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="pa6-xx-17H"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="scY-zN-gqm">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
@@ -157,6 +157,10 @@
                             <constraint firstItem="LPu-Po-1Ep" firstAttribute="leading" secondItem="BFB-lG-oCn" secondAttribute="trailing" constant="2" id="zX4-wh-4KT"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="aboutUserTV" destination="IzC-LU-Yis" id="13C-hu-s2e"/>
+                        <outlet property="userNameTF" destination="VIa-0f-fxs" id="U8G-OW-8uu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
