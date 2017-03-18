@@ -37,7 +37,7 @@ class MainView: UIViewController
         super.viewDidLoad()
         
         print("|--------------------|")
-        print(" Func: \(#function)")
+        print(" Func: \(#function)\n")
         
         printDebugInfo()
         
@@ -187,7 +187,7 @@ extension MainView
         super.viewWillAppear(animated)
         
         print("|--------------------|")
-        print(" Func: \(#function)")
+        print(" Func: \(#function)\n")
         
         printDebugInfo()
     }
@@ -197,7 +197,7 @@ extension MainView
         super.viewWillLayoutSubviews()
         
         print("|--------------------|")
-        print(" Func: \(#function)")
+        print(" Func: \(#function)\n")
         
         printDebugInfo()
     }
@@ -207,7 +207,7 @@ extension MainView
         super.viewDidLayoutSubviews()
         
         print("|--------------------|")
-        print(" Func: \(#function)")
+        print(" Func: \(#function)\n")
         
         printDebugInfo()
     }
@@ -217,7 +217,7 @@ extension MainView
         super.viewDidAppear(animated)
         
         print("|--------------------|")
-        print(" Func: \(#function)")
+        print(" Func: \(#function)\n")
         
         printDebugInfo()
     }
@@ -227,7 +227,7 @@ extension MainView
         super.viewWillDisappear(animated)
         
         print("|--------------------|")
-        print(" Func: \(#function)")
+        print(" Func: \(#function)\n")
         
         printDebugInfo()
     }
@@ -237,7 +237,7 @@ extension MainView
         super.viewDidDisappear(animated)
         
         print("|--------------------|")
-        print(" Func: \(#function)")
+        print(" Func: \(#function)\n")
         
         printDebugInfo()
     }
