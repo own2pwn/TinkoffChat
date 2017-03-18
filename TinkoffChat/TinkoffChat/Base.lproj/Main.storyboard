@@ -70,7 +70,7 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileImg" translatesAutoresizingMaskIntoConstraints="NO" id="Qhl-T8-esE">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileImg" translatesAutoresizingMaskIntoConstraints="NO" id="Qhl-T8-esE">
                                 <rect key="frame" x="60" y="240" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Qhl-T8-esE" secondAttribute="height" multiplier="1:1" id="gfh-lJ-3Yp"/>
@@ -160,6 +160,7 @@
                     <connections>
                         <outlet property="aboutUserTV" destination="IzC-LU-Yis" id="13C-hu-s2e"/>
                         <outlet property="userNameTF" destination="VIa-0f-fxs" id="U8G-OW-8uu"/>
+                        <outlet property="userProfileIV" destination="Qhl-T8-esE" id="wJQ-XY-cJb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
