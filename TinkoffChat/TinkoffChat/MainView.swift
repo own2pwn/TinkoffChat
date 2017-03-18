@@ -36,12 +36,12 @@ class MainView: UIViewController
     {
         super.viewDidLoad()
         
+        print("|--------------------|")
+        print(" Func: \(#function)")
+        
+        printDebugInfo()
+        
         setupLogic()
-    }
-    
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
     }
     
     
@@ -174,6 +174,84 @@ extension MainView: UIImagePickerControllerDelegate, UINavigationControllerDeleg
             isProfileImageSet = true
         }
         dismiss(animated: true, completion: nil)
+    }
+}
+
+
+// MARK: Life cycle
+
+extension MainView
+{
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        print("|--------------------|")
+        print(" Func: \(#function)")
+        
+        printDebugInfo()
+    }
+    
+    override func viewWillLayoutSubviews()
+    {
+        super.viewWillLayoutSubviews()
+        
+        print("|--------------------|")
+        print(" Func: \(#function)")
+        
+        printDebugInfo()
+    }
+    
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        
+        print("|--------------------|")
+        print(" Func: \(#function)")
+        
+        printDebugInfo()
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        
+        print("|--------------------|")
+        print(" Func: \(#function)")
+        
+        printDebugInfo()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        super.viewWillDisappear(animated)
+        
+        print("|--------------------|")
+        print(" Func: \(#function)")
+        
+        printDebugInfo()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool)
+    {
+        super.viewDidDisappear(animated)
+        
+        print("|--------------------|")
+        print(" Func: \(#function)")
+        
+        printDebugInfo()
+    }
+    
+    func printDebugInfo()
+    {
+        print(" View: \(self.view)")
+        
+        for view in self.view.subviews
+        {
+            print(" View: \(view)")
+        }
+        
+        print("|--------------------|")
     }
 }
 
