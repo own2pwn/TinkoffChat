@@ -18,6 +18,9 @@ class MainView: UIViewController
     
     @IBOutlet weak var userProfileIV: UIImageView!
     
+    @IBOutlet weak var textColorLbl: UILabel!
+    
+    
     // MARK: - Properties
     
     var onViewTapGesture = UITapGestureRecognizer()
@@ -63,11 +66,23 @@ class MainView: UIViewController
         
         
         let chooseFromLibraryAction = UIAlertAction(title: "Выбрать из библиотеки", style: .default) { action in
-            print(action)
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            
+            imagePicker.allowsEditing = false
+            imagePicker.sourceType = .photoLibrary
+            
+            self.present(imagePicker, animated: true, completion: nil)
         }
         
         let takePhotoAction = UIAlertAction(title: "Сделать фото", style: .default) { action in
-            print(action)
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            
+            imagePicker.allowsEditing = false
+            imagePicker.sourceType = .camera
+            
+            self.present(imagePicker, animated: true, completion: nil)
         }
         
         let cancelAction = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
@@ -75,7 +90,8 @@ class MainView: UIViewController
         let deleteAction = UIAlertAction(title: "Удалить фото", style: .destructive) { action in
             
             let confirmDeleteAction = UIAlertAction(title: "Удалить", style: .destructive) { action in
-                print(action)
+                self.userProfileIV.image = #imageLiteral(resourceName: "profileImg")
+                self.isProfileImageSet = false
             }
             
             confirmDeleteAlertController.addAction(cancelAction)
@@ -86,11 +102,26 @@ class MainView: UIViewController
         }
         
         profileImageActionActionSheet.addAction(chooseFromLibraryAction)
-        profileImageActionActionSheet.addAction(takePhotoAction)
-        profileImageActionActionSheet.addAction(deleteAction)
+        
+        if (UIImagePickerController.isSourceTypeAvailable(.camera)) { profileImageActionActionSheet.addAction(takePhotoAction) }
+        
+        if (isProfileImageSet) { profileImageActionActionSheet.addAction(deleteAction) }
+        
         profileImageActionActionSheet.addAction(cancelAction)
         
         self.present(profileImageActionActionSheet, animated: true, completion: nil)
+    }
+    
+    
+    
+    @IBAction func didTapColorButton(_ sender: UIButton)
+    {
+        textColorLbl.textColor = sender.backgroundColor
+    }
+    
+    @IBAction func didTapSaveButton(_ sender: UIButton)
+    {
+        print("Сохранение данных профиля")
     }
 }
 
@@ -98,7 +129,7 @@ class MainView: UIViewController
 // MARK: - Extensions
 
 
-// MARK: UITextFieldDelegate conformation
+// MARK: UITextFieldDelegate
 
 extension MainView: UITextFieldDelegate
 {
@@ -111,7 +142,7 @@ extension MainView: UITextFieldDelegate
 }
 
 
-// MARK: UITextViewDelegate conformation
+// MARK: UITextViewDelegate
 
 extension MainView: UITextViewDelegate
 {
@@ -127,6 +158,27 @@ extension MainView: UITextViewDelegate
         self.view.removeGestureRecognizer(onViewTapGesture)
     }
 }
+
+
+// MARK: UIImagePickerControllerDelegate + UINavigationControllerDelegate
+
+extension MainView: UIImagePickerControllerDelegate, UINavigationControllerDelegate
+{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
+    {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        {
+            userProfileIV.image = pickedImage
+            userProfileIV.contentMode = .scaleAspectFit
+            
+            isProfileImageSet = true
+        }
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+
+// MARK:
 
 extension MainView
 {
