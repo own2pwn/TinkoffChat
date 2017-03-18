@@ -149,6 +149,7 @@ extension MainView: UITextViewDelegate
     func textViewDidBeginEditing(_ textView: UITextView)
     {
         onViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(onViewTap))
+        userProfileIV.isUserInteractionEnabled = false
         self.view.addGestureRecognizer(onViewTapGesture)
     }
     
@@ -156,6 +157,7 @@ extension MainView: UITextViewDelegate
     {
         self.aboutUserTV.resignFirstResponder()
         self.view.removeGestureRecognizer(onViewTapGesture)
+        userProfileIV.isUserInteractionEnabled = true
     }
 }
 
