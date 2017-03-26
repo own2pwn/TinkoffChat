@@ -129,7 +129,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="exm-9n-UhE">
-                                                    <rect key="frame" x="203" y="8" width="109" height="20"/>
+                                                    <rect key="frame" x="199" y="4" width="117" height="28"/>
                                                     <color key="backgroundColor" red="0.94084882739999998" green="0.86079573629999995" blue="0.66274297240000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sent message" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="twA-ic-V0V">
@@ -140,14 +140,14 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="exm-9n-UhE" firstAttribute="bottom" secondItem="twA-ic-V0V" secondAttribute="bottom" id="9ib-fv-uqk"/>
+                                                <constraint firstItem="exm-9n-UhE" firstAttribute="bottom" secondItem="twA-ic-V0V" secondAttribute="bottom" constant="4" id="9ib-fv-uqk"/>
                                                 <constraint firstItem="twA-ic-V0V" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="Hbu-SZ-WPI" secondAttribute="bottomMargin" id="Axf-UZ-d6m"/>
                                                 <constraint firstItem="twA-ic-V0V" firstAttribute="top" secondItem="Hbu-SZ-WPI" secondAttribute="topMargin" id="DeR-R0-i05"/>
-                                                <constraint firstItem="exm-9n-UhE" firstAttribute="top" secondItem="twA-ic-V0V" secondAttribute="top" id="OEk-gM-b2K"/>
+                                                <constraint firstItem="exm-9n-UhE" firstAttribute="top" secondItem="twA-ic-V0V" secondAttribute="top" constant="-4" id="OEk-gM-b2K"/>
                                                 <constraint firstItem="twA-ic-V0V" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hbu-SZ-WPI" secondAttribute="leadingMargin" constant="78" id="TnC-SB-xe7"/>
-                                                <constraint firstItem="exm-9n-UhE" firstAttribute="leading" secondItem="twA-ic-V0V" secondAttribute="leading" id="fwR-bj-3eW"/>
+                                                <constraint firstItem="exm-9n-UhE" firstAttribute="leading" secondItem="twA-ic-V0V" secondAttribute="leading" constant="-4" id="fwR-bj-3eW"/>
                                                 <constraint firstItem="twA-ic-V0V" firstAttribute="trailing" secondItem="Hbu-SZ-WPI" secondAttribute="trailingMargin" id="lNN-v8-f0x"/>
-                                                <constraint firstItem="exm-9n-UhE" firstAttribute="trailing" secondItem="twA-ic-V0V" secondAttribute="trailing" id="xwx-1N-LR4"/>
+                                                <constraint firstItem="exm-9n-UhE" firstAttribute="trailing" secondItem="twA-ic-V0V" secondAttribute="trailing" constant="4" id="xwx-1N-LR4"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -163,7 +163,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1iq-PQ-zCe">
-                                                    <rect key="frame" x="8" y="8" width="144" height="20"/>
+                                                    <rect key="frame" x="4" y="4" width="152" height="28"/>
                                                     <color key="backgroundColor" red="0.74547386169433594" green="0.78238368034362793" blue="0.93335801362991333" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Received message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nxl-Wt-37y">
@@ -176,12 +176,12 @@
                                             <constraints>
                                                 <constraint firstItem="Nxl-Wt-37y" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="nGe-dO-mc8" secondAttribute="bottomMargin" id="1Ps-5k-Ukt"/>
                                                 <constraint firstItem="Nxl-Wt-37y" firstAttribute="leading" secondItem="nGe-dO-mc8" secondAttribute="leadingMargin" id="21Q-yg-hZH"/>
-                                                <constraint firstItem="1iq-PQ-zCe" firstAttribute="leading" secondItem="Nxl-Wt-37y" secondAttribute="leading" id="OmT-Wp-WIV"/>
-                                                <constraint firstItem="1iq-PQ-zCe" firstAttribute="bottom" secondItem="Nxl-Wt-37y" secondAttribute="bottom" id="Qzz-BH-zOE"/>
-                                                <constraint firstItem="1iq-PQ-zCe" firstAttribute="top" secondItem="Nxl-Wt-37y" secondAttribute="top" id="XRt-KX-tp4"/>
+                                                <constraint firstItem="1iq-PQ-zCe" firstAttribute="leading" secondItem="Nxl-Wt-37y" secondAttribute="leading" constant="-4" id="OmT-Wp-WIV"/>
+                                                <constraint firstItem="1iq-PQ-zCe" firstAttribute="bottom" secondItem="Nxl-Wt-37y" secondAttribute="bottom" constant="4" id="Qzz-BH-zOE"/>
+                                                <constraint firstItem="1iq-PQ-zCe" firstAttribute="top" secondItem="Nxl-Wt-37y" secondAttribute="top" constant="-4" id="XRt-KX-tp4"/>
                                                 <constraint firstItem="Nxl-Wt-37y" firstAttribute="top" secondItem="nGe-dO-mc8" secondAttribute="topMargin" id="fA6-7h-gop"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Nxl-Wt-37y" secondAttribute="trailing" constant="78" id="hsO-iT-RlN"/>
-                                                <constraint firstItem="1iq-PQ-zCe" firstAttribute="trailing" secondItem="Nxl-Wt-37y" secondAttribute="trailing" id="zlp-70-deS"/>
+                                                <constraint firstItem="1iq-PQ-zCe" firstAttribute="trailing" secondItem="Nxl-Wt-37y" secondAttribute="trailing" constant="4" id="zlp-70-deS"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

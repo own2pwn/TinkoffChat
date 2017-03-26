@@ -27,4 +27,11 @@ class MessageCell: UITableViewCell, MessageCellModel
     @IBOutlet weak var messageLabel: UILabel!
     
     @IBOutlet weak var messageBubbleView: UIView!
+    
+    override func awakeFromNib()
+    {
+        super.awakeFromNib()
+        
+        messageBubbleView.layer.cornerRadius = messageBubbleView.frame.height / 2
+    }
 }

@@ -50,9 +50,6 @@ extension DialogController: UITableViewDataSource
         cell.selectionStyle = .none
         cell.backgroundColor = .CellLightYellowColor
         
-        // TODO: move calculation of est. rect after cell's configuration
-        // and switch by cell's message text len.
-        
         if cell.reuseIdentifier == sentMessageCellId
         {
             switch row
