@@ -33,9 +33,10 @@ class DialogController: UIViewController
         dialogTableView.rowHeight = UITableViewAutomaticDimension
         
         dialogTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-        view.backgroundColor = .CellLightYellowColor
+        dialogTableView.scrollIndicatorInsets = dialogTableView.contentInset
+        dialogTableView.backgroundColor = UIColor.CellLightYellowColor
         
-        self.navigationController?.hidesBarsOnSwipe = false
+        navigationController?.hidesBarsOnSwipe = false
     }
 }
 // MARK: - Extensions
