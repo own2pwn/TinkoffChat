@@ -77,6 +77,29 @@ class DialogsController: UIViewController
             closeButton.addTarget(self, action: #selector(didTapCloseProfileButton), for: .touchUpInside)
             profileVCView?.addSubview(closeButton)
 
+            /*
+             // Решил в релизе оставить без NavBar'a, но если он нужен, код ниже:
+
+             if let navBarFrame = navigationController?.navigationBar.frame
+             {
+                let profileVCView = profileVC.view
+                let navBar = UINavigationBar(frame: navBarFrame)
+                profileVCView?.addSubview(navBar)
+
+                let navItem = UINavigationItem(title: "Профиль")
+
+                let closeButton = UIButton(type: .custom)
+                closeButton.frame = CGRect(x: 6.5, y: 2, width: 12, height: 21.5)
+
+                closeButton.setTitle("X", for: .normal)
+                closeButton.setTitleColor(.blue, for: .normal)
+                closeButton.addTarget(self, action: #selector(didTapCloseProfileButton), for: .touchUpInside)
+
+                let closeButtonItem = UIBarButtonItem(customView: closeButton)
+                navItem.leftBarButtonItem = closeButtonItem
+                navBar.setItems([navItem], animated: true)
+            }
+             */
             present(profileVC, animated: true, completion: nil)
         }
     }
