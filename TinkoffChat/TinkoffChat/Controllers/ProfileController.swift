@@ -1,5 +1,5 @@
 //
-//  MainView.swift
+//  ProfileController.swift
 //  TinkoffChat
 //
 //  Created by Evgeniy on 17.03.17.
@@ -8,27 +8,25 @@
 
 import UIKit
 
-class MainView: UIViewController
+class ProfileController: UIViewController
 {
     // MARK: - Outlets
     
-    @IBOutlet weak var userNameTF: UITextField!
+    @IBOutlet weak var userNameTextField: UITextField!
     
-    @IBOutlet weak var aboutUserTV: UITextView!
+    @IBOutlet weak var aboutUserTextView: UITextView!
     
-    @IBOutlet weak var userProfileIV: UIImageView!
+    @IBOutlet weak var userProfileImageView: UIImageView!
     
-    @IBOutlet weak var textColorLbl: UILabel!
-    
+    @IBOutlet weak var textColorLabel: UILabel!
     
     // MARK: - Properties
     
     var onViewTapGesture = UITapGestureRecognizer()
     
-    var onUserProfileIVTapGesture = UITapGestureRecognizer()
+    var onuserProfileImageViewTapGesture = UITapGestureRecognizer()
     
     var isProfileImageSet = false
-    
     
     // MARK: - Life cycle
     
@@ -44,28 +42,26 @@ class MainView: UIViewController
         setupLogic()
     }
     
-    
     // MARK: - Methods
     
     func setupLogic()
     {
-        userNameTF.delegate = self
-        aboutUserTV.delegate = self
+        userNameTextField.delegate = self
+        aboutUserTextView.delegate = self
         
-        onUserProfileIVTapGesture = UITapGestureRecognizer(target: self, action: #selector(onUserProfileIVTap))
-        userProfileIV.addGestureRecognizer(onUserProfileIVTapGesture)
+        onuserProfileImageViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(onuserProfileImageViewTap))
+        userProfileImageView.addGestureRecognizer(onuserProfileImageViewTapGesture)
     }
     
-    
-    func onUserProfileIVTap()
+    func onuserProfileImageViewTap()
     {
         
         let profileImageActionActionSheet = UIAlertController(title: "Установить изображение профиля", message: "", preferredStyle: .actionSheet)
         
         let confirmDeleteAlertController = UIAlertController(title: "Удалить изображение профиля?", message: "Отменить это действие будет невозможно", preferredStyle: .alert)
         
-        
-        let chooseFromLibraryAction = UIAlertAction(title: "Выбрать из библиотеки", style: .default) { action in
+        let chooseFromLibraryAction = UIAlertAction(title: "Выбрать из библиотеки", style: .default)
+        { action in
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             
@@ -75,7 +71,8 @@ class MainView: UIViewController
             self.present(imagePicker, animated: true, completion: nil)
         }
         
-        let takePhotoAction = UIAlertAction(title: "Сделать фото", style: .default) { action in
+        let takePhotoAction = UIAlertAction(title: "Сделать фото", style: .default)
+        { action in
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             
@@ -87,10 +84,11 @@ class MainView: UIViewController
         
         let cancelAction = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
         
-        let deleteAction = UIAlertAction(title: "Удалить фото", style: .destructive) { action in
-            
-            let confirmDeleteAction = UIAlertAction(title: "Удалить", style: .destructive) { action in
-                self.userProfileIV.image = #imageLiteral(resourceName: "profileImg")
+        let deleteAction = UIAlertAction(title: "Удалить фото", style: .destructive)
+        { action in
+            let confirmDeleteAction = UIAlertAction(title: "Удалить", style: .destructive)
+            { action in
+                self.userProfileImageView.image = #imageLiteral(resourceName: "profileImg")
                 self.isProfileImageSet = false
             }
             
@@ -103,20 +101,18 @@ class MainView: UIViewController
         
         profileImageActionActionSheet.addAction(chooseFromLibraryAction)
         
-        if (UIImagePickerController.isSourceTypeAvailable(.camera)) { profileImageActionActionSheet.addAction(takePhotoAction) }
+        if UIImagePickerController.isSourceTypeAvailable(.camera) { profileImageActionActionSheet.addAction(takePhotoAction) }
         
-        if (isProfileImageSet) { profileImageActionActionSheet.addAction(deleteAction) }
+        if isProfileImageSet { profileImageActionActionSheet.addAction(deleteAction) }
         
         profileImageActionActionSheet.addAction(cancelAction)
         
-        self.present(profileImageActionActionSheet, animated: true, completion: nil)
+        present(profileImageActionActionSheet, animated: true, completion: nil)
     }
-    
-    
     
     @IBAction func didTapColorButton(_ sender: UIButton)
     {
-        textColorLbl.textColor = sender.backgroundColor
+        textColorLabel.textColor = sender.backgroundColor
     }
     
     @IBAction func didTapSaveButton(_ sender: UIButton)
@@ -125,13 +121,11 @@ class MainView: UIViewController
     }
 }
 
-
 // MARK: - Extensions
-
 
 // MARK: UITextFieldDelegate
 
-extension MainView: UITextFieldDelegate
+extension ProfileController: UITextFieldDelegate
 {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
@@ -141,37 +135,35 @@ extension MainView: UITextFieldDelegate
     }
 }
 
-
 // MARK: UITextViewDelegate
 
-extension MainView: UITextViewDelegate
+extension ProfileController: UITextViewDelegate
 {
     func textViewDidBeginEditing(_ textView: UITextView)
     {
         onViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(onViewTap))
-        userProfileIV.isUserInteractionEnabled = false
-        self.view.addGestureRecognizer(onViewTapGesture)
+        userProfileImageView.isUserInteractionEnabled = false
+        view.addGestureRecognizer(onViewTapGesture)
     }
     
     func onViewTap()
     {
-        self.aboutUserTV.resignFirstResponder()
-        self.view.removeGestureRecognizer(onViewTapGesture)
-        userProfileIV.isUserInteractionEnabled = true
+        aboutUserTextView.resignFirstResponder()
+        view.removeGestureRecognizer(onViewTapGesture)
+        userProfileImageView.isUserInteractionEnabled = true
     }
 }
 
-
 // MARK: UIImagePickerControllerDelegate + UINavigationControllerDelegate
 
-extension MainView: UIImagePickerControllerDelegate, UINavigationControllerDelegate
+extension ProfileController: UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any])
     {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         {
-            userProfileIV.image = pickedImage
-            userProfileIV.contentMode = .scaleAspectFit
+            userProfileImageView.image = pickedImage
+            userProfileImageView.contentMode = .scaleAspectFit
             
             isProfileImageSet = true
         }
@@ -179,10 +171,9 @@ extension MainView: UIImagePickerControllerDelegate, UINavigationControllerDeleg
     }
 }
 
-
 // MARK: Life cycle
 
-extension MainView
+extension ProfileController
 {
     override func viewWillAppear(_ animated: Bool)
     {
@@ -248,7 +239,7 @@ extension MainView
     {
         print(" View: \(self.view)")
         
-        for view in self.view.subviews
+        for view in view.subviews
         {
             print(" View: \(view)")
         }
@@ -257,10 +248,9 @@ extension MainView
     }
 }
 
-
 // MARK:
 
-extension MainView
+extension ProfileController
 {
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
 }
