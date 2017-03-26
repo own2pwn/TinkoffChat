@@ -25,4 +25,6 @@ class MessageCell: UITableViewCell, MessageCellModel
     }
     
     @IBOutlet weak var messageLabel: UILabel!
+    
+    @IBOutlet weak var messageBubbleView: UIView!
 }
