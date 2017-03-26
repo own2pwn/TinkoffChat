@@ -128,22 +128,22 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sent message content" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZHW-8k-6Pc">
-                                                    <rect key="frame" x="86" y="8" width="226" height="64"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sent message" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="twA-ic-V0V">
+                                                    <rect key="frame" x="203" y="8" width="109" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="ZHW-8k-6Pc" firstAttribute="top" secondItem="Hbu-SZ-WPI" secondAttribute="topMargin" id="DkP-Tj-6DW"/>
-                                                <constraint firstItem="ZHW-8k-6Pc" firstAttribute="trailing" secondItem="Hbu-SZ-WPI" secondAttribute="trailingMargin" id="EWy-3E-2hU"/>
-                                                <constraint firstItem="ZHW-8k-6Pc" firstAttribute="bottom" secondItem="Hbu-SZ-WPI" secondAttribute="bottomMargin" id="Uyw-hF-iyy"/>
-                                                <constraint firstItem="ZHW-8k-6Pc" firstAttribute="leading" secondItem="Hbu-SZ-WPI" secondAttribute="leadingMargin" constant="78" id="bXK-c5-OU5"/>
+                                                <constraint firstItem="twA-ic-V0V" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="Hbu-SZ-WPI" secondAttribute="bottomMargin" id="Axf-UZ-d6m"/>
+                                                <constraint firstItem="twA-ic-V0V" firstAttribute="top" secondItem="Hbu-SZ-WPI" secondAttribute="topMargin" id="DeR-R0-i05"/>
+                                                <constraint firstItem="twA-ic-V0V" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hbu-SZ-WPI" secondAttribute="leadingMargin" constant="78" id="TnC-SB-xe7"/>
+                                                <constraint firstItem="twA-ic-V0V" firstAttribute="trailing" secondItem="Hbu-SZ-WPI" secondAttribute="trailingMargin" id="lNN-v8-f0x"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="messageLabel" destination="ZHW-8k-6Pc" id="qEY-pt-16P"/>
+                                            <outlet property="messageLabel" destination="twA-ic-V0V" id="kqK-Ha-vbZ"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="idReceivedMessage" id="TYK-8O-co3" customClass="MessageCell" customModule="TinkoffChat" customModuleProvider="target">
@@ -153,25 +153,22 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Received message content" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bv-Bj-bLH">
-                                                    <rect key="frame" x="8" y="8" width="226" height="64"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Received message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nxl-Wt-37y">
+                                                    <rect key="frame" x="8" y="8" width="144" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="9bv-Bj-bLH" secondAttribute="trailing" constant="78" id="5Zd-eX-wJa"/>
-                                                <constraint firstItem="9bv-Bj-bLH" firstAttribute="top" secondItem="nGe-dO-mc8" secondAttribute="topMargin" id="Bkp-cp-68T"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="9bv-Bj-bLH" secondAttribute="trailing" constant="78" id="GuT-hm-tS2"/>
-                                                <constraint firstItem="9bv-Bj-bLH" firstAttribute="leading" secondItem="nGe-dO-mc8" secondAttribute="leadingMargin" id="IXf-yC-GGD"/>
-                                                <constraint firstItem="9bv-Bj-bLH" firstAttribute="bottom" secondItem="nGe-dO-mc8" secondAttribute="bottomMargin" id="bX5-es-WZg"/>
-                                                <constraint firstItem="9bv-Bj-bLH" firstAttribute="leading" secondItem="nGe-dO-mc8" secondAttribute="leadingMargin" id="o8f-m3-kSl"/>
-                                                <constraint firstItem="9bv-Bj-bLH" firstAttribute="top" secondItem="nGe-dO-mc8" secondAttribute="topMargin" id="tk8-kl-8RJ"/>
+                                                <constraint firstItem="Nxl-Wt-37y" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="nGe-dO-mc8" secondAttribute="bottomMargin" id="1Ps-5k-Ukt"/>
+                                                <constraint firstItem="Nxl-Wt-37y" firstAttribute="leading" secondItem="nGe-dO-mc8" secondAttribute="leadingMargin" id="21Q-yg-hZH"/>
+                                                <constraint firstItem="Nxl-Wt-37y" firstAttribute="top" secondItem="nGe-dO-mc8" secondAttribute="topMargin" id="fA6-7h-gop"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Nxl-Wt-37y" secondAttribute="trailing" constant="78" id="hsO-iT-RlN"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="messageLabel" destination="9bv-Bj-bLH" id="XBM-0k-rYt"/>
+                                            <outlet property="messageLabel" destination="Nxl-Wt-37y" id="6g8-j7-ZEk"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -195,7 +192,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n8y-Xm-WZD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2612" y="196.55172413793105"/>
+            <point key="canvasLocation" x="2611.875" y="196.47887323943661"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="diJ-Ke-yQ7">
