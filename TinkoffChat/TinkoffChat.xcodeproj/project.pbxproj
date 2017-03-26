@@ -53,6 +53,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1005A5821E87E5CF007241BD /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				100B0BA31E7C5A8E00DD181F /* Assets.xcassets */,
+				100B0BA51E7C5A8E00DD181F /* LaunchScreen.storyboard */,
+				100B0BA81E7C5A8E00DD181F /* Info.plist */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
 		100B0B901E7C5A8E00DD181F = {
 			isa = PBXGroup;
 			children = (
@@ -77,9 +87,7 @@
 				10BAAB0E1E87B2B600104295 /* Views */,
 				10BAAB151E87B75400104295 /* Helpers */,
 				10BAAB041E87AFFD00104295 /* GUI */,
-				100B0BA31E7C5A8E00DD181F /* Assets.xcassets */,
-				100B0BA51E7C5A8E00DD181F /* LaunchScreen.storyboard */,
-				100B0BA81E7C5A8E00DD181F /* Info.plist */,
+				1005A5821E87E5CF007241BD /* Other */,
 			);
 			path = TinkoffChat;
 			sourceTree = "<group>";

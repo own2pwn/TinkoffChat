@@ -54,7 +54,7 @@ class DialogsController: UIViewController
         dialogsTableView.rowHeight = UITableViewAutomaticDimension
 
         navigationController?.navigationBar.barTintColor = .CellYellowColor
-        self.navigationController?.hidesBarsOnSwipe = true
+        navigationController?.hidesBarsOnSwipe = true
 
         let navBarProfileButton = UIButton()
         navBarProfileButton.addTarget(self, action: #selector(didTapNavBarProfileButton), for: .touchUpInside)
@@ -119,7 +119,6 @@ class DialogsController: UIViewController
             dialogVC.navigationItem.title = cell.userName!
         }
     }
-
 }
 
 // MARK: - Extensions

@@ -10,6 +10,8 @@ import UIKit
 
 class MessageCell: UITableViewCell, MessageCellModel
 {
+    // MARK: - MessageCellModel
+    
     var messageText: String?
     {
         get
@@ -24,9 +26,13 @@ class MessageCell: UITableViewCell, MessageCellModel
         }
     }
     
+    // MARK: - Outlets
+    
     @IBOutlet weak var messageLabel: UILabel!
     
     @IBOutlet weak var messageBubbleView: UIView!
+    
+    // MARK: - Life cycle
     
     override func awakeFromNib()
     {

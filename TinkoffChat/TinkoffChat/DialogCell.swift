@@ -112,11 +112,6 @@ class DialogCell: UITableViewCell, DialogCellModel
         unreadMessagesCircleView.layer.cornerRadius = 16 / 2 // 16 - height of view
     }
     
-    override func prepareForReuse()
-    {
-        // TODO: implement
-    }
-    
     // MARK: - Properties
     
     let currentCalendar = Calendar.current

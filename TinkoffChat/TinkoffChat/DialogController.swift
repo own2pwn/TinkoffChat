@@ -10,6 +10,7 @@ import UIKit
 
 fileprivate let sentMessageCellId = "idSentMessage"
 fileprivate let receivedMessageCellId = "idReceivedMessage"
+fileprivate let numberOfRows = 6
 
 class DialogController: UIViewController
 {
@@ -56,12 +57,9 @@ extension DialogController: UITableViewDataSource
             {
             case 0:
                 cell.messageText = String.randomString(1)
-                
                 break
             case 2:
                 cell.messageText = String.randomString(30)
-                cell.messageBubbleView.layer.cornerRadius = cell.messageBubbleView.frame.height / 4
-                
                 break
             case 4:
                 cell.messageText = String.randomString(300)
@@ -110,7 +108,7 @@ extension DialogController: UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 6
+        return numberOfRows
     }
 }
 
