@@ -51,8 +51,8 @@ extension DialogController: UITableViewDataSource
         cell.backgroundColor = .CellLightYellowColor
         
         let messageBubble = UIView()
-        messageBubble.backgroundColor = UIColor.CellYellowColor
-        messageBubble.layer.cornerRadius = 15
+        messageBubble.backgroundColor = .CellYellowColor
+        messageBubble.layer.cornerRadius = 16
         messageBubble.tag = 1
         
         let size = CGSize(width: 250, height: 1000)
