@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main View-->
+        <!--Profile Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainView" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ProfileController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -47,7 +47,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="didTapSaveButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kHr-Tt-kVM"/>
+                                    <action selector="didTapSaveButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AAA-2P-97K"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IzC-LU-Yis">
@@ -79,7 +79,7 @@
                                     <constraint firstAttribute="height" constant="26" id="J9t-H6-xEN"/>
                                 </constraints>
                                 <connections>
-                                    <action selector="didTapColorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="j8j-7b-7YM"/>
+                                    <action selector="didTapColorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zvx-xC-Sxe"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XV6-4d-wmW">
@@ -99,7 +99,7 @@
                                     <constraint firstAttribute="height" constant="26" id="g4A-ed-I7V"/>
                                 </constraints>
                                 <connections>
-                                    <action selector="didTapColorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KX9-fb-duZ"/>
+                                    <action selector="didTapColorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rs8-JD-Swm"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPu-Po-1Ep">
@@ -175,10 +175,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="aboutUserTV" destination="IzC-LU-Yis" id="13C-hu-s2e"/>
-                        <outlet property="textColorLbl" destination="GEL-ps-yZt" id="cDl-ie-eoK"/>
-                        <outlet property="userNameTF" destination="VIa-0f-fxs" id="U8G-OW-8uu"/>
-                        <outlet property="userProfileIV" destination="Qhl-T8-esE" id="wJQ-XY-cJb"/>
+                        <outlet property="aboutUserTextView" destination="IzC-LU-Yis" id="pcC-MM-A4u"/>
+                        <outlet property="textColorLabel" destination="GEL-ps-yZt" id="Xl0-bN-kNg"/>
+                        <outlet property="userNameTextField" destination="VIa-0f-fxs" id="Qay-xG-Ae1"/>
+                        <outlet property="userProfileImageView" destination="Qhl-T8-esE" id="lNc-KX-dgP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
