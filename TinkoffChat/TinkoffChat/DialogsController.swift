@@ -65,14 +65,14 @@ class DialogsController: UIViewController
 
     // MARK: - Actions
 
-    func didTapNavBarProfileButton(_ sender: UIBarButtonItem)
+    func didTapNavBarProfileButton(_ sender: UIButton)
     {
         if let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateInitialViewController()
         {
             let profileVCView = profileVC.view
             let closeButton = UIButton(type: .custom)
-            closeButton.frame = sender.accessibilityFrame
-            closeButton.frame.origin.y -= 2
+            closeButton.frame = sender.frame
+            closeButton.frame.origin.y += 16
             closeButton.setTitle("X", for: .normal)
             closeButton.setTitleColor(.blue, for: .normal)
             closeButton.addTarget(self, action: #selector(didTapCloseProfileButton), for: .touchUpInside)
