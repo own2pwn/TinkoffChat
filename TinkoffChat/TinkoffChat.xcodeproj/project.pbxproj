@@ -57,17 +57,17 @@
 			isa = PBXGroup;
 			children = (
 				100B0BA31E7C5A8E00DD181F /* Assets.xcassets */,
-				100B0BA51E7C5A8E00DD181F /* LaunchScreen.storyboard */,
 				100B0BA81E7C5A8E00DD181F /* Info.plist */,
+				100B0BA51E7C5A8E00DD181F /* LaunchScreen.storyboard */,
 			);
-			name = Other;
+			path = Other;
 			sourceTree = "<group>";
 		};
 		100B0B901E7C5A8E00DD181F = {
 			isa = PBXGroup;
 			children = (
-				100B0B9B1E7C5A8E00DD181F /* TinkoffChat */,
 				100B0B9A1E7C5A8E00DD181F /* Products */,
+				100B0B9B1E7C5A8E00DD181F /* TinkoffChat */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,8 +85,8 @@
 				10BAAB071E87B0B100104295 /* Controllers */,
 				10BAAB0D1E87B2AF00104295 /* Models */,
 				10BAAB0E1E87B2B600104295 /* Views */,
-				10BAAB151E87B75400104295 /* Helpers */,
 				10BAAB041E87AFFD00104295 /* GUI */,
+				10BAAB151E87B75400104295 /* Helpers */,
 				1005A5821E87E5CF007241BD /* Other */,
 			);
 			path = TinkoffChat;
@@ -95,10 +95,10 @@
 		10BAAB041E87AFFD00104295 /* GUI */ = {
 			isa = PBXGroup;
 			children = (
-				100B0BA01E7C5A8E00DD181F /* Profile.storyboard */,
 				10BAAB051E87B04000104295 /* Dialogs.storyboard */,
+				100B0BA01E7C5A8E00DD181F /* Profile.storyboard */,
 			);
-			name = GUI;
+			path = GUI;
 			sourceTree = "<group>";
 		};
 		10BAAB071E87B0B100104295 /* Controllers */ = {
@@ -108,17 +108,17 @@
 				100B0B9E1E7C5A8E00DD181F /* ProfileController.swift */,
 				10BAAB0A1E87B0DA00104295 /* Dialogs */,
 			);
-			name = Controllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		10BAAB0A1E87B0DA00104295 /* Dialogs */ = {
 			isa = PBXGroup;
 			children = (
+				10BAAB181E87C1B400104295 /* DialogController.swift */,
 				10BAAB081E87B0D800104295 /* DialogsController.swift */,
 				10BAAB0B1E87B1DA00104295 /* DialogsTableViewDataSource.swift */,
-				10BAAB181E87C1B400104295 /* DialogController.swift */,
 			);
-			name = Dialogs;
+			path = Dialogs;
 			sourceTree = "<group>";
 		};
 		10BAAB0D1E87B2AF00104295 /* Models */ = {
@@ -127,7 +127,7 @@
 				10BAAB0F1E87B2FD00104295 /* DialogCellModel.swift */,
 				10BAAB111E87B38A00104295 /* MessageCellModel.swift */,
 			);
-			name = Models;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		10BAAB0E1E87B2B600104295 /* Views */ = {
@@ -136,7 +136,7 @@
 				10BAAB131E87B3C900104295 /* DialogCell.swift */,
 				10BAAB1A1E87C36E00104295 /* MessageCell.swift */,
 			);
-			name = Views;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		10BAAB151E87B75400104295 /* Helpers */ = {
@@ -144,7 +144,7 @@
 			children = (
 				10BAAB161E87B76000104295 /* Extensions.swift */,
 			);
-			name = Helpers;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +243,7 @@
 				100B0BA11E7C5A8E00DD181F /* Base */,
 			);
 			name = Profile.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		100B0BA51E7C5A8E00DD181F /* LaunchScreen.storyboard */ = {
@@ -251,6 +252,7 @@
 				100B0BA61E7C5A8E00DD181F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -354,7 +356,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VD97XKT54M;
-				INFOPLIST_FILE = TinkoffChat/Info.plist;
+				INFOPLIST_FILE = TinkoffChat/Other/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hw.eugene.TinkoffChat;
@@ -372,7 +374,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = VD97XKT54M;
-				INFOPLIST_FILE = TinkoffChat/Info.plist;
+				INFOPLIST_FILE = TinkoffChat/Other/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hw.eugene.TinkoffChat;
