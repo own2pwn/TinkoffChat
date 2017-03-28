@@ -46,18 +46,8 @@ class DialogCell: UITableViewCell, DialogCellModel
         set
         {
             _hasUnreadMessages = newValue
-            guard unreadMessagesCircleView != nil else { return }
-            
-            if _hasUnreadMessages
-            {
-                unreadMessagesCircleView.isHidden = false
-                lastMessageLabel.font = UIFont.appMainFontMedium
-            }
-            else
-            {
-                unreadMessagesCircleView.isHidden = true
-                lastMessageLabel.font = UIFont.appMainFont
-            }
+            guard lastMessageLabel != nil else { return }
+            lastMessageLabel.font = _hasUnreadMessages ? UIFont.appMainFontMedium : UIFont.appMainFont
         }
     }
     
@@ -99,8 +89,6 @@ class DialogCell: UITableViewCell, DialogCellModel
     
     @IBOutlet weak var lastMessageDateLabel: UILabel!
     
-    @IBOutlet weak var unreadMessagesCircleView: UIView!
-    
     @IBOutlet weak var lastMessageLabel: UILabel!
     
     // MARK: - Life cycle
@@ -108,8 +96,6 @@ class DialogCell: UITableViewCell, DialogCellModel
     override func awakeFromNib()
     {
         super.awakeFromNib()
-        
-        unreadMessagesCircleView.layer.cornerRadius = 16 / 2 // 16 - height of view
     }
     
     // MARK: - Properties

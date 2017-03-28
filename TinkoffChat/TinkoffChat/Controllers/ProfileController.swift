@@ -119,6 +119,10 @@ class ProfileController: UIViewController
     {
         print("Сохранение данных профиля")
     }
+    @IBAction func didTapCloseNavBarButton(_ sender: UIBarButtonItem)
+    {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - Extensions
