@@ -27,6 +27,8 @@ class DialogController: UIViewController
         setupView()
     }
     
+    override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
+    
     func setupView()
     {
         dialogTableView.tableFooterView = UIView()
@@ -110,11 +112,4 @@ extension DialogController: UITableViewDataSource
     {
         return numberOfRows
     }
-}
-
-// MARK: Other
-
-extension DialogController
-{
-    override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
 }

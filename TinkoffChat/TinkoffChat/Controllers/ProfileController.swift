@@ -121,7 +121,7 @@ class ProfileController: UIViewController
     }
     @IBAction func didTapCloseNavBarButton(_ sender: UIBarButtonItem)
     {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -239,6 +239,8 @@ extension ProfileController
         printDebugInfo()
     }
     
+    override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
+    
     func printDebugInfo()
     {
         print(" View: \(self.view)")
@@ -250,11 +252,4 @@ extension ProfileController
         
         print("|--------------------|")
     }
-}
-
-// MARK:
-
-extension ProfileController
-{
-    override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
 }
