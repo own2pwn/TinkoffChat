@@ -34,13 +34,10 @@ class ProfileController: UIViewController
     {
         super.viewDidLoad()
         
-        print("|--------------------|")
-        print(" Func: \(#function)\n")
-        
-        printDebugInfo()
-        
         setupLogic()
     }
+    
+    override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
     
     // MARK: - Methods
     
@@ -172,84 +169,5 @@ extension ProfileController: UIImagePickerControllerDelegate, UINavigationContro
             isProfileImageSet = true
         }
         dismiss(animated: true, completion: nil)
-    }
-}
-
-// MARK: Life cycle
-
-extension ProfileController
-{
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        
-        print("|--------------------|")
-        print(" Func: \(#function)\n")
-        
-        printDebugInfo()
-    }
-    
-    override func viewWillLayoutSubviews()
-    {
-        super.viewWillLayoutSubviews()
-        
-        print("|--------------------|")
-        print(" Func: \(#function)\n")
-        
-        printDebugInfo()
-    }
-    
-    override func viewDidLayoutSubviews()
-    {
-        super.viewDidLayoutSubviews()
-        
-        print("|--------------------|")
-        print(" Func: \(#function)\n")
-        
-        printDebugInfo()
-    }
-    
-    override func viewDidAppear(_ animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        
-        print("|--------------------|")
-        print(" Func: \(#function)\n")
-        
-        printDebugInfo()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool)
-    {
-        super.viewWillDisappear(animated)
-        
-        print("|--------------------|")
-        print(" Func: \(#function)\n")
-        
-        printDebugInfo()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool)
-    {
-        super.viewDidDisappear(animated)
-        
-        print("|--------------------|")
-        print(" Func: \(#function)\n")
-        
-        printDebugInfo()
-    }
-    
-    override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
-    
-    func printDebugInfo()
-    {
-        print(" View: \(self.view)")
-        
-        for view in view.subviews
-        {
-            print(" View: \(view)")
-        }
-        
-        print("|--------------------|")
     }
 }
