@@ -255,7 +255,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="didTapSaveButton:" destination="t0J-gO-W45" eventType="touchUpInside" id="K3N-et-Uhf"/>
+                                    <action selector="didTapGCDButton:" destination="t0J-gO-W45" eventType="touchUpInside" id="QaF-Pa-fQL"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Hy6-1A-UQ7">
@@ -367,7 +367,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="didTapSaveButton:" destination="t0J-gO-W45" eventType="touchUpInside" id="SO6-br-F70"/>
+                                    <action selector="didTapOperationButton:" destination="t0J-gO-W45" eventType="touchUpInside" id="4Rm-6r-wRU"/>
                                 </connections>
                             </button>
                         </subviews>

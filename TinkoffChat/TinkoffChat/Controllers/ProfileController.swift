@@ -112,10 +112,16 @@ class ProfileController: UIViewController
         textColorLabel.textColor = sender.backgroundColor
     }
     
-    @IBAction func didTapSaveButton(_ sender: UIButton)
+    @IBAction func didTapGCDButton(_ sender: UIButton)
     {
-        print("Сохранение данных профиля")
+        print("GCD")
     }
+    
+    @IBAction func didTapOperationButton(_ sender: UIButton)
+    {
+        print("Operation")
+    }
+    
     @IBAction func didTapCloseNavBarButton(_ sender: UIBarButtonItem)
     {
         dismiss(animated: true, completion: nil)
