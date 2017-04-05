@@ -36,14 +36,16 @@ extension Date
 
 extension UIColor
 {
-    static func colorFromRGB(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat) -> UIColor
+    static func colorFromRGB(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat, _ alpha: CGFloat = 1) -> UIColor
     {
-        return UIColor(red: red / 255.0, green: green / 255.0, blue: blue / 255.0, alpha: 1)
+        return UIColor(red: red / 255.0, green: green / 255.0, blue: blue / 255.0, alpha: alpha)
     }
 
     static let CellYellowColor = UIColor.init(red: 0.944989, green: 0.912527, blue: 0.518278, alpha: 0.751766)
     static let CellLightYellowColor = UIColor.init(red: 0.944989, green: 0.812527, blue: 0.518278, alpha: 0.751766)
     static let CellPowderColor = UIColor.colorFromRGB(188, 200, 241)
+    static let ButtonEnabledColor = UIColor.colorFromRGB(250, 221, 86)
+    static let ButtonDisabledColor = UIColor.colorFromRGB(250, 221, 86, 0.6)
 }
 
 extension String

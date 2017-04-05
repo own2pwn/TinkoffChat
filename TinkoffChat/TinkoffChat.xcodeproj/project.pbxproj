@@ -20,6 +20,11 @@
 		10BAAB171E87B76000104295 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB161E87B76000104295 /* Extensions.swift */; };
 		10BAAB191E87C1B400104295 /* DialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB181E87C1B400104295 /* DialogController.swift */; };
 		10BAAB1B1E87C36E00104295 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB1A1E87C36E00104295 /* MessageCell.swift */; };
+		10BBA0931E94D2AB0071010C /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BBA0921E94D2AB0071010C /* DataManager.swift */; };
+		10BBA0961E94D2EB0071010C /* GCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BBA0951E94D2EB0071010C /* GCDDataManager.swift */; };
+		10BBA0981E94D2FB0071010C /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BBA0971E94D2FB0071010C /* OperationDataManager.swift */; };
+		10BBA09C1E94D4D50071010C /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BBA09B1E94D4D50071010C /* DataStore.swift */; };
+		10BBA09E1E94D5B70071010C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BBA09D1E94D5B70071010C /* Profile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +43,11 @@
 		10BAAB161E87B76000104295 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		10BAAB181E87C1B400104295 /* DialogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogController.swift; sourceTree = "<group>"; };
 		10BAAB1A1E87C36E00104295 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		10BBA0921E94D2AB0071010C /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		10BBA0951E94D2EB0071010C /* GCDDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GCDDataManager.swift; path = DataManagement/GCDDataManager.swift; sourceTree = "<group>"; };
+		10BBA0971E94D2FB0071010C /* OperationDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OperationDataManager.swift; path = DataManagement/OperationDataManager.swift; sourceTree = "<group>"; };
+		10BBA09B1E94D4D50071010C /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataStore.swift; path = DataManagement/DataStore.swift; sourceTree = "<group>"; };
+		10BBA09D1E94D5B70071010C /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +113,7 @@
 			children = (
 				100B0B9C1E7C5A8E00DD181F /* AppDelegate.swift */,
 				100B0B9E1E7C5A8E00DD181F /* ProfileController.swift */,
+				10BBA0941E94D2C80071010C /* DataManagement */,
 				10BAAB0A1E87B0DA00104295 /* Dialogs */,
 			);
 			path = Controllers;
@@ -123,6 +134,8 @@
 			children = (
 				10BAAB0F1E87B2FD00104295 /* DialogCellModel.swift */,
 				10BAAB111E87B38A00104295 /* MessageCellModel.swift */,
+				10BBA0921E94D2AB0071010C /* DataManager.swift */,
+				10BBA09D1E94D5B70071010C /* Profile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -142,6 +155,16 @@
 				10BAAB161E87B76000104295 /* Extensions.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		10BBA0941E94D2C80071010C /* DataManagement */ = {
+			isa = PBXGroup;
+			children = (
+				10BBA0951E94D2EB0071010C /* GCDDataManager.swift */,
+				10BBA0971E94D2FB0071010C /* OperationDataManager.swift */,
+				10BBA09B1E94D4D50071010C /* DataStore.swift */,
+			);
+			name = DataManagement;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,13 +241,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				10BAAB0C1E87B1DA00104295 /* DialogsTableViewDataSource.swift in Sources */,
+				10BBA09E1E94D5B70071010C /* Profile.swift in Sources */,
+				10BBA0981E94D2FB0071010C /* OperationDataManager.swift in Sources */,
 				10BAAB1B1E87C36E00104295 /* MessageCell.swift in Sources */,
 				10BAAB091E87B0D800104295 /* DialogsController.swift in Sources */,
 				10BAAB101E87B2FD00104295 /* DialogCellModel.swift in Sources */,
 				10BAAB171E87B76000104295 /* Extensions.swift in Sources */,
 				10BAAB121E87B38A00104295 /* MessageCellModel.swift in Sources */,
+				10BBA09C1E94D4D50071010C /* DataStore.swift in Sources */,
+				10BBA0961E94D2EB0071010C /* GCDDataManager.swift in Sources */,
 				100B0B9F1E7C5A8E00DD181F /* ProfileController.swift in Sources */,
 				10BAAB191E87C1B400104295 /* DialogController.swift in Sources */,
+				10BBA0931E94D2AB0071010C /* DataManager.swift in Sources */,
 				100B0B9D1E7C5A8E00DD181F /* AppDelegate.swift in Sources */,
 				10BAAB141E87B3C900104295 /* DialogCell.swift in Sources */,
 			);

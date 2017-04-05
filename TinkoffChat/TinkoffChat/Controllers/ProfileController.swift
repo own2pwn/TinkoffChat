@@ -20,6 +20,12 @@ class ProfileController: UIViewController
     
     @IBOutlet weak var textColorLabel: UILabel!
     
+    @IBOutlet weak var GCDButton: UIButton!
+    
+    @IBOutlet weak var operationButton: UIButton!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     // MARK: - Properties
     
     var onViewTapGesture = UITapGestureRecognizer()
@@ -28,13 +34,46 @@ class ProfileController: UIViewController
     
     var isProfileImageSet = false
     
+    let GCDManager = GCDDataManager()
+    
+    let OperationManager = OperationDataManager()
+    
+    var savedProfileData = Profile.getDefaultProfile()
+    
+    var currentProfileData = Profile.getDefaultProfile()
+    {
+        didSet
+        {
+            setButtonsEnabled(currentProfileData != savedProfileData)
+        }
+    }
+    
     // MARK: - Life cycle
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+        activityIndicator.hidesWhenStopped = true
+        
         setupLogic()
+        loadProfileData(usingManager: GCDManager)
+        { profile, err in
+            self.savedProfileData = profile
+            self.currentProfileData = profile
+            
+            self.userNameTextField.text = profile.userName
+            self.aboutUserTextView.text = profile.aboutUser
+            self.userProfileImageView.image = profile.userImage
+            self.textColorLabel.textColor = profile.textColor
+            
+            if profile.userImage != #imageLiteral(resourceName: "profileImg") { self.isProfileImageSet = true }
+            
+            if err != nil
+            {
+                print("There was an error while loading profile data.\nError: \(err?.localizedDescription)")
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
@@ -110,11 +149,16 @@ class ProfileController: UIViewController
     @IBAction func didTapColorButton(_ sender: UIButton)
     {
         textColorLabel.textColor = sender.backgroundColor
+        updateCurrentProfileData()
     }
     
     @IBAction func didTapGCDButton(_ sender: UIButton)
     {
-        print("GCD")
+        saveProfileData(usingManager: GCDManager)
+        { bSuccess, err in
+            self.presentSavingResultAlert(bSuccess, self.GCDManager)
+            self.updateCurrentProfileData()
+        }
     }
     
     @IBAction func didTapOperationButton(_ sender: UIButton)
@@ -125,6 +169,73 @@ class ProfileController: UIViewController
     @IBAction func didTapCloseNavBarButton(_ sender: UIBarButtonItem)
     {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func presentSavingResultAlert(_ success: Bool, _ manager: DataManager)
+    {
+        let alert = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
+        let dismissBtn = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(dismissBtn)
+        
+        if !success
+        {
+            alert.title = "Ошибка"
+            alert.message = "Не удалось сохранить данные"
+            let retryBtn = UIAlertAction(title: "Повторить", style: .default, handler: { action in
+                self.saveProfileData(usingManager: manager)
+            })
+            alert.addAction(retryBtn)
+        }
+        present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - Data management
+    
+    func updateCurrentProfileData()
+    {
+        currentProfileData = Profile(userName: userNameTextField.text ?? "", aboutUser: aboutUserTextView.text, userImage: userProfileImageView.image ?? #imageLiteral(resourceName: "profileImg"), textColor: textColorLabel.textColor)
+    }
+    
+    func setButtonsEnabled(_ enabled: Bool)
+    {
+        GCDButton.isEnabled = enabled
+        operationButton.isEnabled = enabled
+        
+        if enabled
+        {
+            GCDButton.backgroundColor = .ButtonEnabledColor
+            operationButton.backgroundColor = .ButtonEnabledColor
+        }
+        else
+        {
+            GCDButton.backgroundColor = .ButtonDisabledColor
+            operationButton.backgroundColor = .ButtonDisabledColor
+        }
+    }
+    
+    func saveProfileData(usingManager manager: DataManager, completion: @escaping (Bool, Error?) -> Void = { _, _ in })
+    {
+        activityIndicator.startAnimating()
+        manager.saveProfileData(currentProfileData)
+        { bSuccess, err in
+            completion(bSuccess, err)
+            if err == nil
+            {
+                self.savedProfileData = self.currentProfileData
+                self.setButtonsEnabled(false)
+            }
+            self.activityIndicator.stopAnimating()
+        }
+    }
+    
+    func loadProfileData(usingManager manager: DataManager, completion: @escaping (Profile, Error?) -> Void)
+    {
+        activityIndicator.startAnimating()
+        manager.loadProfileData
+        { profile, err in
+            completion(profile, err)
+            self.activityIndicator.stopAnimating()
+        }
     }
 }
 
@@ -140,6 +251,11 @@ extension ProfileController: UITextFieldDelegate
         
         return true
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField)
+    {
+        updateCurrentProfileData()
+    }
 }
 
 // MARK: UITextViewDelegate
@@ -148,16 +264,26 @@ extension ProfileController: UITextViewDelegate
 {
     func textViewDidBeginEditing(_ textView: UITextView)
     {
-        onViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(onViewTap))
+        let onViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(onViewTap))
         userProfileImageView.isUserInteractionEnabled = false
         view.addGestureRecognizer(onViewTapGesture)
+        updateCurrentProfileData()
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView)
+    {
+        updateCurrentProfileData()
     }
     
     func onViewTap()
     {
         aboutUserTextView.resignFirstResponder()
-        view.removeGestureRecognizer(onViewTapGesture)
+        if let onViewTapGesture = view.gestureRecognizers?.first
+        {
+            view.removeGestureRecognizer(onViewTapGesture)
+        }
         userProfileImageView.isUserInteractionEnabled = true
+        updateCurrentProfileData()
     }
 }
 
@@ -171,6 +297,7 @@ extension ProfileController: UIImagePickerControllerDelegate, UINavigationContro
         {
             userProfileImageView.image = pickedImage
             userProfileImageView.contentMode = .scaleAspectFit
+            updateCurrentProfileData()
             
             isProfileImageSet = true
         }

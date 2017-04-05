@@ -370,6 +370,9 @@
                                     <action selector="didTapOperationButton:" destination="t0J-gO-W45" eventType="touchUpInside" id="4Rm-6r-wRU"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Efw-dj-whK">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.96864080429999999" green="0.96861994269999996" blue="0.96862411500000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -387,6 +390,7 @@
                             <constraint firstAttribute="leadingMargin" secondItem="aBZ-dj-pp3" secondAttribute="leading" id="FEq-I3-Vba"/>
                             <constraint firstItem="lyv-vb-yuV" firstAttribute="leading" secondItem="rUi-63-zE3" secondAttribute="trailing" constant="2" id="Gqr-Et-kNW"/>
                             <constraint firstItem="HYJ-7O-iF3" firstAttribute="leading" secondItem="Dpk-Ka-g1X" secondAttribute="leadingMargin" constant="102" id="Hx0-7x-iaO"/>
+                            <constraint firstItem="Efw-dj-whK" firstAttribute="centerY" secondItem="Dpk-Ka-g1X" secondAttribute="centerY" id="LEb-VL-T2O"/>
                             <constraint firstItem="Hy6-1A-UQ7" firstAttribute="trailing" secondItem="Dpk-Ka-g1X" secondAttribute="trailingMargin" id="Mie-b0-6ts"/>
                             <constraint firstItem="J6W-Nz-5Km" firstAttribute="top" secondItem="SEn-Bn-bsk" secondAttribute="bottom" id="MyT-63-sg7"/>
                             <constraint firstAttribute="trailing" secondItem="Xpd-e4-MXS" secondAttribute="trailing" id="RWV-fS-a6S"/>
@@ -412,6 +416,7 @@
                             <constraint firstItem="n9f-R2-WWZ" firstAttribute="top" secondItem="Hy6-1A-UQ7" secondAttribute="bottom" constant="8" id="uQf-6q-XsA"/>
                             <constraint firstItem="SEn-Bn-bsk" firstAttribute="leading" secondItem="6Xz-dF-UOn" secondAttribute="trailing" constant="8" id="vdf-CO-9Cb"/>
                             <constraint firstItem="DhU-ce-9zX" firstAttribute="leading" secondItem="Dpk-Ka-g1X" secondAttribute="leadingMargin" id="woM-hq-fYD"/>
+                            <constraint firstItem="Efw-dj-whK" firstAttribute="centerX" secondItem="Dpk-Ka-g1X" secondAttribute="centerX" id="wyf-cg-5sa"/>
                             <constraint firstItem="hYd-gl-nhs" firstAttribute="leading" secondItem="Dpk-Ka-g1X" secondAttribute="leadingMargin" id="yn0-ap-6g1"/>
                             <constraint firstItem="SEn-Bn-bsk" firstAttribute="top" secondItem="icc-R2-Ync" secondAttribute="bottom" constant="8" id="yxC-61-F5q"/>
                             <constraint firstItem="SEn-Bn-bsk" firstAttribute="width" secondItem="6Xz-dF-UOn" secondAttribute="width" id="z64-g8-xE9"/>
@@ -419,7 +424,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="jFi-4H-Jzf"/>
                     <connections>
+                        <outlet property="GCDButton" destination="6Xz-dF-UOn" id="SF8-sW-3W2"/>
                         <outlet property="aboutUserTextView" destination="Hy6-1A-UQ7" id="Q4Q-e3-sJk"/>
+                        <outlet property="activityIndicator" destination="Efw-dj-whK" id="uep-8o-Oo9"/>
+                        <outlet property="operationButton" destination="SEn-Bn-bsk" id="vfa-2F-6t3"/>
                         <outlet property="textColorLabel" destination="hYd-gl-nhs" id="sB0-Jz-WFW"/>
                         <outlet property="userNameTextField" destination="c5n-5b-dlF" id="W12-nr-aBc"/>
                         <outlet property="userProfileImageView" destination="HYJ-7O-iF3" id="5GK-GW-qXx"/>
