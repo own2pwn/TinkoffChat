@@ -163,7 +163,11 @@ class ProfileController: UIViewController
     
     @IBAction func didTapOperationButton(_ sender: UIButton)
     {
-        print("Operation")
+        saveProfileData(usingManager: OperationManager)
+        { bSuccess, err in
+            self.presentSavingResultAlert(bSuccess, self.OperationManager)
+            self.updateCurrentProfileData()
+        }
     }
     
     @IBAction func didTapCloseNavBarButton(_ sender: UIBarButtonItem)
