@@ -154,18 +154,28 @@ class ProfileController: UIViewController
     
     @IBAction func didTapGCDButton(_ sender: UIButton)
     {
+        let dataBeforeSaving = currentProfileData
         saveProfileData(usingManager: GCDManager)
         { bSuccess, err in
             self.presentSavingResultAlert(bSuccess, self.GCDManager)
+            if bSuccess
+            {
+                self.savedProfileData = dataBeforeSaving
+            }
             self.updateCurrentProfileData()
         }
     }
     
     @IBAction func didTapOperationButton(_ sender: UIButton)
     {
+        let dataBeforeSaving = currentProfileData
         saveProfileData(usingManager: OperationManager)
         { bSuccess, err in
             self.presentSavingResultAlert(bSuccess, self.OperationManager)
+            if bSuccess
+            {
+                self.savedProfileData = dataBeforeSaving
+            }
             self.updateCurrentProfileData()
         }
     }
@@ -225,7 +235,6 @@ class ProfileController: UIViewController
             completion(bSuccess, err)
             if err == nil
             {
-                self.savedProfileData = self.currentProfileData
                 self.setButtonsEnabled(false)
             }
             self.activityIndicator.stopAnimating()
