@@ -13,7 +13,6 @@
 		100B0BA71E7C5A8E00DD181F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 100B0BA51E7C5A8E00DD181F /* LaunchScreen.storyboard */; };
 		10BAAB061E87B04000104295 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10BAAB051E87B04000104295 /* Main.storyboard */; };
 		10BAAB091E87B0D800104295 /* DialogsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB081E87B0D800104295 /* DialogsController.swift */; };
-		10BAAB0C1E87B1DA00104295 /* DialogsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB0B1E87B1DA00104295 /* DialogsTableViewDataSource.swift */; };
 		10BAAB101E87B2FD00104295 /* DialogCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB0F1E87B2FD00104295 /* DialogCellModel.swift */; };
 		10BAAB121E87B38A00104295 /* MessageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB111E87B38A00104295 /* MessageCellModel.swift */; };
 		10BAAB141E87B3C900104295 /* DialogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB131E87B3C900104295 /* DialogCell.swift */; };
@@ -36,7 +35,6 @@
 		100B0BA81E7C5A8E00DD181F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		10BAAB051E87B04000104295 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		10BAAB081E87B0D800104295 /* DialogsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogsController.swift; sourceTree = "<group>"; };
-		10BAAB0B1E87B1DA00104295 /* DialogsTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogsTableViewDataSource.swift; sourceTree = "<group>"; };
 		10BAAB0F1E87B2FD00104295 /* DialogCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogCellModel.swift; sourceTree = "<group>"; };
 		10BAAB111E87B38A00104295 /* MessageCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCellModel.swift; sourceTree = "<group>"; };
 		10BAAB131E87B3C900104295 /* DialogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogCell.swift; sourceTree = "<group>"; };
@@ -44,9 +42,9 @@
 		10BAAB181E87C1B400104295 /* DialogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogController.swift; sourceTree = "<group>"; };
 		10BAAB1A1E87C36E00104295 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		10BBA0921E94D2AB0071010C /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		10BBA0951E94D2EB0071010C /* GCDDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GCDDataManager.swift; path = DataManagement/GCDDataManager.swift; sourceTree = "<group>"; };
-		10BBA0971E94D2FB0071010C /* OperationDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OperationDataManager.swift; path = DataManagement/OperationDataManager.swift; sourceTree = "<group>"; };
-		10BBA09B1E94D4D50071010C /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataStore.swift; path = DataManagement/DataStore.swift; sourceTree = "<group>"; };
+		10BBA0951E94D2EB0071010C /* GCDDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDDataManager.swift; sourceTree = "<group>"; };
+		10BBA0971E94D2FB0071010C /* OperationDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationDataManager.swift; sourceTree = "<group>"; };
+		10BBA09B1E94D4D50071010C /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		10BBA09D1E94D5B70071010C /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,8 +111,8 @@
 			children = (
 				100B0B9C1E7C5A8E00DD181F /* AppDelegate.swift */,
 				100B0B9E1E7C5A8E00DD181F /* ProfileController.swift */,
-				10BBA0941E94D2C80071010C /* DataManagement */,
 				10BAAB0A1E87B0DA00104295 /* Dialogs */,
+				10BBA0941E94D2C80071010C /* DataManagement */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -124,7 +122,6 @@
 			children = (
 				10BAAB181E87C1B400104295 /* DialogController.swift */,
 				10BAAB081E87B0D800104295 /* DialogsController.swift */,
-				10BAAB0B1E87B1DA00104295 /* DialogsTableViewDataSource.swift */,
 			);
 			path = Dialogs;
 			sourceTree = "<group>";
@@ -132,9 +129,9 @@
 		10BAAB0D1E87B2AF00104295 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				10BBA0921E94D2AB0071010C /* DataManager.swift */,
 				10BAAB0F1E87B2FD00104295 /* DialogCellModel.swift */,
 				10BAAB111E87B38A00104295 /* MessageCellModel.swift */,
-				10BBA0921E94D2AB0071010C /* DataManager.swift */,
 				10BBA09D1E94D5B70071010C /* Profile.swift */,
 			);
 			path = Models;
@@ -160,11 +157,11 @@
 		10BBA0941E94D2C80071010C /* DataManagement */ = {
 			isa = PBXGroup;
 			children = (
+				10BBA09B1E94D4D50071010C /* DataStore.swift */,
 				10BBA0951E94D2EB0071010C /* GCDDataManager.swift */,
 				10BBA0971E94D2FB0071010C /* OperationDataManager.swift */,
-				10BBA09B1E94D4D50071010C /* DataStore.swift */,
 			);
-			name = DataManagement;
+			path = DataManagement;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,7 +237,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10BAAB0C1E87B1DA00104295 /* DialogsTableViewDataSource.swift in Sources */,
 				10BBA09E1E94D5B70071010C /* Profile.swift in Sources */,
 				10BBA0981E94D2FB0071010C /* OperationDataManager.swift in Sources */,
 				10BAAB1B1E87C36E00104295 /* MessageCell.swift in Sources */,
