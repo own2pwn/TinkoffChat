@@ -12,7 +12,7 @@ fileprivate let sentMessageCellId = "idSentMessage"
 fileprivate let receivedMessageCellId = "idReceivedMessage"
 fileprivate let numberOfRows = 6
 
-class DialogController: UIViewController
+class DialogController: UIViewController, UITableViewDataSource
 {
     // MARK: - Communication
     

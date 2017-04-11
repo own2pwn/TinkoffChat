@@ -282,7 +282,10 @@ class DialogsController: UIViewController, UITableViewDataSource, UITableViewDel
     {
         if let cell = sender as? DialogCell, let dialogVC = segue.destination as? DialogController
         {
-            dialogVC.navigationItem.title = cell.userName!
+            dialogVC.navigationItem.title = cell.userName
+            dialogVC.communicator = communicator
+            dialogVC.selectedUserID = selectedUserID
+            dialogVC.dialogsController = self
         }
     }
 

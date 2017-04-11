@@ -153,6 +153,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="messageBubbleView" destination="exm-9n-UhE" id="e4F-GS-AFa"/>
+                                            <outlet property="messageDateLabel" destination="i7Z-ox-sTw" id="PzE-mF-EIa"/>
                                             <outlet property="messageLabel" destination="twA-ic-V0V" id="kqK-Ha-vbZ"/>
                                         </connections>
                                     </tableViewCell>
