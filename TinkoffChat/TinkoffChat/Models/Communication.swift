@@ -20,17 +20,17 @@ protocol Communicator
 protocol CommunicatorDelegate: class
 {
     // MARK: - Discovering
-    
+
     func didFoundUser(userID: String, userName: String?)
     func didLostUser(userID: String)
-    
+
     // MARK: - Errors
-    
+
     func failedToStartBrowsingForUsers(error: Error)
     func failedToStartAdvertising(error: Error)
-    
+
     // MARK: - Messages
-    
+
     func didReceiveMessage(text: String, fromUser: String, toUser: String)
 }
 

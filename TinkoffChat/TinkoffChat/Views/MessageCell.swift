@@ -32,6 +32,8 @@ class MessageCell: UITableViewCell, MessageCellModel
     
     @IBOutlet weak var messageBubbleView: UIView!
     
+    @IBOutlet weak var messageDateLabel: UILabel!
+    
     // MARK: - Life cycle
     
     override func awakeFromNib()
