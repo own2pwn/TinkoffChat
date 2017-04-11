@@ -51,9 +51,9 @@
 		10BBA09B1E94D4D50071010C /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		10BBA09D1E94D5B70071010C /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		B9D845311E9D0F1700D6373C /* Communication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Communication.swift; sourceTree = "<group>"; };
-		B9D845331E9D105200D6373C /* MultipeerCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultipeerCommunicator.swift; path = MPC/MultipeerCommunicator.swift; sourceTree = "<group>"; };
+		B9D845331E9D105200D6373C /* MultipeerCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerCommunicator.swift; sourceTree = "<group>"; };
 		B9D845351E9D263800D6373C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		B9D845371E9D268400D6373C /* CommunicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommunicationManager.swift; path = MPC/CommunicationManager.swift; sourceTree = "<group>"; };
+		B9D845371E9D268400D6373C /* CommunicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,11 +97,11 @@
 			isa = PBXGroup;
 			children = (
 				10BAAB071E87B0B100104295 /* Controllers */,
-				10BAAB0D1E87B2AF00104295 /* Models */,
-				10BAAB0E1E87B2B600104295 /* Views */,
 				10BAAB041E87AFFD00104295 /* GUI */,
 				10BAAB151E87B75400104295 /* Helpers */,
+				10BAAB0D1E87B2AF00104295 /* Models */,
 				1005A5821E87E5CF007241BD /* Other */,
+				10BAAB0E1E87B2B600104295 /* Views */,
 			);
 			path = TinkoffChat;
 			sourceTree = "<group>";
@@ -117,11 +117,11 @@
 		10BAAB071E87B0B100104295 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				100B0B9C1E7C5A8E00DD181F /* AppDelegate.swift */,
-				100B0B9E1E7C5A8E00DD181F /* ProfileController.swift */,
+				10BBA0941E94D2C80071010C /* DataManagement */,
 				10BAAB0A1E87B0DA00104295 /* Dialogs */,
 				B9D845301E9D0EED00D6373C /* MPC */,
-				10BBA0941E94D2C80071010C /* DataManagement */,
+				100B0B9C1E7C5A8E00DD181F /* AppDelegate.swift */,
+				100B0B9E1E7C5A8E00DD181F /* ProfileController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -159,8 +159,8 @@
 		10BAAB151E87B75400104295 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				10BAAB161E87B76000104295 /* Extensions.swift */,
 				B9D845351E9D263800D6373C /* Constants.swift */,
+				10BAAB161E87B76000104295 /* Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -178,10 +178,10 @@
 		B9D845301E9D0EED00D6373C /* MPC */ = {
 			isa = PBXGroup;
 			children = (
-				B9D845331E9D105200D6373C /* MultipeerCommunicator.swift */,
 				B9D845371E9D268400D6373C /* CommunicationManager.swift */,
+				B9D845331E9D105200D6373C /* MultipeerCommunicator.swift */,
 			);
-			name = MPC;
+			path = MPC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
