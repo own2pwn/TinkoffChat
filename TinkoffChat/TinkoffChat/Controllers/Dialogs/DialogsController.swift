@@ -14,7 +14,29 @@ class DialogsController: UIViewController, UITableViewDataSource, UITableViewDel
 
     @IBOutlet weak var dialogsTableView: UITableView!
 
-    // MARK: - Properties
+    // MARK: - Communication
+
+    private let communicator = MultipeerCommunicator()
+
+    private let communicationManager = CommunicationManager()
+
+    private var availablePeers = [Peer]()
+    {
+        didSet
+        {
+            availablePeers.sort(by: peersSorter(_:_:))
+            updateUI()
+        }
+    }
+
+    private var messages = [String: [Message]]()
+    {
+        didSet
+        {
+            updateLastMessageDate()
+            updateUI()
+        }
+    }
 
     // MARK: - Life cycle
 
@@ -32,12 +54,21 @@ class DialogsController: UIViewController, UITableViewDataSource, UITableViewDel
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
-    override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
+    deinit
+    {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     // MARK: - Setup
 
     func setupLogic()
     {
+        communicator.delegate = communicationManager
+
+        NotificationCenter.default.addObserver(self, selector: #selector(onUserFound(_:)), name: .DidFoundUser, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onUserLost(_:)), name: .DidLostUser, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onMessageReceive(_:)), name: .DidReceiveMessage, object: nil)
+
         setupView()
     }
 
@@ -56,8 +87,122 @@ class DialogsController: UIViewController, UITableViewDataSource, UITableViewDel
         navBarProfileButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: navBarProfileButton)
     }
-    
-    //MARK: - UITableViewDataSource
+
+    // MARK: - UI helping functions
+
+    func peersSorter(_ p1: Peer, _ p2: Peer) -> Bool
+    {
+        let d1 = p1.lastMessageDate
+        let d2 = p2.lastMessageDate
+
+        if d1 != nil && d2 == nil
+        {
+            return true
+        }
+        else if d1 == nil && d2 != nil
+        {
+            return false
+        }
+        else if d1 == nil && d2 == nil
+        {
+            let n1 = p1.userName?.lowercased() ?? ""
+            let n2 = p2.userName?.lowercased() ?? ""
+            return n1 < n2
+        }
+        return d1! > d2!
+    }
+
+    func updateLastMessageDate()
+    {
+        for message in messages
+        {
+            if let index = getIndexOfPeer(by: message.key)
+            {
+                availablePeers[index].lastMessageDate = message.value.last?.sentDate
+            }
+        }
+    }
+
+    func updateUI()
+    {
+        DispatchQueue.main.async
+        {
+            self.dialogsTableView.reloadSections(IndexSet(integer: 0), with: .fade)
+        }
+    }
+
+    // MARK: - MPC
+
+    func onUserFound(_ notification: NSNotification)
+    {
+        guard let info = notification.userInfo as? [String: String?] else { return }
+
+        if let userID = info[KDiscoveryInfo.UserID] as? String, let userName = info[KDiscoveryInfo.UserName]
+        {
+            appendPeerIfNotExists(by: userID, with: userName)
+        }
+    }
+
+    func onUserLost(_ notification: NSNotification)
+    {
+        guard let userID = notification.userInfo?[KDiscoveryInfo.UserID] as? String else { return }
+        removePeer(by: userID)
+    }
+
+    func onMessageReceive(_ notification: NSNotification)
+    {
+        guard let info = notification.userInfo as? [String: String] else { return }
+
+        if let text = info[KMessageInfo.Text], let sender = info[KMessageInfo.FromUser], let receiver = info[KMessageInfo.ToUser]
+        {
+            let newMessage = Message(message: text, sentDate: Date(), sender: sender, receiver: receiver)
+            appendMessage(to: sender, message: newMessage)
+        }
+    }
+
+    // MARK: Helping functions
+
+    func appendPeerIfNotExists(by userID: String, with userName: String?)
+    {
+        for peer in availablePeers
+        {
+            if peer.userID == userID { return }
+        }
+        availablePeers.append(Peer(userID: userID, userName: userName, lastMessageDate: nil))
+    }
+
+    func appendMessage(to userID: String, message: Message)
+    {
+        guard messages[userID] != nil else
+        {
+            messages[userID] = [message]
+            return
+        }
+        messages[userID]!.append(message)
+    }
+
+    func getIndexOfPeer(by userID: String) -> Int?
+    {
+        for it in 0..<availablePeers.count where availablePeers[it].userID == userID { return it }
+
+        return nil
+    }
+
+    func getMessagesForUser(_ userID: String) -> [Message]?
+    {
+        return messages[userID]
+    }
+
+    func removePeer(by userID: String)
+    {
+        for it in 0..<availablePeers.count where availablePeers[it].userID == userID
+        {
+            availablePeers.remove(at: it)
+            return
+        }
+    }
+
+    // MARK: - UITableViewDataSource
 
     func numberOfSections(in tableView: UITableView) -> Int
     {
@@ -66,7 +211,11 @@ class DialogsController: UIViewController, UITableViewDataSource, UITableViewDel
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return numberOfRowsInSection
+        if section == 0
+        {
+            return availablePeers.count
+        }
+        return 0
     }
 
     // MARK: UI configuration
@@ -74,90 +223,15 @@ class DialogsController: UIViewController, UITableViewDataSource, UITableViewDel
     func configureCell(_ cell: DialogCell, at indexPath: IndexPath)
     {
         let row = indexPath.row
-        let section = indexPath.section
+
+        let peer = availablePeers[row]
+        let lastMessage = messages[peer.userID]?.last
 
         cell.selectionStyle = .none
-
-        if section == 0
-        {
-            let customCell = CustomDialogCell(lastMessageText: "Newest unreaded message", userName: "Eugene", lastMessageDate: Date(), isUserOnline: true, hasUnreadMessages: true)
-
-            cell.backgroundColor = .CellYellowColor
-            cell.userName = "User_\(row + 1)"
-            switch row
-            {
-            case 0:
-                cell.lastMessageText = customCell.lastMessageText
-                cell.userName = customCell.userName
-                cell.lastMessageDate = customCell.lastMessageDate
-                cell.isUserOnline = customCell.isUserOnline
-                cell.hasUnreadMessages = customCell.hasUnreadMessages
-                break
-            case 1:
-                cell.lastMessageText = "2nd message"
-                cell.lastMessageDate = Date().addingTimeInterval(-60 * 10)
-                cell.isUserOnline = true
-                cell.hasUnreadMessages = false
-                break
-            case 2:
-                cell.lastMessageText = "3rd message"
-                cell.lastMessageDate = Date().addingTimeInterval(-60 * 15)
-                cell.isUserOnline = true
-                cell.hasUnreadMessages = false
-                break
-            case 3:
-                cell.lastMessageText = "long long long long unwrapped message"
-                cell.lastMessageDate = Date().addingTimeInterval(-60 * 20)
-                cell.isUserOnline = true
-                cell.hasUnreadMessages = true
-                break
-            case 4:
-                cell.lastMessageText = "long long long...\nmultiline message"
-                cell.lastMessageDate = Date().addingTimeInterval(-60 * 60 * 24)
-                cell.isUserOnline = true
-                cell.hasUnreadMessages = true
-                break
-            case 5:
-                cell.lastMessageText = "6th message"
-                cell.lastMessageDate = Date().addingTimeInterval(-60 * 60 * 24)
-                cell.isUserOnline = true
-                cell.hasUnreadMessages = false
-                break
-            case 6...9:
-                cell.lastMessageText = nil
-                cell.lastMessageDate = nil
-                cell.isUserOnline = true
-                cell.hasUnreadMessages = false
-                cell.lastMessageLabel.font = .appMainLightFont
-                break
-            default:
-                break
-            }
-        }
-        else
-        {
-            cell.backgroundColor = .white
-            cell.userName = "User_\(row + 11)"
-            cell.lastMessageText = String.randomString()
-            cell.hasUnreadMessages = false
-            cell.isUserOnline = false
-
-            let timeInterval = Double(-60 * row + 1)
-            cell.lastMessageDate = Date().addingTimeInterval(timeInterval)
-
-            switch row
-            {
-            case 0:
-                cell.hasUnreadMessages = true
-                cell.lastMessageDate = Date().addingTimeInterval(-60)
-                break
-            case 6...9:
-                cell.hasUnreadMessages = true
-                break
-            default:
-                break
-            }
-        }
+        cell.userName = peer.userName
+        cell.lastMessageText = lastMessage?.message
+        cell.lastMessageDate = lastMessage?.sentDate
+        cell.isUserOnline = true
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -171,11 +245,11 @@ class DialogsController: UIViewController, UITableViewDataSource, UITableViewDel
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
-        var headerTitle = "Online"
-
-        if section == 1 { headerTitle = "History" }
-
-        return headerTitle
+        if section == 0
+        {
+            return "Online"
+        }
+        return "History"
     }
 
     // MARK: - UITableViewDelegate
@@ -184,6 +258,7 @@ class DialogsController: UIViewController, UITableViewDataSource, UITableViewDel
     {
         if let cell = tableView.cellForRow(at: indexPath)
         {
+            selectedUserID = availablePeers[indexPath.row].userID
             performSegue(withIdentifier: idShowDialogSegue, sender: cell)
         }
     }
@@ -210,11 +285,13 @@ class DialogsController: UIViewController, UITableViewDataSource, UITableViewDel
             dialogVC.navigationItem.title = cell.userName!
         }
     }
-    
-    //MARK: - Private properties
-    
+
+    // MARK: - Private properties
+
+    private var selectedUserID = ""
+    private let currentDeviceUserID = UIDevice.current.identifierForVendor!.uuidString
+
     private let cellReusabledentifier = "idDialogsCell"
     private let numOfSections = 1
-    private let numberOfRowsInSection = 10
     private let idShowDialogSegue = "idShowDialogSegue"
 }

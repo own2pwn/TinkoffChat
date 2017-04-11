@@ -34,6 +34,15 @@ extension Date
     }
 }
 
+extension NSNotification.Name
+{
+    static let DidFoundUser = Notification.Name("didFoundUser")
+    static let DidReceiveMessage = Notification.Name("didReceiveMessage")
+    static let DidLostUser = Notification.Name("didLostUser")
+    static let FailedToStartBrowsingForUsers = Notification.Name("failedToStartBrowsingForUsers")
+    static let FailedToStartAdvertising = Notification.Name("failedToStartAdvertising")
+}
+
 extension UIColor
 {
     static func colorFromRGB(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat, _ alpha: CGFloat = 1) -> UIColor
