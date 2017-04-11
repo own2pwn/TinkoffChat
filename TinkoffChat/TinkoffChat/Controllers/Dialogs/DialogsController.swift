@@ -92,24 +92,16 @@ class DialogsController: UIViewController, UITableViewDataSource, UITableViewDel
 
     func peersSorter(_ p1: Peer, _ p2: Peer) -> Bool
     {
-        let d1 = p1.lastMessageDate
-        let d2 = p2.lastMessageDate
+        let d1 = p1.lastMessageDate ?? Date(timeIntervalSince1970: 0)
+        let d2 = p2.lastMessageDate ?? Date(timeIntervalSince1970: 0)
+        let n1 = p1.userName?.lowercased() ?? "Z"
+        let n2 = p2.userName?.lowercased() ?? "Z"
 
-        if d1 != nil && d2 == nil
+        if d1 == d2
         {
-            return true
-        }
-        else if d1 == nil && d2 != nil
-        {
-            return false
-        }
-        else if d1 == nil && d2 == nil
-        {
-            let n1 = p1.userName?.lowercased() ?? ""
-            let n2 = p2.userName?.lowercased() ?? ""
             return n1 < n2
         }
-        return d1! > d2!
+        return d1 > d2
     }
 
     func updateLastMessageDate()
