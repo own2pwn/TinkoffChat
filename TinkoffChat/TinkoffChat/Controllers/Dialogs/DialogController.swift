@@ -8,10 +8,6 @@
 
 import UIKit
 
-fileprivate let sentMessageCellId = "idSentMessage"
-fileprivate let receivedMessageCellId = "idReceivedMessage"
-fileprivate let numberOfRows = 6
-
 class DialogController: UIViewController, UITableViewDataSource
 {
     // MARK: - Communication
@@ -146,7 +142,7 @@ class DialogController: UIViewController, UITableViewDataSource
     {
         communicator.sendMessage(string: message, to: selectedUserID)
         { sent, error in
-            print("`Msg was sent: \(sent) | with error: \(error?.localizedDescription)")
+            print("`Msg was sent: \(sent) | with error: \(String(describing: error?.localizedDescription))")
             
             if error == nil
             {

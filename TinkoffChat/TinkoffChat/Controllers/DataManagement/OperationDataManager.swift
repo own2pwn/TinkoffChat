@@ -10,11 +10,10 @@ import UIKit
 
 class OperationDataManager: DataManager
 {
+    // MARK: DataManager
+
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool, Error?) -> Void)
     {
-        let queue = OperationQueue()
-        queue.qualityOfService = .userInitiated
-
         let op = SaveProfileDataOperation(profile, completion: { bSuccess, err in
             OperationQueue.main.addOperation
             {
@@ -26,9 +25,6 @@ class OperationDataManager: DataManager
 
     func loadProfileData(completion: @escaping (Profile, Error?) -> Void)
     {
-        let queue = OperationQueue()
-        queue.qualityOfService = .userInitiated
-
         let op = LoadProfileDataOperation(completion: { profile, err in
             OperationQueue.main.addOperation
             {
@@ -37,6 +33,17 @@ class OperationDataManager: DataManager
         })
         queue.addOperation(op)
     }
+
+    // MARK: Life cycle
+
+    init()
+    {
+        queue.qualityOfService = .userInitiated
+    }
+
+    // MARK: Properties
+
+    private let queue = OperationQueue()
 }
 
 class AsyncOperation: Operation

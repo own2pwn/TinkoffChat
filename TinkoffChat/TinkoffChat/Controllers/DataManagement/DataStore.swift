@@ -12,20 +12,25 @@ class DataStore: NSObject
 {
     static func saveProfileData(_ profile: Profile, completion: (Bool, Error?) -> Void)
     {
-        let imageData = UIImagePNGRepresentation(profile.userImage)
-        
-        let dataDict = ["uName": profile.userName, "about": profile.aboutUser, "img": imageData, "color": profile.textColor] as [String: Any]
-        let archData = NSKeyedArchiver.archivedData(withRootObject: dataDict)
-        
-        do
+        if let imageData = UIImagePNGRepresentation(profile.userImage)
         {
-            try archData.write(to: getSettingsFilePath(), options: .atomic)
+            let dataDict = ["uName": profile.userName, "about": profile.aboutUser, "img": imageData, "color": profile.textColor] as [String: Any]
+            let archData = NSKeyedArchiver.archivedData(withRootObject: dataDict)
+            
+            do
+            {
+                try archData.write(to: getSettingsFilePath(), options: .atomic)
+            }
+            catch
+            {
+                completion(false, error)
+            }
+            completion(true, nil)
         }
-        catch
+        else
         {
-            completion(false, error)
+            completion(false, DataStoreError.noImageData)
         }
-        completion(true, nil)
     }
     
     static func loadProfileData(completion: (Profile, Error?) -> Void)

@@ -71,7 +71,7 @@ class ProfileController: UIViewController
             
             if err != nil
             {
-                print("There was an error while loading profile data.\nError: \(err?.localizedDescription)")
+                print("There was an error while loading profile data.\nError: \(String(describing: err?.localizedDescription))")
             }
         }
     }

@@ -90,7 +90,7 @@ class MultipeerCommunicator: NSObject, Communicator, MCNearbyServiceAdvertiserDe
     {
         guard let context = context, let inviteData = try? JSONSerialization.jsonObject(with: context, options: .allowFragments) as? [String: String?], let userName = inviteData?[KDiscoveryInfo.UserName] else { return }
         
-        print("`[Invite from peer: \(peerID) with ctx: \(inviteData)")
+        print("`[Invite from peer: \(peerID) with ctx: \(String(describing: inviteData))")
         let session = getSessionOrCreate(for: peerID)
         
         for peer in session.connectedPeers
