@@ -32,11 +32,11 @@
 
 /* Begin PBXFileReference section */
 		100B0B991E7C5A8E00DD181F /* TinkoffChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		100B0B9C1E7C5A8E00DD181F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		100B0B9C1E7C5A8E00DD181F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = TinkoffChat/Controllers/AppDelegate.swift; sourceTree = "<group>"; };
 		100B0B9E1E7C5A8E00DD181F /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
-		100B0BA31E7C5A8E00DD181F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		100B0BA31E7C5A8E00DD181F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = TinkoffChat/Other/Assets.xcassets; sourceTree = "<group>"; };
 		100B0BA61E7C5A8E00DD181F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		100B0BA81E7C5A8E00DD181F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		100B0BA81E7C5A8E00DD181F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = TinkoffChat/Other/Info.plist; sourceTree = "<group>"; };
 		10BAAB051E87B04000104295 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		10BAAB081E87B0D800104295 /* DialogsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogsController.swift; sourceTree = "<group>"; };
 		10BAAB0F1E87B2FD00104295 /* DialogCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogCellModel.swift; sourceTree = "<group>"; };
@@ -70,9 +70,6 @@
 		1005A5821E87E5CF007241BD /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				100B0BA31E7C5A8E00DD181F /* Assets.xcassets */,
-				100B0BA81E7C5A8E00DD181F /* Info.plist */,
-				100B0BA51E7C5A8E00DD181F /* LaunchScreen.storyboard */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -81,6 +78,10 @@
 			isa = PBXGroup;
 			children = (
 				100B0B9B1E7C5A8E00DD181F /* TinkoffChat */,
+				100B0B9C1E7C5A8E00DD181F /* AppDelegate.swift */,
+				100B0BA51E7C5A8E00DD181F /* LaunchScreen.storyboard */,
+				100B0BA81E7C5A8E00DD181F /* Info.plist */,
+				100B0BA31E7C5A8E00DD181F /* Assets.xcassets */,
 				100B0B9A1E7C5A8E00DD181F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -96,6 +97,9 @@
 		100B0B9B1E7C5A8E00DD181F /* TinkoffChat */ = {
 			isa = PBXGroup;
 			children = (
+				B93675451EA34AF500B69AC8 /* CoreLayer */,
+				B93675441EA34AEF00B69AC8 /* ServiceLayer */,
+				B93675431EA34AE500B69AC8 /* PresentationLayer */,
 				10BAAB071E87B0B100104295 /* Controllers */,
 				10BAAB041E87AFFD00104295 /* GUI */,
 				10BAAB151E87B75400104295 /* Helpers */,
@@ -120,7 +124,6 @@
 				10BBA0941E94D2C80071010C /* DataManagement */,
 				10BAAB0A1E87B0DA00104295 /* Dialogs */,
 				B9D845301E9D0EED00D6373C /* MPC */,
-				100B0B9C1E7C5A8E00DD181F /* AppDelegate.swift */,
 				100B0B9E1E7C5A8E00DD181F /* ProfileController.swift */,
 			);
 			path = Controllers;
@@ -173,6 +176,27 @@
 				10BBA0971E94D2FB0071010C /* OperationDataManager.swift */,
 			);
 			path = DataManagement;
+			sourceTree = "<group>";
+		};
+		B93675431EA34AE500B69AC8 /* PresentationLayer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = PresentationLayer;
+			sourceTree = "<group>";
+		};
+		B93675441EA34AEF00B69AC8 /* ServiceLayer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ServiceLayer;
+			sourceTree = "<group>";
+		};
+		B93675451EA34AF500B69AC8 /* CoreLayer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CoreLayer;
 			sourceTree = "<group>";
 		};
 		B9D845301E9D0EED00D6373C /* MPC */ = {
@@ -287,7 +311,7 @@
 				100B0BA61E7C5A8E00DD181F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			path = .;
+			path = TinkoffChat/Other/.;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
