@@ -37,7 +37,7 @@
 		100B0BA31E7C5A8E00DD181F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = TinkoffChat/Other/Assets.xcassets; sourceTree = "<group>"; };
 		100B0BA61E7C5A8E00DD181F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		100B0BA81E7C5A8E00DD181F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = TinkoffChat/Other/Info.plist; sourceTree = "<group>"; };
-		10BAAB051E87B04000104295 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		10BAAB051E87B04000104295 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = GUI/Main.storyboard; sourceTree = "<group>"; };
 		10BAAB081E87B0D800104295 /* DialogsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogsController.swift; sourceTree = "<group>"; };
 		10BAAB0F1E87B2FD00104295 /* DialogCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogCellModel.swift; sourceTree = "<group>"; };
 		10BAAB111E87B38A00104295 /* MessageCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCellModel.swift; sourceTree = "<group>"; };
@@ -113,7 +113,6 @@
 		10BAAB041E87AFFD00104295 /* GUI */ = {
 			isa = PBXGroup;
 			children = (
-				10BAAB051E87B04000104295 /* Main.storyboard */,
 			);
 			path = GUI;
 			sourceTree = "<group>";
@@ -181,6 +180,8 @@
 		B93675431EA34AE500B69AC8 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				B9E4189E1EAA47B100FE1EA3 /* Modules */,
+				10BAAB051E87B04000104295 /* Main.storyboard */,
 			);
 			name = PresentationLayer;
 			sourceTree = "<group>";
@@ -206,6 +207,13 @@
 				B9D845331E9D105200D6373C /* MultipeerCommunicator.swift */,
 			);
 			path = MPC;
+			sourceTree = "<group>";
+		};
+		B9E4189E1EAA47B100FE1EA3 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Modules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
