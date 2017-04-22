@@ -12,7 +12,7 @@
 		100B0BA41E7C5A8E00DD181F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 100B0BA31E7C5A8E00DD181F /* Assets.xcassets */; };
 		100B0BA71E7C5A8E00DD181F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 100B0BA51E7C5A8E00DD181F /* LaunchScreen.storyboard */; };
 		10BAAB061E87B04000104295 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10BAAB051E87B04000104295 /* Main.storyboard */; };
-		10BAAB091E87B0D800104295 /* DialogsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB081E87B0D800104295 /* DialogsController.swift */; };
+		10BAAB091E87B0D800104295 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB081E87B0D800104295 /* ConversationsListViewController.swift */; };
 		10BAAB101E87B2FD00104295 /* DialogCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB0F1E87B2FD00104295 /* DialogCellModel.swift */; };
 		10BAAB121E87B38A00104295 /* MessageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB111E87B38A00104295 /* MessageCellModel.swift */; };
 		10BAAB141E87B3C900104295 /* DialogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB131E87B3C900104295 /* DialogCell.swift */; };
@@ -38,7 +38,7 @@
 		100B0BA61E7C5A8E00DD181F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		100B0BA81E7C5A8E00DD181F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = TinkoffChat/Other/Info.plist; sourceTree = "<group>"; };
 		10BAAB051E87B04000104295 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = GUI/Main.storyboard; sourceTree = "<group>"; };
-		10BAAB081E87B0D800104295 /* DialogsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogsController.swift; sourceTree = "<group>"; };
+		10BAAB081E87B0D800104295 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationsListViewController.swift; path = Controllers/Dialogs/ConversationsListViewController.swift; sourceTree = "<group>"; };
 		10BAAB0F1E87B2FD00104295 /* DialogCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogCellModel.swift; sourceTree = "<group>"; };
 		10BAAB111E87B38A00104295 /* MessageCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCellModel.swift; sourceTree = "<group>"; };
 		10BAAB131E87B3C900104295 /* DialogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogCell.swift; sourceTree = "<group>"; };
@@ -132,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				10BAAB181E87C1B400104295 /* DialogController.swift */,
-				10BAAB081E87B0D800104295 /* DialogsController.swift */,
 			);
 			path = Dialogs;
 			sourceTree = "<group>";
@@ -177,6 +176,14 @@
 			path = DataManagement;
 			sourceTree = "<group>";
 		};
+		B910A2E91EABBA22005637C1 /* Conversations */ = {
+			isa = PBXGroup;
+			children = (
+				10BAAB081E87B0D800104295 /* ConversationsListViewController.swift */,
+			);
+			name = Conversations;
+			sourceTree = "<group>";
+		};
 		B93675431EA34AE500B69AC8 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +219,7 @@
 		B9E4189E1EAA47B100FE1EA3 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				B910A2E91EABBA22005637C1 /* Conversations */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -293,7 +301,7 @@
 				B9D845361E9D263800D6373C /* Constants.swift in Sources */,
 				10BBA0981E94D2FB0071010C /* OperationDataManager.swift in Sources */,
 				10BAAB1B1E87C36E00104295 /* MessageCell.swift in Sources */,
-				10BAAB091E87B0D800104295 /* DialogsController.swift in Sources */,
+				10BAAB091E87B0D800104295 /* ConversationsListViewController.swift in Sources */,
 				10BAAB101E87B2FD00104295 /* DialogCellModel.swift in Sources */,
 				10BAAB171E87B76000104295 /* Extensions.swift in Sources */,
 				10BAAB121E87B38A00104295 /* MessageCellModel.swift in Sources */,

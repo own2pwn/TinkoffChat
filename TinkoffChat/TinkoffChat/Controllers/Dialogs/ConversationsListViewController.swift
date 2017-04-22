@@ -1,5 +1,5 @@
 //
-//  DialogsController.swift
+//  ConversationsListViewController.swift
 //  TinkoffChat
 //
 //  Created by Evgeniy on 26.03.17.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class DialogsController: UIViewController, UITableViewDataSource, UITableViewDelegate
+class ConversationsListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
     // MARK: - Outlets
 
-    @IBOutlet weak var dialogsTableView: UITableView!
+    @IBOutlet weak var conversationsTableView: UITableView!
 
     // MARK: - Communication
 
@@ -74,9 +74,9 @@ class DialogsController: UIViewController, UITableViewDataSource, UITableViewDel
 
     func setupView()
     {
-        dialogsTableView.tableFooterView = UIView()
-        dialogsTableView.estimatedRowHeight = 44
-        dialogsTableView.rowHeight = UITableViewAutomaticDimension
+        conversationsTableView.tableFooterView = UIView()
+        conversationsTableView.estimatedRowHeight = 44
+        conversationsTableView.rowHeight = UITableViewAutomaticDimension
 
         navigationController?.navigationBar.barTintColor = .CellYellowColor
         navigationController?.hidesBarsOnSwipe = true
@@ -119,7 +119,7 @@ class DialogsController: UIViewController, UITableViewDataSource, UITableViewDel
     {
         DispatchQueue.main.async
         {
-            self.dialogsTableView.reloadSections(IndexSet(integer: 0), with: .fade)
+            self.conversationsTableView.reloadSections(IndexSet(integer: 0), with: .fade)
         }
     }
 

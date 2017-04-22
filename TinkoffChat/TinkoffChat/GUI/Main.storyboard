@@ -13,7 +13,7 @@
         <!--Tinkoff Chat-->
         <scene sceneID="1WD-hv-mor">
             <objects>
-                <viewController id="re7-Av-cuH" customClass="DialogsController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="re7-Av-cuH" customClass="ConversationsListViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="768-4U-O7d"/>
                         <viewControllerLayoutGuide type="bottom" id="Fcx-l8-MAw"/>
@@ -87,7 +87,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Tinkoff Chat" id="Gjt-mc-aZP"/>
                     <connections>
-                        <outlet property="dialogsTableView" destination="6Ue-x1-bgx" id="MRN-3j-Bcj"/>
+                        <outlet property="conversationsTableView" destination="6Ue-x1-bgx" id="vMB-mu-Fbf"/>
                         <segue destination="CY9-V3-5a4" kind="show" identifier="idShowDialogSegue" id="ZGf-bg-wJg"/>
                         <segue destination="t0J-gO-W45" kind="presentation" identifier="idShowProfileSegue" id="sAV-Sn-Kfy"/>
                     </connections>

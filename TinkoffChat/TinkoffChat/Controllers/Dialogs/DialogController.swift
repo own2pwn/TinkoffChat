@@ -16,7 +16,7 @@ class DialogController: UIViewController, UITableViewDataSource
     
     internal var selectedUserID: String!
     
-    weak var dialogsController: DialogsController!
+    weak var dialogsController: ConversationsListViewController!
     
     internal var messages = [Message]()
     {
