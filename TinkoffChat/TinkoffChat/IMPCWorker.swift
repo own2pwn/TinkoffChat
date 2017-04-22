@@ -8,9 +8,16 @@
 
 import Foundation
 
+struct Peer
+{
+    let userID: String
+    let userName: String?
+}
+
 protocol IMPCWorker: class
 {
     func send(message: String, to: String, completion: (Error?) -> Void)
+    func peers(where state: UserState)
     
     weak var delegate: IMPCWorkerDelegate? { get set }
 }
@@ -32,4 +39,21 @@ protocol IMPCWorkerDelegate: class
     func failedToStartBrowsingForUsers(error: Error)
     
     func failedToStartAdvertising(error: Error)
+}
+
+
+class MPCWorker: IMPCWorker
+{
+    func send(message: String, to: String, completion: (Error?) -> Void)
+    {
+        
+    }
+    
+    func peers(where state: UserState) {
+        
+    }
+    
+    var delegate: IMPCWorkerDelegate?
+    
+    //TODO: notufy delegate on new peer and so on
 }

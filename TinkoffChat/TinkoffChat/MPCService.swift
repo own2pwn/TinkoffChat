@@ -8,9 +8,16 @@
 
 import Foundation
 
+enum UserState: Int
+{
+    case offline = 0
+    case online
+}
+
 protocol IMPCService
 {
     func send(message: String, to: String, completion: (Error?) -> Void)
+    func conversations(where peerState: UserState)
     
     weak var delegate: IMPCServiceDelegate? { get set }
 }
@@ -35,6 +42,10 @@ final class MPCService: IMPCService, IMPCWorkerDelegate
     func send(message: String, to: String, completion: (Error?) -> Void)
     {
         mpcWorker.send(message: message, to: to, completion: completion)
+    }
+    
+    func conversations(where peerState: UserState)
+    {
     }
     
     var delegate: IMPCServiceDelegate?

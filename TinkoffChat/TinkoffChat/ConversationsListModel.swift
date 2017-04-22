@@ -37,6 +37,21 @@ final class ConversationsListModel: IConversationsListModel
 
     func loadConversations(for section: ConversationsListTableViewSections)
     {
+        //TODO: completion
+        
+        switch section {
+        case .offlineUsers:
+            let conversations = mpcService.conversations(where: .offline)
+            break
+        case .onlineUsers:
+            break
+
+        case .all:
+            break
+        }
+
+        mpcService.getConversations(where: section.rawValue)
+
         //        coreDataService.retrieveData
         //        { error, data in
         //

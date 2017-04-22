@@ -36,7 +36,7 @@ protocol CommunicatorDelegate: class
 
 // MARK: - Communication
 
-struct Peer
+struct Peer_
 {
     let userID: String
     let userName: String?
