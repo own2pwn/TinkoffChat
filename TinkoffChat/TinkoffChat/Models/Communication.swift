@@ -50,9 +50,3 @@ struct Message
     let sender: String
     let receiver: String
 }
-
-enum MultipeerCommunicatorError: Error
-{
-    case noSessionData
-    case noPeersInSession
-}

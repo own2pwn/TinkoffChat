@@ -30,6 +30,7 @@
 		B910A2F21EABC176005637C1 /* IMPCWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2F11EABC176005637C1 /* IMPCWorker.swift */; };
 		B9B9E88B1EABEA63009CA699 /* IConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B9E88A1EABEA63009CA699 /* IConversationModel.swift */; };
 		B9B9E88D1EABEB9D009CA699 /* IMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B9E88C1EABEB9D009CA699 /* IMessageModel.swift */; };
+		B9B9E88F1EABF74C009CA699 /* MPCWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B9E88E1EABF74C009CA699 /* MPCWorker.swift */; };
 		B9D845321E9D0F1700D6373C /* Communication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D845311E9D0F1700D6373C /* Communication.swift */; };
 		B9D845341E9D105200D6373C /* MultipeerCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D845331E9D105200D6373C /* MultipeerCommunicator.swift */; };
 		B9D845361E9D263800D6373C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D845351E9D263800D6373C /* Constants.swift */; };
@@ -62,6 +63,7 @@
 		B910A2F11EABC176005637C1 /* IMPCWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMPCWorker.swift; sourceTree = "<group>"; };
 		B9B9E88A1EABEA63009CA699 /* IConversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IConversationModel.swift; sourceTree = "<group>"; };
 		B9B9E88C1EABEB9D009CA699 /* IMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMessageModel.swift; sourceTree = "<group>"; };
+		B9B9E88E1EABF74C009CA699 /* MPCWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCWorker.swift; sourceTree = "<group>"; };
 		B9D845311E9D0F1700D6373C /* Communication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Communication.swift; sourceTree = "<group>"; };
 		B9D845331E9D105200D6373C /* MultipeerCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerCommunicator.swift; sourceTree = "<group>"; };
 		B9D845351E9D263800D6373C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				B910A2F11EABC176005637C1 /* IMPCWorker.swift */,
+				B9B9E88E1EABF74C009CA699 /* MPCWorker.swift */,
 			);
 			name = CoreLayer;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				100B0B9D1E7C5A8E00DD181F /* AppDelegate.swift in Sources */,
 				B9D845341E9D105200D6373C /* MultipeerCommunicator.swift in Sources */,
 				B910A2F01EABBD9D005637C1 /* MPCService.swift in Sources */,
+				B9B9E88F1EABF74C009CA699 /* MPCWorker.swift in Sources */,
 				B910A2EE1EABBBF6005637C1 /* IBaseConversation.swift in Sources */,
 				B9B9E88D1EABEB9D009CA699 /* IMessageModel.swift in Sources */,
 				10BAAB141E87B3C900104295 /* DialogCell.swift in Sources */,
