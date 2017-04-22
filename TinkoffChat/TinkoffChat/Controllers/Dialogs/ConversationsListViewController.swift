@@ -8,6 +8,13 @@
 
 import UIKit
 
+enum ConversationsListTableViewSections: Int
+{
+    case onlineUsers = 0
+    case offlineUsers = 1
+    case all
+}
+
 class ConversationsListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
     // MARK: - Outlets
