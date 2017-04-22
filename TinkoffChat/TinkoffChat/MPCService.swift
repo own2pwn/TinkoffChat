@@ -10,7 +10,7 @@ import Foundation
 
 protocol IMPCService
 {
-    func send(message: String)
+    func send(message: String, to: String, completion: (Error?) -> Void)
     
     weak var delegate: IMPCServiceDelegate? { get set }
 }
@@ -18,6 +18,7 @@ protocol IMPCService
 protocol IMPCServiceDelegate: class
 {
     func doJob()
+    func show(error message: String)
 }
 
 final class MPCService: IMPCService, IMPCWorkerDelegate
@@ -31,9 +32,9 @@ final class MPCService: IMPCService, IMPCWorkerDelegate
     
     // MARK: - IMPCService
     
-    func send(message: String)
+    func send(message: String, to: String, completion: (Error?) -> Void)
     {
-        
+        mpcWorker.send(message: message, to: to, completion: completion)
     }
     
     var delegate: IMPCServiceDelegate?
@@ -55,15 +56,9 @@ final class MPCService: IMPCService, IMPCWorkerDelegate
         delegate?.doJob()
     }
     
-    func failedToStartAdvertising(error: Error)
-    {
-        delegate?.doJob()
-    }
+    func failedToStartAdvertising(error: Error) { delegate?.show(error: error.localizedDescription) }
     
-    func failedToStartBrowsingForUsers(error: Error)
-    {
-        delegate?.doJob()
-    }
+    func failedToStartBrowsingForUsers(error: Error) { delegate?.show(error: error.localizedDescription) }
     
     // MARK: - Private methods
     

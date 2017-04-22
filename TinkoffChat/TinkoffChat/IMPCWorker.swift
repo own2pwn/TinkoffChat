@@ -10,6 +10,8 @@ import Foundation
 
 protocol IMPCWorker: class
 {
+    func send(message: String, to: String, completion: (Error?) -> Void)
+    
     weak var delegate: IMPCWorkerDelegate? { get set }
 }
 

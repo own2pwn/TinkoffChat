@@ -26,34 +26,34 @@ protocol IConversationsListModelDelegate: IBaseModelDelegate
     func updateView(with data: [ConversationsListCellDisplayModel])
 }
 
-class ConversationsListModel: IConversationsListModel
+final class ConversationsListModel: IConversationsListModel
 {
     weak var delegate: IConversationsListModelDelegate?
-    
-    let coreDataService: ICoreDataService
-    
-    init(coreDataService: ICoreDataService)
+
+    init(mpcService: IMPCService)
     {
-        self.coreDataService = coreDataService
+        self.mpcService = mpcService
     }
-    
+
     func loadConversations(for section: ConversationsListTableViewSections)
     {
-        coreDataService.retrieveData
-            { error, data in
-                
-                // TODO: check if section == 2 then load for all, else for requested one
-                
-                if let error = error
-                {
-                    delegate?.show(error: error.localizedDescription)
-                }
-                else // if let conversations = data as? [conversations]
-                {
-                    // let conversations = data.map({ConversationsListCellDisplayModel(userName: <#T##String?#>, message: <#T##String?#>, messageDate: <#T##Date?#>)})
-                    // TODO: parse conversations
-                    delegate?.updateView(with: data as! [ConversationsListCellDisplayModel])
-                }
-        }
+        //        coreDataService.retrieveData
+        //        { error, data in
+        //
+        //            // TODO: check if section == 2 then load for all, else for requested one
+        //
+        //            if let error = error
+        //            {
+        //                delegate?.show(error: error.localizedDescription)
+        //            }
+        //            else // if let conversations = data as? [conversations]
+        //            {
+        //                // let conversations = data.map({ConversationsListCellDisplayModel(userName: <#T##String?#>, message: <#T##String?#>, messageDate: <#T##Date?#>)})
+        //                // TODO: parse conversations
+        //                delegate?.updateView(with: data as! [ConversationsListCellDisplayModel])
+        //            }
+        //        }
     }
+
+    private let mpcService: IMPCService
 }
