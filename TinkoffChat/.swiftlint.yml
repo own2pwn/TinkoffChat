@@ -1,5 +1,0 @@
-disabled_rules: # rule identifiers to exclude from running
-- opening_brace
-- line_length
-- statement_position
-- identifier_name
