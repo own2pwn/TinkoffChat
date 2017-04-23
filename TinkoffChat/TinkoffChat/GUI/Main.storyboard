@@ -96,10 +96,10 @@
             </objects>
             <point key="canvasLocation" x="1832.8" y="197.45127436281859"/>
         </scene>
-        <!--Dialog Controller-->
+        <!--Conversation Controller-->
         <scene sceneID="TfC-Er-VBa">
             <objects>
-                <viewController id="CY9-V3-5a4" customClass="DialogController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="CY9-V3-5a4" customClass="ConversationController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9AH-LS-Fry"/>
                         <viewControllerLayoutGuide type="bottom" id="j2U-af-o0Q"/>
@@ -241,10 +241,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dialogTableView" destination="bfM-sT-nwm" id="eg8-WC-BI6"/>
-                        <outlet property="messageTextView" destination="rky-L4-pfN" id="SlU-xp-Em6"/>
-                        <outlet property="sendMessageButton" destination="W9R-bj-KVO" id="273-dI-WBR"/>
-                        <outlet property="textViewBottomConstraint" destination="pfe-ar-DdH" id="dvE-Yb-jpd"/>
+                        <outlet property="conversationTableView" destination="bfM-sT-nwm" id="ipR-iG-Sfq"/>
+                        <outlet property="messageTextView" destination="rky-L4-pfN" id="fZr-YS-4ms"/>
+                        <outlet property="sendMessageButton" destination="W9R-bj-KVO" id="lcR-uR-rAR"/>
+                        <outlet property="textViewBottomConstraint" destination="pfe-ar-DdH" id="7PO-OP-Wmt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n8y-Xm-WZD" userLabel="First Responder" sceneMemberID="firstResponder"/>

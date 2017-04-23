@@ -10,16 +10,14 @@ import Foundation
 
 final class ConversationAssembly
 {
-    let model: IConversationsListModel
+    let model: IConversationModel
     let mpcService: IMPCService
     
-    init()
+    init(with mpcService: IMPCService)
     {
-        let mpcAssembly = MPCAssembly()
-        mpcService = mpcAssembly.mpcService()
+        let model = ConversationModel(mpcService: mpcService)
         
-        let model = ConversationsListModel(mpcService: mpcService)
-        mpcService.delegate = model
+        self.mpcService = mpcService
         self.model = model
     }
 }

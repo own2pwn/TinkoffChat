@@ -51,6 +51,11 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
         }
     }
     
+    func getLocalUserID() -> String
+    {
+        return UIDevice.current.name
+    }
+    
     var online: Bool
     {
         get { return _online }

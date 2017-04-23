@@ -10,7 +10,7 @@ import Foundation
 
 class MPCAssembly
 {
-    func mpcService() -> IMPCService
+    static func mpcService() -> IMPCService
     {
         let worker = mpcWorker()
         let service = MPCService(with: worker)
@@ -19,7 +19,7 @@ class MPCAssembly
         return service
     }
 
-    private func mpcWorker() -> IMPCWorker
+    private static func mpcWorker() -> IMPCWorker
     {
         return MPCWorker()
     }

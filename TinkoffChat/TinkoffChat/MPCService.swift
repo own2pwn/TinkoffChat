@@ -14,14 +14,6 @@ enum UserState: Int
     case online
 }
 
-typealias ConversationDataSourceType = (userID: String, model: ConversationsListCellDisplayModel)
-
-struct ConversationsListCellDisplayModel
-{
-    let userName: String?
-    var messages: [Message]
-}
-
 final class Message
 {
     let message: String
@@ -42,6 +34,7 @@ protocol IMPCService: class
     func getDataSource(completion: ([ConversationDataSourceType]) -> Void)
     func loadMessages(for userID: String, with user: String, completion: ([Message]) -> Void)
     func send(message: String, to: String, completion: (Error?) -> Void)
+    func localUserID() -> String
     
     weak var delegate: IMPCServiceDelegate? { get set }
 }
@@ -91,6 +84,11 @@ final class MPCService: IMPCService, IMPCServiceDelegate
     func send(message: String, to: String, completion: (Error?) -> Void)
     {
         mpcWorker.send(message: message, to: to, completion: completion)
+    }
+    
+    func localUserID() -> String
+    {
+        return mpcWorker.getLocalUserID()
     }
     
     var delegate: IMPCServiceDelegate?
@@ -176,7 +174,6 @@ final class MPCService: IMPCService, IMPCServiceDelegate
             if dataSource[it].userID == userID
             {
                 dataSource[it].model.messages.append(message)
-                print(dataSource[it].model.messages.count)
                 return
             }
         }

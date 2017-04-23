@@ -29,6 +29,7 @@
 		B910A2F21EABC176005637C1 /* IMPCWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2F11EABC176005637C1 /* IMPCWorker.swift */; };
 		B9291BFB1EACEC5800B4358F /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291BFA1EACEC5800B4358F /* ConversationModel.swift */; };
 		B9291BFD1EACEC6200B4358F /* ConversationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291BFC1EACEC6200B4358F /* ConversationAssembly.swift */; };
+		B9291C001EACF42900B4358F /* IBaseConversationModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291BFF1EACF42900B4358F /* IBaseConversationModelDelegate.swift */; };
 		B99814791EAC8EC500B95723 /* RootAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99814781EAC8EC500B95723 /* RootAssembly.swift */; };
 		B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */; };
 		B998147D1EAC90B000B95723 /* ModelsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147C1EAC90B000B95723 /* ModelsAssembly.swift */; };
@@ -65,6 +66,7 @@
 		B910A2F11EABC176005637C1 /* IMPCWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMPCWorker.swift; sourceTree = "<group>"; };
 		B9291BFA1EACEC5800B4358F /* ConversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		B9291BFC1EACEC6200B4358F /* ConversationAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationAssembly.swift; sourceTree = "<group>"; };
+		B9291BFF1EACF42900B4358F /* IBaseConversationModelDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBaseConversationModelDelegate.swift; sourceTree = "<group>"; };
 		B99814781EAC8EC500B95723 /* RootAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
 		B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCAssembly.swift; sourceTree = "<group>"; };
 		B998147C1EAC90B000B95723 /* ModelsAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelsAssembly.swift; sourceTree = "<group>"; };
@@ -217,6 +219,14 @@
 			name = Conversation;
 			sourceTree = "<group>";
 		};
+		B9291BFE1EACF41000B4358F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B9291BFF1EACF42900B4358F /* IBaseConversationModelDelegate.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		B93675431EA34AE500B69AC8 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +266,7 @@
 		B9E4189E1EAA47B100FE1EA3 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				B9291BFE1EACF41000B4358F /* Common */,
 				B9291BF91EACE1DA00B4358F /* Conversation */,
 				B910A2E91EABBA22005637C1 /* Conversations */,
 			);
@@ -342,6 +353,7 @@
 				B9291BFD1EACEC6200B4358F /* ConversationAssembly.swift in Sources */,
 				10BAAB1B1E87C36E00104295 /* MessageCell.swift in Sources */,
 				B99814791EAC8EC500B95723 /* RootAssembly.swift in Sources */,
+				B9291C001EACF42900B4358F /* IBaseConversationModelDelegate.swift in Sources */,
 				B910A2F21EABC176005637C1 /* IMPCWorker.swift in Sources */,
 				10BAAB091E87B0D800104295 /* ConversationsListViewController.swift in Sources */,
 				10BAAB101E87B2FD00104295 /* DialogCellModel.swift in Sources */,

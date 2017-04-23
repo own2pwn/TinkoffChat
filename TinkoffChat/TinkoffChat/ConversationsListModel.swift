@@ -8,21 +8,24 @@
 
 import Foundation
 
-protocol IConversationsListModel: class
+typealias ConversationDataSourceType = (userID: String, model: ConversationsListCellDisplayModel)
+
+struct ConversationsListCellDisplayModel
 {
-    weak var delegate: IConversationsListModelDelegate? { get set }
+    let userName: String?
+    var messages: [Message]
 }
 
-protocol IConversationsListModelDelegate: class
+protocol IConversationsListModel: class
 {
-    func updateView(with data: [ConversationDataSourceType])
+    weak var delegate: IBaseConversationModelDelegate? { get set }
 }
 
 final class ConversationsListModel: IConversationsListModel, IMPCServiceDelegate
 {
     // MARK: - IConversationsListModel
 
-    weak var delegate: IConversationsListModelDelegate?
+    weak var delegate: IBaseConversationModelDelegate?
 
     init(mpcService: IMPCService)
     {
@@ -53,7 +56,6 @@ final class ConversationsListModel: IConversationsListModel, IMPCServiceDelegate
 
     func didReceiveMessage(text: String, fromUser: String, toUser: String)
     {
-
         mpcService.getDataSource
         { dataSource in
             sortDataSource(data: dataSource, completion: { sorted in

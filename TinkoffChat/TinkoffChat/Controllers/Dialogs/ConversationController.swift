@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversationController: UIViewController, UITableViewDataSource
+class ConversationController: UIViewController, IConversationModelDelegate, UITableViewDataSource
 {
     // MARK: - Communication
     
@@ -18,23 +18,23 @@ class ConversationController: UIViewController, UITableViewDataSource
     
     weak var dialogsController: ConversationsListViewController!
     
-    internal var messages = [Message]()
-    {
-        didSet
-        {
-            messagesCount = messages.count
-            DispatchQueue.main.async
-            {
-                self.dialogTableView.reloadSections(IndexSet(integer: 0), with: .fade)
-                let nPath = IndexPath(row: self.messagesCount - 1, section: 0)
-                self.dialogTableView.scrollToRow(at: nPath, at: .middle, animated: true)
-            }
-        }
-    }
+    //    internal var messages = [Message]()
+    //    {
+    //        didSet
+    //        {
+    //            messagesCount = messages.count
+    //            DispatchQueue.main.async
+    //            {
+    //                self.conversationTableView.reloadSections(IndexSet(integer: 0), with: .fade)
+    //                let nPath = IndexPath(row: self.messagesCount - 1, section: 0)
+    //                self.conversationTableView.scrollToRow(at: nPath, at: .middle, animated: true)
+    //            }
+    //        }
+    //    }
     
     // MARK: - Outlets
     
-    @IBOutlet weak var dialogTableView: UITableView!
+    @IBOutlet weak var conversationTableView: UITableView!
     
     @IBOutlet weak var messageTextView: UITextView!
     
@@ -48,6 +48,8 @@ class ConversationController: UIViewController, UITableViewDataSource
     {
         super.viewDidLoad()
         
+        setupLogic()
+        
         setupView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -60,20 +62,40 @@ class ConversationController: UIViewController, UITableViewDataSource
     
     deinit
     {
+        mpcService.delegate = oldDelegate
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func setupLogic()
+    {
+        oldDelegate = mpcService.delegate
+        model.getMessages(for: selectedUserID, with: mpcService.localUserID())
+        { messages in
+            dataSource = messages
+            
+            updateUI()
+        }
+    }
+    
+    private func updateUI()
+    {
+        DispatchQueue.main.async
+        {
+            self.conversationTableView.reloadSections(IndexSet(integer: 0), with: .fade)
+        }
     }
     
     // MARK: - View setup
     
     func setupView()
     {
-        dialogTableView.tableFooterView = UIView()
-        dialogTableView.estimatedRowHeight = 44
-        dialogTableView.rowHeight = UITableViewAutomaticDimension
+        conversationTableView.tableFooterView = UIView()
+        conversationTableView.estimatedRowHeight = 44
+        conversationTableView.rowHeight = UITableViewAutomaticDimension
         
-        dialogTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-        dialogTableView.scrollIndicatorInsets = dialogTableView.contentInset
-        dialogTableView.backgroundColor = UIColor.CellLightYellowColor
+        conversationTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+        conversationTableView.scrollIndicatorInsets = conversationTableView.contentInset
+        conversationTableView.backgroundColor = UIColor.CellLightYellowColor
         
         navigationController?.hidesBarsOnSwipe = false
         
@@ -86,42 +108,56 @@ class ConversationController: UIViewController, UITableViewDataSource
         view.endEditing(true)
     }
     
-    // MARK: - MPC KVO
+    // MARK: - IConversationModelDelegate
     
-    func onUserFound(_ notification: NSNotification)
+    func didLostUser(userID: String)
     {
-        guard let info = notification.userInfo as? [String: String?] else { return }
-        
-        if let userID = info[KDiscoveryInfo.UserID] as? String
-        {
-            if userID == selectedUserID
-            {
-                setSendMessageButtonEnabled(true)
-            }
-        }
     }
     
-    func onUserLost(_ notification: NSNotification)
+    func didReceiveMessage(from userID: String, message: String)
     {
-        guard let userID = notification.userInfo?[KDiscoveryInfo.UserID] as? String else { return }
-        if userID == selectedUserID
-        {
-            setSendMessageButtonEnabled(false)
-        }
     }
     
-    func onMessageReceive(_ notification: NSNotification)
+    func updateView(with data: [ConversationDataSourceType])
     {
-        guard let info = notification.userInfo as? [String: String] else { return }
-        
-        if let text = info[KMessageInfo.Text], let sender = info[KMessageInfo.FromUser], let receiver = info[KMessageInfo.ToUser]
-        {
-            if sender == selectedUserID && receiver == currentDeviceUserID
-            {
-//                messages.append(Message(message: text, sentDate: Date(), sender: sender, receiver: receiver))
-            }
-        }
     }
+    
+    //    // MARK: - MPC KVO
+    //
+    //    func onUserFound(_ notification: NSNotification)
+    //    {
+    //        guard let info = notification.userInfo as? [String: String?] else { return }
+    //
+    //        if let userID = info[KDiscoveryInfo.UserID] as? String
+    //        {
+    //            if userID == selectedUserID
+    //            {
+    //                setSendMessageButtonEnabled(true)
+    //            }
+    //        }
+    //    }
+    //
+    //    func onUserLost(_ notification: NSNotification)
+    //    {
+    //        guard let userID = notification.userInfo?[KDiscoveryInfo.UserID] as? String else { return }
+    //        if userID == selectedUserID
+    //        {
+    //            setSendMessageButtonEnabled(false)
+    //        }
+    //    }
+    //
+    //    func onMessageReceive(_ notification: NSNotification)
+    //    {
+    //        guard let info = notification.userInfo as? [String: String] else { return }
+    //
+    //        if let text = info[KMessageInfo.Text], let sender = info[KMessageInfo.FromUser], let receiver = info[KMessageInfo.ToUser]
+    //        {
+    //            if sender == selectedUserID && receiver == currentDeviceUserID
+    //            {
+    //                //                messages.append(Message(message: text, sentDate: Date(), sender: sender, receiver: receiver))
+    //            }
+    //        }
+    //    }
     
     // MARK: - Methods
     
@@ -131,7 +167,7 @@ class ConversationController: UIViewController, UITableViewDataSource
         //        {
         //            self.messages = messages
         //        }
-        messagesCount = messages.count
+        //        messagesCount = messages.count
     }
     
     func send(message: String)
@@ -142,10 +178,10 @@ class ConversationController: UIViewController, UITableViewDataSource
             
             if error == nil
             {
-//                let msg = Message(message: message, sentDate: Date(), sender: self.currentDeviceUserID, receiver: self.selectedUserID)
+                //                let msg = Message(message: message, sentDate: Date(), sender: self.currentDeviceUserID, receiver: self.selectedUserID)
                 DispatchQueue.main.async
                 {
-//                    self.messages.append(msg)
+                    //                    self.messages.append(msg)
                     //                    self.dialogsController.appendMessage(to: self.selectedUserID, message: msg)
                     self.messageTextView.text = nil
                 }
@@ -165,7 +201,7 @@ class ConversationController: UIViewController, UITableViewDataSource
     {
         if messagesCount > 0
         {
-            dialogTableView.scrollToRow(at: IndexPath(row: messagesCount - 1, section: 0), at: .bottom, animated: true)
+            conversationTableView.scrollToRow(at: IndexPath(row: messagesCount - 1, section: 0), at: .bottom, animated: true)
         }
     }
     
@@ -178,7 +214,7 @@ class ConversationController: UIViewController, UITableViewDataSource
     {
         if messagesCount > 0
         {
-            dialogTableView.scrollToRow(at: IndexPath(row: messagesCount - 1, section: 0), at: .middle, animated: true)
+            conversationTableView.scrollToRow(at: IndexPath(row: messagesCount - 1, section: 0), at: .middle, animated: true)
         }
         
     }
@@ -212,7 +248,7 @@ class ConversationController: UIViewController, UITableViewDataSource
         cell.selectionStyle = .none
         cell.backgroundColor = .CellLightYellowColor
         
-        let message = messages[row]
+        let message = dataSource[row]
         cell.messageText = message.message
         cell.messageDateLabel.text = Calendar.current.isDateInToday(message.sentDate) ? message.sentDate.extractTime() : message.sentDate.extractDay()
     }
@@ -222,7 +258,7 @@ class ConversationController: UIViewController, UITableViewDataSource
         let row = indexPath.row
         var cell = MessageCell()
         
-        let msgSender = messages[row].sender
+        let msgSender = dataSource[row].sender
         
         if msgSender == currentDeviceUserID
         {
@@ -244,6 +280,24 @@ class ConversationController: UIViewController, UITableViewDataSource
     }
     
     // MARK: - Private properties
+    
+    // MARK: Lazy
+    
+    private lazy var assembly: ConversationAssembly = {
+        ConversationAssembly(with: self.mpcService)
+    }()
+    
+    private lazy var model: IConversationModel = {
+        self.assembly.model
+    }()
+    
+    // MARK: Stored
+    
+    internal var mpcService: IMPCService!
+    
+    private var oldDelegate: IMPCServiceDelegate?
+    
+    private var dataSource = [Message]()
     
     private var messagesCount = 0
     private let currentDeviceUserID = UIDevice.current.identifierForVendor!.uuidString

@@ -15,7 +15,7 @@ enum ConversationsListTableViewSections: Int
     case all
 }
 
-final class ConversationsListViewController: UIViewController, IConversationsListModelDelegate, UITableViewDataSource, UITableViewDelegate
+final class ConversationsListViewController: UIViewController, IBaseConversationModelDelegate, UITableViewDataSource, UITableViewDelegate
 {
     // MARK: - Outlets
 
@@ -50,6 +50,7 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
     func setupLogic()
     {
         model.delegate = self
+
         setupView()
     }
 
@@ -76,7 +77,7 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
         if let cell = sender as? DialogCell, let dialogVC = segue.destination as? ConversationController
         {
             dialogVC.navigationItem.title = cell.userName
-            //            dialogVC.communicator = communicator
+            dialogVC.mpcService = mpcService
             dialogVC.selectedUserID = selectedUserID
             dialogVC.dialogsController = self
         }
@@ -148,7 +149,7 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
     {
         if let cell = tableView.cellForRow(at: indexPath)
         {
-            //            selectedUserID = availablePeers[indexPath.row].userID
+            selectedUserID = dataSource[indexPath.row].userID
             performSegue(withIdentifier: idShowDialogSegue, sender: cell)
         }
     }
@@ -172,8 +173,6 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
 
     // MARK: Lazy
 
-    private let assembly = ConversationsListAssembly()
-
     private lazy var model: IConversationsListModel = {
         self.assembly.model
     }()
@@ -183,6 +182,8 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
     }()
 
     // MARK: Stored
+
+    private let assembly = ConversationsListAssembly()
 
     private var dataSource = [ConversationDataSourceType]()
 
