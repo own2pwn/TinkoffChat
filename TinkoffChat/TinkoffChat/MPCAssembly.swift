@@ -10,14 +10,16 @@ import Foundation
 
 class MPCAssembly
 {
-    static func mpcService() -> IMPCService
+    func mpcService() -> IMPCService
     {
-        let service = MPCService(with: mpcWorker())
+        let worker = mpcWorker()
+        let service = MPCService(with: worker)
+        worker.delegate = service
 
         return service
     }
 
-    private static func mpcWorker() -> IMPCWorker
+    private func mpcWorker() -> IMPCWorker
     {
         return MPCWorker()
     }

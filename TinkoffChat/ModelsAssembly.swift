@@ -1,5 +1,5 @@
 //
-//  RootAssembly.swift
+//  ModelsAssembly.swift
 //  TinkoffChat
 //
 //  Created by Evgeniy on 23.04.17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RootAssembly
+class ModelsAssembly
 {
-    var mpcModule: MPCAssembly = MPCAssembly()
+    
 }

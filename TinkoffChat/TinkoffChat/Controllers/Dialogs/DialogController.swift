@@ -131,10 +131,10 @@ class DialogController: UIViewController, UITableViewDataSource
     
     func loadMessages()
     {
-        if let messages = dialogsController.getMessagesForUser(selectedUserID)
-        {
-            self.messages = messages
-        }
+        //        if let messages = dialogsController.getMessagesForUser(selectedUserID)
+        //        {
+        //            self.messages = messages
+        //        }
         messagesCount = messages.count
     }
     
@@ -150,7 +150,7 @@ class DialogController: UIViewController, UITableViewDataSource
                 DispatchQueue.main.async
                 {
                     self.messages.append(msg)
-                    self.dialogsController.appendMessage(to: self.selectedUserID, message: msg)
+                    //                    self.dialogsController.appendMessage(to: self.selectedUserID, message: msg)
                     self.messageTextView.text = nil
                 }
             }

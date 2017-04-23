@@ -15,7 +15,7 @@ enum ConversationsListTableViewSections: Int
     case all
 }
 
-class ConversationsListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
+class ConversationsListViewController: UIViewController, IMPCServiceDelegate, UITableViewDataSource, UITableViewDelegate
 {
     // MARK: - Outlets
 
@@ -23,27 +23,14 @@ class ConversationsListViewController: UIViewController, UITableViewDataSource, 
 
     // MARK: - Communication
 
-    private let communicator = MultipeerCommunicator()
-
-    private let communicationManager = CommunicationManager()
-
-    private var availablePeers = [Peer]()
-    {
-        didSet
-        {
-            availablePeers.sort(by: peersSorter(_:_:))
-            updateUI()
-        }
-    }
-
-    private var messages = [String: [Message]]()
-    {
-        didSet
-        {
-            updateLastMessageDate()
-            updateUI()
-        }
-    }
+    //    private var messages = [String: [Message]]()
+    //    {
+    //        didSet
+    //        {
+    //            updateLastMessageDate()
+    //            updateUI()
+    //        }
+    //    }
 
     // MARK: - Life cycle
 
@@ -61,22 +48,33 @@ class ConversationsListViewController: UIViewController, UITableViewDataSource, 
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
-    deinit
-    {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     // MARK: - Setup
 
     func setupLogic()
     {
-        communicator.delegate = communicationManager
-
-        NotificationCenter.default.addObserver(self, selector: #selector(onUserFound(_:)), name: .DidFoundUser, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onUserLost(_:)), name: .DidLostUser, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onMessageReceive(_:)), name: .DidReceiveMessage, object: nil)
+        //=== new
+        mpcService.delegate = self
 
         setupView()
+    }
+
+    // MARK: - IMPCServiceDelegate
+
+    func append(message: String, sender: String)
+    {
+    }
+
+    func append(userID: String, userName: String?)
+    {
+    }
+
+    func remove(userID: String)
+    {
+    }
+
+    func log(error message: String)
+    {
+        print("There was an error!: \(message)")
     }
 
     func setupView()
@@ -97,30 +95,30 @@ class ConversationsListViewController: UIViewController, UITableViewDataSource, 
 
     // MARK: - UI helping functions
 
-    func peersSorter(_ p1: Peer, _ p2: Peer) -> Bool
-    {
-        let d1 = p1.lastMessageDate ?? Date(timeIntervalSince1970: 0)
-        let d2 = p2.lastMessageDate ?? Date(timeIntervalSince1970: 0)
-        let n1 = p1.userName?.lowercased() ?? "Z"
-        let n2 = p2.userName?.lowercased() ?? "Z"
+    //    func peersSorter(_ p1: Peer, _ p2: Peer) -> Bool
+    //    {
+    //        let d1 = p1.lastMessageDate ?? Date(timeIntervalSince1970: 0)
+    //        let d2 = p2.lastMessageDate ?? Date(timeIntervalSince1970: 0)
+    //        let n1 = p1.userName?.lowercased() ?? "Z"
+    //        let n2 = p2.userName?.lowercased() ?? "Z"
+    //
+    //        if d1 == d2
+    //        {
+    //            return n1 < n2
+    //        }
+    //        return d1 > d2
+    //    }
 
-        if d1 == d2
-        {
-            return n1 < n2
-        }
-        return d1 > d2
-    }
-
-    func updateLastMessageDate()
-    {
-        for message in messages
-        {
-            if let index = getIndexOfPeer(by: message.key)
-            {
-                availablePeers[index].lastMessageDate = message.value.last?.sentDate
-            }
-        }
-    }
+    //    func updateLastMessageDate()
+    //    {
+    //        for message in messages
+    //        {
+    //            if let index = getIndexOfPeer(by: message.key)
+    //            {
+    //                availablePeers[index].lastMessageDate = message.value.last?.sentDate
+    //            }
+    //        }
+    //    }
 
     func updateUI()
     {
@@ -132,74 +130,74 @@ class ConversationsListViewController: UIViewController, UITableViewDataSource, 
 
     // MARK: - MPC
 
-    func onUserFound(_ notification: NSNotification)
-    {
-        guard let info = notification.userInfo as? [String: String?] else { return }
-
-        if let userID = info[KDiscoveryInfo.UserID] as? String, let userName = info[KDiscoveryInfo.UserName]
-        {
-            appendPeerIfNotExists(by: userID, with: userName)
-        }
-    }
-
-    func onUserLost(_ notification: NSNotification)
-    {
-        guard let userID = notification.userInfo?[KDiscoveryInfo.UserID] as? String else { return }
-        removePeer(by: userID)
-    }
-
-    func onMessageReceive(_ notification: NSNotification)
-    {
-        guard let info = notification.userInfo as? [String: String] else { return }
-
-        if let text = info[KMessageInfo.Text], let sender = info[KMessageInfo.FromUser], let receiver = info[KMessageInfo.ToUser]
-        {
-            let newMessage = Message(message: text, sentDate: Date(), sender: sender, receiver: receiver)
-            appendMessage(to: sender, message: newMessage)
-        }
-    }
+    //    func onUserFound(_ notification: NSNotification)
+    //    {
+    //        guard let info = notification.userInfo as? [String: String?] else { return }
+    //
+    //        if let userID = info[KDiscoveryInfo.UserID] as? String, let userName = info[KDiscoveryInfo.UserName]
+    //        {
+    //            appendPeerIfNotExists(by: userID, with: userName)
+    //        }
+    //    }
+    //
+    //    func onUserLost(_ notification: NSNotification)
+    //    {
+    //        guard let userID = notification.userInfo?[KDiscoveryInfo.UserID] as? String else { return }
+    //        removePeer(by: userID)
+    //    }
+    //
+    //    func onMessageReceive(_ notification: NSNotification)
+    //    {
+    //        guard let info = notification.userInfo as? [String: String] else { return }
+    //
+    //        if let text = info[KMessageInfo.Text], let sender = info[KMessageInfo.FromUser], let receiver = info[KMessageInfo.ToUser]
+    //        {
+    //            let newMessage = Message(message: text, sentDate: Date(), sender: sender, receiver: receiver)
+    //            appendMessage(to: sender, message: newMessage)
+    //        }
+    //    }
 
     // MARK: Helping functions
 
-    func appendPeerIfNotExists(by userID: String, with userName: String?)
-    {
-        for peer in availablePeers
-        {
-            if peer.userID == userID { return }
-        }
-        availablePeers.append(Peer(userID: userID, userName: userName, lastMessageDate: nil))
-    }
-
-    func appendMessage(to userID: String, message: Message)
-    {
-        guard messages[userID] != nil else
-        {
-            messages[userID] = [message]
-            return
-        }
-        messages[userID]!.append(message)
-    }
-
-    func getIndexOfPeer(by userID: String) -> Int?
-    {
-        for it in 0..<availablePeers.count where availablePeers[it].userID == userID { return it }
-
-        return nil
-    }
-
-    func getMessagesForUser(_ userID: String) -> [Message]?
-    {
-        return messages[userID]
-    }
-
-    func removePeer(by userID: String)
-    {
-        for it in 0..<availablePeers.count where availablePeers[it].userID == userID
-        {
-            availablePeers.remove(at: it)
-            return
-        }
-    }
+    //    func appendPeerIfNotExists(by userID: String, with userName: String?)
+    //    {
+    //        for peer in availablePeers
+    //        {
+    //            if peer.userID == userID { return }
+    //        }
+    //        availablePeers.append(Peer(userID: userID, userName: userName, lastMessageDate: nil))
+    //    }
+    //
+    //    func appendMessage(to userID: String, message: Message)
+    //    {
+    //        guard messages[userID] != nil else
+    //        {
+    //            messages[userID] = [message]
+    //            return
+    //        }
+    //        messages[userID]!.append(message)
+    //    }
+    //
+    //    func getIndexOfPeer(by userID: String) -> Int?
+    //    {
+    //        for it in 0..<availablePeers.count where availablePeers[it].userID == userID { return it }
+    //
+    //        return nil
+    //    }
+    //
+    //    func getMessagesForUser(_ userID: String) -> [Message]?
+    //    {
+    //        return messages[userID]
+    //    }
+    //
+    //    func removePeer(by userID: String)
+    //    {
+    //        for it in 0..<availablePeers.count where availablePeers[it].userID == userID
+    //        {
+    //            availablePeers.remove(at: it)
+    //            return
+    //        }
+    //    }
 
     // MARK: - UITableViewDataSource
 
@@ -212,7 +210,7 @@ class ConversationsListViewController: UIViewController, UITableViewDataSource, 
     {
         if section == 0
         {
-            return availablePeers.count
+            return dataSource.count
         }
         return 0
     }
@@ -221,15 +219,14 @@ class ConversationsListViewController: UIViewController, UITableViewDataSource, 
 
     func configureCell(_ cell: DialogCell, at indexPath: IndexPath)
     {
-        let row = indexPath.row
-
-        let peer = availablePeers[row]
-        let lastMessage = messages[peer.userID]?.last
-
         cell.selectionStyle = .none
+
+        let row = indexPath.row
+        let peer = dataSource[row]
+
+        cell.lastMessageText = peer.message
+        cell.lastMessageDate = peer.messageDate
         cell.userName = peer.userName
-        cell.lastMessageText = lastMessage?.message
-        cell.lastMessageDate = lastMessage?.sentDate
         cell.isUserOnline = true
     }
 
@@ -257,7 +254,7 @@ class ConversationsListViewController: UIViewController, UITableViewDataSource, 
     {
         if let cell = tableView.cellForRow(at: indexPath)
         {
-            selectedUserID = availablePeers[indexPath.row].userID
+            //            selectedUserID = availablePeers[indexPath.row].userID
             performSegue(withIdentifier: idShowDialogSegue, sender: cell)
         }
     }
@@ -282,7 +279,7 @@ class ConversationsListViewController: UIViewController, UITableViewDataSource, 
         if let cell = sender as? DialogCell, let dialogVC = segue.destination as? DialogController
         {
             dialogVC.navigationItem.title = cell.userName
-            dialogVC.communicator = communicator
+            //            dialogVC.communicator = communicator
             dialogVC.selectedUserID = selectedUserID
             dialogVC.dialogsController = self
         }
@@ -290,7 +287,21 @@ class ConversationsListViewController: UIViewController, UITableViewDataSource, 
 
     // MARK: - Private properties
 
-    private let model: ConversationsListModel!
+    // MARK: Lazy
+
+    private let assembly = ConversationsListAssembly()
+
+    private lazy var model: IConversationsListModel = {
+        self.assembly.model
+    }()
+
+    private lazy var mpcService: IMPCService = {
+        self.assembly.mpcService
+    }()
+
+    // MARK: Stored
+
+    private var dataSource = [ConversationsListCellDisplayModel]()
 
     private var selectedUserID = ""
     private let currentDeviceUserID = UIDevice.current.identifierForVendor!.uuidString

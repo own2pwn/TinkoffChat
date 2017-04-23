@@ -24,8 +24,11 @@ protocol IMPCService
 
 protocol IMPCServiceDelegate: class
 {
-    func doJob()
-    func show(error message: String)
+    func append(message: String, sender: String)
+    func append(userID: String, userName: String?)
+    func remove(userID: String)
+    
+    func log(error message: String)
 }
 
 final class MPCService: IMPCService, IMPCWorkerDelegate
@@ -55,22 +58,22 @@ final class MPCService: IMPCService, IMPCWorkerDelegate
     
     func didFoundUser(userID: String, userName: String?)
     {
-        delegate?.doJob()
+        delegate?.append(userID: userID, userName: userName)
     }
     
     func didLostUser(userID: String)
     {
-        delegate?.doJob()
+        delegate?.remove(userID: userID)
     }
     
     func didReceiveMessage(text: String, fromUser: String, toUser: String)
     {
-        delegate?.doJob()
+        delegate?.append(message: text, sender: fromUser)
     }
     
-    func failedToStartAdvertising(error: Error) { delegate?.show(error: error.localizedDescription) }
+    func failedToStartAdvertising(error: Error) { delegate?.log(error: error.localizedDescription) }
     
-    func failedToStartBrowsingForUsers(error: Error) { delegate?.show(error: error.localizedDescription) }
+    func failedToStartBrowsingForUsers(error: Error) { delegate?.log(error: error.localizedDescription) }
     
     // MARK: - Private methods
     
