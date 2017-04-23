@@ -290,6 +290,8 @@ class ConversationsListViewController: UIViewController, UITableViewDataSource, 
 
     // MARK: - Private properties
 
+    private let model: ConversationsListModel!
+
     private var selectedUserID = ""
     private let currentDeviceUserID = UIDevice.current.identifierForVendor!.uuidString
 

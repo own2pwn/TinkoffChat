@@ -28,6 +28,8 @@
 		B910A2EE1EABBBF6005637C1 /* IBaseConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2ED1EABBBF6005637C1 /* IBaseConversation.swift */; };
 		B910A2F01EABBD9D005637C1 /* MPCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2EF1EABBD9D005637C1 /* MPCService.swift */; };
 		B910A2F21EABC176005637C1 /* IMPCWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2F11EABC176005637C1 /* IMPCWorker.swift */; };
+		B99814791EAC8EC500B95723 /* RootAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99814781EAC8EC500B95723 /* RootAssembly.swift */; };
+		B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */; };
 		B9B9E88B1EABEA63009CA699 /* IConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B9E88A1EABEA63009CA699 /* IConversationModel.swift */; };
 		B9B9E88D1EABEB9D009CA699 /* IMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B9E88C1EABEB9D009CA699 /* IMessageModel.swift */; };
 		B9B9E88F1EABF74C009CA699 /* MPCWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B9E88E1EABF74C009CA699 /* MPCWorker.swift */; };
@@ -61,6 +63,8 @@
 		B910A2ED1EABBBF6005637C1 /* IBaseConversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBaseConversation.swift; sourceTree = "<group>"; };
 		B910A2EF1EABBD9D005637C1 /* MPCService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCService.swift; sourceTree = "<group>"; };
 		B910A2F11EABC176005637C1 /* IMPCWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMPCWorker.swift; sourceTree = "<group>"; };
+		B99814781EAC8EC500B95723 /* RootAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
+		B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCAssembly.swift; sourceTree = "<group>"; };
 		B9B9E88A1EABEA63009CA699 /* IConversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IConversationModel.swift; sourceTree = "<group>"; };
 		B9B9E88C1EABEB9D009CA699 /* IMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMessageModel.swift; sourceTree = "<group>"; };
 		B9B9E88E1EABF74C009CA699 /* MPCWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCWorker.swift; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 			children = (
 				100B0B9B1E7C5A8E00DD181F /* TinkoffChat */,
 				100B0B9C1E7C5A8E00DD181F /* AppDelegate.swift */,
+				B99814781EAC8EC500B95723 /* RootAssembly.swift */,
 				100B0BA51E7C5A8E00DD181F /* LaunchScreen.storyboard */,
 				100B0BA81E7C5A8E00DD181F /* Info.plist */,
 				100B0BA31E7C5A8E00DD181F /* Assets.xcassets */,
@@ -222,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				B910A2EF1EABBD9D005637C1 /* MPCService.swift */,
+				B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */,
 			);
 			name = ServiceLayer;
 			sourceTree = "<group>";
@@ -331,6 +337,7 @@
 				B9B9E88B1EABEA63009CA699 /* IConversationModel.swift in Sources */,
 				10BBA0981E94D2FB0071010C /* OperationDataManager.swift in Sources */,
 				10BAAB1B1E87C36E00104295 /* MessageCell.swift in Sources */,
+				B99814791EAC8EC500B95723 /* RootAssembly.swift in Sources */,
 				B910A2F21EABC176005637C1 /* IMPCWorker.swift in Sources */,
 				10BAAB091E87B0D800104295 /* ConversationsListViewController.swift in Sources */,
 				10BAAB101E87B2FD00104295 /* DialogCellModel.swift in Sources */,
@@ -346,6 +353,7 @@
 				100B0B9D1E7C5A8E00DD181F /* AppDelegate.swift in Sources */,
 				B9D845341E9D105200D6373C /* MultipeerCommunicator.swift in Sources */,
 				B910A2F01EABBD9D005637C1 /* MPCService.swift in Sources */,
+				B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */,
 				B9B9E88F1EABF74C009CA699 /* MPCWorker.swift in Sources */,
 				B910A2EE1EABBBF6005637C1 /* IBaseConversation.swift in Sources */,
 				B9B9E88D1EABEB9D009CA699 /* IMessageModel.swift in Sources */,

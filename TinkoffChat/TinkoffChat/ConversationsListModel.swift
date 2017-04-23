@@ -18,7 +18,7 @@ struct ConversationsListCellDisplayModel: IBaseConversationCellDisplayModel
 protocol IConversationsListModel: class
 {
     weak var delegate: IConversationsListModelDelegate? { get set }
-    func loadConversations(for section: ConversationsListTableViewSections)
+    func loadConversations(for section: ConversationsListTableViewSections, completion: ([ConversationDataModel]) -> Void)
 }
 
 protocol IConversationsListModelDelegate: IBaseModelDelegate
@@ -35,9 +35,20 @@ final class ConversationsListModel: IConversationsListModel
         self.mpcService = mpcService
     }
 
-    func loadConversations(for section: ConversationsListTableViewSections)
+    func loadConversations(for section: ConversationsListTableViewSections, completion: ([ConversationDataModel]) -> Void)
     {
         // TODO: completion
+
+        switch section {
+        case .offlineUsers:
+            break
+        case .onlineUsers:
+            mpcService.conversations(where: .online, completion: completion)
+            break
+        case .all:
+            break
+
+        }
     }
 
     private let mpcService: IMPCService
