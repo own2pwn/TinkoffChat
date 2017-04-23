@@ -11,7 +11,7 @@ import UIKit
 final class ConversationsListCell: UITableViewCell, ConversationsListCellModel
 {
     // MARK: - DialogCellModel
-    
+
     var userName: String?
     {
         get
@@ -25,7 +25,7 @@ final class ConversationsListCell: UITableViewCell, ConversationsListCellModel
             userNameLabel.text = newValue
         }
     }
-    
+
     var lastMessageDate: Date?
     {
         get { return _lastMessageDate }
@@ -33,13 +33,13 @@ final class ConversationsListCell: UITableViewCell, ConversationsListCellModel
         {
             _lastMessageDate = newValue
             guard lastMessageDateLabel != nil, let _lastMessageDate = _lastMessageDate else { return }
-            
+
             let isDateToday = currentCalendar.isDateInToday(_lastMessageDate)
-            
+
             lastMessageDateLabel.text = isDateToday ? _lastMessageDate.extractTime() : _lastMessageDate.extractDay()
         }
     }
-    
+
     var hasUnreadMessages: Bool
     {
         get { return _hasUnreadMessages }
@@ -50,7 +50,7 @@ final class ConversationsListCell: UITableViewCell, ConversationsListCellModel
             lastMessageLabel.font = _hasUnreadMessages ? UIFont.appMainFontMedium : UIFont.appMainFont
         }
     }
-    
+
     var lastMessageText: String?
     {
         get
@@ -61,7 +61,7 @@ final class ConversationsListCell: UITableViewCell, ConversationsListCellModel
         set
         {
             guard lastMessageLabel != nil else { return }
-            
+
             if newValue == nil
             {
                 lastMessageDateLabel.isHidden = true
@@ -76,32 +76,32 @@ final class ConversationsListCell: UITableViewCell, ConversationsListCellModel
             }
         }
     }
-    
+
     var isUserOnline: Bool
     {
         get { return _isUserOnline }
         set { _isUserOnline = newValue }
     }
-    
+
     // MARK: - Outlets
-    
+
     @IBOutlet weak var userNameLabel: UILabel!
-    
+
     @IBOutlet weak var lastMessageDateLabel: UILabel!
-    
+
     @IBOutlet weak var lastMessageLabel: UILabel!
-    
+
     // MARK: - Life cycle
-    
+
     override func awakeFromNib()
     {
         super.awakeFromNib()
     }
-    
+
     // MARK: - Properties
-    
+
     let currentCalendar = Calendar.current
-    
+
     private var _lastMessageDate: Date?
     private var _hasUnreadMessages = false
     private var _isUserOnline = false

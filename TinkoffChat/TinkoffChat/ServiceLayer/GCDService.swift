@@ -11,7 +11,7 @@ import Foundation
 final class GCDService: IDataStore
 {
     // MARK: - IDataStore
-    
+
     func saveProfileData(_ profile: ProfileDisplayModel, completion: @escaping (Bool, Error?) -> Void)
     {
         DispatchQueue.global(qos: .userInitiated).async
@@ -24,7 +24,7 @@ final class GCDService: IDataStore
             })
         }
     }
-    
+
     func loadProfileData(completion: @escaping (ProfileDisplayModel, Error?) -> Void)
     {
         DispatchQueue.global(qos: .userInitiated).async
@@ -37,15 +37,15 @@ final class GCDService: IDataStore
             })
         }
     }
-    
+
     // MARK: - Life cycle
-    
+
     init(dataStore: IDataStore)
     {
         self.dataStore = dataStore
     }
-    
+
     // MARK: - Private properties
-    
+
     private let dataStore: IDataStore
 }

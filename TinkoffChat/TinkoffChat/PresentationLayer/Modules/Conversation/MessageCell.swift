@@ -11,7 +11,7 @@ import UIKit
 final class MessageCell: UITableViewCell, MessageCellModel
 {
     // MARK: - MessageCellModel
-    
+
     var messageText: String?
     {
         get
@@ -25,21 +25,21 @@ final class MessageCell: UITableViewCell, MessageCellModel
             messageLabel.text = newValue
         }
     }
-    
+
     // MARK: - Outlets
-    
+
     @IBOutlet weak var messageLabel: UILabel!
-    
+
     @IBOutlet weak var messageBubbleView: UIView!
-    
+
     @IBOutlet weak var messageDateLabel: UILabel!
-    
+
     // MARK: - Life cycle
-    
+
     override func awakeFromNib()
     {
         super.awakeFromNib()
-        
+
         messageBubbleView.layer.cornerRadius = messageBubbleView.frame.height / 2
     }
 }

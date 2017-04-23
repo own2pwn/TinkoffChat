@@ -16,7 +16,7 @@ protocol MessageCellModel: class
 protocol IConversationModel
 {
     func getMessages(for userID: String, with user: String, completion: ([Message]) -> Void)
-    
+
     weak var delegate: IConversationModelDelegate? { get set }
     var localUser: String { get set }
 }
@@ -30,7 +30,7 @@ protocol IConversationModelDelegate: class
 final class ConversationModel: IConversationModel, IMPCServiceDelegate
 {
     // MARK: - IConversationModel
-    
+
     func getMessages(for userID: String, with user: String, completion: ([Message]) -> Void)
     {
         mpcService.loadMessages(for: userID, with: user, completion: { messages in
@@ -40,16 +40,16 @@ final class ConversationModel: IConversationModel, IMPCServiceDelegate
             completion(sorted)
         })
     }
-    
+
     // MARK: - IMPCServiceDelegate
-    
+
     func didFoundUser(userID: String, userName: String?) {}
-    
+
     func didLostUser(userID: String)
     {
         delegate?.didLostUser(userID: userID)
     }
-    
+
     func didReceiveMessage(text: String, fromUser: String, toUser: String)
     {
         if toUser == localUser
@@ -57,26 +57,26 @@ final class ConversationModel: IConversationModel, IMPCServiceDelegate
             delegate?.didReceiveMessage(from: fromUser, message: text)
         }
     }
-    
+
     func log(error message: String)
     {
         print(message)
     }
-    
-    var delegate: IConversationModelDelegate?
-    
+
+    weak var delegate: IConversationModelDelegate?
+
     lazy var localUser: String = {
         self.mpcService.localUserID()
     }()
-    
+
     // MARK: - Life cycle
-    
+
     init(mpcService: IMPCService)
     {
         self.mpcService = mpcService
     }
-    
+
     // MARK: - Private properties
-    
+
     private let mpcService: IMPCService
 }

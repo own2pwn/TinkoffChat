@@ -13,18 +13,18 @@ class ProfileAssembly
     lazy var model: IProfileModel = {
         ProfileModel(gcdService: self.gcdService(), operationDataStoreService: self.operationDataStoreService())
     }()
-    
+
     func gcdService() -> IDataStore
     {
         return GCDService(dataStore: dataStore)
     }
-    
+
     func operationDataStoreService() -> IDataStore
     {
         return OperationDataStoreService(dataStore: dataStore)
     }
-    
+
     // MARK: - Private properties
-    
+
     private let dataStore = DataStore()
 }

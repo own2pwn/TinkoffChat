@@ -11,29 +11,29 @@ import UIKit
 class ProfileViewController: UIViewController
 {
     // MARK: - Outlets
-    
+
     @IBOutlet weak var userNameTextField: UITextField!
-    
+
     @IBOutlet weak var aboutUserTextView: UITextView!
-    
+
     @IBOutlet weak var userProfileImageView: UIImageView!
-    
+
     @IBOutlet weak var textColorLabel: UILabel!
-    
+
     @IBOutlet weak var saveProfileDataButton: UIButton!
-    
+
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+
     // MARK: - Properties
-    
+
     var onViewTapGesture = UITapGestureRecognizer()
-    
+
     var onuserProfileImageViewTapGesture = UITapGestureRecognizer()
-    
+
     var isProfileImageSet = false
-    
+
     var savedProfileData = ProfileDisplayModel.getDefaultProfile()
-    
+
     var currentProfileData = ProfileDisplayModel.getDefaultProfile()
     {
         didSet
@@ -41,79 +41,79 @@ class ProfileViewController: UIViewController
             setButtonsEnabled(currentProfileData != savedProfileData)
         }
     }
-    
+
     // MARK: - Life cycle
-    
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+
         activityIndicator.hidesWhenStopped = true
-        
+
         setupLogic()
         model.load
         { profile, err in
             self.savedProfileData = profile
             self.currentProfileData = profile
-            
+
             self.userNameTextField.text = profile.userName
             self.aboutUserTextView.text = profile.aboutUser
             self.userProfileImageView.image = profile.userImage
             self.textColorLabel.textColor = profile.textColor
-            
+
             if profile.userImage != #imageLiteral(resourceName: "profileImg") { self.isProfileImageSet = true }
-            
+
             if err != nil
             {
                 print("There was an error while loading profile data.\nError: \(String(describing: err?.localizedDescription))")
             }
         }
     }
-    
+
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
-    
+
     // MARK: - Methods
-    
+
     func setupLogic()
     {
         userNameTextField.delegate = self
         aboutUserTextView.delegate = self
-        
+
         onuserProfileImageViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(onuserProfileImageViewTap))
         userProfileImageView.addGestureRecognizer(onuserProfileImageViewTapGesture)
     }
-    
+
     func onuserProfileImageViewTap()
     {
-        
+
         let profileImageActionActionSheet = UIAlertController(title: "Установить изображение профиля", message: "", preferredStyle: .actionSheet)
-        
+
         let confirmDeleteAlertController = UIAlertController(title: "Удалить изображение профиля?", message: "Отменить это действие будет невозможно", preferredStyle: .alert)
-        
+
         let chooseFromLibraryAction = UIAlertAction(title: "Выбрать из библиотеки", style: .default)
         { action in
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
-            
+
             imagePicker.allowsEditing = false
             imagePicker.sourceType = .photoLibrary
-            
+
             self.present(imagePicker, animated: true, completion: nil)
         }
-        
+
         let takePhotoAction = UIAlertAction(title: "Сделать фото", style: .default)
         { action in
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
-            
+
             imagePicker.allowsEditing = false
             imagePicker.sourceType = .camera
-            
+
             self.present(imagePicker, animated: true, completion: nil)
         }
-        
+
         let cancelAction = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
-        
+
         let deleteAction = UIAlertAction(title: "Удалить фото", style: .destructive)
         { action in
             let confirmDeleteAction = UIAlertAction(title: "Удалить", style: .destructive)
@@ -121,31 +121,31 @@ class ProfileViewController: UIViewController
                 self.userProfileImageView.image = #imageLiteral(resourceName: "profileImg")
                 self.isProfileImageSet = false
             }
-            
+
             confirmDeleteAlertController.addAction(cancelAction)
             confirmDeleteAlertController.addAction(confirmDeleteAction)
-            
+
             self.present(confirmDeleteAlertController, animated: true, completion: nil)
-            
+
         }
-        
+
         profileImageActionActionSheet.addAction(chooseFromLibraryAction)
-        
+
         if UIImagePickerController.isSourceTypeAvailable(.camera) { profileImageActionActionSheet.addAction(takePhotoAction) }
-        
+
         if isProfileImageSet { profileImageActionActionSheet.addAction(deleteAction) }
-        
+
         profileImageActionActionSheet.addAction(cancelAction)
-        
+
         present(profileImageActionActionSheet, animated: true, completion: nil)
     }
-    
+
     @IBAction func didTapColorButton(_ sender: UIButton)
     {
         textColorLabel.textColor = sender.backgroundColor
         updateCurrentProfileData()
     }
-    
+
     @IBAction func didTapSaveButton(_ sender: UIButton)
     {
         let dataBeforeSaving = currentProfileData
@@ -159,18 +159,18 @@ class ProfileViewController: UIViewController
             self.updateCurrentProfileData()
         }
     }
-    
+
     @IBAction func didTapCloseNavBarButton(_ sender: UIBarButtonItem)
     {
         dismiss(animated: true, completion: nil)
     }
-    
+
     func presentSavingResultAlert(_ success: Bool)
     {
         let alert = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
         let dismissBtn = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(dismissBtn)
-        
+
         if !success
         {
             alert.title = "Ошибка"
@@ -182,18 +182,18 @@ class ProfileViewController: UIViewController
         }
         present(alert, animated: true, completion: nil)
     }
-    
+
     // MARK: - Data management
-    
+
     func updateCurrentProfileData()
     {
         currentProfileData = ProfileDisplayModel(userName: userNameTextField.text ?? "", aboutUser: aboutUserTextView.text, userImage: userProfileImageView.image ?? #imageLiteral(resourceName: "profileImg"), textColor: textColorLabel.textColor)
     }
-    
+
     func setButtonsEnabled(_ enabled: Bool)
     {
         saveProfileDataButton.isEnabled = enabled
-        
+
         if enabled
         {
             saveProfileDataButton.backgroundColor = .ButtonEnabledColor
@@ -203,7 +203,7 @@ class ProfileViewController: UIViewController
             saveProfileDataButton.backgroundColor = .ButtonDisabledColor
         }
     }
-    
+
     func saveProfileData(completion: @escaping (Bool, Error?) -> Void = { _, _ in })
     {
         activityIndicator.startAnimating()
@@ -216,7 +216,7 @@ class ProfileViewController: UIViewController
             self.activityIndicator.stopAnimating()
         }
     }
-    
+
     func loadProfileData(usingManager manager: IDataStore, completion: @escaping (ProfileDisplayModel, Error?) -> Void)
     {
         activityIndicator.startAnimating()
@@ -226,13 +226,13 @@ class ProfileViewController: UIViewController
             self.activityIndicator.stopAnimating()
         }
     }
-    
+
     // MARK: - Private properties
-    
+
     private lazy var assembly: ProfileAssembly = {
         ProfileAssembly()
     }()
-    
+
     private lazy var model: IProfileModel = {
         self.assembly.model
     }()
@@ -247,10 +247,10 @@ extension ProfileViewController: UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
         textField.resignFirstResponder()
-        
+
         return true
     }
-    
+
     func textFieldDidEndEditing(_ textField: UITextField)
     {
         updateCurrentProfileData()
@@ -268,12 +268,12 @@ extension ProfileViewController: UITextViewDelegate
         view.addGestureRecognizer(onViewTapGesture)
         updateCurrentProfileData()
     }
-    
+
     func textViewDidEndEditing(_ textView: UITextView)
     {
         updateCurrentProfileData()
     }
-    
+
     func onViewTap()
     {
         aboutUserTextView.resignFirstResponder()
@@ -297,7 +297,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             userProfileImageView.image = pickedImage
             userProfileImageView.contentMode = .scaleAspectFit
             updateCurrentProfileData()
-            
+
             isProfileImageSet = true
         }
         dismiss(animated: true, completion: nil)
