@@ -10,6 +10,6 @@ import Foundation
 
 protocol IDataStore
 {
-    func saveProfileData(_ profile: Profile, completion: @escaping (Bool, Error?) -> Void)
-    func loadProfileData(completion: @escaping (Profile, Error?) -> Void)
+    func saveProfileData(_ profile: ProfileDisplayModel, completion: @escaping (Bool, Error?) -> Void)
+    func loadProfileData(completion: @escaping (ProfileDisplayModel, Error?) -> Void)
 }

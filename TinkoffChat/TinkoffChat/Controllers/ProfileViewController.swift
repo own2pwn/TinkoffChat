@@ -32,9 +32,9 @@ class ProfileViewController: UIViewController
     
     var isProfileImageSet = false
     
-    var savedProfileData = Profile.getDefaultProfile()
+    var savedProfileData = ProfileDisplayModel.getDefaultProfile()
     
-    var currentProfileData = Profile.getDefaultProfile()
+    var currentProfileData = ProfileDisplayModel.getDefaultProfile()
     {
         didSet
         {
@@ -187,7 +187,7 @@ class ProfileViewController: UIViewController
     
     func updateCurrentProfileData()
     {
-        currentProfileData = Profile(userName: userNameTextField.text ?? "", aboutUser: aboutUserTextView.text, userImage: userProfileImageView.image ?? #imageLiteral(resourceName: "profileImg"), textColor: textColorLabel.textColor)
+        currentProfileData = ProfileDisplayModel(userName: userNameTextField.text ?? "", aboutUser: aboutUserTextView.text, userImage: userProfileImageView.image ?? #imageLiteral(resourceName: "profileImg"), textColor: textColorLabel.textColor)
     }
     
     func setButtonsEnabled(_ enabled: Bool)
@@ -217,7 +217,7 @@ class ProfileViewController: UIViewController
         }
     }
     
-    func loadProfileData(usingManager manager: IDataStore, completion: @escaping (Profile, Error?) -> Void)
+    func loadProfileData(usingManager manager: IDataStore, completion: @escaping (ProfileDisplayModel, Error?) -> Void)
     {
         activityIndicator.startAnimating()
         model.load

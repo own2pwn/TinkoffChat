@@ -10,7 +10,7 @@ import UIKit
 
 final class DataStore: IDataStore
 {
-    func saveProfileData(_ profile: Profile, completion: @escaping (Bool, Error?) -> Void)
+    func saveProfileData(_ profile: ProfileDisplayModel, completion: @escaping (Bool, Error?) -> Void)
     {
         if let imageData = UIImagePNGRepresentation(profile.userImage)
         {
@@ -33,7 +33,7 @@ final class DataStore: IDataStore
         }
     }
     
-    func loadProfileData(completion: @escaping (Profile, Error?) -> Void)
+    func loadProfileData(completion: @escaping (ProfileDisplayModel, Error?) -> Void)
     {
         do
         {
@@ -41,12 +41,12 @@ final class DataStore: IDataStore
             let unarchData = NSKeyedUnarchiver.unarchiveObject(with: savedData) as! [String: Any]
             let imageData = UIImage(data: unarchData["img"] as! Data) ?? #imageLiteral(resourceName: "profileImg")
             
-            let ret = Profile(userName: unarchData["uName"] as! String, aboutUser: unarchData["about"] as! String, userImage: imageData, textColor: unarchData["color"] as! UIColor)
+            let ret = ProfileDisplayModel(userName: unarchData["uName"] as! String, aboutUser: unarchData["about"] as! String, userImage: imageData, textColor: unarchData["color"] as! UIColor)
             completion(ret, nil)
         }
         catch
         {
-            completion(Profile.getDefaultProfile(), error)
+            completion(ProfileDisplayModel.getDefaultProfile(), error)
         }
     }
     

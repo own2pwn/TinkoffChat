@@ -52,7 +52,7 @@
 		10BAAB181E87C1B400104295 /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationViewController.swift; path = Controllers/Dialogs/ConversationViewController.swift; sourceTree = "<group>"; };
 		10BAAB1A1E87C36E00104295 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = Views/MessageCell.swift; sourceTree = "<group>"; };
 		10BBA0921E94D2AB0071010C /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		10BBA09D1E94D5B70071010C /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		10BBA09D1E94D5B70071010C /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Profile.swift; path = Models/Profile.swift; sourceTree = "<group>"; };
 		B910A2EA1EABBB82005637C1 /* ConversationsListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListModel.swift; sourceTree = "<group>"; };
 		B910A2EF1EABBD9D005637C1 /* MPCService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCService.swift; sourceTree = "<group>"; };
 		B910A2F11EABC176005637C1 /* IMPCWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMPCWorker.swift; sourceTree = "<group>"; };
@@ -117,7 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				10BBA0921E94D2AB0071010C /* DataManager.swift */,
-				10BBA09D1E94D5B70071010C /* Profile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -153,13 +152,6 @@
 			name = Conversation;
 			sourceTree = "<group>";
 		};
-		B9291BFE1EACF41000B4358F /* Common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Common;
-			sourceTree = "<group>";
-		};
 		B9291C011EAD031A00B4358F /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +168,7 @@
 			children = (
 				100B0B9E1E7C5A8E00DD181F /* ProfileViewController.swift */,
 				B9291C111EAD10A500B4358F /* ProfileAssembly.swift */,
+				10BBA09D1E94D5B70071010C /* Profile.swift */,
 				B9291C0F1EAD0F7F00B4358F /* ProfileModel.swift */,
 			);
 			name = Profile;
@@ -217,7 +210,6 @@
 			isa = PBXGroup;
 			children = (
 				B9291C021EAD03CF00B4358F /* Profile */,
-				B9291BFE1EACF41000B4358F /* Common */,
 				B9291BF91EACE1DA00B4358F /* Conversation */,
 				B910A2E91EABBA22005637C1 /* Conversations */,
 			);

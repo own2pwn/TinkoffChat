@@ -12,7 +12,7 @@ final class OperationDataStoreService: IDataStore
 {
     // MARK: - IDataStore
     
-    func saveProfileData(_ profile: Profile, completion: @escaping (Bool, Error?) -> Void)
+    func saveProfileData(_ profile: ProfileDisplayModel, completion: @escaping (Bool, Error?) -> Void)
     {
         let op = SaveProfileDataOperation(dataStore: dataStore, profile, completion: { bSuccess, err in
             OperationQueue.main.addOperation
@@ -24,7 +24,7 @@ final class OperationDataStoreService: IDataStore
         queue.addOperation(op)
     }
     
-    func loadProfileData(completion: @escaping (Profile, Error?) -> Void)
+    func loadProfileData(completion: @escaping (ProfileDisplayModel, Error?) -> Void)
     {
         let op = LoadProfileDataOperation(dataStore: dataStore, completion: { profile, err in
             OperationQueue.main.addOperation
@@ -85,10 +85,10 @@ private class AsyncOperation: Operation
 
 private class SaveProfileDataOperation: AsyncOperation
 {
-    let profile: Profile
+    let profile: ProfileDisplayModel
     let completion: (Bool, Error?) -> Void
     
-    init(dataStore: IDataStore, _ profile: Profile, completion: @escaping (Bool, Error?) -> Void)
+    init(dataStore: IDataStore, _ profile: ProfileDisplayModel, completion: @escaping (Bool, Error?) -> Void)
     {
         self.dataStore = dataStore
         self.profile = profile
@@ -112,9 +112,9 @@ private class SaveProfileDataOperation: AsyncOperation
 
 private class LoadProfileDataOperation: AsyncOperation
 {
-    let completion: (Profile, Error?) -> Void
+    let completion: (ProfileDisplayModel, Error?) -> Void
     
-    init(dataStore: IDataStore, completion: @escaping (Profile, Error?) -> Void)
+    init(dataStore: IDataStore, completion: @escaping (ProfileDisplayModel, Error?) -> Void)
     {
         self.dataStore = dataStore
         self.completion = completion
