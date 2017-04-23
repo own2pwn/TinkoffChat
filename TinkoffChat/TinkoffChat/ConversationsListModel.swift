@@ -8,33 +8,9 @@
 
 import Foundation
 
-typealias ConversationDataSourceType = (userID: String, model: ConversationsListCellDisplayModel)
-
-struct ConversationsListCellDisplayModel
-{
-    let userName: String?
-    var messages: [Message]
-}
-
-class Message
-{
-    let message: String
-    let sentDate = Date()
-    let sender: String
-    let receiver: String
-
-    init(message: String, sender: String, receiver: String)
-    {
-        self.message = message
-        self.sender = sender
-        self.receiver = receiver
-    }
-}
-
 protocol IConversationsListModel: class
 {
     weak var delegate: IConversationsListModelDelegate? { get set }
-    func loadMessages(for userID: String, with user: String, completion: ([Message]) -> Void)
 }
 
 protocol IConversationsListModelDelegate: class
@@ -53,58 +29,36 @@ final class ConversationsListModel: IConversationsListModel, IMPCServiceDelegate
         self.mpcService = mpcService
     }
 
-    func loadMessages(for userID: String, with user: String, completion: ([Message]) -> Void)
-    {
-        var relatedMessages = [Message]()
-
-        for e in dataSource
-        {
-            for m in e.model.messages
-            {
-                if m.sender == userID && m.receiver == user || m.sender == user && m.receiver == userID
-                {
-                    relatedMessages.append(m)
-                }
-            }
-        }
-        completion(relatedMessages)
-    }
-
     // MARK: - IMPCServiceDelegate
 
     func didFoundUser(userID: String, userName: String?)
     {
-        let newUser = ConversationsListCellDisplayModel(userName: userName, messages: [Message]()) // ConversationsListCellDisplayModel(message: nil, messageDate: nil, userName: userName)
-        let newElement = ConversationDataSourceType(userID: userID, model: newUser)
-
-        if !isUserExists(userID: userID)
-        {
-            dataSource.insert(newElement, at: 0)
-        }
-
-        sortUsers
-        {
-            self.delegate?.updateView(with: self.dataSource)
+        mpcService.getDataSource
+        { dataSource in
+            sortDataSource(data: dataSource, completion: { sorted in
+                self.delegate?.updateView(with: sorted)
+            })
         }
     }
 
     func didLostUser(userID: String)
     {
-        removeUser(userID: userID)
-        sortUsers
-        {
-            self.delegate?.updateView(with: self.dataSource)
+        mpcService.getDataSource
+        { dataSource in
+            sortDataSource(data: dataSource, completion: { sorted in
+                self.delegate?.updateView(with: sorted)
+            })
         }
     }
 
     func didReceiveMessage(text: String, fromUser: String, toUser: String)
     {
-        let message = Message(message: text, sender: fromUser, receiver: toUser)
-        appendMessage(to: fromUser, message: message)
 
-        sortUsers
-        {
-            self.delegate?.updateView(with: self.dataSource)
+        mpcService.getDataSource
+        { dataSource in
+            sortDataSource(data: dataSource, completion: { sorted in
+                self.delegate?.updateView(with: sorted)
+            })
         }
     }
 
@@ -115,24 +69,12 @@ final class ConversationsListModel: IConversationsListModel, IMPCServiceDelegate
 
     // MARK: - Private methods
 
-    private func removeUser(userID: String)
-    {
-        for it in 0..<dataSource.count
-        {
-            if dataSource[it].userID == userID
-            {
-                dataSource.remove(at: it)
-                return
-            }
-        }
-    }
-
-    private func sortUsers(completion: @escaping () -> Void)
+    private func sortDataSource(data: [ConversationDataSourceType], completion: @escaping ([ConversationDataSourceType]) -> Void)
     {
         DispatchQueue.global(qos: .userInitiated).async
         {
-            self.dataSource.sort(by: self.displayModelSorter)
-            completion()
+            let sorted = data.sorted(by: self.displayModelSorter)
+            completion(sorted)
         }
     }
 
@@ -151,34 +93,7 @@ final class ConversationsListModel: IConversationsListModel, IMPCServiceDelegate
         return d1 > d2
     }
 
-    private func appendMessage(to userID: String, message: Message)
-    {
-        for it in 0..<dataSource.count
-        {
-            if dataSource[it].userID == userID
-            {
-                dataSource[it].model.messages.append(message)
-                print(dataSource[it].model.messages.count)
-                return
-            }
-        }
-    }
-
-    private func isUserExists(userID: String) -> Bool
-    {
-        for it in 0..<dataSource.count
-        {
-            if dataSource[it].userID == userID
-            {
-                return true
-            }
-        }
-        return false
-    }
-
     // MARK: - Private properties
-
-    private var dataSource = [ConversationDataSourceType]()
 
     private let mpcService: IMPCService
 }
