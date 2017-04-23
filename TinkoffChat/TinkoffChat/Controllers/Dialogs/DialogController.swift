@@ -122,7 +122,7 @@ class DialogController: UIViewController, UITableViewDataSource
         {
             if sender == selectedUserID && receiver == currentDeviceUserID
             {
-                messages.append(Message(message: text, sentDate: Date(), sender: sender, receiver: receiver))
+//                messages.append(Message(message: text, sentDate: Date(), sender: sender, receiver: receiver))
             }
         }
     }
@@ -146,10 +146,10 @@ class DialogController: UIViewController, UITableViewDataSource
             
             if error == nil
             {
-                let msg = Message(message: message, sentDate: Date(), sender: self.currentDeviceUserID, receiver: self.selectedUserID)
+//                let msg = Message(message: message, sentDate: Date(), sender: self.currentDeviceUserID, receiver: self.selectedUserID)
                 DispatchQueue.main.async
                 {
-                    self.messages.append(msg)
+//                    self.messages.append(msg)
                     //                    self.dialogsController.appendMessage(to: self.selectedUserID, message: msg)
                     self.messageTextView.text = nil
                 }

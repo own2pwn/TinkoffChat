@@ -42,11 +42,3 @@ struct Peer_
     let userName: String?
     var lastMessageDate: Date?
 }
-
-struct Message
-{
-    let message: String
-    let sentDate: Date
-    let sender: String
-    let receiver: String
-}

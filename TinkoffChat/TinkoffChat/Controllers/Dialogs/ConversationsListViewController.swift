@@ -15,7 +15,7 @@ enum ConversationsListTableViewSections: Int
     case all
 }
 
-class ConversationsListViewController: UIViewController, IMPCServiceDelegate, UITableViewDataSource, UITableViewDelegate
+class ConversationsListViewController: UIViewController, IConversationsListModelDelegate, UITableViewDataSource, UITableViewDelegate
 {
     // MARK: - Outlets
 
@@ -52,29 +52,23 @@ class ConversationsListViewController: UIViewController, IMPCServiceDelegate, UI
 
     func setupLogic()
     {
-        //=== new
-        mpcService.delegate = self
+        model.delegate = self
 
         setupView()
     }
 
-    // MARK: - IMPCServiceDelegate
+    // MARK: - IConversationsListModelDelegate
 
-    func append(message: String, sender: String)
+    func updateView(with data: [String: ConversationsListCellDisplayModel])
     {
+        dataSource = data
+        updateUI()
     }
 
-    func append(userID: String, userName: String?)
+    func updateMessages(with data: [String: [Message]])
     {
-    }
-
-    func remove(userID: String)
-    {
-    }
-
-    func log(error message: String)
-    {
-        print("There was an error!: \(message)")
+        messages = data
+        updateUI()
     }
 
     func setupView()
@@ -222,12 +216,23 @@ class ConversationsListViewController: UIViewController, IMPCServiceDelegate, UI
         cell.selectionStyle = .none
 
         let row = indexPath.row
-        let peer = dataSource[row]
+        let peer = Array(dataSource)[row]
 
-        cell.lastMessageText = peer.message
-        cell.lastMessageDate = peer.messageDate
-        cell.userName = peer.userName
+        cell.userName = peer.value.userName
         cell.isUserOnline = true
+
+        let messagesArray = Array(messages)
+        guard messagesArray.count > row else
+        {
+            cell.lastMessageText = nil
+            cell.lastMessageDate = nil
+            return
+        }
+
+        let relatedMessages = messagesArray[row].value.last
+
+        cell.lastMessageText = relatedMessages?.message
+        cell.lastMessageDate = relatedMessages?.sentDate
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -301,7 +306,8 @@ class ConversationsListViewController: UIViewController, IMPCServiceDelegate, UI
 
     // MARK: Stored
 
-    private var dataSource = [ConversationsListCellDisplayModel]()
+    private var dataSource = [String: ConversationsListCellDisplayModel]()
+    private var messages = [String: [Message]]()
 
     private var selectedUserID = ""
     private let currentDeviceUserID = UIDevice.current.identifierForVendor!.uuidString

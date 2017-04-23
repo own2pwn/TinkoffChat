@@ -82,9 +82,11 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
     
     var online: Bool
     {
-        didSet
+        get { return _online }
+        set
         {
-            setBrowsingEnabled(online)
+            _online = newValue
+            setBrowsingEnabled(newValue)
         }
     }
     
@@ -94,11 +96,12 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
     
     override init()
     {
-        online = true
         super.init()
         
         advertiser.delegate = self
         browser.delegate = self
+        
+        online = true
     }
     
     // MARK: - MCNearbyServiceAdvertiserDelegate
@@ -272,6 +275,8 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
     // MARK: Stored
     
     private let serviceType = "tinkoff-chat"
+    
+    private var _online = false
     
     private let discoveryInfo = [KDiscoveryInfo.UserName: UIDevice.current.name]
     

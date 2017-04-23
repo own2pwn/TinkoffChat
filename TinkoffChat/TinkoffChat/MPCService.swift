@@ -14,7 +14,7 @@ enum UserState: Int
     case online
 }
 
-protocol IMPCService
+protocol IMPCService: class
 {
     func send(message: String, to: String, completion: (Error?) -> Void)
     func conversations(where peerState: UserState, completion: ([ConversationDataModel]) -> Void)
@@ -24,9 +24,14 @@ protocol IMPCService
 
 protocol IMPCServiceDelegate: class
 {
-    func append(message: String, sender: String)
-    func append(userID: String, userName: String?)
-    func remove(userID: String)
+    func didFoundUser(userID: String, userName: String?)
+    func didLostUser(userID: String)
+    func didReceiveMessage(text: String, fromUser: String, toUser: String)
+    
+    
+//    func append(message: String, sender: String)
+//    func append(userID: String, userName: String?)
+//    func remove(userID: String)
     
     func log(error message: String)
 }
@@ -58,17 +63,18 @@ final class MPCService: IMPCService, IMPCWorkerDelegate
     
     func didFoundUser(userID: String, userName: String?)
     {
-        delegate?.append(userID: userID, userName: userName)
+//        let newUser = ConversationsListCellDisplayModel(message: nil, messageDate: nil, userName: userName)
+        delegate?.didFoundUser(userID: userID, userName: userName)
     }
     
     func didLostUser(userID: String)
     {
-        delegate?.remove(userID: userID)
+        delegate?.didLostUser(userID: userID)
     }
     
     func didReceiveMessage(text: String, fromUser: String, toUser: String)
     {
-        delegate?.append(message: text, sender: fromUser)
+        delegate?.didReceiveMessage(text: text, fromUser: fromUser, toUser: toUser)
     }
     
     func failedToStartAdvertising(error: Error) { delegate?.log(error: error.localizedDescription) }
