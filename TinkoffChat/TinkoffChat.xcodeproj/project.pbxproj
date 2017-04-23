@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		100B0B9D1E7C5A8E00DD181F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100B0B9C1E7C5A8E00DD181F /* AppDelegate.swift */; };
 		100B0B9F1E7C5A8E00DD181F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100B0B9E1E7C5A8E00DD181F /* ProfileViewController.swift */; };
 		100B0BA41E7C5A8E00DD181F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 100B0BA31E7C5A8E00DD181F /* Assets.xcassets */; };
 		100B0BA71E7C5A8E00DD181F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 100B0BA51E7C5A8E00DD181F /* LaunchScreen.storyboard */; };
@@ -28,6 +27,7 @@
 		B9291C0C1EAD0A9000B4358F /* OperationDataStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291C0B1EAD0A9000B4358F /* OperationDataStoreService.swift */; };
 		B9291C101EAD0F7F00B4358F /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291C0F1EAD0F7F00B4358F /* ProfileModel.swift */; };
 		B9291C121EAD10A500B4358F /* ProfileAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291C111EAD10A500B4358F /* ProfileAssembly.swift */; };
+		B948204C1EAD1BF500052AA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B948204B1EAD1BF500052AA9 /* AppDelegate.swift */; };
 		B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */; };
 		B998147F1EAC90D400B95723 /* ConversationsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */; };
 		B9B9E88F1EABF74C009CA699 /* MPCWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B9E88E1EABF74C009CA699 /* MPCWorker.swift */; };
@@ -36,7 +36,6 @@
 
 /* Begin PBXFileReference section */
 		100B0B991E7C5A8E00DD181F /* TinkoffChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		100B0B9C1E7C5A8E00DD181F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = TinkoffChat/Controllers/AppDelegate.swift; sourceTree = "<group>"; };
 		100B0B9E1E7C5A8E00DD181F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		100B0BA31E7C5A8E00DD181F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		100B0BA61E7C5A8E00DD181F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,6 +57,7 @@
 		B9291C0B1EAD0A9000B4358F /* OperationDataStoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationDataStoreService.swift; sourceTree = "<group>"; };
 		B9291C0F1EAD0F7F00B4358F /* ProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		B9291C111EAD10A500B4358F /* ProfileAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileAssembly.swift; sourceTree = "<group>"; };
+		B948204B1EAD1BF500052AA9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCAssembly.swift; sourceTree = "<group>"; };
 		B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListAssembly.swift; sourceTree = "<group>"; };
 		B9B9E88E1EABF74C009CA699 /* MPCWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCWorker.swift; sourceTree = "<group>"; };
@@ -80,7 +80,6 @@
 			children = (
 				100B0B9A1E7C5A8E00DD181F /* Products */,
 				100B0B9B1E7C5A8E00DD181F /* TinkoffChat */,
-				100B0B9C1E7C5A8E00DD181F /* AppDelegate.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +98,7 @@
 				B93675451EA34AF500B69AC8 /* CoreLayer */,
 				B93675431EA34AE500B69AC8 /* PresentationLayer */,
 				B93675441EA34AEF00B69AC8 /* ServiceLayer */,
+				B948204B1EAD1BF500052AA9 /* AppDelegate.swift */,
 			);
 			path = TinkoffChat;
 			sourceTree = "<group>";
@@ -269,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B948204C1EAD1BF500052AA9 /* AppDelegate.swift in Sources */,
 				B9291C061EAD04A900B4358F /* DataStore.swift in Sources */,
 				B9D845361E9D263800D6373C /* Constants.swift in Sources */,
 				B9291C0C1EAD0A9000B4358F /* OperationDataStoreService.swift in Sources */,
@@ -283,7 +284,6 @@
 				10BAAB171E87B76000104295 /* Extensions.swift in Sources */,
 				100B0B9F1E7C5A8E00DD181F /* ProfileViewController.swift in Sources */,
 				10BAAB191E87C1B400104295 /* ConversationViewController.swift in Sources */,
-				100B0B9D1E7C5A8E00DD181F /* AppDelegate.swift in Sources */,
 				B910A2F01EABBD9D005637C1 /* MPCService.swift in Sources */,
 				B9291C041EAD048300B4358F /* IDataStore.swift in Sources */,
 				B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */,
