@@ -1,31 +1,32 @@
 //
-//  OperationDataManager.swift
+//  OperationDataStoreService.swift
 //  TinkoffChat
 //
-//  Created by Evgeniy on 05.04.17.
+//  Created by Evgeniy on 23.04.17.
 //  Copyright © 2017 Evgeniy. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class OperationDataManager: DataManager
+final class OperationDataStoreService: IDataStore
 {
-    // MARK: DataManager
-
+    // MARK: - IDataStore
+    
     func saveProfileData(_ profile: Profile, completion: @escaping (Bool, Error?) -> Void)
     {
-        let op = SaveProfileDataOperation(profile, completion: { bSuccess, err in
+        let op = SaveProfileDataOperation(dataStore: dataStore, profile, completion: { bSuccess, err in
             OperationQueue.main.addOperation
             {
                 completion(bSuccess, err)
             }
         })
+        
         queue.addOperation(op)
     }
-
+    
     func loadProfileData(completion: @escaping (Profile, Error?) -> Void)
     {
-        let op = LoadProfileDataOperation(completion: { profile, err in
+        let op = LoadProfileDataOperation(dataStore: dataStore, completion: { profile, err in
             OperationQueue.main.addOperation
             {
                 completion(profile, err)
@@ -33,20 +34,23 @@ class OperationDataManager: DataManager
         })
         queue.addOperation(op)
     }
-
-    // MARK: Life cycle
-
-    init()
+    
+    // MARK: - Life cycle
+    
+    init(dataStore: IDataStore)
     {
+        self.dataStore = dataStore
         queue.qualityOfService = .userInitiated
     }
-
-    // MARK: Properties
-
+    
+    // MARK: - Private properties
+    
+    private let dataStore: IDataStore
+    
     private let queue = OperationQueue()
 }
 
-class AsyncOperation: Operation
+private class AsyncOperation: Operation
 {
     enum State: String
     {
@@ -56,7 +60,7 @@ class AsyncOperation: Operation
             return "is" + self.rawValue
         }
     }
-
+    
     var state = State.Ready
     {
         willSet(newValue)
@@ -64,32 +68,33 @@ class AsyncOperation: Operation
             self.willChangeValue(forKey: newValue.keyPath)
             self.willChangeValue(forKey: self.state.keyPath)
         }
-
+        
         didSet
         {
             self.didChangeValue(forKey: oldValue.keyPath)
             self.didChangeValue(forKey: self.state.keyPath)
         }
     }
-
+    
     override var isAsynchronous: Bool { return true }
-
+    
     override var isExecuting: Bool { return state == .Executing }
-
+    
     override var isFinished: Bool { return state == .Finished }
 }
 
-class SaveProfileDataOperation: AsyncOperation
+private class SaveProfileDataOperation: AsyncOperation
 {
     let profile: Profile
     let completion: (Bool, Error?) -> Void
-
-    init(_ profile: Profile, completion: @escaping (Bool, Error?) -> Void)
+    
+    init(dataStore: IDataStore, _ profile: Profile, completion: @escaping (Bool, Error?) -> Void)
     {
+        self.dataStore = dataStore
         self.profile = profile
         self.completion = completion
     }
-
+    
     override func start()
     {
         if isCancelled
@@ -98,20 +103,23 @@ class SaveProfileDataOperation: AsyncOperation
             return
         }
         state = .Executing
-        DataStore.saveProfileData(profile, completion: completion)
+        dataStore.saveProfileData(profile, completion: completion)
         state = .Finished
     }
+    
+    private let dataStore: IDataStore
 }
 
-class LoadProfileDataOperation: AsyncOperation
+private class LoadProfileDataOperation: AsyncOperation
 {
     let completion: (Profile, Error?) -> Void
-
-    init(completion: @escaping (Profile, Error?) -> Void)
+    
+    init(dataStore: IDataStore, completion: @escaping (Profile, Error?) -> Void)
     {
+        self.dataStore = dataStore
         self.completion = completion
     }
-
+    
     override func start()
     {
         if isCancelled
@@ -120,7 +128,9 @@ class LoadProfileDataOperation: AsyncOperation
             return
         }
         state = .Executing
-        DataStore.loadProfileData(completion: completion)
+        dataStore.loadProfileData(completion: completion)
         state = .Finished
     }
+    
+    private let dataStore: IDataStore
 }

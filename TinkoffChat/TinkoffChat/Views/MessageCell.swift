@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessageCell: UITableViewCell, MessageCellModel
+final class MessageCell: UITableViewCell, MessageCellModel
 {
     // MARK: - MessageCellModel
     

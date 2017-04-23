@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversationsListCell: UITableViewCell, ConversationsListCellModel
+final class ConversationsListCell: UITableViewCell, ConversationsListCellModel
 {
     // MARK: - DialogCellModel
     

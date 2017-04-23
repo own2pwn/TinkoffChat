@@ -34,10 +34,6 @@ class ProfileController: UIViewController
     
     var isProfileImageSet = false
     
-    let GCDManager = GCDDataManager()
-    
-    let OperationManager = OperationDataManager()
-    
     var savedProfileData = Profile.getDefaultProfile()
     
     var currentProfileData = Profile.getDefaultProfile()
@@ -57,7 +53,7 @@ class ProfileController: UIViewController
         activityIndicator.hidesWhenStopped = true
         
         setupLogic()
-        loadProfileData(usingManager: GCDManager)
+        loadProfileData(usingManager: gcdService)
         { profile, err in
             self.savedProfileData = profile
             self.currentProfileData = profile
@@ -155,9 +151,9 @@ class ProfileController: UIViewController
     @IBAction func didTapGCDButton(_ sender: UIButton)
     {
         let dataBeforeSaving = currentProfileData
-        saveProfileData(usingManager: GCDManager)
+        saveProfileData(usingManager: gcdService)
         { bSuccess, err in
-            self.presentSavingResultAlert(bSuccess, self.GCDManager)
+            self.presentSavingResultAlert(bSuccess, self.gcdService)
             if bSuccess
             {
                 self.savedProfileData = dataBeforeSaving
@@ -169,9 +165,9 @@ class ProfileController: UIViewController
     @IBAction func didTapOperationButton(_ sender: UIButton)
     {
         let dataBeforeSaving = currentProfileData
-        saveProfileData(usingManager: OperationManager)
+        saveProfileData(usingManager: operationDataStoreService)
         { bSuccess, err in
-            self.presentSavingResultAlert(bSuccess, self.OperationManager)
+            self.presentSavingResultAlert(bSuccess, self.operationDataStoreService)
             if bSuccess
             {
                 self.savedProfileData = dataBeforeSaving
@@ -185,7 +181,7 @@ class ProfileController: UIViewController
         dismiss(animated: true, completion: nil)
     }
     
-    func presentSavingResultAlert(_ success: Bool, _ manager: DataManager)
+    func presentSavingResultAlert(_ success: Bool, _ manager: IDataStore)
     {
         let alert = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
         let dismissBtn = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -227,7 +223,7 @@ class ProfileController: UIViewController
         }
     }
     
-    func saveProfileData(usingManager manager: DataManager, completion: @escaping (Bool, Error?) -> Void = { _, _ in })
+    func saveProfileData(usingManager manager: IDataStore, completion: @escaping (Bool, Error?) -> Void = { _, _ in })
     {
         activityIndicator.startAnimating()
         manager.saveProfileData(currentProfileData)
@@ -241,7 +237,7 @@ class ProfileController: UIViewController
         }
     }
     
-    func loadProfileData(usingManager manager: DataManager, completion: @escaping (Profile, Error?) -> Void)
+    func loadProfileData(usingManager manager: IDataStore, completion: @escaping (Profile, Error?) -> Void)
     {
         activityIndicator.startAnimating()
         manager.loadProfileData
@@ -250,6 +246,20 @@ class ProfileController: UIViewController
             self.activityIndicator.stopAnimating()
         }
     }
+    
+    // MARK: - Private properties
+    
+    lazy var assembly: DataStoreAssembly = {
+        DataStoreAssembly()
+    }()
+    
+    lazy var gcdService: IDataStore = {
+        self.assembly.gcdService()
+    }()
+    
+    lazy var operationDataStoreService: IDataStore = {
+        self.assembly.operationDataStoreService()
+    }()
 }
 
 // MARK: - Extensions

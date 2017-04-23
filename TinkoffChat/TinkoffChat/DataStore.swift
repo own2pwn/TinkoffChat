@@ -2,15 +2,15 @@
 //  DataStore.swift
 //  TinkoffChat
 //
-//  Created by Evgeniy on 05.04.17.
+//  Created by Evgeniy on 23.04.17.
 //  Copyright © 2017 Evgeniy. All rights reserved.
 //
 
 import UIKit
 
-class DataStore: NSObject
+final class DataStore: IDataStore
 {
-    static func saveProfileData(_ profile: Profile, completion: (Bool, Error?) -> Void)
+    func saveProfileData(_ profile: Profile, completion: @escaping (Bool, Error?) -> Void)
     {
         if let imageData = UIImagePNGRepresentation(profile.userImage)
         {
@@ -33,7 +33,7 @@ class DataStore: NSObject
         }
     }
     
-    static func loadProfileData(completion: (Profile, Error?) -> Void)
+    func loadProfileData(completion: @escaping (Profile, Error?) -> Void)
     {
         do
         {
@@ -52,13 +52,13 @@ class DataStore: NSObject
     
     // MARK: - Helping stuff
     
-    enum DataStoreError: Error
+    private enum DataStoreError: Error
     {
         case noImageData
         case noAvailableSavedProfileFound
     }
     
-    static func getSettingsFilePath() -> URL
+    private func getSettingsFilePath() -> URL
     {
         let docDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let settingsFileName = "settings.bin"
@@ -66,4 +66,5 @@ class DataStore: NSObject
         
         return ret
     }
+    
 }
