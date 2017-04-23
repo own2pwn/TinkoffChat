@@ -8,6 +8,9 @@
 
 import Foundation
 
+typealias ConversationDataSourceType = (userID: String, model: ConversationsListCellDisplayModel)
+typealias ConversationMessageType = (userID: String, messages: [Message])
+
 struct ConversationsListCellDisplayModel: IBaseConversationCellDisplayModel
 {
     var message: String?
@@ -31,8 +34,8 @@ protocol IConversationsListModel: class
 
 protocol IConversationsListModelDelegate: class
 {
-    func updateView(with data: [String: ConversationsListCellDisplayModel])
-    func updateMessages(with data: [String: [Message]])
+    func updateView(with data: [ConversationDataSourceType])
+    func updateMessages(with data: ConversationMessageType)
 }
 
 final class ConversationsListModel: IConversationsListModel, IMPCServiceDelegate
@@ -67,13 +70,15 @@ final class ConversationsListModel: IConversationsListModel, IMPCServiceDelegate
     func didFoundUser(userID: String, userName: String?)
     {
         let newUser = ConversationsListCellDisplayModel(message: nil, messageDate: nil, userName: userName)
-        dataSource[userID] = newUser
+        let newElement = ConversationDataSourceType(userID: userID, model: newUser)
+
+        dataSource.insert(newElement, at: 0)
         delegate?.updateView(with: dataSource)
     }
 
     func didLostUser(userID: String)
     {
-        dataSource.removeValue(forKey: userID)
+        removeUser(userID: userID)
         delegate?.updateView(with: dataSource)
     }
 
@@ -101,11 +106,27 @@ final class ConversationsListModel: IConversationsListModel, IMPCServiceDelegate
         print("There was an error!: \(message)")
     }
 
+    // MARK: - Private methods
+
+    private func removeUser(userID: String)
+    {
+        for it in 0..<dataSource.count
+        {
+            if dataSource[it].userID == userID
+            {
+                dataSource.remove(at: it)
+                return
+            }
+        }
+    }
+    
+    func appenMessageOrCreateNew()
+
     // MARK: - Private properties
 
-    private var dataSource = [String: ConversationsListCellDisplayModel]()
+    private var dataSource = [ConversationDataSourceType]()
 
-    private var messages = [String: [Message]]()
+    private var messages = [ConversationMessageType]()
 
     private let mpcService: IMPCService
 }

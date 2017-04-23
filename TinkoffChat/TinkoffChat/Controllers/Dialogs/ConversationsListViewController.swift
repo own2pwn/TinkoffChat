@@ -59,7 +59,7 @@ class ConversationsListViewController: UIViewController, IConversationsListModel
 
     // MARK: - IConversationsListModelDelegate
 
-    func updateView(with data: [String: ConversationsListCellDisplayModel])
+    func updateView(with data: Array<[String: ConversationsListCellDisplayModel]>)
     {
         dataSource = data
         updateUI()
@@ -128,14 +128,27 @@ class ConversationsListViewController: UIViewController, IConversationsListModel
 
     func sortDisplayModel()
     {
-        dataSource.sorted
-        { (lv, rv) -> Bool in
-
-            let lvd = lv.value.messageDate ?? Date(timeIntervalSince1970: 0)
-            let rvd = rv.value.messageDate ?? Date(timeIntervalSince1970: 0)
-
-            return lvd > rvd
-        }
+        let t = Array(dataSource)
+        t
+        
+//        let sortedDisplayModel = Array(dataSource).sorted
+//        { (lv, rv) -> Bool in
+//            let lvd = lv.value.messageDate ?? Date(timeIntervalSince1970: 0)
+//            let rvd = rv.value.messageDate ?? Date(timeIntervalSince1970: 0)
+//
+//            return lvd > rvd
+//        }
+//        dataSource.removeAll()
+//
+//        for (k, v) in sortedDisplayModel
+//        {
+//            dataSource[k] = v
+//        }
+//
+//        let oldMessages = Array(messages)
+//        let newMessages = oldMessages.sorted
+//        { (lv, rv) -> Bool in
+//        }
     }
 
     // MARK: - MPC
@@ -322,7 +335,7 @@ class ConversationsListViewController: UIViewController, IConversationsListModel
 
     // MARK: Stored
 
-    private var dataSource = [String: ConversationsListCellDisplayModel]()
+    private var dataSource = [ConversationDataSourceType]() //[String: ConversationsListCellDisplayModel]()
     private var messages = [String: [Message]]()
 
     private var selectedUserID = ""
