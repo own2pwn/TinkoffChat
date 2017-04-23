@@ -25,7 +25,6 @@
 		10BBA09C1E94D4D50071010C /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BBA09B1E94D4D50071010C /* DataStore.swift */; };
 		10BBA09E1E94D5B70071010C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BBA09D1E94D5B70071010C /* Profile.swift */; };
 		B910A2EB1EABBB82005637C1 /* ConversationsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2EA1EABBB82005637C1 /* ConversationsListModel.swift */; };
-		B910A2EE1EABBBF6005637C1 /* IBaseConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2ED1EABBBF6005637C1 /* IBaseConversation.swift */; };
 		B910A2F01EABBD9D005637C1 /* MPCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2EF1EABBD9D005637C1 /* MPCService.swift */; };
 		B910A2F21EABC176005637C1 /* IMPCWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2F11EABC176005637C1 /* IMPCWorker.swift */; };
 		B99814791EAC8EC500B95723 /* RootAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99814781EAC8EC500B95723 /* RootAssembly.swift */; };
@@ -62,7 +61,6 @@
 		10BBA09B1E94D4D50071010C /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		10BBA09D1E94D5B70071010C /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		B910A2EA1EABBB82005637C1 /* ConversationsListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListModel.swift; sourceTree = "<group>"; };
-		B910A2ED1EABBBF6005637C1 /* IBaseConversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBaseConversation.swift; sourceTree = "<group>"; };
 		B910A2EF1EABBD9D005637C1 /* MPCService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCService.swift; sourceTree = "<group>"; };
 		B910A2F11EABC176005637C1 /* IMPCWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMPCWorker.swift; sourceTree = "<group>"; };
 		B99814781EAC8EC500B95723 /* RootAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
@@ -213,7 +211,6 @@
 		B910A2EC1EABBBEC005637C1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				B910A2ED1EABBBF6005637C1 /* IBaseConversation.swift */,
 				B9B9E88A1EABEA63009CA699 /* IConversationModel.swift */,
 				B9B9E88C1EABEB9D009CA699 /* IMessageModel.swift */,
 			);
@@ -363,7 +360,6 @@
 				B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */,
 				B9B9E88F1EABF74C009CA699 /* MPCWorker.swift in Sources */,
 				B998147D1EAC90B000B95723 /* ModelsAssembly.swift in Sources */,
-				B910A2EE1EABBBF6005637C1 /* IBaseConversation.swift in Sources */,
 				B9B9E88D1EABEB9D009CA699 /* IMessageModel.swift in Sources */,
 				10BAAB141E87B3C900104295 /* DialogCell.swift in Sources */,
 				B910A2EB1EABBB82005637C1 /* ConversationsListModel.swift in Sources */,
