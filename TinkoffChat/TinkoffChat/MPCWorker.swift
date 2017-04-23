@@ -53,7 +53,7 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
     
     func getLocalUserID() -> String
     {
-        return UIDevice.current.name
+        return localPeer.displayName
     }
     
     var online: Bool

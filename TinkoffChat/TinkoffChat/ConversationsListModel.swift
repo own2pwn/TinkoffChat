@@ -18,14 +18,19 @@ struct ConversationsListCellDisplayModel
 
 protocol IConversationsListModel: class
 {
-    weak var delegate: IBaseConversationModelDelegate? { get set }
+    weak var delegate: IConversationsListModelDelegate? { get set }
+}
+
+protocol IConversationsListModelDelegate: class
+{
+    func updateView(with data: [ConversationDataSourceType])
 }
 
 final class ConversationsListModel: IConversationsListModel, IMPCServiceDelegate
 {
     // MARK: - IConversationsListModel
 
-    weak var delegate: IBaseConversationModelDelegate?
+    weak var delegate: IConversationsListModelDelegate?
 
     init(mpcService: IMPCService)
     {

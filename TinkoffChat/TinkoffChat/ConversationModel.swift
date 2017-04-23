@@ -16,7 +16,7 @@ protocol IConversationModel
     var localUser: String { get set }
 }
 
-protocol IConversationModelDelegate: IBaseConversationModelDelegate
+protocol IConversationModelDelegate: class
 {
     func didLostUser(userID: String)
     func didReceiveMessage(from userID: String, message: String)

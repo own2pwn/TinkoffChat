@@ -8,7 +8,3 @@
 
 import Foundation
 
-protocol IBaseConversationModelDelegate: class
-{
-    func updateView(with data: [ConversationDataSourceType])
-}

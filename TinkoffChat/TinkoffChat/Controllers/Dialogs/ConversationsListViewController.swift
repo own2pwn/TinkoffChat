@@ -15,7 +15,7 @@ enum ConversationsListTableViewSections: Int
     case all
 }
 
-final class ConversationsListViewController: UIViewController, IBaseConversationModelDelegate, UITableViewDataSource, UITableViewDelegate
+final class ConversationsListViewController: UIViewController, IConversationsListModelDelegate, UITableViewDataSource, UITableViewDelegate
 {
     // MARK: - Outlets
 

@@ -112,14 +112,18 @@ class ConversationController: UIViewController, IConversationModelDelegate, UITa
     
     func didLostUser(userID: String)
     {
+        if userID == selectedUserID
+        {
+            setSendMessageButtonEnabled(false)
+        }
     }
     
     func didReceiveMessage(from userID: String, message: String)
     {
-    }
-    
-    func updateView(with data: [ConversationDataSourceType])
-    {
+        let newMessage = Message(message: message, sender: userID, receiver: mpcService.localUserID())
+        dataSource.append(newMessage)
+        
+        updateUI()
     }
     
     //    // MARK: - MPC KVO
@@ -199,6 +203,8 @@ class ConversationController: UIViewController, IConversationModelDelegate, UITa
     
     func keyboardDidShow()
     {
+        let messagesCount = dataSource.count
+        
         if messagesCount > 0
         {
             conversationTableView.scrollToRow(at: IndexPath(row: messagesCount - 1, section: 0), at: .bottom, animated: true)
@@ -212,11 +218,12 @@ class ConversationController: UIViewController, IConversationModelDelegate, UITa
     
     func keyboardDidHide(_ notification: NSNotification)
     {
+        let messagesCount = dataSource.count
+        
         if messagesCount > 0
         {
             conversationTableView.scrollToRow(at: IndexPath(row: messagesCount - 1, section: 0), at: .middle, animated: true)
         }
-        
     }
     
     func setSendMessageButtonEnabled(_ enabled: Bool)
@@ -276,7 +283,7 @@ class ConversationController: UIViewController, IConversationModelDelegate, UITa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return messagesCount
+        return dataSource.count
     }
     
     // MARK: - Private properties
@@ -299,7 +306,7 @@ class ConversationController: UIViewController, IConversationModelDelegate, UITa
     
     private var dataSource = [Message]()
     
-    private var messagesCount = 0
+    //    private var messagesCount = 0
     private let currentDeviceUserID = UIDevice.current.identifierForVendor!.uuidString
     
     private let sentMessageCellId = "idSentMessage"
