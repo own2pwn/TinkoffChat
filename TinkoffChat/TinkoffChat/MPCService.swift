@@ -17,7 +17,7 @@ enum UserState: Int
 protocol IMPCService: class
 {
     func send(message: String, to: String, completion: (Error?) -> Void)
-    func conversations(where peerState: UserState, completion: ([ConversationDataModel]) -> Void)
+//    func conversations(where peerState: UserState, completion: ([ConversationDataModel]) -> Void)
     
     weak var delegate: IMPCServiceDelegate? { get set }
 }
@@ -52,10 +52,10 @@ final class MPCService: IMPCService, IMPCWorkerDelegate
         mpcWorker.send(message: message, to: to, completion: completion)
     }
     
-    func conversations(where peerState: UserState, completion: ([ConversationDataModel]) -> Void)
-    {
-        mpcWorker.retrieveConversations(where: peerState, completion: completion)
-    }
+//    func conversations(where peerState: UserState, completion: ([ConversationDataModel]) -> Void)
+//    {
+//        mpcWorker.retrieveConversations(where: peerState, completion: completion)
+//    }
     
     var delegate: IMPCServiceDelegate?
     

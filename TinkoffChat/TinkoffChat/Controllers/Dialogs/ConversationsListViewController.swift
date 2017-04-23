@@ -73,7 +73,7 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        if let cell = sender as? DialogCell, let dialogVC = segue.destination as? DialogController
+        if let cell = sender as? DialogCell, let dialogVC = segue.destination as? ConversationController
         {
             dialogVC.navigationItem.title = cell.userName
             //            dialogVC.communicator = communicator

@@ -15,9 +15,4 @@ import Foundation
 //    var message: String
 // }
 
-struct MessageModel
-{
-    let sender: String
-    let receiver: String
-    let message: String
-}
+

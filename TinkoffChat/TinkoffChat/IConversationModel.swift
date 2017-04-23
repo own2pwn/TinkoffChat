@@ -15,12 +15,7 @@ protocol IConversationModel
     func conversations(where state: UserState)
 }
 
-struct ConversationDataModel
-{
-    let isOnline: Bool
-    let users: [String]
-    let messages: [MessageModel]
-}
+
 
 // protocol IConversationDataModel
 // {

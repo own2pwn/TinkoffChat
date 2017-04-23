@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DialogController: UIViewController, UITableViewDataSource
+class ConversationController: UIViewController, UITableViewDataSource
 {
     // MARK: - Communication
     
@@ -54,10 +54,6 @@ class DialogController: UIViewController, UITableViewDataSource
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(onUserFound(_:)), name: .DidFoundUser, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onMessageReceive(_:)), name: .DidReceiveMessage, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onUserLost(_:)), name: .DidLostUser, object: nil)
         
         loadMessages()
     }

@@ -20,7 +20,7 @@ protocol IMPCWorker: class
     func send(message: String, to userID: String, completion: (Error?) -> Void)
     //    func peers(where state: UserState) -> [Peer]
     
-    func retrieveConversations(where state: UserState, completion: ([ConversationDataModel]) -> Void)
+//    func retrieveConversations(where state: UserState, completion: ([ConversationDataModel]) -> Void)
     
     var online: Bool { get set }
     weak var delegate: IMPCWorkerDelegate? { get set }

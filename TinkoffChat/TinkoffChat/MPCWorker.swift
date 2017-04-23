@@ -65,20 +65,20 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
         return peers
     }
     
-    func retrieveConversations(where state: UserState, completion: ([ConversationDataModel]) -> Void)
-    {
-        if state == .online
-        {
-            let relatedConversations = conversations.filter({ (conversation) -> Bool in
-                conversation.isOnline
-            })
-            completion(relatedConversations)
-        }
-        else
-        {
-            completion([ConversationDataModel]())
-        }
-    }
+//    func retrieveConversations(where state: UserState, completion: ([ConversationDataModel]) -> Void)
+//    {
+//        if state == .online
+//        {
+//            let relatedConversations = conversations.filter({ (conversation) -> Bool in
+//                conversation.isOnline
+//            })
+//            completion(relatedConversations)
+//        }
+//        else
+//        {
+//            completion([ConversationDataModel]())
+//        }
+//    }
     
     var online: Bool
     {
@@ -288,7 +288,7 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
     
     private var foundPeers = [MCPeerID: Peer]()
     
-    private var conversations = [ConversationDataModel]()
+//    private var conversations = [ConversationDataModel]()
     
     // MARK: Session
     
