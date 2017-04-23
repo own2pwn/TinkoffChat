@@ -15,11 +15,19 @@ protocol IConversationModel
     func conversations(where state: UserState)
 }
 
-protocol IConversationDataModel
+struct ConversationDataModel
 {
-    var users: [String] { get set }
-    var messages: [IMessageModel] { get set }
+    let isOnline: Bool
+    let users: [String]
+    let messages: [MessageModel]
 }
+
+// protocol IConversationDataModel
+// {
+//    var isOnline: Bool {get set}
+//    var users: [String] { get set }
+//    var messages: [IMessageModel] { get set }
+// }
 
 final class ConversationModel: IConversationModel
 {
@@ -33,7 +41,7 @@ final class ConversationModel: IConversationModel
     {
         switch state {
         case .offline:
-            
+
             break
         case .online:
             break

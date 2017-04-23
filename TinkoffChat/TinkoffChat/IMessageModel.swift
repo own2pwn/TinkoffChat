@@ -8,9 +8,16 @@
 
 import Foundation
 
-protocol IMessageModel
+// protocol IMessageModel
+// {
+//    var sender: String
+//    var receiver: String
+//    var message: String
+// }
+
+struct MessageModel
 {
-    var sender: String { get set }
-    var receiver: String { get set }
-    var message: String { get set }
+    let sender: String
+    let receiver: String
+    let message: String
 }

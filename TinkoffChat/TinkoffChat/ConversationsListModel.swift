@@ -18,7 +18,7 @@ struct ConversationsListCellDisplayModel: IBaseConversationCellDisplayModel
 protocol IConversationsListModel: class
 {
     weak var delegate: IConversationsListModelDelegate? { get set }
-    func loadConversations(for section: ConversationsListTableViewSections) // TODO: rename?
+    func loadConversations(for section: ConversationsListTableViewSections)
 }
 
 protocol IConversationsListModelDelegate: IBaseModelDelegate
@@ -37,37 +37,7 @@ final class ConversationsListModel: IConversationsListModel
 
     func loadConversations(for section: ConversationsListTableViewSections)
     {
-        //TODO: completion
-        
-        switch section {
-        case .offlineUsers:
-            let conversations = mpcService.conversations(where: .offline)
-            break
-        case .onlineUsers:
-            break
-
-        case .all:
-            break
-        }
-
-//        mpcService.getConversations(where: section.rawValue)
-
-        //        coreDataService.retrieveData
-        //        { error, data in
-        //
-        //            // TODO: check if section == 2 then load for all, else for requested one
-        //
-        //            if let error = error
-        //            {
-        //                delegate?.show(error: error.localizedDescription)
-        //            }
-        //            else // if let conversations = data as? [conversations]
-        //            {
-        //                // let conversations = data.map({ConversationsListCellDisplayModel(userName: <#T##String?#>, message: <#T##String?#>, messageDate: <#T##Date?#>)})
-        //                // TODO: parse conversations
-        //                delegate?.updateView(with: data as! [ConversationsListCellDisplayModel])
-        //            }
-        //        }
+        // TODO: completion
     }
 
     private let mpcService: IMPCService

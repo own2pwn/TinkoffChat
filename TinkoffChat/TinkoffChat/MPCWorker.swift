@@ -65,16 +65,18 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
         return peers
     }
     
-    func retrieveConversations(where state: UserState)
+    func retrieveConversations(where state: UserState, completion: ([ConversationDataModel]) -> Void)
     {
         if state == .online
         {
-            let onlineUsers = peers(where: .online)
-            
-            //            var relatedConversations = [IConversationDataModel]()
             let relatedConversations = conversations.filter({ (conversation) -> Bool in
-                
+                conversation.isOnline
             })
+            completion(relatedConversations)
+        }
+        else
+        {
+            completion([ConversationDataModel]())
         }
     }
     
@@ -92,13 +94,11 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
     
     override init()
     {
-        browser = MCNearbyServiceBrowser(peer: localPeer, serviceType: serviceType)
-        browser.delegate = self
+        online = true
+        super.init()
         
-        advertiser = MCNearbyServiceAdvertiser(peer: localPeer, discoveryInfo: discoveryInfo, serviceType: serviceType)
         advertiser.delegate = self
-        
-        setBrowsingEnabled(true)
+        browser.delegate = self
     }
     
     // MARK: - MCNearbyServiceAdvertiserDelegate
@@ -261,15 +261,19 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
         return ret
     }()
     
+    private lazy var browser: MCNearbyServiceBrowser = {
+        MCNearbyServiceBrowser(peer: self.localPeer, serviceType: self.serviceType)
+    }()
+    
+    private lazy var advertiser: MCNearbyServiceAdvertiser = {
+        MCNearbyServiceAdvertiser(peer: self.localPeer, discoveryInfo: self.discoveryInfo, serviceType: self.serviceType)
+    }()
+    
     // MARK: Stored
     
     private let serviceType = "tinkoff-chat"
     
     private let discoveryInfo = [KDiscoveryInfo.UserName: UIDevice.current.name]
-    
-    private var browser: MCNearbyServiceBrowser
-    
-    private var advertiser: MCNearbyServiceAdvertiser
     
     private var sessions = [MCPeerID: MCSession]()
     
@@ -279,7 +283,7 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
     
     private var foundPeers = [MCPeerID: Peer]()
     
-    private var conversations = [MCPeerID: IConversationDataModel]()
+    private var conversations = [ConversationDataModel]()
     
     // MARK: Session
     
