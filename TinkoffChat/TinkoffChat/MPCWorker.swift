@@ -51,35 +51,6 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
         }
     }
     
-    func peers(where state: UserState) -> [Peer]
-    {
-        var peers = [Peer]()
-        
-        if state == .online
-        {
-            for peer in foundPeers where peer.value.isOnline == true
-            {
-                peers.append(peer.value)
-            }
-        }
-        return peers
-    }
-    
-//    func retrieveConversations(where state: UserState, completion: ([ConversationDataModel]) -> Void)
-//    {
-//        if state == .online
-//        {
-//            let relatedConversations = conversations.filter({ (conversation) -> Bool in
-//                conversation.isOnline
-//            })
-//            completion(relatedConversations)
-//        }
-//        else
-//        {
-//            completion([ConversationDataModel]())
-//        }
-//    }
-    
     var online: Bool
     {
         get { return _online }
@@ -90,7 +61,7 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
         }
     }
     
-    var delegate: IMPCWorkerDelegate?
+    var delegate: IMPCServiceDelegate?
     
     // MARK: - Life cycle
     
@@ -126,7 +97,7 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error)
     {
-        delegate?.failedToStartAdvertising(error: error)
+        print("[ERROR]: MPCWorker advertiser didNotStartAdvertisingPeer with error: \(error.localizedDescription)")
     }
     
     // MARK: - Browsing
@@ -152,7 +123,7 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
     
     func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error)
     {
-        delegate?.failedToStartBrowsingForUsers(error: error)
+        print("[ERROR]: MPCWorker advertiser didNotStartBrowsingForPeers with error: \(error.localizedDescription)")
     }
     
     // MARK: - Session
@@ -285,10 +256,6 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
     private let connectionTimeout = 3.0
     
     private var lastState = [MCPeerID: MCSessionState]()
-    
-    private var foundPeers = [MCPeerID: Peer]()
-    
-//    private var conversations = [ConversationDataModel]()
     
     // MARK: Session
     

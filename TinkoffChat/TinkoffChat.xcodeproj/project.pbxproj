@@ -223,8 +223,8 @@
 		B93675441EA34AEF00B69AC8 /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
-				B910A2EF1EABBD9D005637C1 /* MPCService.swift */,
 				B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */,
+				B910A2EF1EABBD9D005637C1 /* MPCService.swift */,
 			);
 			name = ServiceLayer;
 			sourceTree = "<group>";

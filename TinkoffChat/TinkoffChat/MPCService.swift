@@ -17,7 +17,6 @@ enum UserState: Int
 protocol IMPCService: class
 {
     func send(message: String, to: String, completion: (Error?) -> Void)
-//    func conversations(where peerState: UserState, completion: ([ConversationDataModel]) -> Void)
     
     weak var delegate: IMPCServiceDelegate? { get set }
 }
@@ -28,15 +27,10 @@ protocol IMPCServiceDelegate: class
     func didLostUser(userID: String)
     func didReceiveMessage(text: String, fromUser: String, toUser: String)
     
-    
-//    func append(message: String, sender: String)
-//    func append(userID: String, userName: String?)
-//    func remove(userID: String)
-    
     func log(error message: String)
 }
 
-final class MPCService: IMPCService, IMPCWorkerDelegate
+final class MPCService: IMPCService, IMPCServiceDelegate
 {
     // MARK: - Life cycle
     
@@ -52,18 +46,12 @@ final class MPCService: IMPCService, IMPCWorkerDelegate
         mpcWorker.send(message: message, to: to, completion: completion)
     }
     
-//    func conversations(where peerState: UserState, completion: ([ConversationDataModel]) -> Void)
-//    {
-//        mpcWorker.retrieveConversations(where: peerState, completion: completion)
-//    }
-    
     var delegate: IMPCServiceDelegate?
     
     // MARK: - IMPCWorkerDelegate
     
     func didFoundUser(userID: String, userName: String?)
     {
-//        let newUser = ConversationsListCellDisplayModel(message: nil, messageDate: nil, userName: userName)
         delegate?.didFoundUser(userID: userID, userName: userName)
     }
     
@@ -77,6 +65,11 @@ final class MPCService: IMPCService, IMPCWorkerDelegate
         delegate?.didReceiveMessage(text: text, fromUser: fromUser, toUser: toUser)
     }
     
+    func log(error message: String)
+    {
+        print("There was an error!: \(message)")
+    }
+    
     func failedToStartAdvertising(error: Error) { delegate?.log(error: error.localizedDescription) }
     
     func failedToStartBrowsingForUsers(error: Error) { delegate?.log(error: error.localizedDescription) }
@@ -85,7 +78,7 @@ final class MPCService: IMPCService, IMPCWorkerDelegate
     
     private func setupLogic()
     {
-        mpcWorker.delegate = self
+        //        mpcWorker.delegate = self
     }
     
     // MARK: - Private properties
