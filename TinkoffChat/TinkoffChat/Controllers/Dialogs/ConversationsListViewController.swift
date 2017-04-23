@@ -116,9 +116,25 @@ class ConversationsListViewController: UIViewController, IConversationsListModel
 
     func updateUI()
     {
-        DispatchQueue.main.async
+        DispatchQueue.global(qos: .userInitiated).async
         {
-            self.conversationsTableView.reloadSections(IndexSet(integer: 0), with: .fade)
+            self.sortDisplayModel()
+            DispatchQueue.main.async
+            {
+                self.conversationsTableView.reloadSections(IndexSet(integer: 0), with: .fade)
+            }
+        }
+    }
+
+    func sortDisplayModel()
+    {
+        dataSource.sorted
+        { (lv, rv) -> Bool in
+
+            let lvd = lv.value.messageDate ?? Date(timeIntervalSince1970: 0)
+            let rvd = rv.value.messageDate ?? Date(timeIntervalSince1970: 0)
+
+            return lvd > rvd
         }
     }
 
