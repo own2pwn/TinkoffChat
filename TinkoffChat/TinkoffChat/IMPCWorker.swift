@@ -12,12 +12,15 @@ struct Peer
 {
     let userID: String
     let userName: String?
+    let isOnline: Bool
 }
 
 protocol IMPCWorker: class
 {
     func send(message: String, to userID: String, completion: (Error?) -> Void)
     func peers(where state: UserState) -> [Peer]
+    
+    func retrieveConversations(where state: UserState)
     
     var online: Bool { get set }
     

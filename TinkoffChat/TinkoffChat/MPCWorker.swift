@@ -57,12 +57,25 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
         
         if state == .online
         {
-            for peer in foundPeers
+            for peer in foundPeers where peer.value.isOnline == true
             {
                 peers.append(peer.value)
             }
         }
         return peers
+    }
+    
+    func retrieveConversations(where state: UserState)
+    {
+        if state == .online
+        {
+            let onlineUsers = peers(where: .online)
+            
+            //            var relatedConversations = [IConversationDataModel]()
+            let relatedConversations = conversations.filter({ (conversation) -> Bool in
+                
+            })
+        }
     }
     
     var online: Bool
@@ -265,6 +278,8 @@ final class MPCWorker: NSObject, IMPCWorker, MCNearbyServiceAdvertiserDelegate, 
     private var lastState = [MCPeerID: MCSessionState]()
     
     private var foundPeers = [MCPeerID: Peer]()
+    
+    private var conversations = [MCPeerID: IConversationDataModel]()
     
     // MARK: Session
     

@@ -33,7 +33,7 @@ final class ConversationModel: IConversationModel
     {
         switch state {
         case .offline:
-            mpcService.
+            
             break
         case .online:
             break

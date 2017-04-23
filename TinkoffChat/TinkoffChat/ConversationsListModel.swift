@@ -50,7 +50,7 @@ final class ConversationsListModel: IConversationsListModel
             break
         }
 
-        mpcService.getConversations(where: section.rawValue)
+//        mpcService.getConversations(where: section.rawValue)
 
         //        coreDataService.retrieveData
         //        { error, data in
