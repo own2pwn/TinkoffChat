@@ -1,5 +1,5 @@
 //
-//  DialogCell.swift
+//  ConversationsListCell.swift
 //  TinkoffChat
 //
 //  Created by Evgeniy on 26.03.17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DialogCell: UITableViewCell, DialogCellModel
+class ConversationsListCell: UITableViewCell, ConversationsListCellModel
 {
     // MARK: - DialogCellModel
     

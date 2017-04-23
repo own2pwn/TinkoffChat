@@ -16,6 +16,15 @@ struct ConversationsListCellDisplayModel
     var messages: [Message]
 }
 
+protocol ConversationsListCellModel: class
+{
+    var userName: String? { get set }
+    var lastMessageText: String? { get set }
+    var lastMessageDate: Date? { get set }
+    var isUserOnline: Bool { get set }
+    var hasUnreadMessages: Bool { get set }
+}
+
 protocol IConversationsListModel: class
 {
     weak var delegate: IConversationsListModelDelegate? { get set }

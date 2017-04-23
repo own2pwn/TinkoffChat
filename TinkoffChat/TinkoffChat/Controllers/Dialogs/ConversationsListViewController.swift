@@ -80,7 +80,7 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        if let cell = sender as? DialogCell, let dialogVC = segue.destination as? ConversationController
+        if let cell = sender as? ConversationsListCell, let dialogVC = segue.destination as? ConversationController
         {
             dialogVC.navigationItem.title = cell.userName
             dialogVC.mpcService = mpcService
@@ -114,7 +114,7 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
 
     // MARK: UI configuration
 
-    func configureCell(_ cell: DialogCell, at indexPath: IndexPath)
+    func configureCell(_ cell: ConversationsListCell, at indexPath: IndexPath)
     {
         cell.selectionStyle = .none
 
@@ -132,7 +132,7 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReusabledentifier, for: indexPath) as! DialogCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellReusabledentifier, for: indexPath) as! ConversationsListCell
 
         configureCell(cell, at: indexPath)
 
