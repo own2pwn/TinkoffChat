@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		100B0B9D1E7C5A8E00DD181F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100B0B9C1E7C5A8E00DD181F /* AppDelegate.swift */; };
-		100B0B9F1E7C5A8E00DD181F /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100B0B9E1E7C5A8E00DD181F /* ProfileController.swift */; };
+		100B0B9F1E7C5A8E00DD181F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100B0B9E1E7C5A8E00DD181F /* ProfileViewController.swift */; };
 		100B0BA41E7C5A8E00DD181F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 100B0BA31E7C5A8E00DD181F /* Assets.xcassets */; };
 		100B0BA71E7C5A8E00DD181F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 100B0BA51E7C5A8E00DD181F /* LaunchScreen.storyboard */; };
 		10BAAB061E87B04000104295 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10BAAB051E87B04000104295 /* Main.storyboard */; };
@@ -29,6 +29,8 @@
 		B9291C081EAD04CF00B4358F /* DataStoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291C071EAD04CF00B4358F /* DataStoreAssembly.swift */; };
 		B9291C0A1EAD04DB00B4358F /* GCDService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291C091EAD04DB00B4358F /* GCDService.swift */; };
 		B9291C0C1EAD0A9000B4358F /* OperationDataStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291C0B1EAD0A9000B4358F /* OperationDataStoreService.swift */; };
+		B9291C101EAD0F7F00B4358F /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291C0F1EAD0F7F00B4358F /* ProfileModel.swift */; };
+		B9291C121EAD10A500B4358F /* ProfileAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291C111EAD10A500B4358F /* ProfileAssembly.swift */; };
 		B99814791EAC8EC500B95723 /* RootAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99814781EAC8EC500B95723 /* RootAssembly.swift */; };
 		B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */; };
 		B998147F1EAC90D400B95723 /* ConversationsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */; };
@@ -39,7 +41,7 @@
 /* Begin PBXFileReference section */
 		100B0B991E7C5A8E00DD181F /* TinkoffChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		100B0B9C1E7C5A8E00DD181F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = TinkoffChat/Controllers/AppDelegate.swift; sourceTree = "<group>"; };
-		100B0B9E1E7C5A8E00DD181F /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileController.swift; path = Controllers/ProfileController.swift; sourceTree = "<group>"; };
+		100B0B9E1E7C5A8E00DD181F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = Controllers/ProfileViewController.swift; sourceTree = "<group>"; };
 		100B0BA31E7C5A8E00DD181F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Other/Assets.xcassets; sourceTree = "<group>"; };
 		100B0BA61E7C5A8E00DD181F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		100B0BA81E7C5A8E00DD181F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Other/Info.plist; sourceTree = "<group>"; };
@@ -61,6 +63,8 @@
 		B9291C071EAD04CF00B4358F /* DataStoreAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStoreAssembly.swift; sourceTree = "<group>"; };
 		B9291C091EAD04DB00B4358F /* GCDService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDService.swift; sourceTree = "<group>"; };
 		B9291C0B1EAD0A9000B4358F /* OperationDataStoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationDataStoreService.swift; sourceTree = "<group>"; };
+		B9291C0F1EAD0F7F00B4358F /* ProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		B9291C111EAD10A500B4358F /* ProfileAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileAssembly.swift; sourceTree = "<group>"; };
 		B99814781EAC8EC500B95723 /* RootAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
 		B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCAssembly.swift; sourceTree = "<group>"; };
 		B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListAssembly.swift; sourceTree = "<group>"; };
@@ -170,7 +174,9 @@
 		B9291C021EAD03CF00B4358F /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				100B0B9E1E7C5A8E00DD181F /* ProfileController.swift */,
+				100B0B9E1E7C5A8E00DD181F /* ProfileViewController.swift */,
+				B9291C111EAD10A500B4358F /* ProfileAssembly.swift */,
+				B9291C0F1EAD0F7F00B4358F /* ProfileModel.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -296,7 +302,9 @@
 				B9D845361E9D263800D6373C /* Constants.swift in Sources */,
 				B9291C0C1EAD0A9000B4358F /* OperationDataStoreService.swift in Sources */,
 				B998147F1EAC90D400B95723 /* ConversationsListAssembly.swift in Sources */,
+				B9291C101EAD0F7F00B4358F /* ProfileModel.swift in Sources */,
 				B9291BFD1EACEC6200B4358F /* ConversationAssembly.swift in Sources */,
+				B9291C121EAD10A500B4358F /* ProfileAssembly.swift in Sources */,
 				10BAAB1B1E87C36E00104295 /* MessageCell.swift in Sources */,
 				B9291C0A1EAD04DB00B4358F /* GCDService.swift in Sources */,
 				B99814791EAC8EC500B95723 /* RootAssembly.swift in Sources */,
@@ -304,7 +312,7 @@
 				B910A2F21EABC176005637C1 /* IMPCWorker.swift in Sources */,
 				10BAAB091E87B0D800104295 /* ConversationsListViewController.swift in Sources */,
 				10BAAB171E87B76000104295 /* Extensions.swift in Sources */,
-				100B0B9F1E7C5A8E00DD181F /* ProfileController.swift in Sources */,
+				100B0B9F1E7C5A8E00DD181F /* ProfileViewController.swift in Sources */,
 				10BAAB191E87C1B400104295 /* ConversationViewController.swift in Sources */,
 				10BBA0931E94D2AB0071010C /* DataManager.swift in Sources */,
 				100B0B9D1E7C5A8E00DD181F /* AppDelegate.swift in Sources */,

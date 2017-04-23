@@ -8,17 +8,17 @@
 
 import Foundation
 
-class DataStoreAssembly
-{
-    func gcdService() -> IDataStore
-    {
-        return GCDService(dataStore: dataStore)
-    }
-
-    func operationDataStoreService() -> IDataStore
-    {
-        return OperationDataStoreService(dataStore: dataStore)
-    }
-
-    private let dataStore = DataStore()
-}
+//class DataStoreAssembly
+//{
+//    func gcdService() -> IDataStore
+//    {
+//        return GCDService(dataStore: dataStore)
+//    }
+//
+//    func operationDataStoreService() -> IDataStore
+//    {
+//        return OperationDataStoreService(dataStore: dataStore)
+//    }
+//
+//    private let dataStore = DataStore()
+//}

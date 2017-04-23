@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -272,7 +273,7 @@
         <!--Profile-->
         <scene sceneID="dXR-IU-RA8">
             <objects>
-                <viewController storyboardIdentifier="idProfileVC" title="Profile" id="t0J-gO-W45" customClass="ProfileController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="idProfileVC" title="Profile" id="t0J-gO-W45" customClass="ProfileViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AXo-vs-SkF"/>
                         <viewControllerLayoutGuide type="bottom" id="J6W-Nz-5Km"/>
@@ -294,16 +295,16 @@
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Xz-dF-UOn">
-                                <rect key="frame" x="0.0" y="524" width="156" height="44"/>
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <color key="backgroundColor" red="1" green="0.86666666670000003" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="tfG-5e-J8c"/>
                                 </constraints>
-                                <state key="normal" title="GCD">
+                                <state key="normal" title="Сохранить">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="didTapGCDButton:" destination="t0J-gO-W45" eventType="touchUpInside" id="QaF-Pa-fQL"/>
+                                    <action selector="didTapSaveButton:" destination="t0J-gO-W45" eventType="touchUpInside" id="4Hj-uw-4K5"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Hy6-1A-UQ7">
@@ -405,19 +406,6 @@
                                     <constraint firstAttribute="width" secondItem="HYJ-7O-iF3" secondAttribute="height" multiplier="1:1" id="qea-eI-CX6"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEn-Bn-bsk">
-                                <rect key="frame" x="164" y="524" width="156" height="44"/>
-                                <color key="backgroundColor" red="1" green="0.86666666670000003" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="cxw-by-miI"/>
-                                </constraints>
-                                <state key="normal" title="Operation">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapOperationButton:" destination="t0J-gO-W45" eventType="touchUpInside" id="4Rm-6r-wRU"/>
-                                </connections>
-                            </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Efw-dj-whK">
                                 <rect key="frame" x="150" y="274" width="20" height="20"/>
                             </activityIndicatorView>
@@ -431,51 +419,57 @@
                             <constraint firstItem="Hy6-1A-UQ7" firstAttribute="leading" secondItem="Dpk-Ka-g1X" secondAttribute="leadingMargin" id="3fP-gd-QRp"/>
                             <constraint firstItem="c5n-5b-dlF" firstAttribute="leading" secondItem="Dpk-Ka-g1X" secondAttribute="leadingMargin" id="3rf-ti-3lf"/>
                             <constraint firstItem="Xpd-e4-MXS" firstAttribute="leading" secondItem="Dpk-Ka-g1X" secondAttribute="leading" id="483-cd-ipf"/>
+                            <constraint firstItem="icc-R2-Ync" firstAttribute="firstBaseline" secondItem="rUi-63-zE3" secondAttribute="firstBaseline" id="4cg-xs-NJN"/>
+                            <constraint firstItem="icc-R2-Ync" firstAttribute="firstBaseline" secondItem="aBZ-dj-pp3" secondAttribute="firstBaseline" id="5T2-js-lBN"/>
                             <constraint firstAttribute="leadingMargin" secondItem="aBZ-dj-pp3" secondAttribute="leading" id="5ih-Qh-Dr7"/>
                             <constraint firstItem="Vmm-3g-7iY" firstAttribute="leading" secondItem="icc-R2-Ync" secondAttribute="trailing" constant="2" id="79l-P2-0T6"/>
                             <constraint firstItem="icc-R2-Ync" firstAttribute="leading" secondItem="lyv-vb-yuV" secondAttribute="trailing" constant="2" id="7c0-Rq-nOH"/>
-                            <constraint firstAttribute="trailing" secondItem="SEn-Bn-bsk" secondAttribute="trailing" id="AT7-Gn-Uhw"/>
+                            <constraint firstItem="icc-R2-Ync" firstAttribute="firstBaseline" secondItem="Vmm-3g-7iY" secondAttribute="firstBaseline" id="BYZ-n7-z5U"/>
+                            <constraint firstItem="icc-R2-Ync" firstAttribute="baseline" secondItem="lyv-vb-yuV" secondAttribute="baseline" id="EZZ-9e-Wv7"/>
+                            <constraint firstAttribute="trailing" secondItem="6Xz-dF-UOn" secondAttribute="trailing" id="Eg2-jG-faG"/>
                             <constraint firstAttribute="leadingMargin" secondItem="aBZ-dj-pp3" secondAttribute="leading" id="FEq-I3-Vba"/>
+                            <constraint firstItem="icc-R2-Ync" firstAttribute="baseline" secondItem="Vmm-3g-7iY" secondAttribute="baseline" id="Ghq-95-H3K"/>
                             <constraint firstItem="lyv-vb-yuV" firstAttribute="leading" secondItem="rUi-63-zE3" secondAttribute="trailing" constant="2" id="Gqr-Et-kNW"/>
                             <constraint firstItem="HYJ-7O-iF3" firstAttribute="leading" secondItem="Dpk-Ka-g1X" secondAttribute="leadingMargin" constant="102" id="Hx0-7x-iaO"/>
                             <constraint firstItem="Efw-dj-whK" firstAttribute="centerY" secondItem="Dpk-Ka-g1X" secondAttribute="centerY" id="LEb-VL-T2O"/>
                             <constraint firstItem="Hy6-1A-UQ7" firstAttribute="trailing" secondItem="Dpk-Ka-g1X" secondAttribute="trailingMargin" id="Mie-b0-6ts"/>
-                            <constraint firstItem="J6W-Nz-5Km" firstAttribute="top" secondItem="SEn-Bn-bsk" secondAttribute="bottom" id="MyT-63-sg7"/>
+                            <constraint firstItem="J6W-Nz-5Km" firstAttribute="top" secondItem="6Xz-dF-UOn" secondAttribute="bottom" id="Mwj-ax-BTd"/>
                             <constraint firstAttribute="trailing" secondItem="Xpd-e4-MXS" secondAttribute="trailing" id="RWV-fS-a6S"/>
+                            <constraint firstItem="6Xz-dF-UOn" firstAttribute="leading" secondItem="Dpk-Ka-g1X" secondAttribute="leading" id="Stw-Xh-9MC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Vmm-3g-7iY" secondAttribute="trailing" id="U4B-ri-eK8"/>
+                            <constraint firstItem="icc-R2-Ync" firstAttribute="baseline" secondItem="rUi-63-zE3" secondAttribute="baseline" id="WEQ-wn-rkK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HYJ-7O-iF3" secondAttribute="trailing" constant="102" id="YjP-yT-F3F"/>
                             <constraint firstItem="6Xz-dF-UOn" firstAttribute="top" secondItem="lyv-vb-yuV" secondAttribute="bottom" constant="8" id="ZKp-Qb-r5I"/>
                             <constraint firstItem="lyv-vb-yuV" firstAttribute="width" secondItem="aBZ-dj-pp3" secondAttribute="width" id="a3F-F3-eUV"/>
                             <constraint firstItem="DhU-ce-9zX" firstAttribute="top" secondItem="c5n-5b-dlF" secondAttribute="bottom" constant="8" id="aZV-x1-NAh"/>
+                            <constraint firstItem="icc-R2-Ync" firstAttribute="firstBaseline" secondItem="lyv-vb-yuV" secondAttribute="firstBaseline" id="bgp-lB-yiH"/>
+                            <constraint firstItem="icc-R2-Ync" firstAttribute="baseline" secondItem="aBZ-dj-pp3" secondAttribute="baseline" id="btd-Ja-mJy"/>
                             <constraint firstItem="Xpd-e4-MXS" firstAttribute="top" secondItem="Dpk-Ka-g1X" secondAttribute="top" constant="20" id="dLO-9v-CxM"/>
                             <constraint firstItem="HDx-qp-hrL" firstAttribute="leading" secondItem="Dpk-Ka-g1X" secondAttribute="leadingMargin" id="eEV-im-Qah"/>
                             <constraint firstItem="rUi-63-zE3" firstAttribute="leading" secondItem="aBZ-dj-pp3" secondAttribute="trailing" constant="2" id="eID-dt-5NG"/>
                             <constraint firstItem="HDx-qp-hrL" firstAttribute="top" secondItem="Xpd-e4-MXS" secondAttribute="bottom" constant="8" id="gek-XI-ZDn"/>
                             <constraint firstItem="c5n-5b-dlF" firstAttribute="top" secondItem="HDx-qp-hrL" secondAttribute="bottom" constant="8" id="gjc-mt-wos"/>
-                            <constraint firstItem="SEn-Bn-bsk" firstAttribute="top" secondItem="Vmm-3g-7iY" secondAttribute="bottom" constant="8" id="hue-0f-7Y0"/>
                             <constraint firstItem="rUi-63-zE3" firstAttribute="width" secondItem="aBZ-dj-pp3" secondAttribute="width" id="j2y-KM-OTx"/>
                             <constraint firstItem="Hy6-1A-UQ7" firstAttribute="top" secondItem="DhU-ce-9zX" secondAttribute="bottom" constant="8" id="kUP-yg-w3c"/>
                             <constraint firstItem="6Xz-dF-UOn" firstAttribute="top" secondItem="rUi-63-zE3" secondAttribute="bottom" constant="8" id="nTk-yG-VvX"/>
                             <constraint firstItem="c5n-5b-dlF" firstAttribute="trailing" secondItem="Dpk-Ka-g1X" secondAttribute="trailingMargin" id="nlA-Od-O4i"/>
                             <constraint firstItem="n9f-R2-WWZ" firstAttribute="leading" secondItem="Dpk-Ka-g1X" secondAttribute="leadingMargin" id="pAI-uc-mVc"/>
                             <constraint firstItem="J6W-Nz-5Km" firstAttribute="top" secondItem="6Xz-dF-UOn" secondAttribute="bottom" id="qfd-8F-Atv"/>
+                            <constraint firstItem="icc-R2-Ync" firstAttribute="top" secondItem="lyv-vb-yuV" secondAttribute="top" id="qy0-xP-enE"/>
                             <constraint firstItem="Vmm-3g-7iY" firstAttribute="width" secondItem="aBZ-dj-pp3" secondAttribute="width" id="rFJ-4W-Vdi"/>
                             <constraint firstItem="6Xz-dF-UOn" firstAttribute="leading" secondItem="Dpk-Ka-g1X" secondAttribute="leading" id="t0b-c7-k2g"/>
                             <constraint firstItem="n9f-R2-WWZ" firstAttribute="top" secondItem="Hy6-1A-UQ7" secondAttribute="bottom" constant="8" id="uQf-6q-XsA"/>
-                            <constraint firstItem="SEn-Bn-bsk" firstAttribute="leading" secondItem="6Xz-dF-UOn" secondAttribute="trailing" constant="8" id="vdf-CO-9Cb"/>
                             <constraint firstItem="DhU-ce-9zX" firstAttribute="leading" secondItem="Dpk-Ka-g1X" secondAttribute="leadingMargin" id="woM-hq-fYD"/>
                             <constraint firstItem="Efw-dj-whK" firstAttribute="centerX" secondItem="Dpk-Ka-g1X" secondAttribute="centerX" id="wyf-cg-5sa"/>
                             <constraint firstItem="hYd-gl-nhs" firstAttribute="leading" secondItem="Dpk-Ka-g1X" secondAttribute="leadingMargin" id="yn0-ap-6g1"/>
-                            <constraint firstItem="SEn-Bn-bsk" firstAttribute="top" secondItem="icc-R2-Ync" secondAttribute="bottom" constant="8" id="yxC-61-F5q"/>
-                            <constraint firstItem="SEn-Bn-bsk" firstAttribute="width" secondItem="6Xz-dF-UOn" secondAttribute="width" id="z64-g8-xE9"/>
+                            <constraint firstItem="6Xz-dF-UOn" firstAttribute="top" secondItem="Vmm-3g-7iY" secondAttribute="bottom" constant="8" id="zvM-eN-BOO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="jFi-4H-Jzf"/>
                     <connections>
-                        <outlet property="GCDButton" destination="6Xz-dF-UOn" id="SF8-sW-3W2"/>
                         <outlet property="aboutUserTextView" destination="Hy6-1A-UQ7" id="Q4Q-e3-sJk"/>
                         <outlet property="activityIndicator" destination="Efw-dj-whK" id="uep-8o-Oo9"/>
-                        <outlet property="operationButton" destination="SEn-Bn-bsk" id="vfa-2F-6t3"/>
+                        <outlet property="saveProfileDataButton" destination="6Xz-dF-UOn" id="iw6-WA-6Vx"/>
                         <outlet property="textColorLabel" destination="hYd-gl-nhs" id="sB0-Jz-WFW"/>
                         <outlet property="userNameTextField" destination="c5n-5b-dlF" id="W12-nr-aBc"/>
                         <outlet property="userProfileImageView" destination="HYJ-7O-iF3" id="5GK-GW-qXx"/>
@@ -483,7 +477,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S4c-9L-bQv" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1831.875" y="916.25"/>
+            <point key="canvasLocation" x="1831.875" y="915.84507042253517"/>
         </scene>
     </scenes>
     <resources>

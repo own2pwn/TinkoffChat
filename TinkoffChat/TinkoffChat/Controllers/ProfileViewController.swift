@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileController: UIViewController
+class ProfileViewController: UIViewController
 {
     // MARK: - Outlets
     
@@ -20,9 +20,7 @@ class ProfileController: UIViewController
     
     @IBOutlet weak var textColorLabel: UILabel!
     
-    @IBOutlet weak var GCDButton: UIButton!
-    
-    @IBOutlet weak var operationButton: UIButton!
+    @IBOutlet weak var saveProfileDataButton: UIButton!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -53,7 +51,7 @@ class ProfileController: UIViewController
         activityIndicator.hidesWhenStopped = true
         
         setupLogic()
-        loadProfileData(usingManager: gcdService)
+        model.load
         { profile, err in
             self.savedProfileData = profile
             self.currentProfileData = profile
@@ -148,26 +146,12 @@ class ProfileController: UIViewController
         updateCurrentProfileData()
     }
     
-    @IBAction func didTapGCDButton(_ sender: UIButton)
+    @IBAction func didTapSaveButton(_ sender: UIButton)
     {
         let dataBeforeSaving = currentProfileData
-        saveProfileData(usingManager: gcdService)
+        saveProfileData
         { bSuccess, err in
-            self.presentSavingResultAlert(bSuccess, self.gcdService)
-            if bSuccess
-            {
-                self.savedProfileData = dataBeforeSaving
-            }
-            self.updateCurrentProfileData()
-        }
-    }
-    
-    @IBAction func didTapOperationButton(_ sender: UIButton)
-    {
-        let dataBeforeSaving = currentProfileData
-        saveProfileData(usingManager: operationDataStoreService)
-        { bSuccess, err in
-            self.presentSavingResultAlert(bSuccess, self.operationDataStoreService)
+            self.presentSavingResultAlert(bSuccess)
             if bSuccess
             {
                 self.savedProfileData = dataBeforeSaving
@@ -181,7 +165,7 @@ class ProfileController: UIViewController
         dismiss(animated: true, completion: nil)
     }
     
-    func presentSavingResultAlert(_ success: Bool, _ manager: IDataStore)
+    func presentSavingResultAlert(_ success: Bool)
     {
         let alert = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
         let dismissBtn = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -192,7 +176,7 @@ class ProfileController: UIViewController
             alert.title = "Ошибка"
             alert.message = "Не удалось сохранить данные"
             let retryBtn = UIAlertAction(title: "Повторить", style: .default, handler: { action in
-                self.saveProfileData(usingManager: manager)
+                self.saveProfileData()
             })
             alert.addAction(retryBtn)
         }
@@ -208,27 +192,23 @@ class ProfileController: UIViewController
     
     func setButtonsEnabled(_ enabled: Bool)
     {
-        GCDButton.isEnabled = enabled
-        operationButton.isEnabled = enabled
+        saveProfileDataButton.isEnabled = enabled
         
         if enabled
         {
-            GCDButton.backgroundColor = .ButtonEnabledColor
-            operationButton.backgroundColor = .ButtonEnabledColor
+            saveProfileDataButton.backgroundColor = .ButtonEnabledColor
         }
         else
         {
-            GCDButton.backgroundColor = .ButtonDisabledColor
-            operationButton.backgroundColor = .ButtonDisabledColor
+            saveProfileDataButton.backgroundColor = .ButtonDisabledColor
         }
     }
     
-    func saveProfileData(usingManager manager: IDataStore, completion: @escaping (Bool, Error?) -> Void = { _, _ in })
+    func saveProfileData(completion: @escaping (Bool, Error?) -> Void = { _, _ in })
     {
         activityIndicator.startAnimating()
-        manager.saveProfileData(currentProfileData)
+        model.save(profile: currentProfileData)
         { bSuccess, err in
-            completion(bSuccess, err)
             if err == nil
             {
                 self.setButtonsEnabled(false)
@@ -240,7 +220,7 @@ class ProfileController: UIViewController
     func loadProfileData(usingManager manager: IDataStore, completion: @escaping (Profile, Error?) -> Void)
     {
         activityIndicator.startAnimating()
-        manager.loadProfileData
+        model.load
         { profile, err in
             completion(profile, err)
             self.activityIndicator.stopAnimating()
@@ -249,16 +229,12 @@ class ProfileController: UIViewController
     
     // MARK: - Private properties
     
-    lazy var assembly: DataStoreAssembly = {
-        DataStoreAssembly()
+    private lazy var assembly: ProfileAssembly = {
+        ProfileAssembly()
     }()
     
-    lazy var gcdService: IDataStore = {
-        self.assembly.gcdService()
-    }()
-    
-    lazy var operationDataStoreService: IDataStore = {
-        self.assembly.operationDataStoreService()
+    private lazy var model: IProfileModel = {
+        self.assembly.model
     }()
 }
 
@@ -266,7 +242,7 @@ class ProfileController: UIViewController
 
 // MARK: UITextFieldDelegate
 
-extension ProfileController: UITextFieldDelegate
+extension ProfileViewController: UITextFieldDelegate
 {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
@@ -283,7 +259,7 @@ extension ProfileController: UITextFieldDelegate
 
 // MARK: UITextViewDelegate
 
-extension ProfileController: UITextViewDelegate
+extension ProfileViewController: UITextViewDelegate
 {
     func textViewDidBeginEditing(_ textView: UITextView)
     {
@@ -312,7 +288,7 @@ extension ProfileController: UITextViewDelegate
 
 // MARK: UIImagePickerControllerDelegate + UINavigationControllerDelegate
 
-extension ProfileController: UIImagePickerControllerDelegate, UINavigationControllerDelegate
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any])
     {
