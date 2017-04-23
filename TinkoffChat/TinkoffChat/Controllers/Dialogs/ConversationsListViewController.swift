@@ -59,16 +59,20 @@ class ConversationsListViewController: UIViewController, IConversationsListModel
 
     // MARK: - IConversationsListModelDelegate
 
-    func updateView(with data: Array<[String: ConversationsListCellDisplayModel]>)
+    func updateView(with data: [ConversationDataSourceType])
     {
         dataSource = data
         updateUI()
     }
 
-    func updateMessages(with data: [String: [Message]])
+    func updateMessages(with data: [ConversationMessageType])
     {
-        messages = data
         updateUI()
+    }
+
+    func updateMessagesForUser(userID: String, messages: [Message])
+    {
+
     }
 
     func setupView()
@@ -89,66 +93,42 @@ class ConversationsListViewController: UIViewController, IConversationsListModel
 
     // MARK: - UI helping functions
 
-    //    func peersSorter(_ p1: Peer, _ p2: Peer) -> Bool
-    //    {
-    //        let d1 = p1.lastMessageDate ?? Date(timeIntervalSince1970: 0)
-    //        let d2 = p2.lastMessageDate ?? Date(timeIntervalSince1970: 0)
-    //        let n1 = p1.userName?.lowercased() ?? "Z"
-    //        let n2 = p2.userName?.lowercased() ?? "Z"
-    //
-    //        if d1 == d2
-    //        {
-    //            return n1 < n2
-    //        }
-    //        return d1 > d2
-    //    }
+    func displayModelSorter(_ lv: ConversationDataSourceType, _ rv: ConversationDataSourceType) -> Bool
+    {
+        let d1 = lv.model.messages.last?.sentDate ?? Date(timeIntervalSince1970: 0)
+        let d2 = rv.model.messages.last?.sentDate ?? Date(timeIntervalSince1970: 0)
 
-    //    func updateLastMessageDate()
-    //    {
-    //        for message in messages
+        let n1 = lv.model.userName?.lowercased() ?? "Z"
+        let n2 = rv.model.userName?.lowercased() ?? "Z"
+
+        if d1 == d2
+        {
+            return n1 < n2
+        }
+        return d1 > d2
+    }
+
+    //        func updateLastMessageDate()
     //        {
-    //            if let index = getIndexOfPeer(by: message.key)
+    //            for message in messages
     //            {
-    //                availablePeers[index].lastMessageDate = message.value.last?.sentDate
+    //                if let index = getIndexOfPeer(by: message.key)
+    //                {
+    //                    availablePeers[index].lastMessageDate = message.value.last?.sentDate
+    //                }
     //            }
     //        }
-    //    }
 
     func updateUI()
     {
         DispatchQueue.global(qos: .userInitiated).async
         {
-            self.sortDisplayModel()
+            self.dataSource.sort(by: self.displayModelSorter)
             DispatchQueue.main.async
             {
                 self.conversationsTableView.reloadSections(IndexSet(integer: 0), with: .fade)
             }
         }
-    }
-
-    func sortDisplayModel()
-    {
-        let t = Array(dataSource)
-        t
-        
-//        let sortedDisplayModel = Array(dataSource).sorted
-//        { (lv, rv) -> Bool in
-//            let lvd = lv.value.messageDate ?? Date(timeIntervalSince1970: 0)
-//            let rvd = rv.value.messageDate ?? Date(timeIntervalSince1970: 0)
-//
-//            return lvd > rvd
-//        }
-//        dataSource.removeAll()
-//
-//        for (k, v) in sortedDisplayModel
-//        {
-//            dataSource[k] = v
-//        }
-//
-//        let oldMessages = Array(messages)
-//        let newMessages = oldMessages.sorted
-//        { (lv, rv) -> Bool in
-//        }
     }
 
     // MARK: - MPC
@@ -245,23 +225,15 @@ class ConversationsListViewController: UIViewController, IConversationsListModel
         cell.selectionStyle = .none
 
         let row = indexPath.row
-        let peer = Array(dataSource)[row]
+        let model = dataSource[row].model
 
-        cell.userName = peer.value.userName
+        cell.userName = model.userName
         cell.isUserOnline = true
 
-        let messagesArray = Array(messages)
-        guard messagesArray.count > row else
-        {
-            cell.lastMessageText = nil
-            cell.lastMessageDate = nil
-            return
-        }
+        let relatedMessage = dataSource[row].model.messages.last
 
-        let relatedMessages = messagesArray[row].value.last
-
-        cell.lastMessageText = relatedMessages?.message
-        cell.lastMessageDate = relatedMessages?.sentDate
+        cell.lastMessageText = relatedMessage?.message
+        cell.lastMessageDate = relatedMessage?.sentDate
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -335,8 +307,7 @@ class ConversationsListViewController: UIViewController, IConversationsListModel
 
     // MARK: Stored
 
-    private var dataSource = [ConversationDataSourceType]() //[String: ConversationsListCellDisplayModel]()
-    private var messages = [String: [Message]]()
+    private var dataSource = [ConversationDataSourceType]()
 
     private var selectedUserID = ""
     private let currentDeviceUserID = UIDevice.current.identifierForVendor!.uuidString
