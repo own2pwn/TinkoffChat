@@ -65,16 +65,6 @@ class ConversationsListViewController: UIViewController, IConversationsListModel
         updateUI()
     }
 
-    func updateMessages(with data: [ConversationMessageType])
-    {
-        updateUI()
-    }
-
-    func updateMessagesForUser(userID: String, messages: [Message])
-    {
-
-    }
-
     func setupView()
     {
         conversationsTableView.tableFooterView = UIView()
@@ -121,13 +111,9 @@ class ConversationsListViewController: UIViewController, IConversationsListModel
 
     func updateUI()
     {
-        DispatchQueue.global(qos: .userInitiated).async
+        DispatchQueue.main.async
         {
-            self.dataSource.sort(by: self.displayModelSorter)
-            DispatchQueue.main.async
-            {
-                self.conversationsTableView.reloadSections(IndexSet(integer: 0), with: .fade)
-            }
+            self.conversationsTableView.reloadSections(IndexSet(integer: 0), with: .fade)
         }
     }
 

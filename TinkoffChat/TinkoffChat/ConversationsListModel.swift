@@ -41,7 +41,6 @@ protocol IConversationsListModel: class
 protocol IConversationsListModelDelegate: class
 {
     func updateView(with data: [ConversationDataSourceType])
-    func updateMessages(with data: [ConversationMessageType])
 }
 
 final class ConversationsListModel: IConversationsListModel, IMPCServiceDelegate
@@ -81,14 +80,21 @@ final class ConversationsListModel: IConversationsListModel, IMPCServiceDelegate
         if !isUserExists(userID: userID)
         {
             dataSource.insert(newElement, at: 0)
-            delegate?.updateView(with: dataSource)
+        }
+
+        sortUsers
+        {
+            self.delegate?.updateView(with: self.dataSource)
         }
     }
 
     func didLostUser(userID: String)
     {
         removeUser(userID: userID)
-        delegate?.updateView(with: dataSource)
+        sortUsers
+        {
+            self.delegate?.updateView(with: self.dataSource)
+        }
     }
 
     func didReceiveMessage(text: String, fromUser: String, toUser: String)
@@ -96,7 +102,10 @@ final class ConversationsListModel: IConversationsListModel, IMPCServiceDelegate
         let message = Message(message: text, sender: fromUser, receiver: toUser)
         appendMessage(to: fromUser, message: message)
 
-        delegate?.updateView(with: dataSource)
+        sortUsers
+        {
+            self.delegate?.updateView(with: self.dataSource)
+        }
     }
 
     func log(error message: String)
@@ -116,6 +125,30 @@ final class ConversationsListModel: IConversationsListModel, IMPCServiceDelegate
                 return
             }
         }
+    }
+
+    private func sortUsers(completion: @escaping () -> Void)
+    {
+        DispatchQueue.global(qos: .userInitiated).async
+        {
+            self.dataSource.sort(by: self.displayModelSorter)
+            completion()
+        }
+    }
+
+    private func displayModelSorter(_ lv: ConversationDataSourceType, _ rv: ConversationDataSourceType) -> Bool
+    {
+        let d1 = lv.model.messages.last?.sentDate ?? Date(timeIntervalSince1970: 0)
+        let d2 = rv.model.messages.last?.sentDate ?? Date(timeIntervalSince1970: 0)
+
+        let n1 = lv.model.userName?.lowercased() ?? "Z"
+        let n2 = rv.model.userName?.lowercased() ?? "Z"
+
+        if d1 == d2
+        {
+            return n1 < n2
+        }
+        return d1 > d2
     }
 
     private func appendMessage(to userID: String, message: Message)
