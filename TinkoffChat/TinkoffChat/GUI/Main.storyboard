@@ -26,7 +26,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="idDialogsCell" id="NSD-nd-eIi" customClass="DialogCell" customModule="TinkoffChat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="idDialogsCell" id="NSD-nd-eIi" customClass="ConversationsListCell" customModule="TinkoffChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NSD-nd-eIi" id="K7M-NL-1lS">

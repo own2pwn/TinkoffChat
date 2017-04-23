@@ -8,6 +8,11 @@
 
 import Foundation
 
+protocol MessageCellModel: class
+{
+    var messageText: String? { get set }
+}
+
 protocol IConversationModel
 {
     func getMessages(for userID: String, with user: String, completion: ([Message]) -> Void)
