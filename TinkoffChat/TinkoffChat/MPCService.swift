@@ -74,13 +74,6 @@ final class MPCService: IMPCService, IMPCServiceDelegate
     
     func failedToStartBrowsingForUsers(error: Error) { delegate?.log(error: error.localizedDescription) }
     
-    // MARK: - Private methods
-    
-    private func setupLogic()
-    {
-        //        mpcWorker.delegate = self
-    }
-    
     // MARK: - Private properties
     
     private let mpcWorker: IMPCWorker
