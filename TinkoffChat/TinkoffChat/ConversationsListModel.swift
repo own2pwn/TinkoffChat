@@ -9,7 +9,6 @@
 import Foundation
 
 typealias ConversationDataSourceType = (userID: String, model: ConversationsListCellDisplayModel)
-typealias ConversationMessageType = (userID: String, messages: [Message])
 
 struct ConversationsListCellDisplayModel
 {
@@ -35,7 +34,7 @@ class Message
 protocol IConversationsListModel: class
 {
     weak var delegate: IConversationsListModelDelegate? { get set }
-    func loadConversations(for section: ConversationsListTableViewSections, completion: ([ConversationDataModel]) -> Void)
+    func loadMessages(for userID: String, with user: String, completion: ([Message]) -> Void)
 }
 
 protocol IConversationsListModelDelegate: class
@@ -54,20 +53,21 @@ final class ConversationsListModel: IConversationsListModel, IMPCServiceDelegate
         self.mpcService = mpcService
     }
 
-    func loadConversations(for section: ConversationsListTableViewSections, completion: ([ConversationDataModel]) -> Void)
+    func loadMessages(for userID: String, with user: String, completion: ([Message]) -> Void)
     {
-        // TODO: completion
+        var relatedMessages = [Message]()
 
-        switch section {
-        case .offlineUsers:
-            break
-        case .onlineUsers:
-            mpcService.conversations(where: .online, completion: completion)
-            break
-        case .all:
-            break
-
+        for e in dataSource
+        {
+            for m in e.model.messages
+            {
+                if m.sender == userID && m.receiver == user || m.sender == user && m.receiver == userID
+                {
+                    relatedMessages.append(m)
+                }
+            }
         }
+        completion(relatedMessages)
     }
 
     // MARK: - IMPCServiceDelegate
@@ -179,8 +179,6 @@ final class ConversationsListModel: IConversationsListModel, IMPCServiceDelegate
     // MARK: - Private properties
 
     private var dataSource = [ConversationDataSourceType]()
-
-    private var messages = [ConversationMessageType]()
 
     private let mpcService: IMPCService
 }
