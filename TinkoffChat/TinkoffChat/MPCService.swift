@@ -83,7 +83,17 @@ final class MPCService: IMPCService, IMPCServiceDelegate
     
     func send(message: String, to: String, completion: (Error?) -> Void)
     {
-        mpcWorker.send(message: message, to: to, completion: completion)
+        //        mpcWorker.send(message: message, to: to, completion: completion)
+        mpcWorker.send(message: message, to: to)
+        { error in
+            if error == nil
+            {
+                let newMessage = Message(message: message, sender: localUserID(), receiver: to)
+                appendMessage(to: to, message: newMessage)
+                
+            }
+            completion(error)
+        }
     }
     
     func localUserID() -> String

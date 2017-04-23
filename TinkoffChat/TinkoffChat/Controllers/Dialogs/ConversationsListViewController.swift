@@ -35,6 +35,12 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
     {
         super.viewDidLoad()
 
+        model.delegate = self
+    }
+
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
         setupLogic()
     }
 
@@ -49,7 +55,7 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
 
     func setupLogic()
     {
-        model.delegate = self
+        mpcService.delegate = model as? IMPCServiceDelegate
 
         setupView()
     }
@@ -79,7 +85,6 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
             dialogVC.navigationItem.title = cell.userName
             dialogVC.mpcService = mpcService
             dialogVC.selectedUserID = selectedUserID
-            dialogVC.dialogsController = self
         }
     }
 

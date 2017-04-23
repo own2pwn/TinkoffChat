@@ -8,30 +8,8 @@
 
 import UIKit
 
-class ConversationController: UIViewController, IConversationModelDelegate, UITableViewDataSource
+final class ConversationController: UIViewController, IConversationModelDelegate, UITableViewDataSource
 {
-    // MARK: - Communication
-    
-    internal var communicator: MultipeerCommunicator!
-    
-    internal var selectedUserID: String!
-    
-    weak var dialogsController: ConversationsListViewController!
-    
-    //    internal var messages = [Message]()
-    //    {
-    //        didSet
-    //        {
-    //            messagesCount = messages.count
-    //            DispatchQueue.main.async
-    //            {
-    //                self.conversationTableView.reloadSections(IndexSet(integer: 0), with: .fade)
-    //                let nPath = IndexPath(row: self.messagesCount - 1, section: 0)
-    //                self.conversationTableView.scrollToRow(at: nPath, at: .middle, animated: true)
-    //            }
-    //        }
-    //    }
-    
     // MARK: - Outlets
     
     @IBOutlet weak var conversationTableView: UITableView!
@@ -41,6 +19,18 @@ class ConversationController: UIViewController, IConversationModelDelegate, UITa
     @IBOutlet weak var sendMessageButton: UIButton!
     
     @IBOutlet weak var textViewBottomConstraint: NSLayoutConstraint!
+    
+    // MARK: - Outlets actions
+    
+    @IBAction func didPressSendMessageButton(_ sender: UIButton)
+    {
+        guard let text = messageTextView.text else { return }
+        
+        if !text.isEmpty
+        {
+            send(message: text)
+        }
+    }
     
     // MARK: - Life cycle
     
@@ -53,61 +43,16 @@ class ConversationController: UIViewController, IConversationModelDelegate, UITa
         setupView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidChangeState), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidChangeState), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
         
         loadMessages()
     }
     
     deinit
     {
-        mpcService.delegate = oldDelegate
         NotificationCenter.default.removeObserver(self)
-    }
-    
-    private func setupLogic()
-    {
-        model.delegate = self
-        
-        oldDelegate = mpcService.delegate
-        model.getMessages(for: selectedUserID, with: mpcService.localUserID())
-        { messages in
-            dataSource = messages
-            
-            updateUI()
-        }
-    }
-    
-    private func updateUI()
-    {
-        DispatchQueue.main.async
-        {
-            self.conversationTableView.reloadSections(IndexSet(integer: 0), with: .fade)
-        }
-    }
-    
-    // MARK: - View setup
-    
-    func setupView()
-    {
-        conversationTableView.tableFooterView = UIView()
-        conversationTableView.estimatedRowHeight = 44
-        conversationTableView.rowHeight = UITableViewAutomaticDimension
-        
-        conversationTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-        conversationTableView.scrollIndicatorInsets = conversationTableView.contentInset
-        conversationTableView.backgroundColor = UIColor.CellLightYellowColor
-        
-        navigationController?.hidesBarsOnSwipe = false
-        
-        let onViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(onViewTap))
-        view.addGestureRecognizer(onViewTapGesture)
-    }
-    
-    func onViewTap()
-    {
-        view.endEditing(true)
     }
     
     // MARK: - IConversationModelDelegate
@@ -122,130 +67,10 @@ class ConversationController: UIViewController, IConversationModelDelegate, UITa
     
     func didReceiveMessage(from userID: String, message: String)
     {
-        let newMessage = Message(message: message, sender: userID, receiver: mpcService.localUserID())
+        let newMessage = Message(message: message, sender: userID, receiver: currentDeviceUserID)
         dataSource.append(newMessage)
         
         updateUI()
-    }
-    
-    //    // MARK: - MPC KVO
-    //
-    //    func onUserFound(_ notification: NSNotification)
-    //    {
-    //        guard let info = notification.userInfo as? [String: String?] else { return }
-    //
-    //        if let userID = info[KDiscoveryInfo.UserID] as? String
-    //        {
-    //            if userID == selectedUserID
-    //            {
-    //                setSendMessageButtonEnabled(true)
-    //            }
-    //        }
-    //    }
-    //
-    //    func onUserLost(_ notification: NSNotification)
-    //    {
-    //        guard let userID = notification.userInfo?[KDiscoveryInfo.UserID] as? String else { return }
-    //        if userID == selectedUserID
-    //        {
-    //            setSendMessageButtonEnabled(false)
-    //        }
-    //    }
-    //
-    //    func onMessageReceive(_ notification: NSNotification)
-    //    {
-    //        guard let info = notification.userInfo as? [String: String] else { return }
-    //
-    //        if let text = info[KMessageInfo.Text], let sender = info[KMessageInfo.FromUser], let receiver = info[KMessageInfo.ToUser]
-    //        {
-    //            if sender == selectedUserID && receiver == currentDeviceUserID
-    //            {
-    //                //                messages.append(Message(message: text, sentDate: Date(), sender: sender, receiver: receiver))
-    //            }
-    //        }
-    //    }
-    
-    // MARK: - Methods
-    
-    func loadMessages()
-    {
-        //        if let messages = dialogsController.getMessagesForUser(selectedUserID)
-        //        {
-        //            self.messages = messages
-        //        }
-        //        messagesCount = messages.count
-    }
-    
-    func send(message: String)
-    {
-        communicator.sendMessage(string: message, to: selectedUserID)
-        { sent, error in
-            print("`Msg was sent: \(sent) | with error: \(String(describing: error?.localizedDescription))")
-            
-            if error == nil
-            {
-                //                let msg = Message(message: message, sentDate: Date(), sender: self.currentDeviceUserID, receiver: self.selectedUserID)
-                DispatchQueue.main.async
-                {
-                    //                    self.messages.append(msg)
-                    //                    self.dialogsController.appendMessage(to: self.selectedUserID, message: msg)
-                    self.messageTextView.text = nil
-                }
-            }
-        }
-    }
-    
-    func keyboardWillShow(_ notification: NSNotification)
-    {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-        {
-            textViewBottomConstraint.constant = keyboardSize.size.height
-        }
-    }
-    
-    func keyboardDidShow()
-    {
-        let messagesCount = dataSource.count
-        
-        if messagesCount > 0
-        {
-            conversationTableView.scrollToRow(at: IndexPath(row: messagesCount - 1, section: 0), at: .bottom, animated: true)
-        }
-    }
-    
-    func keyboardWillHide()
-    {
-        textViewBottomConstraint.constant = 0
-    }
-    
-    func keyboardDidHide(_ notification: NSNotification)
-    {
-        let messagesCount = dataSource.count
-        
-        if messagesCount > 0
-        {
-            conversationTableView.scrollToRow(at: IndexPath(row: messagesCount - 1, section: 0), at: .middle, animated: true)
-        }
-    }
-    
-    func setSendMessageButtonEnabled(_ enabled: Bool)
-    {
-        DispatchQueue.main.async
-        {
-            self.sendMessageButton.isEnabled = enabled
-        }
-    }
-    
-    // MARK: - Outlets actions
-    
-    @IBAction func didPressSendMessageButton(_ sender: UIButton)
-    {
-        guard let text = messageTextView.text else { return }
-        
-        if !text.isEmpty
-        {
-            send(message: text)
-        }
     }
     
     // MARK: - UITableViewDataSource
@@ -288,6 +113,107 @@ class ConversationController: UIViewController, IConversationModelDelegate, UITa
         return dataSource.count
     }
     
+    // MARK: - Private methods
+    
+    private func setupLogic()
+    {
+        model.delegate = self
+    }
+    
+    private func loadMessages()
+    {
+        model.getMessages(for: selectedUserID, with: currentDeviceUserID)
+        { messages in
+            dataSource = messages
+            
+            updateUI()
+        }
+    }
+    
+    private func updateUI()
+    {
+        DispatchQueue.main.async
+        {
+            self.conversationTableView.reloadSections(IndexSet(integer: 0), with: .fade)
+        }
+    }
+    
+    // MARK: View setup
+    
+    private func setupView()
+    {
+        conversationTableView.tableFooterView = UIView()
+        conversationTableView.estimatedRowHeight = 44
+        conversationTableView.rowHeight = UITableViewAutomaticDimension
+        
+        conversationTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+        conversationTableView.scrollIndicatorInsets = conversationTableView.contentInset
+        conversationTableView.backgroundColor = UIColor.CellLightYellowColor
+        
+        navigationController?.hidesBarsOnSwipe = false
+        
+        let onViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(onViewTap))
+        view.addGestureRecognizer(onViewTapGesture)
+    }
+    
+    internal func onViewTap()
+    {
+        view.endEditing(true)
+    }
+    
+    private func send(message: String)
+    {
+        mpcService.send(message: message, to: selectedUserID)
+        { error in
+            if error != nil
+            {
+                print("There was an eror while sending message: \(String(describing: error?.localizedDescription))")
+            }
+            else
+            {
+                let newMessage = Message(message: message, sender: currentDeviceUserID, receiver: selectedUserID)
+                dataSource.append(newMessage)
+                
+                DispatchQueue.main.async
+                {
+                    self.messageTextView.text = nil
+                    self.conversationTableView.reloadSections(IndexSet(integer: 0), with: .fade)
+                }
+            }
+        }
+    }
+    
+    internal func keyboardWillShow(_ notification: NSNotification)
+    {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        {
+            textViewBottomConstraint.constant = keyboardSize.size.height
+        }
+    }
+    
+    internal func keyboardDidChangeState()
+    {
+        let messagesCount = dataSource.count
+        
+        if messagesCount > 0
+        {
+            conversationTableView.scrollToRow(at: IndexPath(row: messagesCount - 1, section: 0), at: .bottom, animated: true)
+        }
+    }
+    
+    internal func keyboardWillHide()
+    {
+        textViewBottomConstraint.constant = 0
+    }
+    
+    private func setSendMessageButtonEnabled(_ enabled: Bool)
+    {
+        DispatchQueue.main.async
+        {
+            self.sendMessageButton.isEnabled = enabled
+        }
+    }
+    
     // MARK: - Private properties
     
     // MARK: Lazy
@@ -304,11 +230,10 @@ class ConversationController: UIViewController, IConversationModelDelegate, UITa
     
     internal var mpcService: IMPCService!
     
-    private var oldDelegate: IMPCServiceDelegate?
+    internal var selectedUserID: String!
     
     private var dataSource = [Message]()
     
-    //    private var messagesCount = 0
     private let currentDeviceUserID = UIDevice.current.identifierForVendor!.uuidString
     
     private let sentMessageCellId = "idSentMessage"
