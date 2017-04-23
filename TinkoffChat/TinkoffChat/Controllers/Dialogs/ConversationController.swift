@@ -68,6 +68,8 @@ class ConversationController: UIViewController, IConversationModelDelegate, UITa
     
     private func setupLogic()
     {
+        model.delegate = self
+        
         oldDelegate = mpcService.delegate
         model.getMessages(for: selectedUserID, with: mpcService.localUserID())
         { messages in

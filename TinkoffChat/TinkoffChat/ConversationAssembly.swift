@@ -16,8 +16,9 @@ final class ConversationAssembly
     init(with mpcService: IMPCService)
     {
         let model = ConversationModel(mpcService: mpcService)
-        
         self.mpcService = mpcService
         self.model = model
+        
+        mpcService.delegate = model
     }
 }

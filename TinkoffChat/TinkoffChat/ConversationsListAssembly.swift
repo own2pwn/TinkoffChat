@@ -15,9 +15,8 @@ final class ConversationsListAssembly
 
     init()
     {
-//        let mpcAssembly = MPCAssembly()
-        mpcService = MPCAssembly.mpcService() //mpcAssembly.mpcService()
-        
+        mpcService = MPCAssembly.mpcService()
+
         let model = ConversationsListModel(mpcService: mpcService)
         mpcService.delegate = model
         self.model = model
