@@ -96,10 +96,10 @@
             </objects>
             <point key="canvasLocation" x="1832.8" y="197.45127436281859"/>
         </scene>
-        <!--Conversation Controller-->
+        <!--Conversation View Controller-->
         <scene sceneID="TfC-Er-VBa">
             <objects>
-                <viewController id="CY9-V3-5a4" customClass="ConversationController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="CY9-V3-5a4" customClass="ConversationViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9AH-LS-Fry"/>
                         <viewControllerLayoutGuide type="bottom" id="j2U-af-o0Q"/>

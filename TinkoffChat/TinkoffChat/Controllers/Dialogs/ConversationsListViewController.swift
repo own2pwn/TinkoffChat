@@ -80,7 +80,7 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        if let cell = sender as? ConversationsListCell, let dialogVC = segue.destination as? ConversationController
+        if let cell = sender as? ConversationsListCell, let dialogVC = segue.destination as? ConversationViewController
         {
             dialogVC.navigationItem.title = cell.userName
             dialogVC.mpcService = mpcService
