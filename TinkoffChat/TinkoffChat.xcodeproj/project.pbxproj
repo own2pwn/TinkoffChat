@@ -16,6 +16,8 @@
 		10BAAB171E87B76000104295 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB161E87B76000104295 /* Extensions.swift */; };
 		10BAAB191E87C1B400104295 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB181E87C1B400104295 /* ConversationViewController.swift */; };
 		10BAAB1B1E87C36E00104295 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB1A1E87C36E00104295 /* MessageCell.swift */; };
+		307B77CB1EB101AA0048B8EC /* tfs_chat_model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 307B77C91EB101AA0048B8EC /* tfs_chat_model.xcdatamodeld */; };
+		307B77CD1EB1024C0048B8EC /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307B77CC1EB1024C0048B8EC /* CoreDataStack.swift */; };
 		B910A2EB1EABBB82005637C1 /* ConversationsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2EA1EABBB82005637C1 /* ConversationsListModel.swift */; };
 		B910A2F01EABBD9D005637C1 /* MPCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2EF1EABBD9D005637C1 /* MPCService.swift */; };
 		B910A2F21EABC176005637C1 /* IMPCWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2F11EABC176005637C1 /* IMPCWorker.swift */; };
@@ -46,6 +48,8 @@
 		10BAAB161E87B76000104295 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		10BAAB181E87C1B400104295 /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		10BAAB1A1E87C36E00104295 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		307B77CA1EB101AA0048B8EC /* tfs_chat_model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tfs_chat_model.xcdatamodel; sourceTree = "<group>"; };
+		307B77CC1EB1024C0048B8EC /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		B910A2EA1EABBB82005637C1 /* ConversationsListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListModel.swift; sourceTree = "<group>"; };
 		B910A2EF1EABBD9D005637C1 /* MPCService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCService.swift; sourceTree = "<group>"; };
 		B910A2F11EABC176005637C1 /* IMPCWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMPCWorker.swift; sourceTree = "<group>"; };
@@ -110,6 +114,15 @@
 				10BAAB161E87B76000104295 /* Extensions.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		30A0EF7E1EB0F5F300296A3D /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				307B77C91EB101AA0048B8EC /* tfs_chat_model.xcdatamodeld */,
+				307B77CC1EB1024C0048B8EC /* CoreDataStack.swift */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		B910A2E91EABBA22005637C1 /* Conversations */ = {
@@ -178,6 +191,7 @@
 		B93675451EA34AF500B69AC8 /* CoreLayer */ = {
 			isa = PBXGroup;
 			children = (
+				30A0EF7E1EB0F5F300296A3D /* CoreData */,
 				B9291C051EAD04A900B4358F /* DataStore.swift */,
 				B9291C031EAD048300B4358F /* IDataStore.swift */,
 				B910A2F11EABC176005637C1 /* IMPCWorker.swift */,
@@ -270,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B948204C1EAD1BF500052AA9 /* AppDelegate.swift in Sources */,
+				307B77CB1EB101AA0048B8EC /* tfs_chat_model.xcdatamodeld in Sources */,
 				B9291C061EAD04A900B4358F /* DataStore.swift in Sources */,
 				B9D845361E9D263800D6373C /* Constants.swift in Sources */,
 				B9291C0C1EAD0A9000B4358F /* OperationDataStoreService.swift in Sources */,
@@ -283,6 +298,7 @@
 				10BAAB091E87B0D800104295 /* ConversationsListViewController.swift in Sources */,
 				10BAAB171E87B76000104295 /* Extensions.swift in Sources */,
 				100B0B9F1E7C5A8E00DD181F /* ProfileViewController.swift in Sources */,
+				307B77CD1EB1024C0048B8EC /* CoreDataStack.swift in Sources */,
 				10BAAB191E87C1B400104295 /* ConversationViewController.swift in Sources */,
 				B910A2F01EABBD9D005637C1 /* MPCService.swift in Sources */,
 				B9291C041EAD048300B4358F /* IDataStore.swift in Sources */,
@@ -456,6 +472,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		307B77C91EB101AA0048B8EC /* tfs_chat_model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				307B77CA1EB101AA0048B8EC /* tfs_chat_model.xcdatamodel */,
+			);
+			currentVersion = 307B77CA1EB101AA0048B8EC /* tfs_chat_model.xcdatamodel */;
+			path = tfs_chat_model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 100B0B911E7C5A8E00DD181F /* Project object */;
 }
