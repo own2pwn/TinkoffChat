@@ -59,7 +59,6 @@ class ProfileViewController: UIViewController
             self.userNameTextField.text = profile.userName
             self.aboutUserTextView.text = profile.aboutUser
             self.userProfileImageView.image = profile.userImage
-            self.textColorLabel.textColor = profile.textColor
 
             if profile.userImage != #imageLiteral(resourceName: "profileImg") { self.isProfileImageSet = true }
 
@@ -187,7 +186,9 @@ class ProfileViewController: UIViewController
 
     func updateCurrentProfileData()
     {
-        currentProfileData = ProfileDisplayModel(userName: userNameTextField.text ?? "", aboutUser: aboutUserTextView.text, userImage: userProfileImageView.image ?? #imageLiteral(resourceName: "profileImg"), textColor: textColorLabel.textColor)
+        currentProfileData = ProfileDisplayModel(userName: userNameTextField.text ?? "",
+                                                 aboutUser: aboutUserTextView.text,
+                                                 userImage: userProfileImageView.image ?? #imageLiteral(resourceName: "profileImg"))
     }
 
     func setButtonsEnabled(_ enabled: Bool)
