@@ -25,8 +25,7 @@ class CoreDataStack
 {
     init()
     {
-        let t = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel!)
-        t.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: <#T##String?#>, at: <#T##URL?#>, options: <#T##[AnyHashable : Any]?#>)
+        
     }
 
     // MARK: - Private properties
@@ -41,26 +40,26 @@ class CoreDataStack
         }
         return NSManagedObjectModel(contentsOf: url)
     }()
-    
+
     private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
-        
+
         guard let model = self.managedObjectModel else
         {
             print("Can't initialize managedObjectModel")
             return nil
         }
-        
+
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
         do
         {
             try coordinator
         }
-        
+
         catch
         {
-            
+
         }
-        
+
         return coordinator
     }()
 
