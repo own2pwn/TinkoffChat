@@ -11,14 +11,14 @@ import CoreData
 
 protocol ICoreDataWorker
 {
-    var mainContext: NSManagedObjectContext { get }
+    var masterContext: NSManagedObjectContext { get }
 }
 
 protocol IStorageManager
 {
     var managedObjectModel: NSManagedObjectModel? { get }
     var persistentStoreCoordinator: NSPersistentStoreCoordinator? { get }
-    var masterContext: NSManagedObjectContext { get }
+    var mainContext: NSManagedObjectContext { get }
     var saveContext: NSManagedObjectContext { get }
 }
 
@@ -119,8 +119,6 @@ final class StorageManager: IStorageManager
     
     // MARK: - Private properties
     
-    // MARK: Stored
-    
     private let managedObjectModelName = "ChatModel"
     
     private var modelURL: URL?
@@ -135,8 +133,10 @@ final class StorageManager: IStorageManager
     
     private var storeURL: URL
     {
-        let directory = NSPersistentContainer.defaultDirectoryURL()
-        return directory.appendingPathComponent("Store" + ".sqlite")
+        let docsDir = FileManager.default.urls(for: .documentDirectory,
+                                               in: .userDomainMask).first!
+        
+        return docsDir.appendingPathComponent("Store" + ".sqlite")
     }
     
     private var _managedObjectModel: NSManagedObjectModel?

@@ -22,6 +22,8 @@
 		B910A2F01EABBD9D005637C1 /* MPCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2EF1EABBD9D005637C1 /* MPCService.swift */; };
 		B910A2F21EABC176005637C1 /* IMPCWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2F11EABC176005637C1 /* IMPCWorker.swift */; };
 		B926E3341EB60CCA00EFF3AC /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B926E3331EB60CCA00EFF3AC /* StorageManager.swift */; };
+		B926E33D1EB6115500EFF3AC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B926E33B1EB6115500EFF3AC /* Profile.swift */; };
+		B926E33E1EB6115500EFF3AC /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B926E33C1EB6115500EFF3AC /* Profile+CoreDataProperties.swift */; };
 		B9291BFB1EACEC5800B4358F /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291BFA1EACEC5800B4358F /* ConversationModel.swift */; };
 		B9291BFD1EACEC6200B4358F /* ConversationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291BFC1EACEC6200B4358F /* ConversationAssembly.swift */; };
 		B9291C041EAD048300B4358F /* IDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291C031EAD048300B4358F /* IDataStore.swift */; };
@@ -55,6 +57,8 @@
 		B910A2EF1EABBD9D005637C1 /* MPCService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCService.swift; sourceTree = "<group>"; };
 		B910A2F11EABC176005637C1 /* IMPCWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMPCWorker.swift; sourceTree = "<group>"; };
 		B926E3331EB60CCA00EFF3AC /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		B926E33B1EB6115500EFF3AC /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		B926E33C1EB6115500EFF3AC /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B9291BFA1EACEC5800B4358F /* ConversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		B9291BFC1EACEC6200B4358F /* ConversationAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationAssembly.swift; sourceTree = "<group>"; };
 		B9291C031EAD048300B4358F /* IDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDataStore.swift; sourceTree = "<group>"; };
@@ -143,6 +147,8 @@
 		B926E3321EB60C7800EFF3AC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B926E33B1EB6115500EFF3AC /* Profile.swift */,
+				B926E33C1EB6115500EFF3AC /* Profile+CoreDataProperties.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -295,11 +301,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B948204C1EAD1BF500052AA9 /* AppDelegate.swift in Sources */,
+				B926E33D1EB6115500EFF3AC /* Profile.swift in Sources */,
 				307B77CB1EB101AA0048B8EC /* ChatModel.xcdatamodeld in Sources */,
 				B926E3341EB60CCA00EFF3AC /* StorageManager.swift in Sources */,
 				B9291C061EAD04A900B4358F /* DataStore.swift in Sources */,
 				B9D845361E9D263800D6373C /* Constants.swift in Sources */,
 				B9291C0C1EAD0A9000B4358F /* OperationDataStoreService.swift in Sources */,
+				B926E33E1EB6115500EFF3AC /* Profile+CoreDataProperties.swift in Sources */,
 				B998147F1EAC90D400B95723 /* ConversationsListAssembly.swift in Sources */,
 				B9291C101EAD0F7F00B4358F /* ProfileModel.swift in Sources */,
 				B9291BFD1EACEC6200B4358F /* ConversationAssembly.swift in Sources */,
