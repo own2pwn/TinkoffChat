@@ -26,6 +26,7 @@
 		B926E33E1EB6115500EFF3AC /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B926E33C1EB6115500EFF3AC /* Profile+CoreDataProperties.swift */; };
 		B926E3421EB6234200EFF3AC /* ManagedObjectConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = B926E3411EB6234200EFF3AC /* ManagedObjectConvertible.swift */; };
 		B926E3441EB623C300EFF3AC /* IManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B926E3431EB623C300EFF3AC /* IManagedObject.swift */; };
+		B926E3461EB62C0D00EFF3AC /* CoreDataWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B926E3451EB62C0D00EFF3AC /* CoreDataWorker.swift */; };
 		B9291BFB1EACEC5800B4358F /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291BFA1EACEC5800B4358F /* ConversationModel.swift */; };
 		B9291BFD1EACEC6200B4358F /* ConversationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291BFC1EACEC6200B4358F /* ConversationAssembly.swift */; };
 		B9291C041EAD048300B4358F /* IDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291C031EAD048300B4358F /* IDataStore.swift */; };
@@ -63,6 +64,7 @@
 		B926E33C1EB6115500EFF3AC /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B926E3411EB6234200EFF3AC /* ManagedObjectConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectConvertible.swift; sourceTree = "<group>"; };
 		B926E3431EB623C300EFF3AC /* IManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IManagedObject.swift; sourceTree = "<group>"; };
+		B926E3451EB62C0D00EFF3AC /* CoreDataWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataWorker.swift; sourceTree = "<group>"; };
 		B9291BFA1EACEC5800B4358F /* ConversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		B9291BFC1EACEC6200B4358F /* ConversationAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationAssembly.swift; sourceTree = "<group>"; };
 		B9291C031EAD048300B4358F /* IDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDataStore.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */,
 				B910A2EF1EABBD9D005637C1 /* MPCService.swift */,
 				B9291C0B1EAD0A9000B4358F /* OperationDataStoreService.swift */,
+				B926E3451EB62C0D00EFF3AC /* CoreDataWorker.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				10BAAB171E87B76000104295 /* Extensions.swift in Sources */,
 				100B0B9F1E7C5A8E00DD181F /* ProfileViewController.swift in Sources */,
 				B926E3441EB623C300EFF3AC /* IManagedObject.swift in Sources */,
+				B926E3461EB62C0D00EFF3AC /* CoreDataWorker.swift in Sources */,
 				307B77CD1EB1024C0048B8EC /* CoreDataStack.swift in Sources */,
 				10BAAB191E87C1B400104295 /* ConversationViewController.swift in Sources */,
 				B910A2F01EABBD9D005637C1 /* MPCService.swift in Sources */,

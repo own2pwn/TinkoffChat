@@ -35,7 +35,7 @@ extension ProfileEntityModel: ManagedObjectConvertible
     typealias ManagedObject = Profile
 
     func toManagedObject(in context: NSManagedObjectContext,
-                         completion: @escaping (Profile?, Error?) -> Void)
+                         completion: @escaping (Profile) -> Void)
     {
         Profile.findFirstOrInsert(in: context)
         { profileMO in
@@ -43,7 +43,7 @@ extension ProfileEntityModel: ManagedObjectConvertible
             profileMO.userImage = self.userImage
             profileMO.userName = self.userName
 
-            completion(profileMO, nil)
+            completion(profileMO)
         }
     }
 }

@@ -11,5 +11,6 @@ import CoreData
 protocol ManagedObjectConvertible
 {
     associatedtype ManagedObject: NSManagedObject, IManagedObject
-    func toManagedObject(in context: NSManagedObjectContext, completion: @escaping (ManagedObject?, Error?) -> Void)
+    func toManagedObject(in context: NSManagedObjectContext,
+                         completion: @escaping (ManagedObject) -> Void)
 }

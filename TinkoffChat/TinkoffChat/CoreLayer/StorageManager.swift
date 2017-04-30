@@ -9,13 +9,9 @@
 import Foundation
 import CoreData
 
-protocol ICoreDataWorker
-{
-    var masterContext: NSManagedObjectContext { get }
-}
-
 protocol IStorageManager
 {
+    var masterContext: NSManagedObjectContext { get }
     var managedObjectModel: NSManagedObjectModel? { get }
     var persistentStoreCoordinator: NSPersistentStoreCoordinator? { get }
     var mainContext: NSManagedObjectContext { get }
