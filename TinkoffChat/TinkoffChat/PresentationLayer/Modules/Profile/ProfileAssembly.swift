@@ -10,11 +10,17 @@ import Foundation
 
 class ProfileAssembly
 {
-    lazy var model: IProfileModel = {
-        ProfileModel(gcdService: self.gcdService(), operationDataStoreService: self.operationDataStoreService())
-    }()
+    func profileModel() -> IProfileModel
+    {
+        return ProfileModel(gcdService: gcdService(),
+                            operationDataStoreService: operationDataStoreService())
+    }
 
-    func gcdService() -> IDataStore
+    // MARK: - Private methods
+
+    // MARK: - Services
+
+    private func gcdService() -> IDataStore
     {
         return GCDService(dataStore: dataStore)
     }

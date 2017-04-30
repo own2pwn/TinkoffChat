@@ -10,6 +10,40 @@ import Foundation
 import CoreData
 
 @objc(Profile)
-public class Profile: NSManagedObject
+public class Profile: NSManagedObject {}
+
+struct ProfileEntityModel
 {
+    let aboutUser: String?
+    let userImage: NSData?
+    let userName: String?
+}
+
+extension Profile: IManagedObject
+{
+    typealias Entity = ProfileEntityModel
+
+    func toEntity() -> ProfileEntityModel?
+    {
+        return ProfileEntityModel(aboutUser: aboutUser,
+                                  userImage: userImage, userName: userName)
+    }
+}
+
+extension ProfileEntityModel: ManagedObjectConvertible
+{
+    typealias ManagedObject = Profile
+
+    func toManagedObject(in context: NSManagedObjectContext,
+                         completion: @escaping (Profile?, Error?) -> Void)
+    {
+        Profile.findFirstOrInsert(in: context)
+        { profileMO in
+            profileMO.aboutUser = self.aboutUser
+            profileMO.userImage = self.userImage
+            profileMO.userName = self.userName
+
+            completion(profileMO, nil)
+        }
+    }
 }

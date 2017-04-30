@@ -235,7 +235,7 @@ class ProfileViewController: UIViewController
     }()
 
     private lazy var model: IProfileModel = {
-        self.assembly.model
+        self.assembly.profileModel()
     }()
 }
 
