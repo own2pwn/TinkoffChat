@@ -10,13 +10,18 @@ import CoreData
 
 protocol ICoreDataWorker
 {
-    func updateOrInsert<Entity: ManagedObjectConvertible>(entity: Entity, timeOut: Double?,
+    func updateOrInsert<Entity: ManagedObjectConvertible>(entity: Entity,
                                                           completion: @escaping (Error?) -> Void)
+    
+    func get<Entity: ManagedObjectConvertible>(with predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?,
+                                               fetchLimit: Int?, completion: @escaping (Result<[Entity]>) -> Void)
 }
 
 class CoreDataWorker: ICoreDataWorker
 {
-    func updateOrInsert<Entity: ManagedObjectConvertible>(entity: Entity, timeOut: Double?,
+    // MARK: - ICoreDataWorker
+    
+    func updateOrInsert<Entity: ManagedObjectConvertible>(entity: Entity,
                                                           completion: @escaping (Error?) -> Void)
     {
         entity.toManagedObject(in: ctx)
@@ -27,6 +32,30 @@ class CoreDataWorker: ICoreDataWorker
             }
         }
     }
+    
+    func get<Entity: ManagedObjectConvertible>(with predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?,
+                                               fetchLimit: Int?, completion: @escaping (Result<[Entity]>) -> Void)
+    {
+        do
+        {
+            let fetchRequest = Entity.ManagedObject.fetchRequest()
+            fetchRequest.predicate = predicate
+            fetchRequest.sortDescriptors = sortDescriptors
+            if let fetchLimit = fetchLimit
+            {
+                fetchRequest.fetchLimit = fetchLimit
+            }
+            let results = try ctx.fetch(fetchRequest) as? [Entity.ManagedObject]
+            let items: [Entity] = results?.flatMap { $0.toEntity() as? Entity } ?? []
+            completion(.success(items))
+        }
+        catch
+        {
+            completion(Result.fail("Can't fetch!"))
+        }
+    }
+    
+    // MARK: - Life cycle
     
     init(coreDataStack: ICoreDataStack, storageManager: IStorageManager)
     {

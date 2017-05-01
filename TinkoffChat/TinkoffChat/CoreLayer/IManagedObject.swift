@@ -52,9 +52,6 @@ extension IManagedObject where Self: NSManagedObject
                               completion: @escaping ([Self]?) -> Void)
     {
         let fetchRequest = Self.fetchRequest()
-        let test = NSFetchRequest<Self>()
-        print(fetchRequest)
-        print(test)
         fetchRequest.sortDescriptors = sortDescriptors
         fetchRequest.predicate = predicate
         fetchRequest.returnsObjectsAsFaults = false
@@ -71,7 +68,7 @@ extension IManagedObject where Self: NSManagedObject
             catch
             {
                 result = nil
-                assertionFailure("CoreData was failed to fetch fetchrequest!Error: \(error)")
+                print("CoreData was failed to fetch fetchrequest!Error: \(error)")
             }
             completion(result)
         }

@@ -20,7 +20,7 @@ struct ProfileDisplayModel
     let aboutUser: String
     let userImage: UIImage
 
-    static func getDefaultProfile() -> ProfileDisplayModel
+    static func defaultModel() -> ProfileDisplayModel
     {
         return ProfileDisplayModel(userName: "", aboutUser: "\(aboutPlaceholder)", userImage: #imageLiteral(resourceName: "profileImg"))
     }
@@ -44,24 +44,66 @@ class ProfileModel: IProfileModel
 
     func save(profile: ProfileDisplayModel, completion: @escaping (Bool, Error?) -> Void)
     {
-        gcdService.saveProfileData(profile, completion: completion)
+        let imageData = UIImagePNGRepresentation(profile.userImage) as NSData?
+
+        let entityModel = ProfileEntityModel(aboutUser: profile.aboutUser,
+                                             userImage: imageData, userName: profile.userName)
+
+        coreDataWorker.updateOrInsert(entity: entityModel)
+        { error in
+            if let error = error
+            {
+                print("Couldn't save profile data! Error: \(error.localizedDescription)")
+                completion(false, error)
+            }
+            else { completion(true, nil) }
+        }
     }
 
     func load(completion: @escaping (ProfileDisplayModel, Error?) -> Void)
     {
-        operationDataStoreService.loadProfileData(completion: completion)
+        coreDataWorker.get(with: nil, sortDescriptors: nil, fetchLimit: 1)
+        { (result: Result<[ProfileEntityModel]>) in
+            switch result
+            {
+            case .fail(let error):
+                print("Couldn't load profile data! Error: \(error)")
+                break
+            case .success(let profile):
+                if let profile = profile.first?.validate()
+                {
+                    if let imageData = profile.userImage as Data?
+                    {
+                        let image = UIImage(data: imageData) ?? #imageLiteral(resourceName: "profileImg")
+                        let displayModel = ProfileDisplayModel(userName: profile.userName ?? "",
+                                                               aboutUser: profile.aboutUser ?? "", userImage: image)
+                        completion(displayModel, nil)
+                    }
+                }
+                else // no saved data
+                {
+                    completion(ProfileDisplayModel.defaultModel(), nil)
+                }
+                break
+            }
+        }
     }
 
     // MARK: - Life cycle
 
-    init(gcdService: IDataStore, operationDataStoreService: IDataStore)
+    init(gcdService: IDataStore, operationDataStoreService: IDataStore,
+         coreDataWorker: ICoreDataWorker)
     {
         self.gcdService = gcdService
         self.operationDataStoreService = operationDataStoreService
+        self.coreDataWorker = coreDataWorker
     }
 
     // MARK: - Private properties
 
     private let gcdService: IDataStore
+
     private let operationDataStoreService: IDataStore
+
+    private let coreDataWorker: ICoreDataWorker
 }

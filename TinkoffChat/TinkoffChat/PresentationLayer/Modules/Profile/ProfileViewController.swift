@@ -32,9 +32,9 @@ class ProfileViewController: UIViewController
 
     var isProfileImageSet = false
 
-    var savedProfileData = ProfileDisplayModel.getDefaultProfile()
+    var savedProfileData = ProfileDisplayModel.defaultModel()
 
-    var currentProfileData = ProfileDisplayModel.getDefaultProfile()
+    var currentProfileData = ProfileDisplayModel.defaultModel()
     {
         didSet
         {
@@ -119,13 +119,13 @@ class ProfileViewController: UIViewController
             { action in
                 self.userProfileImageView.image = #imageLiteral(resourceName: "profileImg")
                 self.isProfileImageSet = false
+                self.updateCurrentProfileData()
             }
 
             confirmDeleteAlertController.addAction(cancelAction)
             confirmDeleteAlertController.addAction(confirmDeleteAction)
 
             self.present(confirmDeleteAlertController, animated: true, completion: nil)
-
         }
 
         profileImageActionActionSheet.addAction(chooseFromLibraryAction)
@@ -137,12 +137,6 @@ class ProfileViewController: UIViewController
         profileImageActionActionSheet.addAction(cancelAction)
 
         present(profileImageActionActionSheet, animated: true, completion: nil)
-    }
-
-    @IBAction func didTapColorButton(_ sender: UIButton)
-    {
-        textColorLabel.textColor = sender.backgroundColor
-        updateCurrentProfileData()
     }
 
     @IBAction func didTapSaveButton(_ sender: UIButton)
@@ -194,7 +188,6 @@ class ProfileViewController: UIViewController
     func setButtonsEnabled(_ enabled: Bool)
     {
         saveProfileDataButton.isEnabled = enabled
-
         if enabled
         {
             saveProfileDataButton.backgroundColor = .ButtonEnabledColor
@@ -210,11 +203,14 @@ class ProfileViewController: UIViewController
         activityIndicator.startAnimating()
         model.save(profile: currentProfileData)
         { bSuccess, err in
-            if err == nil
+            var state = true
+            if err == nil { state = false }
+            DispatchQueue.main.async
             {
-                self.setButtonsEnabled(false)
+                completion(bSuccess, err)
+                self.setButtonsEnabled(state)
+                self.activityIndicator.stopAnimating()
             }
-            self.activityIndicator.stopAnimating()
         }
     }
 
@@ -222,9 +218,9 @@ class ProfileViewController: UIViewController
     {
         activityIndicator.startAnimating()
         model.load
-        { profile, err in
+        { [weak self] profile, err in
             completion(profile, err)
-            self.activityIndicator.stopAnimating()
+            self?.activityIndicator.stopAnimating()
         }
     }
 

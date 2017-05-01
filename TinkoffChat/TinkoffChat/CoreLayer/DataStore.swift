@@ -49,7 +49,7 @@ final class DataStore: IDataStore
         }
         catch
         {
-            completion(ProfileDisplayModel.getDefaultProfile(), error)
+            completion(ProfileDisplayModel.defaultModel(), error)
         }
     }
 

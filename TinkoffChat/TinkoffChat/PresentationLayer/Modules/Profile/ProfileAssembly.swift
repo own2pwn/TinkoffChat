@@ -13,7 +13,8 @@ class ProfileAssembly
     func profileModel() -> IProfileModel
     {
         return ProfileModel(gcdService: gcdService(),
-                            operationDataStoreService: operationDataStoreService())
+                            operationDataStoreService: operationDataStoreService(),
+                            coreDataWorker: coreDataWorkerService())
     }
 
     // MARK: - Private methods
@@ -30,7 +31,17 @@ class ProfileAssembly
         return OperationDataStoreService(dataStore: dataStore)
     }
 
+    func coreDataWorkerService() -> ICoreDataWorker
+    {
+        return CoreDataWorker(coreDataStack: coreDataStack,
+                              storageManager: storageManager)
+    }
+
     // MARK: - Private properties
 
     private let dataStore = DataStore()
+
+    private let coreDataStack = CoreDataStack()
+
+    private let storageManager = StorageManager()
 }

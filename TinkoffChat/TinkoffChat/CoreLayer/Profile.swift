@@ -47,3 +47,16 @@ extension ProfileEntityModel: ManagedObjectConvertible
         }
     }
 }
+
+extension ProfileEntityModel: ModelValidable
+{
+    typealias Entity = ProfileEntityModel
+
+    func validate() -> ProfileEntityModel?
+    {
+        guard aboutUser != nil || userImage != nil || userName != nil else { return nil }
+
+        return ProfileEntityModel(aboutUser: aboutUser,
+                                  userImage: userImage, userName: userName)
+    }
+}
