@@ -18,8 +18,6 @@ class ProfileViewController: UIViewController
 
     @IBOutlet weak var userProfileImageView: UIImageView!
 
-    @IBOutlet weak var textColorLabel: UILabel!
-
     @IBOutlet weak var saveProfileDataButton: UIButton!
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -143,13 +141,13 @@ class ProfileViewController: UIViewController
     {
         let dataBeforeSaving = currentProfileData
         saveProfileData
-        { bSuccess, err in
-            self.presentSavingResultAlert(bSuccess)
+        { [weak self] bSuccess, err in
+            self?.presentSavingResultAlert(bSuccess)
             if bSuccess
             {
-                self.savedProfileData = dataBeforeSaving
+                self?.savedProfileData = dataBeforeSaving
             }
-            self.updateCurrentProfileData()
+            self?.updateCurrentProfileData()
         }
     }
 
@@ -202,19 +200,19 @@ class ProfileViewController: UIViewController
     {
         activityIndicator.startAnimating()
         model.save(profile: currentProfileData)
-        { bSuccess, err in
+        { [weak self] bSuccess, err in
             var state = true
             if err == nil { state = false }
             DispatchQueue.main.async
             {
                 completion(bSuccess, err)
-                self.setButtonsEnabled(state)
-                self.activityIndicator.stopAnimating()
+                self?.setButtonsEnabled(state)
+                self?.activityIndicator.stopAnimating()
             }
         }
     }
 
-    func loadProfileData(usingManager manager: IDataStore, completion: @escaping (ProfileDisplayModel, Error?) -> Void)
+    func loadProfileData(completion: @escaping (ProfileDisplayModel, Error?) -> Void)
     {
         activityIndicator.startAnimating()
         model.load

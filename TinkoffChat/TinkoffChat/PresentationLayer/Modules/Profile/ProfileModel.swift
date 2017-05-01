@@ -91,19 +91,12 @@ class ProfileModel: IProfileModel
 
     // MARK: - Life cycle
 
-    init(gcdService: IDataStore, operationDataStoreService: IDataStore,
-         coreDataWorker: ICoreDataWorker)
+    init(coreDataWorker: ICoreDataWorker)
     {
-        self.gcdService = gcdService
-        self.operationDataStoreService = operationDataStoreService
         self.coreDataWorker = coreDataWorker
     }
 
     // MARK: - Private properties
-
-    private let gcdService: IDataStore
-
-    private let operationDataStoreService: IDataStore
 
     private let coreDataWorker: ICoreDataWorker
 }
