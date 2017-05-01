@@ -19,20 +19,18 @@ struct ProfileDisplayModel
     let userName: String
     let aboutUser: String
     let userImage: UIImage
-    let textColor: UIColor
 
-    static func getDefaultProfile() -> ProfileDisplayModel
+    static func defaultModel() -> ProfileDisplayModel
     {
-        return ProfileDisplayModel(userName: "", aboutUser: "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.", userImage: #imageLiteral(resourceName: "profileImg"), textColor: .black)
+        return ProfileDisplayModel(userName: "", aboutUser: "\(aboutPlaceholder)", userImage: #imageLiteral(resourceName: "profileImg"))
     }
+
+    private static let aboutPlaceholder = "Some info about"
 }
 
 extension ProfileDisplayModel: Hashable
 {
-    var hashValue: Int
-    {
-        return userName.hashValue ^ aboutUser.hashValue ^ userImage.hashValue ^ textColor.hashValue
-    }
+    var hashValue: Int { return userName.hashValue ^ aboutUser.hashValue ^ userImage.hashValue }
 
     static func == (lhs: ProfileDisplayModel, rhs: ProfileDisplayModel) -> Bool
     {
@@ -46,24 +44,59 @@ class ProfileModel: IProfileModel
 
     func save(profile: ProfileDisplayModel, completion: @escaping (Bool, Error?) -> Void)
     {
-        gcdService.saveProfileData(profile, completion: completion)
+        let imageData = UIImagePNGRepresentation(profile.userImage) as NSData?
+
+        let entityModel = ProfileEntityModel(aboutUser: profile.aboutUser,
+                                             userImage: imageData, userName: profile.userName)
+
+        coreDataWorker.updateOrInsert(entity: entityModel)
+        { error in
+            if let error = error
+            {
+                print("Couldn't save profile data! Error: \(error.localizedDescription)")
+                completion(false, error)
+            }
+            else { completion(true, nil) }
+        }
     }
 
     func load(completion: @escaping (ProfileDisplayModel, Error?) -> Void)
     {
-        operationDataStoreService.loadProfileData(completion: completion)
+        coreDataWorker.get(with: nil, sortDescriptors: nil, fetchLimit: 1)
+        { (result: Result<[ProfileEntityModel]>) in
+            switch result
+            {
+            case .fail(let error):
+                print("Couldn't load profile data! Error: \(error)")
+                break
+            case .success(let profile):
+                if let profile = profile.first?.validate()
+                {
+                    if let imageData = profile.userImage as Data?
+                    {
+                        let image = UIImage(data: imageData) ?? #imageLiteral(resourceName: "profileImg")
+                        let displayModel = ProfileDisplayModel(userName: profile.userName ?? "",
+                                                               aboutUser: profile.aboutUser ?? "", userImage: image)
+                        completion(displayModel, nil)
+                    }
+                }
+                else // no saved data
+                {
+                    completion(ProfileDisplayModel.defaultModel(), nil)
+                }
+                break
+            }
+        }
     }
 
     // MARK: - Life cycle
 
-    init(gcdService: IDataStore, operationDataStoreService: IDataStore)
+    init(coreDataWorker: ICoreDataWorker)
     {
-        self.gcdService = gcdService
-        self.operationDataStoreService = operationDataStoreService
+        self.coreDataWorker = coreDataWorker
     }
 
     // MARK: - Private properties
 
-    private let gcdService: IDataStore
-    private let operationDataStoreService: IDataStore
+    private let coreDataWorker: ICoreDataWorker
 }

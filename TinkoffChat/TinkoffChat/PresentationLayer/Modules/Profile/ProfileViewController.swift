@@ -18,8 +18,6 @@ class ProfileViewController: UIViewController
 
     @IBOutlet weak var userProfileImageView: UIImageView!
 
-    @IBOutlet weak var textColorLabel: UILabel!
-
     @IBOutlet weak var saveProfileDataButton: UIButton!
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -32,9 +30,9 @@ class ProfileViewController: UIViewController
 
     var isProfileImageSet = false
 
-    var savedProfileData = ProfileDisplayModel.getDefaultProfile()
+    var savedProfileData = ProfileDisplayModel.defaultModel()
 
-    var currentProfileData = ProfileDisplayModel.getDefaultProfile()
+    var currentProfileData = ProfileDisplayModel.defaultModel()
     {
         didSet
         {
@@ -59,7 +57,6 @@ class ProfileViewController: UIViewController
             self.userNameTextField.text = profile.userName
             self.aboutUserTextView.text = profile.aboutUser
             self.userProfileImageView.image = profile.userImage
-            self.textColorLabel.textColor = profile.textColor
 
             if profile.userImage != #imageLiteral(resourceName: "profileImg") { self.isProfileImageSet = true }
 
@@ -120,13 +117,13 @@ class ProfileViewController: UIViewController
             { action in
                 self.userProfileImageView.image = #imageLiteral(resourceName: "profileImg")
                 self.isProfileImageSet = false
+                self.updateCurrentProfileData()
             }
 
             confirmDeleteAlertController.addAction(cancelAction)
             confirmDeleteAlertController.addAction(confirmDeleteAction)
 
             self.present(confirmDeleteAlertController, animated: true, completion: nil)
-
         }
 
         profileImageActionActionSheet.addAction(chooseFromLibraryAction)
@@ -140,23 +137,17 @@ class ProfileViewController: UIViewController
         present(profileImageActionActionSheet, animated: true, completion: nil)
     }
 
-    @IBAction func didTapColorButton(_ sender: UIButton)
-    {
-        textColorLabel.textColor = sender.backgroundColor
-        updateCurrentProfileData()
-    }
-
     @IBAction func didTapSaveButton(_ sender: UIButton)
     {
         let dataBeforeSaving = currentProfileData
         saveProfileData
-        { bSuccess, err in
-            self.presentSavingResultAlert(bSuccess)
+        { [weak self] bSuccess, err in
+            self?.presentSavingResultAlert(bSuccess)
             if bSuccess
             {
-                self.savedProfileData = dataBeforeSaving
+                self?.savedProfileData = dataBeforeSaving
             }
-            self.updateCurrentProfileData()
+            self?.updateCurrentProfileData()
         }
     }
 
@@ -187,13 +178,14 @@ class ProfileViewController: UIViewController
 
     func updateCurrentProfileData()
     {
-        currentProfileData = ProfileDisplayModel(userName: userNameTextField.text ?? "", aboutUser: aboutUserTextView.text, userImage: userProfileImageView.image ?? #imageLiteral(resourceName: "profileImg"), textColor: textColorLabel.textColor)
+        currentProfileData = ProfileDisplayModel(userName: userNameTextField.text ?? "",
+                                                 aboutUser: aboutUserTextView.text,
+                                                 userImage: userProfileImageView.image ?? #imageLiteral(resourceName: "profileImg"))
     }
 
     func setButtonsEnabled(_ enabled: Bool)
     {
         saveProfileDataButton.isEnabled = enabled
-
         if enabled
         {
             saveProfileDataButton.backgroundColor = .ButtonEnabledColor
@@ -208,22 +200,25 @@ class ProfileViewController: UIViewController
     {
         activityIndicator.startAnimating()
         model.save(profile: currentProfileData)
-        { bSuccess, err in
-            if err == nil
+        { [weak self] bSuccess, err in
+            var state = true
+            if err == nil { state = false }
+            DispatchQueue.main.async
             {
-                self.setButtonsEnabled(false)
+                completion(bSuccess, err)
+                self?.setButtonsEnabled(state)
+                self?.activityIndicator.stopAnimating()
             }
-            self.activityIndicator.stopAnimating()
         }
     }
 
-    func loadProfileData(usingManager manager: IDataStore, completion: @escaping (ProfileDisplayModel, Error?) -> Void)
+    func loadProfileData(completion: @escaping (ProfileDisplayModel, Error?) -> Void)
     {
         activityIndicator.startAnimating()
         model.load
-        { profile, err in
+        { [weak self] profile, err in
             completion(profile, err)
-            self.activityIndicator.stopAnimating()
+            self?.activityIndicator.stopAnimating()
         }
     }
 
@@ -234,7 +229,7 @@ class ProfileViewController: UIViewController
     }()
 
     private lazy var model: IProfileModel = {
-        self.assembly.model
+        self.assembly.profileModel()
     }()
 }
 

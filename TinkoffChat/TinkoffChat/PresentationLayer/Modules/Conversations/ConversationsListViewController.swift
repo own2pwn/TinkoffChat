@@ -22,7 +22,6 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
     @IBOutlet weak var conversationsTableView: UITableView!
 
     // MARK: - Actions
-
     func didTapNavBarProfileButton(_ sender: UIButton)
     {
         let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "idProfileVC")
