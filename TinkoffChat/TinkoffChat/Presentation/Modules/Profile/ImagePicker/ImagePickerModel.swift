@@ -61,15 +61,19 @@ final class ImagePickerModel: IImagePickerModel
         imageLoader.loadImage(by: imageUrl, completion: completion)
     }
     
-    func saveImage(_ image: UIImage, completion: (Bool) -> Void) {
-        <#code#>
+    func saveImage(_ image: UIImage,
+                   completion: (Bool) -> Void)
+    {
+        
     }
     
     // MARK: - Life cycle
     
-    init(imageLoaderService: IImageLoaderService)
+    init(imageLoaderService: IImageLoaderService,
+         dataStoreService: IDataStoreService)
     {
         imageLoader = imageLoaderService
+        self.dataStoreService = dataStoreService
     }
     
     // MARK: - Private properties
@@ -85,6 +89,8 @@ final class ImagePickerModel: IImagePickerModel
     // MARK: Services
     
     private let imageLoader: IImageLoaderService
+    
+    private let dataStoreService: IDataStoreService
 }
 
 extension IImagePickerModel
