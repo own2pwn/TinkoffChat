@@ -20,9 +20,6 @@ protocol IImagePickerModel: class
     
     func fetchImage(at index: Int,
                     completion: @escaping (UIImage?) -> Void)
-    
-    func saveImageData(_ data: Data,
-                       completion: @escaping (Bool) -> Void)
 }
 
 final class ImagePickerModel: IImagePickerModel
@@ -61,19 +58,11 @@ final class ImagePickerModel: IImagePickerModel
         imageLoader.loadImage(by: imageUrl, completion: completion)
     }
     
-    func saveImageData(_ data: Data,
-                       completion: @escaping (Bool) -> Void)
-    {
-        dataStoreService.saveImageData(data, completion: completion)
-    }
-    
     // MARK: - Life cycle
     
-    init(imageLoaderService: IImageLoaderService,
-         dataStoreService: IDataStoreService)
+    init(imageLoaderService: IImageLoaderService)
     {
         imageLoader = imageLoaderService
-        self.dataStoreService = dataStoreService
     }
     
     // MARK: - Private properties
@@ -89,8 +78,6 @@ final class ImagePickerModel: IImagePickerModel
     // MARK: Services
     
     private let imageLoader: IImageLoaderService
-    
-    private let dataStoreService: IDataStoreService
 }
 
 extension IImagePickerModel

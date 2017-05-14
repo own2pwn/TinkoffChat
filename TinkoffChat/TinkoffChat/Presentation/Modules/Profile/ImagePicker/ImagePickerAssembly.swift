@@ -11,8 +11,7 @@ import Foundation
 final class ImagePickerAssembly
 {
     lazy var imagePickerModel: IImagePickerModel = {
-        ImagePickerModel(imageLoaderService: self.imageLoader,
-                         dataStoreService: DataStoreService())
+        ImagePickerModel(imageLoaderService: self.imageLoader)
     }()
 
     // MARK: - Private
