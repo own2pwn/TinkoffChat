@@ -8,27 +8,41 @@
 
 import Foundation
 
-protocol IImagePickerModel
+protocol IImagePickerModel: class
 {
+    weak var delegate: IImagePickerViewController? { get set }
+    
     var imagesCount: Int { get }
     
-    func loadImages()
+    func performFetch(_ query: String,
+                      limit: Int,
+                      completion: (() -> Void)?)
 }
 
 final class ImagePickerModel: IImagePickerModel
 {
     // MARK: - IImagePickerModel
     
+    weak var delegate: IImagePickerViewController?
+    
     var imagesCount: Int
     {
-        return getImagesCount()
+        return dataSource.fetchedItemsCount
     }
     
-    func loadImages()
+    func performFetch(_ query: String,
+                      limit: Int,
+                      completion: (() -> Void)? = nil)
     {
-        imageLoader.getImages(for: "test query", count: 5)
+        delegate?.setSpinnerStateEnabled(true)
+        imageLoader.getImages(for: query, limit: limit)
         { imageListModel in
-            print(imageListModel)
+            if let model = imageListModel
+            {
+                self.dataSource = model
+                self.delegate?.setSpinnerStateEnabled(false)
+                self.delegate?.reloadDataSource()
+            }
         }
     }
     
@@ -41,14 +55,23 @@ final class ImagePickerModel: IImagePickerModel
     
     // MARK: - Private methods
     
-    private func getImagesCount() -> Int
-    {
-        return 3
-    }
-    
     // MARK: - Private properties
+    
+    private lazy var dataSource: ImageListApiModel = {
+        ImageListApiModel(totalItemsCount: 0, fetchedItemsCount: 0, images: [ImageApiModel]())
+    }()
     
     // MARK: Services
     
     private let imageLoader: IImageLoaderService
+}
+
+extension IImagePickerModel
+{
+    func performFetch(_ query: String,
+                      limit: Int,
+                      completion: (() -> Void)? = nil)
+    {
+        performFetch(query, limit: limit, completion: completion)
+    }
 }

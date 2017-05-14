@@ -19,26 +19,27 @@ final class GetImagesRequest: PixabayGetRequest
     // MARK: - Life cycle
     
     init(query: String,
-         count: Int)
+         limit: Int)
     {
         requestQuery = query
-        self.count = count
+        self.limit = limit
         
         super.init()
+        constructedQuery = constructQuery()
     }
     
     // MARK: - Private methods
     
     private func constructQuery() -> String
     {
-        return "key=\(apiKey)&q=\(requestQuery)&image_type=photo&pretty=true&per_page=\(count)"
+        return "key=\(apiKey)&q=\(requestQuery)&image_type=photo&pretty=true&per_page=\(limit)"
     }
     
     // MARK: - Private properties
     
     private let requestQuery: String
     
-    private let count: Int
+    private let limit: Int
     
     private var constructedQuery: String = ""
 }

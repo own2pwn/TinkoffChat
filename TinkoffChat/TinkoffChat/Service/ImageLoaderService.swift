@@ -11,7 +11,7 @@ import Foundation
 protocol IImageLoaderService
 {
     func getImages(for query: String,
-                   count: Int,
+                   limit: Int,
                    completion: @escaping (ImageListApiModel?) -> Void)
 }
 
@@ -20,11 +20,11 @@ final class ImageLoaderService: PixabayRequestSender, IImageLoaderService
     // MARK: - IImageLoaderService
 
     func getImages(for query: String,
-                   count: Int,
+                   limit: Int,
                    completion: @escaping (ImageListApiModel?) -> Void)
     {
         let getImagesRequest =
-            GetRequestFactory.ImageLoaderGetRequests.getImagesCountRequest(for: query, count: count)
+            GetRequestFactory.ImageLoaderGetRequests.getImagesCountRequest(for: query, limit: limit)
 
         makeRequest(requestConfig: getImagesRequest)
         { imageListModel, error in

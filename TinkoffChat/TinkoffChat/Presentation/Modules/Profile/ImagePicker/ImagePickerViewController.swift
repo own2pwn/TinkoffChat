@@ -8,7 +8,14 @@
 
 import UIKit
 
-final class ImagePickerViewController: UIViewController,
+protocol IImagePickerViewController: class
+{
+    func setSpinnerStateEnabled(_ enabled: Bool)
+
+    func reloadDataSource()
+}
+
+final class ImagePickerViewController: UIViewController, IImagePickerViewController,
     UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 {
     // MARK: - Outlets
@@ -16,6 +23,24 @@ final class ImagePickerViewController: UIViewController,
     @IBOutlet weak var imagesCollectionView: UICollectionView!
 
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
+
+    // MARK: - IImagePickerViewController
+
+    func setSpinnerStateEnabled(_ enabled: Bool)
+    {
+        updateUI
+        {
+            self.loadingSpinner.isHidden = !enabled
+        }
+    }
+
+    func reloadDataSource()
+    {
+        DispatchQueue.main.async
+        {
+            self.imagesCollectionView.reloadData()
+        }
+    }
 
     // MARK: - Life cycle
 
@@ -29,8 +54,8 @@ final class ImagePickerViewController: UIViewController,
     {
         super.viewDidLoad()
 
-        loadingSpinner.startAnimating()
-        model.loadImages()
+        setupLogic()
+        model.performFetch(queryString, limit: limit)
     }
 
     // MARK: - UICollectionViewDataSource
@@ -45,7 +70,7 @@ final class ImagePickerViewController: UIViewController,
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return 10
+        return model.imagesCount
     }
 
     // MARK: - UICollectionViewDelegateFlowLayout
@@ -63,6 +88,20 @@ final class ImagePickerViewController: UIViewController,
 
     // MARK: - Private methods
 
+    private func setupLogic()
+    {
+        loadingSpinner.hidesWhenStopped = true
+        model.delegate = self
+    }
+
+    private func updateUI(_ block: @escaping () -> Void)
+    {
+        DispatchQueue.main.async
+        {
+            block()
+        }
+    }
+
     // MARK: Outlet actions
 
     @IBAction func didTapNavBarCloseButton(_ sender: UIBarButtonItem)
@@ -71,6 +110,10 @@ final class ImagePickerViewController: UIViewController,
     }
 
     // MARK: - Private properties
+
+    private let queryString = "yellow flowers"
+
+    private let limit = 110
 
     private let cellDequeueIdentifier = "imageCell"
 
