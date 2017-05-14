@@ -8,7 +8,6 @@
 
 // swiftlint:disable line_length
 
-import UIKit
 import CoreData
 
 protocol IFetchedResultsControllerProviderService

@@ -49,6 +49,8 @@ class CoreDataService: ICoreDataService
     
     // MARK: - Private properties
     
+    // MARK: Core objects
+    
     private let coreDataWorker: ICoreDataWorker
 }
 

@@ -74,7 +74,7 @@ final class StorageManager: IStorageManager
     
     // MARK: - Private properties
     
-    private let managedObjectModelName = "ChatModel"
+    // MARK: Lazy
     
     private lazy var modelURL: URL = {
         let url = Bundle.main.url(forResource: self.managedObjectModelName, withExtension: "momd")
@@ -89,13 +89,7 @@ final class StorageManager: IStorageManager
         return docsDir.appendingPathComponent("Store" + ".sqlite")
     }()
     
-    private var _managedObjectModel: NSManagedObjectModel?
+    // MARK: Stored
     
-    private var _persistentStoreCoordinator: NSPersistentStoreCoordinator?
-    
-    private var _masterContext: NSManagedObjectContext?
-    
-    private var _mainContext: NSManagedObjectContext?
-    
-    private var _saveContext: NSManagedObjectContext?
+    private let managedObjectModelName = "ChatModel"
 }

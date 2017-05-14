@@ -31,7 +31,6 @@
 		B91B03C21EC0758C0030E7E0 /* Conversation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91B03BC1EC0758C0030E7E0 /* Conversation+CoreDataProperties.swift */; };
 		B91B03C31EC0758C0030E7E0 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91B03BD1EC0758C0030E7E0 /* AppUser.swift */; };
 		B91B03C41EC0758C0030E7E0 /* AppUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91B03BE1EC0758C0030E7E0 /* AppUser+CoreDataProperties.swift */; };
-		B91BA9AD1EC3061F00638ED1 /* FetchRequestExecuter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91BA9AC1EC3061F00638ED1 /* FetchRequestExecuter.swift */; };
 		B91BEF941EC0992200467798 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91BEF931EC0992200467798 /* CoreDataService.swift */; };
 		B91BEF991EC0AA2500467798 /* FetchRequestProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91BEF981EC0AA2500467798 /* FetchRequestProvider.swift */; };
 		B926E3341EB60CCA00EFF3AC /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B926E3331EB60CCA00EFF3AC /* StorageManager.swift */; };
@@ -84,7 +83,6 @@
 		B91B03BC1EC0758C0030E7E0 /* Conversation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Conversation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B91B03BD1EC0758C0030E7E0 /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		B91B03BE1EC0758C0030E7E0 /* AppUser+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		B91BA9AC1EC3061F00638ED1 /* FetchRequestExecuter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchRequestExecuter.swift; sourceTree = "<group>"; };
 		B91BEF931EC0992200467798 /* CoreDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		B91BEF981EC0AA2500467798 /* FetchRequestProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchRequestProvider.swift; sourceTree = "<group>"; };
 		B926E3331EB60CCA00EFF3AC /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -277,7 +275,6 @@
 			children = (
 				B91BEF931EC0992200467798 /* CoreDataService.swift */,
 				B91B03A31EC050590030E7E0 /* DataStoreService.swift */,
-				B91BA9AC1EC3061F00638ED1 /* FetchRequestExecuter.swift */,
 				B9F04F311EC836FC00AEA713 /* FetchedResultsControllerProviderService.swift */,
 				B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */,
 				B910A2EF1EABBD9D005637C1 /* MPCService.swift */,
@@ -397,7 +394,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B948204C1EAD1BF500052AA9 /* AppDelegate.swift in Sources */,
-				B91BA9AD1EC3061F00638ED1 /* FetchRequestExecuter.swift in Sources */,
 				B926E33D1EB6115500EFF3AC /* Profile.swift in Sources */,
 				B91B03C31EC0758C0030E7E0 /* AppUser.swift in Sources */,
 				307B77CB1EB101AA0048B8EC /* ChatModel.xcdatamodeld in Sources */,

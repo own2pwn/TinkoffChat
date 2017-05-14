@@ -10,8 +10,7 @@ import Foundation
 
 protocol IMPCWorker: class
 {
-    func send(message: String,
-              to userID: String,
+    func send(message: String, to userID: String,
               completion: (Error?) -> Void)
 
     var online: Bool { get set }

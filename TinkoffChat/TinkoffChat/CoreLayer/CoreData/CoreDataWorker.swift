@@ -25,8 +25,6 @@ protocol ICoreDataWorker
     
     func executeFetchRequestWithError(_ request: NSFetchRequest<NSFetchRequestResult>) -> Error?
     
-    func save()
-    
     var managedObjectModel: NSManagedObjectModel { get }
     
     var saveCtx: NSManagedObjectContext { get }
@@ -94,11 +92,6 @@ final class CoreDataWorker: ICoreDataWorker
         {
             completion(Result.fail("\(error.localizedDescription)"))
         }
-    }
-    
-    func save()
-    {
-        coreDataStack.performSave(context: ctx)
     }
     
     func injectWorker(_ coreDataWorker: inout ICoreDataWorker) { coreDataWorker = self }
