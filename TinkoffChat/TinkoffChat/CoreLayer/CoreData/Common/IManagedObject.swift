@@ -20,9 +20,10 @@ extension IManagedObject where Self: NSManagedObject
                                   with predicate: NSPredicate? = nil,
                                   completion: @escaping (Self) -> Void)
     {
-        findFirst(in: context)
+        findFirst(in: context,
+                  with: predicate,
+                  sortDescriptors: nil)
         { result in
-
             if let result = result { completion(result) }
             else
             {

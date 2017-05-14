@@ -12,15 +12,22 @@ class MPCAssembly
 {
     static func mpcService() -> IMPCService
     {
-        let worker = mpcWorker()
-        let service = MPCService(with: worker)
-        worker.delegate = service
-
+        let service = MPCService(mpcWorker: mpcWorker)
+        
         return service
     }
-
-    private static func mpcWorker() -> IMPCWorker
-    {
-        return MPCWorker()
-    }
+    
+    // MARK: - Private
+    
+    // MARK: Services
+    
+    // MARK: Core object
+    
+    private static let mpcWorker: IMPCWorker = MPCWorker()
+    
+    private static let coreDataWorker: ICoreDataWorker = CoreDataWorker()
+    
+    private static var fetchRequestProvider: IFetchRequestProvider = {
+        FetchRequestProvider(coreDataWorker: coreDataWorker)
+    }()
 }

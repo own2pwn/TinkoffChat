@@ -1,12 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AppUser" representedClassName="AppUser" syncable="YES">
+        <relationship name="conversations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Conversation" inverseName="appUser" inverseEntity="Conversation" syncable="YES"/>
+        <relationship name="currentUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="currentAppUser" inverseEntity="User" syncable="YES"/>
+        <relationship name="lastMessage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="lastMessageAppUser" inverseEntity="Message" syncable="YES"/>
+        <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="appUser" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Conversation" representedClassName="Conversation" syncable="YES">
+        <attribute name="conversationId" attributeType="String" syncable="YES"/>
+        <attribute name="isOnline" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="appUser" maxCount="1" deletionRule="Nullify" destinationEntity="AppUser" inverseName="conversations" inverseEntity="AppUser" syncable="YES"/>
+        <relationship name="lastMessage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="lastMessageInConversation" inverseEntity="Message" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="conversation" inverseEntity="Message" syncable="YES"/>
+        <relationship name="participants" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="conversations" inverseEntity="User" syncable="YES"/>
+        <relationship name="typingParticipants" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="typingInConversations" inverseEntity="User" syncable="YES"/>
+        <relationship name="unreadMessages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="undreadInConversation" inverseEntity="Message" syncable="YES"/>
+    </entity>
+    <entity name="Message" representedClassName="Message" syncable="YES">
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="messageId" attributeType="String" syncable="YES"/>
+        <attribute name="orderIndex" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="text" attributeType="String" syncable="YES"/>
+        <relationship name="conversation" maxCount="1" deletionRule="Nullify" destinationEntity="Conversation" inverseName="messages" inverseEntity="Conversation" syncable="YES"/>
+        <relationship name="lastMessageAppUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppUser" inverseName="lastMessage" inverseEntity="AppUser" syncable="YES"/>
+        <relationship name="lastMessageInConversation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Conversation" inverseName="lastMessage" inverseEntity="Conversation" syncable="YES"/>
+        <relationship name="receiver" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="incomingMessages" inverseEntity="User" syncable="YES"/>
+        <relationship name="sender" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="outgoingMessages" inverseEntity="User" syncable="YES"/>
+        <relationship name="undreadInConversation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Conversation" inverseName="unreadMessages" inverseEntity="Conversation" syncable="YES"/>
+    </entity>
     <entity name="Profile" representedClassName="Profile" syncable="YES">
         <attribute name="aboutUser" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="userImage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imagePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="isOnline" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="userId" attributeType="String" syncable="YES"/>
+        <relationship name="appUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppUser" inverseName="users" inverseEntity="AppUser" syncable="YES"/>
+        <relationship name="conversations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Conversation" inverseName="participants" inverseEntity="Conversation" syncable="YES"/>
+        <relationship name="currentAppUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppUser" inverseName="currentUser" inverseEntity="AppUser" syncable="YES"/>
+        <relationship name="incomingMessages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="receiver" inverseEntity="Message" syncable="YES"/>
+        <relationship name="outgoingMessages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="sender" inverseEntity="Message" syncable="YES"/>
+        <relationship name="typingInConversations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Conversation" inverseName="typingParticipants" inverseEntity="Conversation" syncable="YES"/>
+    </entity>
+    <fetchRequest name="AppUser" entity="AppUser"/>
+    <fetchRequest name="ConversationById" entity="Conversation" predicateString="conversationId == $conversationId"/>
+    <fetchRequest name="ConversationByUserId" entity="Conversation" predicateString="ANY participants.userId == $userId"/>
+    <fetchRequest name="MessagesByConversationId" entity="Message" predicateString="conversation.conversationId == $conversationId"/>
+    <fetchRequest name="NonEmptyConversationsWithOnlineUser" entity="User" predicateString="isOnline == 0 AND conversations.messages.count &gt; 0"/>
+    <fetchRequest name="OnlineUsers" entity="User" predicateString="isOnline == 0"/>
     <fetchRequest name="Profile" entity="Profile"/>
+    <fetchRequest name="UsersById" entity="User" predicateString="userId == $userId"/>
     <elements>
-        <element name="Profile" positionX="-63" positionY="9" width="128" height="90"/>
+        <element name="AppUser" positionX="133" positionY="-81" width="128" height="103"/>
+        <element name="Conversation" positionX="376" positionY="206" width="128" height="163"/>
+        <element name="Message" positionX="9" positionY="99" width="128" height="30"/>
+        <element name="Profile" positionX="-135" positionY="-0" width="128" height="90"/>
+        <element name="User" positionX="405" positionY="-106" width="128" height="30"/>
     </elements>
 </model>

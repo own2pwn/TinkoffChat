@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 enum ConversationsListTableViewSections: Int
 {
@@ -15,17 +16,76 @@ enum ConversationsListTableViewSections: Int
     case all
 }
 
-final class ConversationsListViewController: UIViewController, IConversationsListModelDelegate, UITableViewDataSource, UITableViewDelegate
+final class ConversationsListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,
+    NSFetchedResultsControllerDelegate
 {
     // MARK: - Outlets
 
     @IBOutlet weak var conversationsTableView: UITableView!
 
-    // MARK: - Actions
-    func didTapNavBarProfileButton(_ sender: UIButton)
+    // MARK: - NSFetchedResultsControllerDelegate
+
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>)
     {
-        let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "idProfileVC")
-        present(profileVC, animated: true, completion: nil)
+        conversationsTableView.beginUpdates()
+    }
+
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>)
+    {
+        conversationsTableView.endUpdates()
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int,
+                    for type: NSFetchedResultsChangeType)
+    {
+        switch type {
+        case .insert:
+            conversationsTableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .delete:
+            conversationsTableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+        default:
+            break
+        }
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any, at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?)
+    {
+        switch type {
+        case .insert:
+            if let indexPath = newIndexPath
+            {
+                conversationsTableView.insertRows(at: [indexPath], with: .fade)
+            }
+            break
+        case .delete:
+            if let indexPath = indexPath
+            {
+                conversationsTableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            break
+        case .update:
+            if let indexPath = indexPath
+            {
+                // swiftlint:disable:next force_cast
+                let cell = conversationsTableView.cellForRow(at: indexPath) as! ConversationsListCell
+                configureCell(cell, at: indexPath)
+            }
+            break
+        case .move:
+            if let indexPath = indexPath
+            {
+                conversationsTableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            if let newIndexPath = newIndexPath
+            {
+                conversationsTableView.insertRows(at: [newIndexPath], with: .fade)
+            }
+            break
+        }
+        checkUser(anObject as? User)
     }
 
     // MARK: - Life cycle
@@ -34,13 +94,13 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
     {
         super.viewDidLoad()
 
-        model.delegate = self
+        model.initFetchedResultsController(ignoringUserId: localUserId, self)
     }
 
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        setupLogic()
+        setupView()
     }
 
     override func viewWillDisappear(_ animated: Bool)
@@ -50,16 +110,62 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
-    // MARK: - Setup
+    // MARK: - UITableViewDataSource
 
-    func setupLogic()
+    func numberOfSections(in tableView: UITableView) -> Int
     {
-        mpcService.delegate = model as? IMPCServiceDelegate
-
-        setupView()
+        return model.numberOfSection
     }
 
-    func setupView()
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return model.numberOfRowsInSection(section)
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        // swiftlint:disable:next force_cast line_length
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellReusabledentifier, for: indexPath) as! ConversationsListCell
+
+        configureCell(cell, at: indexPath)
+
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    {
+        return model.getTitleForSection(section)
+    }
+
+    // MARK: - UITableViewDelegate
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        if let cell = tableView.cellForRow(at: indexPath)
+        {
+            selectedUser = model.fetchUser(at: indexPath)
+            performSegue(withIdentifier: idShowDialogSegue, sender: cell)
+        }
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
+    {
+        return CGFloat.leastNormalMagnitude
+    }
+
+    // MARK: - Outlet actions
+
+    func didTapNavBarProfileButton(_ sender: UIButton)
+    {
+        let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "idProfileVC")
+        present(profileVC, animated: true, completion: nil)
+    }
+
+    // MARK: - Private methods
+
+    // MARK: UI
+
+    private func setupView()
     {
         conversationsTableView.tableFooterView = UIView()
         conversationsTableView.estimatedRowHeight = 44
@@ -75,101 +181,43 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: navBarProfileButton)
     }
 
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
-        if let cell = sender as? ConversationsListCell, let dialogVC = segue.destination as? ConversationViewController
-        {
-            dialogVC.navigationItem.title = cell.userName
-            dialogVC.mpcService = mpcService
-            dialogVC.selectedUserID = selectedUserID
-        }
-    }
-
-    // MARK: - IConversationsListModelDelegate
-
-    func updateView(with data: [ConversationDataSourceType])
-    {
-        dataSource = data
-        updateUI()
-    }
-
-    // MARK: - UITableViewDataSource
-
-    func numberOfSections(in tableView: UITableView) -> Int
-    {
-        return numOfSections
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        if section == 0
-        {
-            return dataSource.count
-        }
-        return 0
-    }
-
-    // MARK: UI configuration
-
-    func configureCell(_ cell: ConversationsListCell, at indexPath: IndexPath)
+    private func configureCell(_ cell: ConversationsListCell, at indexPath: IndexPath)
     {
         cell.selectionStyle = .none
 
-        let row = indexPath.row
-        let model = dataSource[row].model
+        let userModel = model.fetchUserDisplayModel(at: indexPath)
 
-        cell.userName = model.userName
-        cell.isUserOnline = true
-
-        let relatedMessage = dataSource[row].model.messages.last
-
-        cell.lastMessageText = relatedMessage?.message
-        cell.lastMessageDate = relatedMessage?.sentDate
+        cell.userName = userModel.name
+        cell.isUserOnline = userModel.isOnline
+        cell.lastMessageText = userModel.lastMessageText
+        cell.lastMessageDate = userModel.lastMessageDate
+        cell.backgroundColor = cell.isUserOnline ? .CellYellowColor : .white
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    // MARK: Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReusabledentifier, for: indexPath) as! ConversationsListCell
-
-        configureCell(cell, at: indexPath)
-
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
-    {
-        if section == 0
+        if let cell = sender as? ConversationsListCell,
+            let dialogVC = segue.destination as? ConversationViewController
         {
-            return "Online"
-        }
-        return "History"
-    }
-
-    // MARK: - UITableViewDelegate
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-        if let cell = tableView.cellForRow(at: indexPath)
-        {
-            selectedUserID = dataSource[indexPath.row].userID
-            performSegue(withIdentifier: idShowDialogSegue, sender: cell)
+            conversationViewController = dialogVC
+            conversationViewController?.setSendMessageButtonEnabled(selectedUser.isOnline)
+            dialogVC.navigationItem.title = cell.userName
+            dialogVC.mpcService = mpcService
+            dialogVC.selectedUser = selectedUser
         }
     }
 
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
-    {
-        return CGFloat.leastNormalMagnitude
-    }
+    // MARK: Helping methods
 
-    // MARK: - Private methods
-
-    private func updateUI()
+    private func checkUser(_ user: User?)
     {
-        DispatchQueue.main.async
+        guard let user = user,
+            selectedUser != nil else { return }
+        if user == selectedUser
         {
-            self.conversationsTableView.reloadSections(IndexSet(integer: 0), with: .fade)
+            conversationViewController?.setSendMessageButtonEnabled(user.isOnline)
         }
     }
 
@@ -181,20 +229,23 @@ final class ConversationsListViewController: UIViewController, IConversationsLis
         self.assembly.model
     }()
 
-    private lazy var mpcService: IMPCService = {
-        self.assembly.mpcService
-    }()
-
     // MARK: Stored
+
+    private var selectedUser: User!
+
+    private weak var conversationViewController: IConversationViewController?
 
     private let assembly = ConversationsListAssembly()
 
-    private var dataSource = [ConversationDataSourceType]()
-
-    private var selectedUserID = ""
-    private let currentDeviceUserID = UIDevice.current.identifierForVendor!.uuidString
+    private let localUserId = UIDevice.current.identifierForVendor!.uuidString
 
     private let cellReusabledentifier = "idDialogsCell"
-    private let numOfSections = 1
+
     private let idShowDialogSegue = "idShowDialogSegue"
+
+    // MARK: Services
+
+    private lazy var mpcService: IMPCService = {
+        self.assembly.mpcService
+    }()
 }

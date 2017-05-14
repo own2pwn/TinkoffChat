@@ -15,19 +15,8 @@ public class Profile: NSManagedObject {}
 struct ProfileEntityModel
 {
     let aboutUser: String?
-    let userImage: NSData?
+    let imagePath: String?
     let userName: String?
-}
-
-extension Profile: IManagedObject
-{
-    typealias Entity = ProfileEntityModel
-
-    func toEntity() -> ProfileEntityModel?
-    {
-        return ProfileEntityModel(aboutUser: aboutUser,
-                                  userImage: userImage, userName: userName)
-    }
 }
 
 extension ProfileEntityModel: ManagedObjectConvertible
@@ -40,7 +29,7 @@ extension ProfileEntityModel: ManagedObjectConvertible
         Profile.findFirstOrInsert(in: context)
         { profileMO in
             profileMO.aboutUser = self.aboutUser
-            profileMO.userImage = self.userImage
+            profileMO.imagePath = self.imagePath
             profileMO.userName = self.userName
 
             completion(profileMO)
@@ -54,9 +43,22 @@ extension ProfileEntityModel: ModelValidable
 
     func validate() -> ProfileEntityModel?
     {
-        guard aboutUser != nil || userImage != nil || userName != nil else { return nil }
+        guard aboutUser != nil || imagePath != nil || userName != nil else { return nil }
 
         return ProfileEntityModel(aboutUser: aboutUser,
-                                  userImage: userImage, userName: userName)
+                                  imagePath: imagePath,
+                                  userName: userName)
+    }
+}
+
+extension Profile: IManagedObject
+{
+    typealias Entity = ProfileEntityModel
+
+    func toEntity() -> ProfileEntityModel?
+    {
+        return ProfileEntityModel(aboutUser: aboutUser,
+                                  imagePath: imagePath,
+                                  userName: userName)
     }
 }

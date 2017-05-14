@@ -10,9 +10,9 @@ import Foundation
 
 protocol IMPCWorker: class
 {
-    func send(message: String, to userID: String, completion: (Error?) -> Void)
-    func getLocalUserID() -> String
+    func send(message: String,
+              to userID: String,
+              completion: (Error?) -> Void)
 
     var online: Bool { get set }
-    weak var delegate: IMPCServiceDelegate? { get set }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController
+final class ProfileViewController: UIViewController
 {
     // MARK: - Outlets
 
@@ -22,24 +22,6 @@ class ProfileViewController: UIViewController
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    // MARK: - Properties
-
-    var onViewTapGesture = UITapGestureRecognizer()
-
-    var onuserProfileImageViewTapGesture = UITapGestureRecognizer()
-
-    var isProfileImageSet = false
-
-    var savedProfileData = ProfileDisplayModel.defaultModel()
-
-    var currentProfileData = ProfileDisplayModel.defaultModel()
-    {
-        didSet
-        {
-            setButtonsEnabled(currentProfileData != savedProfileData)
-        }
-    }
-
     // MARK: - Life cycle
 
     override func viewDidLoad()
@@ -49,8 +31,8 @@ class ProfileViewController: UIViewController
         activityIndicator.hidesWhenStopped = true
 
         setupLogic()
-        model.load
-        { profile, err in
+        model.loadProfileModel
+        { profile, error in
             self.savedProfileData = profile
             self.currentProfileData = profile
 
@@ -59,23 +41,51 @@ class ProfileViewController: UIViewController
             self.userProfileImageView.image = profile.userImage
 
             if profile.userImage != #imageLiteral(resourceName: "profileImg") { self.isProfileImageSet = true }
-
-            if err != nil
+            if let error = error
             {
-                print("There was an error while loading profile data.\nError: \(String(describing: err?.localizedDescription))")
+                print("model.loadProfileModel: \(error)")
             }
         }
     }
 
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
 
-    // MARK: - Methods
+    @IBAction func didTapCloseNavBarButton(_ sender: UIBarButtonItem)
+    {
+        dismiss(animated: true, completion: nil)
+    }
 
-    func setupLogic()
+    // MARK: - Private methods
+
+    // MARK: Outlet actions
+
+    @IBAction func didTapSaveButton(_ sender: UIButton)
+    {
+        aboutUserTextView.endEditing(true)
+        let dataBeforeSaving = currentProfileData
+        saveProfileData
+        { [weak self] bSuccess, error in
+            self?.presentSavingResultAlert(bSuccess)
+            if let error = error
+            {
+                print("^ Profile[didTapSaveButton]: \(error)")
+            }
+            if bSuccess
+            {
+                self?.savedProfileData = dataBeforeSaving
+            }
+            self?.updateCurrentProfileData()
+        }
+    }
+
+    // MARK: Logic
+
+    private func setupLogic()
     {
         userNameTextField.delegate = self
         aboutUserTextView.delegate = self
 
+        // swiftlint:disable line_length
         onuserProfileImageViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(onuserProfileImageViewTap))
         userProfileImageView.addGestureRecognizer(onuserProfileImageViewTapGesture)
     }
@@ -88,7 +98,7 @@ class ProfileViewController: UIViewController
         let confirmDeleteAlertController = UIAlertController(title: "Удалить изображение профиля?", message: "Отменить это действие будет невозможно", preferredStyle: .alert)
 
         let chooseFromLibraryAction = UIAlertAction(title: "Выбрать из библиотеки", style: .default)
-        { action in
+        { _ in
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
 
@@ -99,7 +109,7 @@ class ProfileViewController: UIViewController
         }
 
         let takePhotoAction = UIAlertAction(title: "Сделать фото", style: .default)
-        { action in
+        { _ in
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
 
@@ -112,9 +122,9 @@ class ProfileViewController: UIViewController
         let cancelAction = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
 
         let deleteAction = UIAlertAction(title: "Удалить фото", style: .destructive)
-        { action in
+        { _ in
             let confirmDeleteAction = UIAlertAction(title: "Удалить", style: .destructive)
-            { action in
+            { _ in
                 self.userProfileImageView.image = #imageLiteral(resourceName: "profileImg")
                 self.isProfileImageSet = false
                 self.updateCurrentProfileData()
@@ -135,28 +145,10 @@ class ProfileViewController: UIViewController
         profileImageActionActionSheet.addAction(cancelAction)
 
         present(profileImageActionActionSheet, animated: true, completion: nil)
+        // swiftlint:enable line_length
     }
 
-    @IBAction func didTapSaveButton(_ sender: UIButton)
-    {
-        let dataBeforeSaving = currentProfileData
-        saveProfileData
-        { [weak self] bSuccess, err in
-            self?.presentSavingResultAlert(bSuccess)
-            if bSuccess
-            {
-                self?.savedProfileData = dataBeforeSaving
-            }
-            self?.updateCurrentProfileData()
-        }
-    }
-
-    @IBAction func didTapCloseNavBarButton(_ sender: UIBarButtonItem)
-    {
-        dismiss(animated: true, completion: nil)
-    }
-
-    func presentSavingResultAlert(_ success: Bool)
+    private func presentSavingResultAlert(_ success: Bool)
     {
         let alert = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
         let dismissBtn = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -166,7 +158,7 @@ class ProfileViewController: UIViewController
         {
             alert.title = "Ошибка"
             alert.message = "Не удалось сохранить данные"
-            let retryBtn = UIAlertAction(title: "Повторить", style: .default, handler: { action in
+            let retryBtn = UIAlertAction(title: "Повторить", style: .default, handler: { _ in
                 self.saveProfileData()
             })
             alert.addAction(retryBtn)
@@ -176,14 +168,14 @@ class ProfileViewController: UIViewController
 
     // MARK: - Data management
 
-    func updateCurrentProfileData()
+    fileprivate func updateCurrentProfileData()
     {
         currentProfileData = ProfileDisplayModel(userName: userNameTextField.text ?? "",
                                                  aboutUser: aboutUserTextView.text,
                                                  userImage: userProfileImageView.image ?? #imageLiteral(resourceName: "profileImg"))
     }
 
-    func setButtonsEnabled(_ enabled: Bool)
+    private func setButtonsEnabled(_ enabled: Bool)
     {
         saveProfileDataButton.isEnabled = enabled
         if enabled
@@ -196,7 +188,7 @@ class ProfileViewController: UIViewController
         }
     }
 
-    func saveProfileData(completion: @escaping (Bool, Error?) -> Void = { _, _ in })
+    private func saveProfileData(completion: @escaping (Bool, Error?) -> Void = { _, _ in })
     {
         activityIndicator.startAnimating()
         model.save(profile: currentProfileData)
@@ -212,10 +204,10 @@ class ProfileViewController: UIViewController
         }
     }
 
-    func loadProfileData(completion: @escaping (ProfileDisplayModel, Error?) -> Void)
+    private func loadProfileData(completion: @escaping (ProfileDisplayModel, Error?) -> Void)
     {
         activityIndicator.startAnimating()
-        model.load
+        model.loadProfileModel
         { [weak self] profile, err in
             completion(profile, err)
             self?.activityIndicator.stopAnimating()
@@ -223,6 +215,22 @@ class ProfileViewController: UIViewController
     }
 
     // MARK: - Private properties
+
+    fileprivate var isProfileImageSet = false
+
+    private var onViewTapGesture = UITapGestureRecognizer()
+
+    private var onuserProfileImageViewTapGesture = UITapGestureRecognizer()
+
+    private var savedProfileData = ProfileDisplayModel.defaultModel()
+
+    private var currentProfileData = ProfileDisplayModel.defaultModel()
+    {
+        didSet
+        {
+            setButtonsEnabled(currentProfileData != savedProfileData)
+        }
+    }
 
     private lazy var assembly: ProfileAssembly = {
         ProfileAssembly()
@@ -291,6 +299,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         {
             userProfileImageView.image = pickedImage
             userProfileImageView.contentMode = .scaleAspectFit
+
             updateCurrentProfileData()
 
             isProfileImageSet = true

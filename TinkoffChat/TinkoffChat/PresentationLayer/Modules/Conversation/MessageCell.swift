@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol MessageCellModel: class
+{
+    var messageText: String? { get set }
+}
+
 final class MessageCell: UITableViewCell, MessageCellModel
 {
     // MARK: - MessageCellModel

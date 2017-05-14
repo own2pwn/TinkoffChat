@@ -12,22 +12,25 @@ class ProfileAssembly
 {
     func profileModel() -> IProfileModel
     {
-        return ProfileModel(coreDataWorker: coreDataWorkerService())
+        return ProfileModel(coreDataService: coreDataService(),
+                            dataStoreService: dataStoreService())
     }
 
-    // MARK: - Private methods
+    // MARK: - Private
 
-    // MARK: - Services
+    // MARK: Services
 
-    private func coreDataWorkerService() -> ICoreDataWorker
+    private func coreDataService() -> ICoreDataService
     {
-        return CoreDataWorker(coreDataStack: coreDataStack,
-                              storageManager: storageManager)
+        return CoreDataService(coreDataWorker: coreDataWorker)
     }
 
-    // MARK: - Private properties
+    private func dataStoreService() -> IDataStoreService
+    {
+        return DataStoreService()
+    }
 
-    private let coreDataStack = CoreDataStack()
+    // MARK: Core objects
 
-    private let storageManager = StorageManager()
+    private let coreDataWorker: ICoreDataWorker = CoreDataAssembly.coreDataWorker
 }

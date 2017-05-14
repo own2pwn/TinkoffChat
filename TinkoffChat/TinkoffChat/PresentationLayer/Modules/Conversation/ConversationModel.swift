@@ -7,76 +7,124 @@
 //
 
 import Foundation
-
-protocol MessageCellModel: class
-{
-    var messageText: String? { get set }
-}
+import CoreData
 
 protocol IConversationModel
 {
-    func getMessages(for userID: String, with user: String, completion: ([Message]) -> Void)
+    func initFetchedResultsController(_ participant: User,
+                                      _ delegate: NSFetchedResultsControllerDelegate)
 
-    weak var delegate: IConversationModelDelegate? { get set }
-    var localUser: String { get set }
+    func messagesCount() -> Int
+
+    func isIncomingMessage(_ orderIndex: Int) -> Bool
+
+    func fetchMessageDisplayModel(at orderIndex: Int) -> MessageDisplayModel
+
+    func saveMessage(_ message: String,
+                     receiverId: String)
 }
 
-protocol IConversationModelDelegate: class
-{
-    func didLostUser(userID: String)
-    func didReceiveMessage(from userID: String, message: String)
-}
-
-final class ConversationModel: IConversationModel, IMPCServiceDelegate
+final class ConversationModel: IConversationModel
 {
     // MARK: - IConversationModel
 
-    func getMessages(for userID: String, with user: String, completion: ([Message]) -> Void)
+    func initFetchedResultsController(_ participant: User,
+                                      _ delegate: NSFetchedResultsControllerDelegate)
     {
-        mpcService.loadMessages(for: userID, with: user, completion: { messages in
-            let sorted = messages.sorted(by: { (lv, rv) -> Bool in
-                lv.sentDate > rv.sentDate
-            })
-            completion(sorted)
-        })
+        self.participant = participant
+        messageFRC = frcProviderService.messageFetchedResultsController(participant, delegate)
     }
 
-    // MARK: - IMPCServiceDelegate
-
-    func didFoundUser(userID: String, userName: String?) {}
-
-    func didLostUser(userID: String)
+    func messagesCount() -> Int
     {
-        delegate?.didLostUser(userID: userID)
+        // swiftlint:disable force_cast
+        let conversation = participant.conversations?.allObjects.first as! Conversation
+        return conversation.messages!.count
     }
 
-    func didReceiveMessage(text: String, fromUser: String, toUser: String)
+    func fetchMessageDisplayModel(at orderIndex: Int) -> MessageDisplayModel
     {
-        if toUser == localUser
-        {
-            delegate?.didReceiveMessage(from: fromUser, message: text)
+        let conversation = participant.conversations?.allObjects.first as! Conversation
+        let message = (conversation.messages?.allObjects as! [Message])
+            .filter({ $0.orderIndex == Int64(orderIndex) })
+            .first!
+
+        return MessageDisplayModel(text: message.text, date: message.date as Date)
+    }
+
+    func isIncomingMessage(_ orderIndex: Int) -> Bool
+    {
+        let conversation = participant.conversations?.allObjects.first as! Conversation
+        let messages = (conversation.messages?.allObjects as! [Message]).sorted(by: { $0.orderIndex < $1.orderIndex })
+        let message = messages[orderIndex]
+
+        return message.sender == participant
+    }
+
+    func saveMessage(_ message: String,
+                     receiverId: String)
+    {
+        let userById = fetchRequestProvider.userById(receiverId)
+        let appUser = fetchRequestProvider.appUser()
+
+        let receiverModel = coreDataWorker.executeFetchRequest(userById)!.first as! User
+        let conversationModel = receiverModel.conversations!.allObjects.first as! Conversation
+        let currentAppUser = coreDataWorker.executeFetchRequest(appUser)!.first as! AppUser
+        // swiftlint:enable force_cast
+        let currentUser = currentAppUser.currentUser!
+
+        let newMessage = Message(context: coreDataWorker.saveCtx)
+        let messagesCountInConversation = conversationModel.messages?.count ?? 0
+
+        newMessage.date = NSDate()
+        newMessage.messageId = CommunicationHelper.generateUniqueId()
+        newMessage.orderIndex = Int64(messagesCountInConversation)
+        newMessage.text = message
+
+        newMessage.conversation = conversationModel
+        newMessage.lastMessageAppUser = currentAppUser
+        newMessage.lastMessageInConversation = conversationModel
+        newMessage.receiver = receiverModel
+        newMessage.sender = currentUser
+        newMessage.undreadInConversation = conversationModel
+
+        coreDataWorker.updateOrInsert(object: newMessage)
+        { error in
+            if let error = error
+            {
+                print("^ saveMessage: \(error)")
+            }
         }
     }
 
-    func log(error message: String)
-    {
-        print(message)
-    }
-
-    weak var delegate: IConversationModelDelegate?
-
-    lazy var localUser: String = {
-        self.mpcService.localUserID()
-    }()
-
     // MARK: - Life cycle
 
-    init(mpcService: IMPCService)
+    init(mpcService: IMPCService,
+         coreDataWorker: ICoreDataWorker,
+         frcProviderService: IFetchedResultsControllerProviderService)
     {
         self.mpcService = mpcService
+        self.coreDataWorker = coreDataWorker
+        self.frcProviderService = frcProviderService
+
+        fetchRequestProvider = FetchRequestProvider(coreDataWorker: coreDataWorker)
     }
 
     // MARK: - Private properties
 
+    private var participant: User!
+
+    private var messageFRC: NSFetchedResultsController<Message>!
+
+    // MARK: Services
+
     private let mpcService: IMPCService
+
+    private let frcProviderService: IFetchedResultsControllerProviderService
+
+    // MARK: Core objects
+
+    private let coreDataWorker: ICoreDataWorker
+
+    private let fetchRequestProvider: IFetchRequestProvider
 }

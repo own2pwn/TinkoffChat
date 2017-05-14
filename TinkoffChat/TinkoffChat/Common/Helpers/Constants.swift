@@ -25,3 +25,11 @@ enum KMessageInfo
     static let FromUser = "fromUser"
     static let ToUser = "toUser"
 }
+
+enum KFetchRequestTemplates
+{
+    static let AppUser = "AppUser"
+    static let ConversationById = "ConversationById"
+    static let ConversationByUserId = "ConversationByUserId"
+    static let UsersById = "UsersById"
+}

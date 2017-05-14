@@ -7,8 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
-final class ConversationViewController: UIViewController, IConversationModelDelegate, UITableViewDataSource
+protocol IConversationViewController: class
+{
+    func setSendMessageButtonEnabled(_ enabled: Bool)
+}
+
+final class ConversationViewController: UIViewController, UITableViewDataSource,
+    NSFetchedResultsControllerDelegate, IConversationViewController
 {
     // MARK: - Outlets
 
@@ -20,15 +27,36 @@ final class ConversationViewController: UIViewController, IConversationModelDele
 
     @IBOutlet weak var textViewBottomConstraint: NSLayoutConstraint!
 
-    // MARK: - Outlets actions
+    // MARK: - NSFetchedResultsControllerDelegate
 
-    @IBAction func didPressSendMessageButton(_ sender: UIButton)
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>)
     {
-        guard let text = messageTextView.text else { return }
+        conversationTableView.beginUpdates()
+    }
 
-        if !text.isEmpty
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>)
+    {
+        conversationTableView.endUpdates()
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any, at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?)
+    {
+        let ip = IndexPath(row: model.messagesCount() - 1, section: 0)
+        if type == .insert
         {
-            send(message: text)
+            conversationTableView.insertRows(at: [ip], with: .fade)
+        }
+    }
+
+    // MARK: - IConversationViewController
+
+    func setSendMessageButtonEnabled(_ enabled: Bool)
+    {
+        DispatchQueue.main.async
+        {
+            self.sendMessageButton.isEnabled = enabled
         }
     }
 
@@ -38,39 +66,15 @@ final class ConversationViewController: UIViewController, IConversationModelDele
     {
         super.viewDidLoad()
 
-        setupLogic()
+        model.initFetchedResultsController(selectedUser, self)
 
         setupView()
-
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidChangeState), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidChangeState), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
-
-        loadMessages()
+        observeKeyboard()
     }
 
     deinit
     {
         NotificationCenter.default.removeObserver(self)
-    }
-
-    // MARK: - IConversationModelDelegate
-
-    func didLostUser(userID: String)
-    {
-        if userID == selectedUserID
-        {
-            setSendMessageButtonEnabled(false)
-        }
-    }
-
-    func didReceiveMessage(from userID: String, message: String)
-    {
-        let newMessage = Message(message: message, sender: userID, receiver: currentDeviceUserID)
-        dataSource.append(newMessage)
-
-        updateUI()
     }
 
     // MARK: - UITableViewDataSource
@@ -82,9 +86,10 @@ final class ConversationViewController: UIViewController, IConversationModelDele
         cell.selectionStyle = .none
         cell.backgroundColor = .CellLightYellowColor
 
-        let message = dataSource[row]
-        cell.messageText = message.message
-        cell.messageDateLabel.text = Calendar.current.isDateInToday(message.sentDate) ? message.sentDate.extractTime() : message.sentDate.extractDay()
+        let message = model.fetchMessageDisplayModel(at: row)
+        cell.messageText = message.text
+        cell.messageDateLabel.text = Calendar.current.isDateInToday(message.date) ? message.date.extractTime() : message.date.extractDay()
+        // swiftlint:disable:previous line_length
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -92,17 +97,16 @@ final class ConversationViewController: UIViewController, IConversationModelDele
         let row = indexPath.row
         var cell = MessageCell()
 
-        let msgSender = dataSource[row].sender
-
-        if msgSender == currentDeviceUserID
-        {
-            cell = tableView.dequeueReusableCell(withIdentifier: sentMessageCellId, for: indexPath) as! MessageCell
-        }
-        else
+        // swiftlint:disable force_cast
+        if model.isIncomingMessage(row)
         {
             cell = tableView.dequeueReusableCell(withIdentifier: receivedMessageCellId, for: indexPath) as! MessageCell
         }
-
+        else
+        {
+            cell = tableView.dequeueReusableCell(withIdentifier: sentMessageCellId, for: indexPath) as! MessageCell
+            // swiftlint:enable force_cast
+        }
         configureCell(cell, at: indexPath)
 
         return cell
@@ -110,32 +114,30 @@ final class ConversationViewController: UIViewController, IConversationModelDele
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return dataSource.count
+        return model.messagesCount()
+    }
+
+    // MARK: - Outlet actions
+
+    @IBAction func didPressSendMessageButton(_ sender: UIButton)
+    {
+        guard let text = messageTextView.text else { return }
+
+        if !text.isEmpty
+        {
+            send(message: text)
+        }
     }
 
     // MARK: - Private methods
 
-    private func setupLogic()
+    private func observeKeyboard()
     {
-        model.delegate = self
-    }
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)),
+                                               name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 
-    private func loadMessages()
-    {
-        model.getMessages(for: selectedUserID, with: currentDeviceUserID)
-        { messages in
-            dataSource = messages
-
-            updateUI()
-        }
-    }
-
-    private func updateUI()
-    {
-        DispatchQueue.main.async
-        {
-            self.conversationTableView.reloadSections(IndexSet(integer: 0), with: .fade)
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
+                                               name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
     // MARK: View setup
@@ -163,7 +165,7 @@ final class ConversationViewController: UIViewController, IConversationModelDele
 
     private func send(message: String)
     {
-        mpcService.send(message: message, to: selectedUserID)
+        mpcService.send(message: message, to: selectedUserId)
         { error in
             if error != nil
             {
@@ -171,14 +173,8 @@ final class ConversationViewController: UIViewController, IConversationModelDele
             }
             else
             {
-                let newMessage = Message(message: message, sender: currentDeviceUserID, receiver: selectedUserID)
-                dataSource.append(newMessage)
-
-                DispatchQueue.main.async
-                {
-                    self.messageTextView.text = nil
-                    self.conversationTableView.reloadSections(IndexSet(integer: 0), with: .fade)
-                }
+                model.saveMessage(message, receiverId: selectedUserId)
+                messageTextView.text = nil
             }
         }
     }
@@ -191,27 +187,9 @@ final class ConversationViewController: UIViewController, IConversationModelDele
         }
     }
 
-    internal func keyboardDidChangeState()
-    {
-        let messagesCount = dataSource.count
-
-        if messagesCount > 0
-        {
-            conversationTableView.scrollToRow(at: IndexPath(row: messagesCount - 1, section: 0), at: .bottom, animated: true)
-        }
-    }
-
     internal func keyboardWillHide()
     {
         textViewBottomConstraint.constant = 0
-    }
-
-    private func setSendMessageButtonEnabled(_ enabled: Bool)
-    {
-        DispatchQueue.main.async
-        {
-            self.sendMessageButton.isEnabled = enabled
-        }
     }
 
     // MARK: - Private properties
@@ -228,14 +206,23 @@ final class ConversationViewController: UIViewController, IConversationModelDele
 
     // MARK: Stored
 
-    internal var mpcService: IMPCService!
+    internal var selectedUserId: String!
 
-    internal var selectedUserID: String!
-
-    private var dataSource = [Message]()
+    internal var selectedUser: User!
+    {
+        didSet
+        {
+            selectedUserId = selectedUser.userId
+        }
+    }
 
     private let currentDeviceUserID = UIDevice.current.identifierForVendor!.uuidString
 
     private let sentMessageCellId = "idSentMessage"
+
     private let receivedMessageCellId = "idReceivedMessage"
+
+    // MARK: Services
+
+    internal var mpcService: IMPCService!
 }

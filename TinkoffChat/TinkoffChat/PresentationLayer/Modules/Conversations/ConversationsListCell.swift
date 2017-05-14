@@ -8,6 +8,15 @@
 
 import UIKit
 
+protocol ConversationsListCellModel: class
+{
+    var userName: String? { get set }
+    var lastMessageText: String? { get set }
+    var lastMessageDate: Date? { get set }
+    var isUserOnline: Bool { get set }
+    var hasUnreadMessages: Bool { get set }
+}
+
 final class ConversationsListCell: UITableViewCell, ConversationsListCellModel
 {
     // MARK: - DialogCellModel

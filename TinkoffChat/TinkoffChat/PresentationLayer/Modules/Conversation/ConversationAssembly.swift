@@ -10,15 +10,29 @@ import Foundation
 
 final class ConversationAssembly
 {
-    let model: IConversationModel
-    let mpcService: IMPCService
+    var model: IConversationModel!
+    var mpcService: IMPCService!
+
+    // MARK: - Life cycle
 
     init(with mpcService: IMPCService)
     {
-        let model = ConversationModel(mpcService: mpcService)
+        let model = ConversationModel(mpcService: mpcService,
+                                      coreDataWorker: coreDataWorker,
+                                      frcProviderService: frcProviderService)
         self.mpcService = mpcService
         self.model = model
-
-        mpcService.delegate = model
     }
+
+    // MARK: - Private
+
+    // MARK: Services
+
+    private let frcProviderService: IFetchedResultsControllerProviderService = FetchedResultsControllerProviderService()
+
+    // MARK: Core object
+
+    private let coreDataWorker: ICoreDataWorker = CoreDataAssembly.coreDataWorker
+
+    private let fetchRequestProvider: IFetchRequestProvider = CoreDataAssembly.fetchRequestProvider
 }

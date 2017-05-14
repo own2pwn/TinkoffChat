@@ -17,7 +17,7 @@ extension Profile
     }
 
     @NSManaged public var aboutUser: String?
-    @NSManaged public var userImage: NSData?
+    @NSManaged public var imagePath: String?
     @NSManaged public var userName: String?
 
 }

@@ -12,7 +12,7 @@ import CoreData
 protocol IStorageManager
 {
     var masterContext: NSManagedObjectContext { get }
-    var managedObjectModel: NSManagedObjectModel? { get }
+    var managedObjectModel: NSManagedObjectModel { get }
     var persistentStoreCoordinator: NSPersistentStoreCoordinator? { get }
     var mainContext: NSManagedObjectContext { get }
     var saveContext: NSManagedObjectContext { get }
@@ -22,118 +22,72 @@ final class StorageManager: IStorageManager
 {
     // MARK: - IStorageManager
     
-    var managedObjectModel: NSManagedObjectModel?
-    {
-        if _managedObjectModel == nil
-        {
-            guard let url = modelURL else { return nil }
-            _managedObjectModel = NSManagedObjectModel(contentsOf: url)
-        }
-        return _managedObjectModel
-    }
+    lazy var managedObjectModel: NSManagedObjectModel = {
+        let model = NSManagedObjectModel(contentsOf: self.modelURL)
+        assert(model != nil, "Can't initialize managedObjectModel")
+        return model!
+    }()
     
-    var persistentStoreCoordinator: NSPersistentStoreCoordinator?
-    {
-        if _persistentStoreCoordinator == nil
+    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+        do
         {
-            guard let model = self.managedObjectModel else
-            {
-                assertionFailure("Can't initialize managedObjectModel")
-                return nil
-            }
-            _persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
-            do
-            {
-                try _persistentStoreCoordinator?.addPersistentStore(ofType: NSSQLiteStoreType,
-                                                                    configurationName: nil,
-                                                                    at: self.storeURL, options: nil)
-            }
-            catch
-            {
-                assertionFailure("Can't add persistent store to coordinator. Error: \(error)")
-            }
+            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType,
+                                               configurationName: nil,
+                                               at: self.storeURL, options: nil)
         }
-        return _persistentStoreCoordinator
-    }
-    
-    var masterContext: NSManagedObjectContext
-    {
-        if let ctx = _masterContext { return ctx }
-        else
+        catch
         {
-            let ctx = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-            guard let coordinator = persistentStoreCoordinator else
-            {
-                assertionFailure("Can't initialize persistent store!")
-                return ctx
-            }
-            ctx.persistentStoreCoordinator = coordinator
-            ctx.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
-            ctx.undoManager = nil
-            _masterContext = ctx
+            assertionFailure("Can't add persistent store to coordinator. Error: \(error)")
+        }
+        return coordinator
+    }()
+    
+    lazy var masterContext: NSManagedObjectContext = {
+        let ctx = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        guard let coordinator = self.persistentStoreCoordinator else
+        {
+            assertionFailure("Can't initialize persistent store!")
             return ctx
         }
-    }
+        ctx.persistentStoreCoordinator = coordinator
+        ctx.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        ctx.undoManager = nil
+        return ctx
+    }()
     
-    var mainContext: NSManagedObjectContext
-    {
-        if let ctx = _mainContext { return ctx }
-        else
-        {
-            let ctx = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-            guard let parentContext = _masterContext else
-            {
-                assertionFailure("Can't initialize parentContext!")
-                return ctx
-            }
-            ctx.parent = parentContext
-            ctx.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
-            ctx.undoManager = nil
-            _mainContext = ctx
-            return ctx
-        }
-    }
+    lazy var mainContext: NSManagedObjectContext = {
+        let ctx = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        ctx.parent = self.masterContext
+        ctx.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        ctx.undoManager = nil
+        return ctx
+    }()
     
-    var saveContext: NSManagedObjectContext
-    {
-        if let ctx = _mainContext { return ctx }
-        else
-        {
-            let ctx = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-            guard let parentContext = _mainContext else
-            {
-                assertionFailure("Can't initialize mainContext!")
-                return ctx
-            }
-            ctx.parent = parentContext
-            ctx.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-            ctx.undoManager = nil
-            _mainContext = ctx
-            return ctx
-        }
-    }
+    lazy var saveContext: NSManagedObjectContext = {
+        let ctx = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        ctx.parent = self.mainContext
+        ctx.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        ctx.undoManager = nil
+        return ctx
+    }()
     
     // MARK: - Private properties
     
     private let managedObjectModelName = "ChatModel"
     
-    private var modelURL: URL?
-    {
-        guard let url = Bundle.main.url(forResource: managedObjectModelName, withExtension: "momd") else
-        {
-            assertionFailure("Can't obtain url for managed object model!")
-            return nil
-        }
-        return url
-    }
+    private lazy var modelURL: URL = {
+        let url = Bundle.main.url(forResource: self.managedObjectModelName, withExtension: "momd")
+        assert(url != nil, "Can't obtain url for managed object model!")
+        return url!
+    }()
     
-    private var storeURL: URL
-    {
+    private lazy var storeURL: URL = {
         let docsDir = FileManager.default.urls(for: .documentDirectory,
                                                in: .userDomainMask).first!
         
         return docsDir.appendingPathComponent("Store" + ".sqlite")
-    }
+    }()
     
     private var _managedObjectModel: NSManagedObjectModel?
     

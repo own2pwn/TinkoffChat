@@ -10,8 +10,10 @@ import UIKit
 
 protocol IProfileModel
 {
-    func save(profile: ProfileDisplayModel, completion: @escaping (Bool, Error?) -> Void)
-    func load(completion: @escaping (ProfileDisplayModel, Error?) -> Void)
+    func loadProfileModel(completion: @escaping (ProfileDisplayModel, Error?) -> Void)
+
+    func save(profile: ProfileDisplayModel,
+              completion: @escaping (Bool, Error?) -> Void)
 }
 
 struct ProfileDisplayModel
@@ -42,27 +44,9 @@ class ProfileModel: IProfileModel
 {
     // MARK: - IProfileModel
 
-    func save(profile: ProfileDisplayModel, completion: @escaping (Bool, Error?) -> Void)
+    func loadProfileModel(completion: @escaping (ProfileDisplayModel, Error?) -> Void)
     {
-        let imageData = UIImagePNGRepresentation(profile.userImage) as NSData?
-
-        let entityModel = ProfileEntityModel(aboutUser: profile.aboutUser,
-                                             userImage: imageData, userName: profile.userName)
-
-        coreDataWorker.updateOrInsert(entity: entityModel)
-        { error in
-            if let error = error
-            {
-                print("Couldn't save profile data! Error: \(error.localizedDescription)")
-                completion(false, error)
-            }
-            else { completion(true, nil) }
-        }
-    }
-
-    func load(completion: @escaping (ProfileDisplayModel, Error?) -> Void)
-    {
-        coreDataWorker.get(with: nil, sortDescriptors: nil, fetchLimit: 1)
+        coreDataService.get(predicate: nil, sortDescriptors: nil, fetchLimit: 1)
         { (result: Result<[ProfileEntityModel]>) in
             switch result
             {
@@ -72,13 +56,8 @@ class ProfileModel: IProfileModel
             case .success(let profile):
                 if let profile = profile.first?.validate()
                 {
-                    if let imageData = profile.userImage as Data?
-                    {
-                        let image = UIImage(data: imageData) ?? #imageLiteral(resourceName: "profileImg")
-                        let displayModel = ProfileDisplayModel(userName: profile.userName ?? "",
-                                                               aboutUser: profile.aboutUser ?? "", userImage: image)
-                        completion(displayModel, nil)
-                    }
+                    let model = self.convertEntityToModel(profile)
+                    completion(model, nil)
                 }
                 else // no saved data
                 {
@@ -89,14 +68,61 @@ class ProfileModel: IProfileModel
         }
     }
 
+    func save(profile: ProfileDisplayModel,
+              completion: @escaping (Bool, Error?) -> Void)
+    {
+        dataStoreService.saveImageOnDisk(profile.userImage)
+        { error, path in
+            guard error == nil, let path = path else
+            {
+                completion(false, error)
+                return
+            }
+            let entityModel = ProfileEntityModel(aboutUser: profile.aboutUser,
+                                                 imagePath: path,
+                                                 userName: profile.userName)
+
+            self.coreDataService.updateOrInsert(entity: entityModel)
+            { error in
+                if let error = error
+                {
+                    print("Couldn't save profile data! Error: \(error.localizedDescription)")
+                    completion(false, error)
+                }
+                else { completion(true, nil) }
+            }
+        }
+    }
+
     // MARK: - Life cycle
 
-    init(coreDataWorker: ICoreDataWorker)
+    init(coreDataService: ICoreDataService,
+         dataStoreService: IDataStoreService)
     {
-        self.coreDataWorker = coreDataWorker
+        self.coreDataService = coreDataService
+        self.dataStoreService = dataStoreService
+    }
+
+    // MARK: - Private methods
+
+    private func convertEntityToModel(_ entity: ProfileEntityModel) -> ProfileDisplayModel
+    {
+        let userName = entity.userName ?? ""
+        let aboutUser = entity.aboutUser ?? ""
+        var image: UIImage
+        if entity.imagePath == nil { image = #imageLiteral(resourceName: "profileImg") }
+        else
+        {
+            image = dataStoreService.getImageFromDisk(by: entity.imagePath!) ?? #imageLiteral(resourceName: "profileImg")
+        }
+        return ProfileDisplayModel(userName: userName,
+                                   aboutUser: aboutUser,
+                                   userImage: image)
     }
 
     // MARK: - Private properties
 
-    private let coreDataWorker: ICoreDataWorker
+    private let coreDataService: ICoreDataService
+
+    private let dataStoreService: IDataStoreService
 }

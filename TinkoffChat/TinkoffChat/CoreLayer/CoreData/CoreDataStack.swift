@@ -11,14 +11,20 @@ import CoreData
 
 protocol ICoreDataStack
 {
-    func performSave(context: NSManagedObjectContext, completion: ((Error?) -> Void)?)
+    func performSave(context: NSManagedObjectContext,
+                     completion: ((Error?) -> Void)?)
 }
 
 class CoreDataStack: ICoreDataStack
 {
-    func performSave(context: NSManagedObjectContext, completion: ((Error?) -> Void)?)
+    func performSave(context: NSManagedObjectContext,
+                     completion: ((Error?) -> Void)? = nil)
     {
-        guard context.hasChanges else { completion?(nil); return }
+        guard context.hasChanges else
+        {
+            completion?(nil)
+            return
+        }
         context.perform
         { [weak self] in
             do
@@ -34,7 +40,19 @@ class CoreDataStack: ICoreDataStack
             {
                 self?.performSave(context: parent, completion: completion)
             }
-            else { completion?(nil) }
+            else
+            {
+                completion?(nil)
+            }
         }
+    }
+}
+
+extension ICoreDataStack
+{
+    func performSave(context: NSManagedObjectContext,
+                     completion: ((Error?) -> Void)? = nil)
+    {
+        performSave(context: context, completion: completion)
     }
 }
