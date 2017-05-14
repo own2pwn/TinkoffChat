@@ -49,7 +49,8 @@ final class ImagePickerModel: IImagePickerModel
         }
     }
     
-    func fetchImage(at index: Int, completion: (UIImage?) -> Void)
+    func fetchImage(at index: Int,
+                    completion: (UIImage?) -> Void)
     {
         let imageUrl = dataSource[index].webformatUrl
         

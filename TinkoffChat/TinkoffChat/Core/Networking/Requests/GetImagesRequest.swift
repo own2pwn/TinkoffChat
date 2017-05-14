@@ -12,7 +12,7 @@ final class GetImagesRequest: PixabayGetRequest
 {
     // MARK: - PixabayGetRequest
     
-    override var path: String { return "" }
+    override var path: String { return "/api" }
     
     override var query: String { return constructedQuery }
     

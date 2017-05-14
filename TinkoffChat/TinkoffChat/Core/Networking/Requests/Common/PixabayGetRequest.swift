@@ -25,7 +25,7 @@ open class PixabayGetRequest: IPixabayGetRequest
     
     var urlRequest: URLRequest?
     {
-        let urlString = CRequest.pixabayApiBaseUrl + path + "?" + encodedQuery()
+        let urlString = CRequest.pixabayBaseUrl + path + "?" + encodedQuery()
         var urlRequest: URLRequest?
         
         if let url = URL(string: urlString)

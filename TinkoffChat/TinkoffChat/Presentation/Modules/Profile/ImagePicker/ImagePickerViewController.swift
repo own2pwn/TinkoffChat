@@ -110,6 +110,17 @@ final class ImagePickerViewController: UIViewController, IImagePickerViewControl
         guard let imageData = cachedImageData[row] as? Data,
             let image = UIImage(data: imageData) else
         {
+            model.fetchImage(at: row, completion: { image in
+                if let image = image
+                {
+                    let compressedImage = UIImagePNGRepresentation(image)
+                    cachedImageData[row] = compressedImage
+                    updateUI
+                    {
+                        self.imagesCollectionView.reloadItems(at: [indexPath])
+                    }
+                }
+            })
             return #imageLiteral(resourceName: "profileImg")
         }
 
@@ -118,7 +129,6 @@ final class ImagePickerViewController: UIViewController, IImagePickerViewControl
 
     private func invalidateCache()
     {
-        let imagesCount = model.imagesCount
         cachedImageData.removeAll()
     }
 

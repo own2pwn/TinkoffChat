@@ -36,5 +36,5 @@ enum KFetchRequestTemplates
 
 enum CRequest
 {
-    static let pixabayApiBaseUrl = "https://pixabay.com/api"
+    static let pixabayBaseUrl = "https://pixabay.com"
 }

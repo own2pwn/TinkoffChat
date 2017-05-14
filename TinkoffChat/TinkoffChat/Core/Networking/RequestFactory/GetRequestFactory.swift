@@ -6,7 +6,7 @@
 //  Copyright © 2017 Evgeniy. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct GetRequestFactory
 {
@@ -16,6 +16,12 @@ struct GetRequestFactory
         {
             return RequestConfig(request: GetImagesRequest(query: query, limit: limit),
                                  parser: GetImagesParser())
+        }
+
+        static func loadImageRequest(by url: String) -> RequestConfig<UIImage>
+        {
+            return RequestConfig(request: LoadImageRequest(url),
+                                 parser: LoadImageParser())
         }
     }
 }
