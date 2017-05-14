@@ -52,6 +52,9 @@
 		B95ED5161EC88CE900EBD076 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5151EC88CE900EBD076 /* Result.swift */; };
 		B95ED5191EC88D0000EBD076 /* GetRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5181EC88D0000EBD076 /* GetRequestFactory.swift */; };
 		B95ED51C1EC88D4200EBD076 /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED51B1EC88D4200EBD076 /* RequestSender.swift */; };
+		B95ED51E1EC88D9A00EBD076 /* IRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED51D1EC88D9A00EBD076 /* IRequestSender.swift */; };
+		B95ED5211EC88DBE00EBD076 /* IRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5201EC88DBE00EBD076 /* IRequest.swift */; };
+		B95ED5251EC88E1F00EBD076 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5241EC88E1F00EBD076 /* Parser.swift */; };
 		B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */; };
 		B998147F1EAC90D400B95723 /* ConversationsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */; };
 		B999037A1EB722380047313B /* ModelValidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99903791EB722380047313B /* ModelValidable.swift */; };
@@ -111,6 +114,9 @@
 		B95ED5151EC88CE900EBD076 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		B95ED5181EC88D0000EBD076 /* GetRequestFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetRequestFactory.swift; sourceTree = "<group>"; };
 		B95ED51B1EC88D4200EBD076 /* RequestSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestSender.swift; sourceTree = "<group>"; };
+		B95ED51D1EC88D9A00EBD076 /* IRequestSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IRequestSender.swift; sourceTree = "<group>"; };
+		B95ED5201EC88DBE00EBD076 /* IRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IRequest.swift; sourceTree = "<group>"; };
+		B95ED5241EC88E1F00EBD076 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCAssembly.swift; sourceTree = "<group>"; };
 		B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListAssembly.swift; sourceTree = "<group>"; };
 		B99903791EB722380047313B /* ModelValidable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelValidable.swift; sourceTree = "<group>"; };
@@ -282,41 +288,42 @@
 				10BAAB051E87B04000104295 /* Main.storyboard */,
 			);
 			name = Presentation;
-			path = PresentationLayer;
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		B93675441EA34AEF00B69AC8 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				B95ED5101EC88C5600EBD076 /* MPC */,
 				B95ED50F1EC88C4B00EBD076 /* Data */,
+				B95ED5101EC88C5600EBD076 /* MPC */,
 				B95ED5111EC88C9600EBD076 /* ImageLoaderService.swift */,
 			);
 			name = Service;
-			path = ServiceLayer;
+			path = Service;
 			sourceTree = "<group>";
 		};
 		B93675451EA34AF500B69AC8 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				B95ED5131EC88CC400EBD076 /* Networking */,
 				B91AEE1F1EC2242100B7AB3D /* Common */,
 				30A0EF7E1EB0F5F300296A3D /* CoreData */,
 				B926E33F1EB6230C00EFF3AC /* MPC */,
+				B95ED5131EC88CC400EBD076 /* Networking */,
 			);
 			name = Core;
-			path = CoreLayer;
+			path = Core;
 			sourceTree = "<group>";
 		};
 		B95ED5061EC879DD00EBD076 /* ImagePicker */ = {
 			isa = PBXGroup;
 			children = (
-				B95ED5071EC879F200EBD076 /* ImagePickerViewController.swift */,
 				B95ED5091EC87CC700EBD076 /* ImageCell.swift */,
-				B95ED50B1EC889A800EBD076 /* ImagePickerModel.swift */,
 				B95ED50D1EC88AD900EBD076 /* ImagePickerAssembly.swift */,
+				B95ED50B1EC889A800EBD076 /* ImagePickerModel.swift */,
+				B95ED5071EC879F200EBD076 /* ImagePickerViewController.swift */,
 			);
 			name = ImagePicker;
+			path = ImagePicker;
 			sourceTree = "<group>";
 		};
 		B95ED50F1EC88C4B00EBD076 /* Data */ = {
@@ -327,6 +334,7 @@
 				B9F04F311EC836FC00AEA713 /* FetchedResultsControllerProviderService.swift */,
 			);
 			name = Data;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		B95ED5101EC88C5600EBD076 /* MPC */ = {
@@ -336,16 +344,20 @@
 				B910A2EF1EABBD9D005637C1 /* MPCService.swift */,
 			);
 			name = MPC;
+			path = MPC;
 			sourceTree = "<group>";
 		};
 		B95ED5131EC88CC400EBD076 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				B95ED51A1EC88D2F00EBD076 /* RequestManager */,
-				B95ED5171EC88CF700EBD076 /* RequestFactory */,
 				B95ED5141EC88CDC00EBD076 /* Common */,
+				B95ED5221EC88DEB00EBD076 /* Parsers */,
+				B95ED5171EC88CF700EBD076 /* RequestFactory */,
+				B95ED51A1EC88D2F00EBD076 /* RequestManager */,
+				B95ED51F1EC88DB300EBD076 /* Requests */,
 			);
 			name = Networking;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		B95ED5141EC88CDC00EBD076 /* Common */ = {
@@ -354,6 +366,7 @@
 				B95ED5151EC88CE900EBD076 /* Result.swift */,
 			);
 			name = Common;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		B95ED5171EC88CF700EBD076 /* RequestFactory */ = {
@@ -362,14 +375,53 @@
 				B95ED5181EC88D0000EBD076 /* GetRequestFactory.swift */,
 			);
 			name = RequestFactory;
+			path = RequestFactory;
 			sourceTree = "<group>";
 		};
 		B95ED51A1EC88D2F00EBD076 /* RequestManager */ = {
 			isa = PBXGroup;
 			children = (
+				B95ED51D1EC88D9A00EBD076 /* IRequestSender.swift */,
 				B95ED51B1EC88D4200EBD076 /* RequestSender.swift */,
 			);
 			name = RequestManager;
+			path = RequestManager;
+			sourceTree = "<group>";
+		};
+		B95ED51F1EC88DB300EBD076 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED5231EC88E0600EBD076 /* Common */,
+			);
+			name = Requests;
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		B95ED5221EC88DEB00EBD076 /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED5261EC88E2700EBD076 /* Common */,
+			);
+			name = Parsers;
+			path = Parsers;
+			sourceTree = "<group>";
+		};
+		B95ED5231EC88E0600EBD076 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED5201EC88DBE00EBD076 /* IRequest.swift */,
+			);
+			name = Common;
+			path = Common;
+			sourceTree = "<group>";
+		};
+		B95ED5261EC88E2700EBD076 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED5241EC88E1F00EBD076 /* Parser.swift */,
+			);
+			name = Common;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		B9E4189E1EAA47B100FE1EA3 /* Modules */ = {
@@ -490,6 +542,7 @@
 				B91B03B71EC075320030E7E0 /* Message.swift in Sources */,
 				B9291BFD1EACEC6200B4358F /* ConversationAssembly.swift in Sources */,
 				B9291C121EAD10A500B4358F /* ProfileAssembly.swift in Sources */,
+				B95ED5251EC88E1F00EBD076 /* Parser.swift in Sources */,
 				B91B03C41EC0758C0030E7E0 /* AppUser+CoreDataProperties.swift in Sources */,
 				10BAAB1B1E87C36E00104295 /* MessageCell.swift in Sources */,
 				B9C696E81EC7A2DA0021CCED /* MPCCoreDataHelper.swift in Sources */,
@@ -500,6 +553,7 @@
 				B910A2F21EABC176005637C1 /* IMPCWorker.swift in Sources */,
 				10BAAB091E87B0D800104295 /* ConversationsListViewController.swift in Sources */,
 				10BAAB171E87B76000104295 /* Extensions.swift in Sources */,
+				B95ED5211EC88DBE00EBD076 /* IRequest.swift in Sources */,
 				100B0B9F1E7C5A8E00DD181F /* ProfileViewController.swift in Sources */,
 				B91B03B81EC075320030E7E0 /* Message+CoreDataProperties.swift in Sources */,
 				B926E3441EB623C300EFF3AC /* IManagedObject.swift in Sources */,
@@ -518,6 +572,7 @@
 				B91BEF941EC0992200467798 /* CoreDataService.swift in Sources */,
 				B95ED5081EC879F200EBD076 /* ImagePickerViewController.swift in Sources */,
 				10BAAB141E87B3C900104295 /* ConversationsListCell.swift in Sources */,
+				B95ED51E1EC88D9A00EBD076 /* IRequestSender.swift in Sources */,
 				B91B03C01EC0758C0030E7E0 /* User+CoreDataProperties.swift in Sources */,
 				B9291BFB1EACEC5800B4358F /* ConversationModel.swift in Sources */,
 				B95ED5161EC88CE900EBD076 /* Result.swift in Sources */,

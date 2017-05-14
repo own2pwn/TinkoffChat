@@ -1,5 +1,5 @@
 //
-//  RequestSender.swift
+//  Parser.swift
 //  TinkoffChat
 //
 //  Created by Evgeniy on 14.05.17.
@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+open class Parser<T>
+{
+    func parse(response: Data) -> T? { return nil }
+}
