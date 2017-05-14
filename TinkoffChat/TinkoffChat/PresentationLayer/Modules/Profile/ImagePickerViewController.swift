@@ -9,6 +9,7 @@
 import UIKit
 
 final class ImagePickerViewController: UIViewController,
+    UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 {
     // MARK: - Outlets
 
@@ -19,6 +20,34 @@ final class ImagePickerViewController: UIViewController,
     override func viewDidLoad()
     {
         super.viewDidLoad()
+    }
+
+    // MARK: - UICollectionViewDataSource
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
+        // swiftlint:disable:next force_cast line_length
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellDequeueIdentifier, for: indexPath) as! ImageCell
+
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    {
+        return 10
+    }
+
+    // MARK: - UICollectionViewDelegateFlowLayout
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
+        let padding = insetSize * (itemsPerRow + 1)
+        let remainingSpace = view.frame.width - padding
+        let itemSize = remainingSpace / itemsPerRow
+
+        return CGSize(width: itemSize, height: itemSize)
     }
 
     // MARK: - Private methods
@@ -33,4 +62,8 @@ final class ImagePickerViewController: UIViewController,
     // MARK: - Private properties
 
     private let cellDequeueIdentifier = "imageCell"
+
+    private let insetSize: CGFloat = 10
+
+    private let itemsPerRow: CGFloat = 3
 }
