@@ -54,6 +54,7 @@
 		B9C696EA1EC7A4620021CCED /* CoreDataAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C696E91EC7A4620021CCED /* CoreDataAssembly.swift */; };
 		B9D845361E9D263800D6373C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D845351E9D263800D6373C /* Constants.swift */; };
 		B9F04F321EC836FC00AEA713 /* FetchedResultsControllerProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F04F311EC836FC00AEA713 /* FetchedResultsControllerProviderService.swift */; };
+		B9F04F381EC860C800AEA713 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B9F04F371EC860C800AEA713 /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +107,7 @@
 		B9C696E91EC7A4620021CCED /* CoreDataAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAssembly.swift; sourceTree = "<group>"; };
 		B9D845351E9D263800D6373C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B9F04F311EC836FC00AEA713 /* FetchedResultsControllerProviderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsControllerProviderService.swift; sourceTree = "<group>"; };
+		B9F04F371EC860C800AEA713 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 			children = (
 				100B0B9A1E7C5A8E00DD181F /* Products */,
 				100B0B9B1E7C5A8E00DD181F /* TinkoffChat */,
+				B9F04F371EC860C800AEA713 /* .swiftlint.yml */,
 			);
 			sourceTree = "<group>";
 		};
@@ -363,6 +366,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9F04F381EC860C800AEA713 /* .swiftlint.yml in Resources */,
 				10BAAB061E87B04000104295 /* Main.storyboard in Resources */,
 				100B0BA71E7C5A8E00DD181F /* LaunchScreen.storyboard in Resources */,
 				100B0BA41E7C5A8E00DD181F /* Assets.xcassets in Resources */,
