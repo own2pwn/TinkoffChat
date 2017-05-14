@@ -32,6 +32,8 @@ enum KFetchRequestTemplates
     static let ConversationById = "ConversationById"
     static let ConversationByUserId = "ConversationByUserId"
     static let UsersById = "UsersById"
+    
+    static let Profile = "Profile"
 }
 
 enum CRequest

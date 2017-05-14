@@ -8,7 +8,14 @@
 
 import UIKit
 
-final class ProfileViewController: UIViewController
+protocol IProfileViewController: class
+{
+    var profileImageHasBeenChanged: Bool { get set }
+
+    var profileImage: UIImage? { get set }
+}
+
+final class ProfileViewController: UIViewController, IProfileViewController
 {
     // MARK: - Outlets
 
@@ -48,6 +55,15 @@ final class ProfileViewController: UIViewController
         }
     }
 
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        if profileImageHasBeenChanged
+        {
+            updateCurrentProfileData()
+        }
+    }
+
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
 
     @IBAction func didTapCloseNavBarButton(_ sender: UIBarButtonItem)
@@ -55,7 +71,27 @@ final class ProfileViewController: UIViewController
         dismiss(animated: true)
     }
 
+    // MARK: - IProfileViewController
+
+    var profileImageHasBeenChanged: Bool = false
+
+    var profileImage: UIImage?
+    {
+        get { return userProfileImageView.image }
+        set { userProfileImageView.image = newValue }
+    }
+
     // MARK: - Private methods
+
+    // MARK: Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let imagePicker = segue.destination as? IImagePickerViewControllerDelegate
+        {
+            imagePicker.profileDelegate = self
+        }
+    }
 
     // MARK: Outlet actions
 

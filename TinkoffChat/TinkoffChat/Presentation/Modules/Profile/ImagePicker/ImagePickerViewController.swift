@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol IImagePickerViewControllerDelegate: class
+{
+    weak var profileDelegate: IProfileViewController? { get set }
+}
+
 protocol IImagePickerViewController: class
 {
     func setSpinnerStateEnabled(_ enabled: Bool)
@@ -15,7 +20,7 @@ protocol IImagePickerViewController: class
     func reloadDataSource()
 }
 
-final class ImagePickerViewController: UIViewController, IImagePickerViewController,
+final class ImagePickerViewController: UIViewController, IImagePickerViewController, IImagePickerViewControllerDelegate,
     UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 {
     // MARK: - Outlets
@@ -23,6 +28,10 @@ final class ImagePickerViewController: UIViewController, IImagePickerViewControl
     @IBOutlet weak var imagesCollectionView: UICollectionView!
 
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
+
+    // MARK: - IImagePickerViewControllerDelegate
+
+    weak var profileDelegate: IProfileViewController?
 
     // MARK: - IImagePickerViewController
 
@@ -81,13 +90,10 @@ final class ImagePickerViewController: UIViewController, IImagePickerViewControl
     {
         if let data = cachedImageData[indexPath.row] as? Data
         {
-            model.saveImageData(data, completion: { result in
-                if !result
-                {
-                    print("^ [collectionView didSelectItemAt]: can't save selected image!")
-                }
-                self.dismiss(animated: true)
-            })
+            self.profileDelegate?.profileImage = UIImage(data: data)
+            self.profileDelegate?.profileImageHasBeenChanged = true
+
+            self.dismiss(animated: true)
         }
     }
 
