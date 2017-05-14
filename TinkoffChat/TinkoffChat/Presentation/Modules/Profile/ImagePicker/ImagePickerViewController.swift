@@ -92,8 +92,6 @@ final class ImagePickerViewController: UIViewController, IImagePickerViewControl
 
     private func setupLogic()
     {
-        let dummyImageData = UIImagePNGRepresentation(#imageLiteral(resourceName: "profileImg"))
-        cachedImagesData.append(dummyImageData)
         loadingSpinner.hidesWhenStopped = true
         model.delegate = self
     }
@@ -109,24 +107,19 @@ final class ImagePickerViewController: UIViewController, IImagePickerViewControl
     private func fetchImage(for indexPath: IndexPath) -> UIImage
     {
         let row = indexPath.row
-        guard cachedImagesData.indices.contains(row),
-            let imageData = cachedImagesData[row] else
+        guard let imageData = cachedImageData[row] as? Data,
+            let image = UIImage(data: imageData) else
         {
-            cachedImagesData.insert(Data(), at: 55)
             return #imageLiteral(resourceName: "profileImg")
         }
-        let image = UIImage(data: imageData) ?? #imageLiteral(resourceName: "profileImg")
+
         return image
     }
 
     private func invalidateCache()
     {
         let imagesCount = model.imagesCount
-        cachedImagesData.removeAll()
-        cachedImages.removeAll()
-
-        cachedImagesData.reserveCapacity(imagesCount)
-        cachedImages.reserveCapacity(imagesCount)
+        cachedImageData.removeAll()
     }
 
     // MARK: Outlet actions
@@ -140,7 +133,7 @@ final class ImagePickerViewController: UIViewController, IImagePickerViewControl
 
     private var cachedImages = [UIImage]()
 
-    private var cachedImagesData = [Data?]()
+    private var cachedImageData = [Int: Data?]()
 
     private let queryString = "yellow flowers"
 

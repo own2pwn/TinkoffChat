@@ -6,7 +6,7 @@
 //  Copyright © 2017 Evgeniy. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol IImagePickerModel: class
 {
@@ -17,6 +17,9 @@ protocol IImagePickerModel: class
     func performFetch(_ query: String,
                       limit: Int,
                       completion: (() -> Void)?)
+    
+    func fetchImage(at index: Int,
+                    completion: (UIImage?) -> Void)
 }
 
 final class ImagePickerModel: IImagePickerModel
@@ -46,6 +49,11 @@ final class ImagePickerModel: IImagePickerModel
         }
     }
     
+    func fetchImage(at index: Int, completion: (UIImage?) -> Void)
+    {
+        let imageUrl = dataSource[index]
+    }
+    
     // MARK: - Life cycle
     
     init(imageLoaderService: IImageLoaderService)
@@ -55,7 +63,14 @@ final class ImagePickerModel: IImagePickerModel
     
     // MARK: - Private methods
     
+    private func serializeDataSource(_ dataSource: ImageListApiModel)
+    {
+        
+    }
+    
     // MARK: - Private properties
+    
+    private lazy var imagesInfo = 
     
     private lazy var dataSource: ImageListApiModel = {
         ImageListApiModel(totalItemsCount: 0, fetchedItemsCount: 0, images: [ImageApiModel]())

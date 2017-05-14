@@ -10,9 +10,14 @@ import Foundation
 
 struct ImageListApiModel
 {
+    let info: ImageListApiInfoModel
+    let images: [ImageApiModel]
+}
+
+struct ImageListApiInfoModel
+{
     let totalItemsCount: Int
     let fetchedItemsCount: Int
-    let images: [ImageApiModel]
 }
 
 struct ImageApiModel
