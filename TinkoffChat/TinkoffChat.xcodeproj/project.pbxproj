@@ -48,6 +48,7 @@
 		B95ED50A1EC87CC700EBD076 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5091EC87CC700EBD076 /* ImageCell.swift */; };
 		B95ED50C1EC889A800EBD076 /* ImagePickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED50B1EC889A800EBD076 /* ImagePickerModel.swift */; };
 		B95ED50E1EC88AD900EBD076 /* ImagePickerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED50D1EC88AD900EBD076 /* ImagePickerAssembly.swift */; };
+		B95ED5121EC88C9600EBD076 /* ImageLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5111EC88C9600EBD076 /* ImageLoaderService.swift */; };
 		B99322731EB719BF0051FEBD /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99322721EB719BF0051FEBD /* Result.swift */; };
 		B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */; };
 		B998147F1EAC90D400B95723 /* ConversationsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */; };
@@ -104,6 +105,7 @@
 		B95ED5091EC87CC700EBD076 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		B95ED50B1EC889A800EBD076 /* ImagePickerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerModel.swift; sourceTree = "<group>"; };
 		B95ED50D1EC88AD900EBD076 /* ImagePickerAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerAssembly.swift; sourceTree = "<group>"; };
+		B95ED5111EC88C9600EBD076 /* ImageLoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoaderService.swift; sourceTree = "<group>"; };
 		B99322721EB719BF0051FEBD /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCAssembly.swift; sourceTree = "<group>"; };
 		B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListAssembly.swift; sourceTree = "<group>"; };
@@ -148,9 +150,9 @@
 			isa = PBXGroup;
 			children = (
 				B9291C011EAD031A00B4358F /* Common */,
-				B93675451EA34AF500B69AC8 /* CoreLayer */,
-				B93675431EA34AE500B69AC8 /* PresentationLayer */,
-				B93675441EA34AEF00B69AC8 /* ServiceLayer */,
+				B93675451EA34AF500B69AC8 /* Core */,
+				B93675431EA34AE500B69AC8 /* Presentation */,
+				B93675441EA34AEF00B69AC8 /* Service */,
 				B948204B1EAD1BF500052AA9 /* AppDelegate.swift */,
 			);
 			path = TinkoffChat;
@@ -270,34 +272,35 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		B93675431EA34AE500B69AC8 /* PresentationLayer */ = {
+		B93675431EA34AE500B69AC8 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
 				B9E4189E1EAA47B100FE1EA3 /* Modules */,
 				10BAAB051E87B04000104295 /* Main.storyboard */,
 			);
+			name = Presentation;
 			path = PresentationLayer;
 			sourceTree = "<group>";
 		};
-		B93675441EA34AEF00B69AC8 /* ServiceLayer */ = {
+		B93675441EA34AEF00B69AC8 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				B91BEF931EC0992200467798 /* CoreDataService.swift */,
-				B91B03A31EC050590030E7E0 /* DataStoreService.swift */,
-				B9F04F311EC836FC00AEA713 /* FetchedResultsControllerProviderService.swift */,
-				B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */,
-				B910A2EF1EABBD9D005637C1 /* MPCService.swift */,
+				B95ED5101EC88C5600EBD076 /* MPC */,
+				B95ED50F1EC88C4B00EBD076 /* Data */,
+				B95ED5111EC88C9600EBD076 /* ImageLoaderService.swift */,
 			);
+			name = Service;
 			path = ServiceLayer;
 			sourceTree = "<group>";
 		};
-		B93675451EA34AF500B69AC8 /* CoreLayer */ = {
+		B93675451EA34AF500B69AC8 /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				B91AEE1F1EC2242100B7AB3D /* Common */,
 				30A0EF7E1EB0F5F300296A3D /* CoreData */,
 				B926E33F1EB6230C00EFF3AC /* MPC */,
 			);
+			name = Core;
 			path = CoreLayer;
 			sourceTree = "<group>";
 		};
@@ -310,6 +313,25 @@
 				B95ED50D1EC88AD900EBD076 /* ImagePickerAssembly.swift */,
 			);
 			name = ImagePicker;
+			sourceTree = "<group>";
+		};
+		B95ED50F1EC88C4B00EBD076 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B91BEF931EC0992200467798 /* CoreDataService.swift */,
+				B91B03A31EC050590030E7E0 /* DataStoreService.swift */,
+				B9F04F311EC836FC00AEA713 /* FetchedResultsControllerProviderService.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		B95ED5101EC88C5600EBD076 /* MPC */ = {
+			isa = PBXGroup;
+			children = (
+				B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */,
+				B910A2EF1EABBD9D005637C1 /* MPCService.swift */,
+			);
+			name = MPC;
 			sourceTree = "<group>";
 		};
 		B9E4189E1EAA47B100FE1EA3 /* Modules */ = {
@@ -443,6 +465,7 @@
 				B91B03B81EC075320030E7E0 /* Message+CoreDataProperties.swift in Sources */,
 				B926E3441EB623C300EFF3AC /* IManagedObject.swift in Sources */,
 				B926E3461EB62C0D00EFF3AC /* CoreDataWorker.swift in Sources */,
+				B95ED5121EC88C9600EBD076 /* ImageLoaderService.swift in Sources */,
 				B95ED50A1EC87CC700EBD076 /* ImageCell.swift in Sources */,
 				307B77CD1EB1024C0048B8EC /* CoreDataStack.swift in Sources */,
 				B95ED50C1EC889A800EBD076 /* ImagePickerModel.swift in Sources */,
