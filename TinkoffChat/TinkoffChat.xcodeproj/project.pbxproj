@@ -58,6 +58,7 @@
 		B95ED5281EC891C500EBD076 /* GetImagesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5271EC891C500EBD076 /* GetImagesParser.swift */; };
 		B95ED52A1EC8938E00EBD076 /* GetImagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5291EC8938E00EBD076 /* GetImagesRequest.swift */; };
 		B95ED52C1EC893C800EBD076 /* PixabayGetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED52B1EC893C800EBD076 /* PixabayGetRequest.swift */; };
+		B95ED52E1EC896D800EBD076 /* PixabayRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED52D1EC896D800EBD076 /* PixabayRequestSender.swift */; };
 		B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */; };
 		B998147F1EAC90D400B95723 /* ConversationsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */; };
 		B999037A1EB722380047313B /* ModelValidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99903791EB722380047313B /* ModelValidable.swift */; };
@@ -123,6 +124,7 @@
 		B95ED5271EC891C500EBD076 /* GetImagesParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImagesParser.swift; sourceTree = "<group>"; };
 		B95ED5291EC8938E00EBD076 /* GetImagesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImagesRequest.swift; sourceTree = "<group>"; };
 		B95ED52B1EC893C800EBD076 /* PixabayGetRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixabayGetRequest.swift; sourceTree = "<group>"; };
+		B95ED52D1EC896D800EBD076 /* PixabayRequestSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixabayRequestSender.swift; sourceTree = "<group>"; };
 		B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCAssembly.swift; sourceTree = "<group>"; };
 		B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListAssembly.swift; sourceTree = "<group>"; };
 		B99903791EB722380047313B /* ModelValidable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelValidable.swift; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 			children = (
 				B95ED51D1EC88D9A00EBD076 /* IRequestSender.swift */,
 				B95ED51B1EC88D4200EBD076 /* RequestSender.swift */,
+				B95ED52D1EC896D800EBD076 /* PixabayRequestSender.swift */,
 			);
 			path = RequestManager;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 				B998147F1EAC90D400B95723 /* ConversationsListAssembly.swift in Sources */,
 				B91B03C11EC0758C0030E7E0 /* Conversation.swift in Sources */,
 				B9291C101EAD0F7F00B4358F /* ProfileModel.swift in Sources */,
+				B95ED52E1EC896D800EBD076 /* PixabayRequestSender.swift in Sources */,
 				B95ED5191EC88D0000EBD076 /* GetRequestFactory.swift in Sources */,
 				B91B03B71EC075320030E7E0 /* Message.swift in Sources */,
 				B9291BFD1EACEC6200B4358F /* ConversationAssembly.swift in Sources */,

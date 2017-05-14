@@ -14,7 +14,7 @@ struct GetRequestFactory
     {
         static func getImagesCountRequest(for query: String, count: Int) -> RequestConfig<ImageListApiModel>
         {
-            return RequestConfig(request: GetImages,
+            return RequestConfig(request: GetImagesRequest(query: query, count: count),
                                  parser: GetImagesParser())
         }
     }

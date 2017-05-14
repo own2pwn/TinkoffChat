@@ -12,31 +12,27 @@ protocol IImageLoaderService
 {
     func getImages(for query: String,
                    count: Int,
-                   completion: (ImageListApiModel?) -> Void)
+                   completion: @escaping (ImageListApiModel?) -> Void)
 }
 
-final class ImageLoaderService: IImageLoaderService
+final class ImageLoaderService: PixabayRequestSender, IImageLoaderService
 {
     // MARK: - IImageLoaderService
-    
+
     func getImages(for query: String,
                    count: Int,
-                   completion: (ImageListApiModel?) -> Void)
+                   completion: @escaping (ImageListApiModel?) -> Void)
     {
         let getImagesRequest =
-        GetRequestFactory.ImageLoaderGetRequests.getImagesCountRequest()
+            GetRequestFactory.ImageLoaderGetRequests.getImagesCountRequest(for: query, count: count)
+
+        makeRequest(requestConfig: getImagesRequest)
+        { imageListModel, error in
+            if let error = error
+            {
+                print("^ getImages error: \(error)")
+            }
+            completion(imageListModel)
+        }
     }
-    
-    // MARK: - Life cycle
-    
-    init(requestSender: IRequestSender)
-    {
-        self.requestSender = requestSender
-    }
-    
-    // MARK: - Private properties
-    
-    // MARK: Core objects
-    
-    private let requestSender: IRequestSender
 }

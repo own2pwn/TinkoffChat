@@ -24,6 +24,6 @@ final class GetImagesParser: Parser<ImageListApiModel>
 
     override func parse(response: Data) -> ImageListApiModel?
     {
-
+        return nil
     }
 }
