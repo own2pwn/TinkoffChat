@@ -75,6 +75,13 @@ final class ImagePickerViewController: UIViewController, IImagePickerViewControl
         return model.imagesCount
     }
 
+    // MARK: - UICollectionViewDelegate
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        
+    }
+
     // MARK: - UICollectionViewDelegateFlowLayout
 
     func collectionView(_ collectionView: UICollectionView,

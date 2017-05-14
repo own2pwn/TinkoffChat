@@ -224,6 +224,14 @@
 			name = Pixabay;
 			sourceTree = "<group>";
 		};
+		B90A78A11EC8E5D400344163 /* Pixabay */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED5111EC88C9600EBD076 /* ImageLoaderService.swift */,
+			);
+			name = Pixabay;
+			sourceTree = "<group>";
+		};
 		B910A2E91EABBA22005637C1 /* Conversations */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,9 +333,9 @@
 		B93675441EA34AEF00B69AC8 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				B90A78A11EC8E5D400344163 /* Pixabay */,
 				B95ED50F1EC88C4B00EBD076 /* Data */,
 				B95ED5101EC88C5600EBD076 /* MPC */,
-				B95ED5111EC88C9600EBD076 /* ImageLoaderService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
