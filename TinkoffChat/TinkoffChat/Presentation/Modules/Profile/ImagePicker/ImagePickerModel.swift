@@ -30,7 +30,7 @@ final class ImagePickerModel: IImagePickerModel
     
     var imagesCount: Int
     {
-        return dataSource.fetchedItemsCount
+        return responseInfo.fetchedItemsCount
     }
     
     func performFetch(_ query: String,
@@ -42,7 +42,7 @@ final class ImagePickerModel: IImagePickerModel
         { imageListModel in
             if let model = imageListModel
             {
-                self.dataSource = model
+                self.dataSource = model.images
                 self.delegate?.setSpinnerStateEnabled(false)
                 self.delegate?.reloadDataSource()
             }
@@ -51,7 +51,8 @@ final class ImagePickerModel: IImagePickerModel
     
     func fetchImage(at index: Int, completion: (UIImage?) -> Void)
     {
-        let imageUrl = dataSource[index]
+        let imageUrl = dataSource[index].webformatUrl
+        
     }
     
     // MARK: - Life cycle
@@ -65,15 +66,16 @@ final class ImagePickerModel: IImagePickerModel
     
     private func serializeDataSource(_ dataSource: ImageListApiModel)
     {
-        
     }
     
     // MARK: - Private properties
     
-    private lazy var imagesInfo = 
+    private lazy var responseInfo: ImageListApiInfoModel = {
+        ImageListApiInfoModel(totalItemsCount: 0, fetchedItemsCount: 0)
+    }()
     
-    private lazy var dataSource: ImageListApiModel = {
-        ImageListApiModel(totalItemsCount: 0, fetchedItemsCount: 0, images: [ImageApiModel]())
+    private lazy var dataSource: [ImageApiModel] = {
+        [ImageApiModel]()
     }()
     
     // MARK: Services

@@ -48,8 +48,10 @@ final class GetImagesParser: Parser<ImageListApiModel>
                     images.append(image)
                 }
             }
-            return ImageListApiModel(totalItemsCount: totalItemsCount,
-                                     fetchedItemsCount: images.count,
+            let info = ImageListApiInfoModel(totalItemsCount: totalItemsCount,
+                                             fetchedItemsCount: images.count)
+
+            return ImageListApiModel(info: info,
                                      images: images)
         }
         return nil
