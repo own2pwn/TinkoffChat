@@ -49,7 +49,9 @@
 		B95ED50C1EC889A800EBD076 /* ImagePickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED50B1EC889A800EBD076 /* ImagePickerModel.swift */; };
 		B95ED50E1EC88AD900EBD076 /* ImagePickerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED50D1EC88AD900EBD076 /* ImagePickerAssembly.swift */; };
 		B95ED5121EC88C9600EBD076 /* ImageLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5111EC88C9600EBD076 /* ImageLoaderService.swift */; };
-		B99322731EB719BF0051FEBD /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99322721EB719BF0051FEBD /* Result.swift */; };
+		B95ED5161EC88CE900EBD076 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5151EC88CE900EBD076 /* Result.swift */; };
+		B95ED5191EC88D0000EBD076 /* GetRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5181EC88D0000EBD076 /* GetRequestFactory.swift */; };
+		B95ED51C1EC88D4200EBD076 /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED51B1EC88D4200EBD076 /* RequestSender.swift */; };
 		B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */; };
 		B998147F1EAC90D400B95723 /* ConversationsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */; };
 		B999037A1EB722380047313B /* ModelValidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99903791EB722380047313B /* ModelValidable.swift */; };
@@ -106,7 +108,9 @@
 		B95ED50B1EC889A800EBD076 /* ImagePickerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerModel.swift; sourceTree = "<group>"; };
 		B95ED50D1EC88AD900EBD076 /* ImagePickerAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerAssembly.swift; sourceTree = "<group>"; };
 		B95ED5111EC88C9600EBD076 /* ImageLoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoaderService.swift; sourceTree = "<group>"; };
-		B99322721EB719BF0051FEBD /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		B95ED5151EC88CE900EBD076 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		B95ED5181EC88D0000EBD076 /* GetRequestFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetRequestFactory.swift; sourceTree = "<group>"; };
+		B95ED51B1EC88D4200EBD076 /* RequestSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestSender.swift; sourceTree = "<group>"; };
 		B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCAssembly.swift; sourceTree = "<group>"; };
 		B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListAssembly.swift; sourceTree = "<group>"; };
 		B99903791EB722380047313B /* ModelValidable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelValidable.swift; sourceTree = "<group>"; };
@@ -256,7 +260,6 @@
 				100B0BA31E7C5A8E00DD181F /* Assets.xcassets */,
 				100B0BA81E7C5A8E00DD181F /* Info.plist */,
 				100B0BA51E7C5A8E00DD181F /* LaunchScreen.storyboard */,
-				B99322721EB719BF0051FEBD /* Result.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 		B93675451EA34AF500B69AC8 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				B95ED5131EC88CC400EBD076 /* Networking */,
 				B91AEE1F1EC2242100B7AB3D /* Common */,
 				30A0EF7E1EB0F5F300296A3D /* CoreData */,
 				B926E33F1EB6230C00EFF3AC /* MPC */,
@@ -332,6 +336,40 @@
 				B910A2EF1EABBD9D005637C1 /* MPCService.swift */,
 			);
 			name = MPC;
+			sourceTree = "<group>";
+		};
+		B95ED5131EC88CC400EBD076 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED51A1EC88D2F00EBD076 /* RequestManager */,
+				B95ED5171EC88CF700EBD076 /* RequestFactory */,
+				B95ED5141EC88CDC00EBD076 /* Common */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		B95ED5141EC88CDC00EBD076 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED5151EC88CE900EBD076 /* Result.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		B95ED5171EC88CF700EBD076 /* RequestFactory */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED5181EC88D0000EBD076 /* GetRequestFactory.swift */,
+			);
+			name = RequestFactory;
+			sourceTree = "<group>";
+		};
+		B95ED51A1EC88D2F00EBD076 /* RequestManager */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED51B1EC88D4200EBD076 /* RequestSender.swift */,
+			);
+			name = RequestManager;
 			sourceTree = "<group>";
 		};
 		B9E4189E1EAA47B100FE1EA3 /* Modules */ = {
@@ -448,6 +486,7 @@
 				B998147F1EAC90D400B95723 /* ConversationsListAssembly.swift in Sources */,
 				B91B03C11EC0758C0030E7E0 /* Conversation.swift in Sources */,
 				B9291C101EAD0F7F00B4358F /* ProfileModel.swift in Sources */,
+				B95ED5191EC88D0000EBD076 /* GetRequestFactory.swift in Sources */,
 				B91B03B71EC075320030E7E0 /* Message.swift in Sources */,
 				B9291BFD1EACEC6200B4358F /* ConversationAssembly.swift in Sources */,
 				B9291C121EAD10A500B4358F /* ProfileAssembly.swift in Sources */,
@@ -471,7 +510,7 @@
 				B95ED50C1EC889A800EBD076 /* ImagePickerModel.swift in Sources */,
 				B91B03BF1EC0758C0030E7E0 /* User.swift in Sources */,
 				10BAAB191E87C1B400104295 /* ConversationViewController.swift in Sources */,
-				B99322731EB719BF0051FEBD /* Result.swift in Sources */,
+				B95ED51C1EC88D4200EBD076 /* RequestSender.swift in Sources */,
 				B910A2F01EABBD9D005637C1 /* MPCService.swift in Sources */,
 				B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */,
 				B9B9E88F1EABF74C009CA699 /* MPCWorker.swift in Sources */,
@@ -481,6 +520,7 @@
 				10BAAB141E87B3C900104295 /* ConversationsListCell.swift in Sources */,
 				B91B03C01EC0758C0030E7E0 /* User+CoreDataProperties.swift in Sources */,
 				B9291BFB1EACEC5800B4358F /* ConversationModel.swift in Sources */,
+				B95ED5161EC88CE900EBD076 /* Result.swift in Sources */,
 				B91B03A41EC050590030E7E0 /* DataStoreService.swift in Sources */,
 				B910A2EB1EABBB82005637C1 /* ConversationsListModel.swift in Sources */,
 			);
