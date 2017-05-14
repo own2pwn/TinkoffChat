@@ -9,13 +9,6 @@
 import UIKit
 import CoreData
 
-enum ConversationsListTableViewSections: Int
-{
-    case offlineUsers = 0
-    case onlineUsers = 1
-    case all
-}
-
 final class ConversationsListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,
     NSFetchedResultsControllerDelegate
 {

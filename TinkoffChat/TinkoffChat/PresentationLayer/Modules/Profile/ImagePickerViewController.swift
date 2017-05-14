@@ -8,8 +8,12 @@
 
 import UIKit
 
-final class ImagePickerViewController: UIViewController
+final class ImagePickerViewController: UIViewController,
 {
+    // MARK: - Outlets
+
+    @IBOutlet weak var imagesCollectionView: UICollectionView!
+
     // MARK: - Life cycle
 
     override func viewDidLoad()
@@ -25,4 +29,8 @@ final class ImagePickerViewController: UIViewController
     {
         dismiss(animated: true)
     }
+
+    // MARK: - Private properties
+
+    private let cellDequeueIdentifier = "imageCell"
 }
