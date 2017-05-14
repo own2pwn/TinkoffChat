@@ -13,6 +13,9 @@ protocol IDataStoreService
     func saveImageOnDisk(_ image: UIImage,
                          completion: @escaping (Error?, String?) -> Void)
 
+    func saveImageData(_ data: Data,
+                       completion: @escaping (Bool) -> Void)
+
     func getImageFromDisk(by path: String) -> UIImage?
 }
 
@@ -44,6 +47,20 @@ final class DataStoreService: IDataStoreService
         {
             let error = DataStoreError.cantRepresentImage
             completion(error, nil)
+        }
+    }
+
+    func saveImageData(_ data: Data,
+                       completion: @escaping (Bool) -> Void)
+    {
+        do
+        {
+            try data.write(to: userImagePath)
+            completion(true)
+        }
+        catch
+        {
+            completion(false)
         }
     }
 

@@ -79,7 +79,16 @@ final class ImagePickerViewController: UIViewController, IImagePickerViewControl
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        
+        if let data = cachedImageData[indexPath.row] as? Data
+        {
+            model.saveImageData(data, completion: { result in
+                if !result
+                {
+                    print("^ [collectionView didSelectItemAt]: can't save selected image!")
+                }
+                self.dismiss(animated: true)
+            })
+        }
     }
 
     // MARK: - UICollectionViewDelegateFlowLayout
