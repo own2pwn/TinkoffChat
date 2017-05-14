@@ -42,10 +42,12 @@ final class ImagePickerModel: IImagePickerModel
         { imageListModel in
             if let model = imageListModel
             {
+                self.responseInfo = model.info
                 self.dataSource = model.images
                 self.delegate?.setSpinnerStateEnabled(false)
                 self.delegate?.reloadDataSource()
             }
+            completion?()
         }
     }
     
@@ -61,12 +63,6 @@ final class ImagePickerModel: IImagePickerModel
     init(imageLoaderService: IImageLoaderService)
     {
         imageLoader = imageLoaderService
-    }
-    
-    // MARK: - Private methods
-    
-    private func serializeDataSource(_ dataSource: ImageListApiModel)
-    {
     }
     
     // MARK: - Private properties
