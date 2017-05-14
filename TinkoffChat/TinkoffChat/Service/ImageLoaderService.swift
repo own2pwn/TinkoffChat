@@ -11,6 +11,7 @@ import Foundation
 protocol IImageLoaderService
 {
     func getImages(for query: String,
+                   count: Int,
                    completion: () -> Void)
     
     func getImagesCount(for request: String,
@@ -21,7 +22,9 @@ final class ImageLoaderService: IImageLoaderService
 {
     // MARK: - IImageLoaderService
     
-    func getImages(for query: String, completion: () -> Void)
+    func getImages(for query: String,
+                   count: Int,
+                   completion: () -> Void)
     {
         
     }

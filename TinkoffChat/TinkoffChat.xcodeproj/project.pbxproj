@@ -55,6 +55,7 @@
 		B95ED51E1EC88D9A00EBD076 /* IRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED51D1EC88D9A00EBD076 /* IRequestSender.swift */; };
 		B95ED5211EC88DBE00EBD076 /* IRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5201EC88DBE00EBD076 /* IRequest.swift */; };
 		B95ED5251EC88E1F00EBD076 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5241EC88E1F00EBD076 /* Parser.swift */; };
+		B95ED5281EC891C500EBD076 /* GetImagesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5271EC891C500EBD076 /* GetImagesParser.swift */; };
 		B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */; };
 		B998147F1EAC90D400B95723 /* ConversationsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */; };
 		B999037A1EB722380047313B /* ModelValidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99903791EB722380047313B /* ModelValidable.swift */; };
@@ -117,6 +118,7 @@
 		B95ED51D1EC88D9A00EBD076 /* IRequestSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IRequestSender.swift; sourceTree = "<group>"; };
 		B95ED5201EC88DBE00EBD076 /* IRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IRequest.swift; sourceTree = "<group>"; };
 		B95ED5241EC88E1F00EBD076 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		B95ED5271EC891C500EBD076 /* GetImagesParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImagesParser.swift; sourceTree = "<group>"; };
 		B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCAssembly.swift; sourceTree = "<group>"; };
 		B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListAssembly.swift; sourceTree = "<group>"; };
 		B99903791EB722380047313B /* ModelValidable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelValidable.swift; sourceTree = "<group>"; };
@@ -287,7 +289,6 @@
 				B9E4189E1EAA47B100FE1EA3 /* Modules */,
 				10BAAB051E87B04000104295 /* Main.storyboard */,
 			);
-			name = Presentation;
 			path = Presentation;
 			sourceTree = "<group>";
 		};
@@ -298,7 +299,6 @@
 				B95ED5101EC88C5600EBD076 /* MPC */,
 				B95ED5111EC88C9600EBD076 /* ImageLoaderService.swift */,
 			);
-			name = Service;
 			path = Service;
 			sourceTree = "<group>";
 		};
@@ -310,7 +310,6 @@
 				B926E33F1EB6230C00EFF3AC /* MPC */,
 				B95ED5131EC88CC400EBD076 /* Networking */,
 			);
-			name = Core;
 			path = Core;
 			sourceTree = "<group>";
 		};
@@ -322,7 +321,6 @@
 				B95ED50B1EC889A800EBD076 /* ImagePickerModel.swift */,
 				B95ED5071EC879F200EBD076 /* ImagePickerViewController.swift */,
 			);
-			name = ImagePicker;
 			path = ImagePicker;
 			sourceTree = "<group>";
 		};
@@ -333,7 +331,6 @@
 				B91B03A31EC050590030E7E0 /* DataStoreService.swift */,
 				B9F04F311EC836FC00AEA713 /* FetchedResultsControllerProviderService.swift */,
 			);
-			name = Data;
 			path = Data;
 			sourceTree = "<group>";
 		};
@@ -343,7 +340,6 @@
 				B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */,
 				B910A2EF1EABBD9D005637C1 /* MPCService.swift */,
 			);
-			name = MPC;
 			path = MPC;
 			sourceTree = "<group>";
 		};
@@ -356,7 +352,6 @@
 				B95ED51A1EC88D2F00EBD076 /* RequestManager */,
 				B95ED51F1EC88DB300EBD076 /* Requests */,
 			);
-			name = Networking;
 			path = Networking;
 			sourceTree = "<group>";
 		};
@@ -365,7 +360,6 @@
 			children = (
 				B95ED5151EC88CE900EBD076 /* Result.swift */,
 			);
-			name = Common;
 			path = Common;
 			sourceTree = "<group>";
 		};
@@ -374,7 +368,6 @@
 			children = (
 				B95ED5181EC88D0000EBD076 /* GetRequestFactory.swift */,
 			);
-			name = RequestFactory;
 			path = RequestFactory;
 			sourceTree = "<group>";
 		};
@@ -384,7 +377,6 @@
 				B95ED51D1EC88D9A00EBD076 /* IRequestSender.swift */,
 				B95ED51B1EC88D4200EBD076 /* RequestSender.swift */,
 			);
-			name = RequestManager;
 			path = RequestManager;
 			sourceTree = "<group>";
 		};
@@ -393,7 +385,6 @@
 			children = (
 				B95ED5231EC88E0600EBD076 /* Common */,
 			);
-			name = Requests;
 			path = Requests;
 			sourceTree = "<group>";
 		};
@@ -401,8 +392,8 @@
 			isa = PBXGroup;
 			children = (
 				B95ED5261EC88E2700EBD076 /* Common */,
+				B95ED5271EC891C500EBD076 /* GetImagesParser.swift */,
 			);
-			name = Parsers;
 			path = Parsers;
 			sourceTree = "<group>";
 		};
@@ -411,7 +402,6 @@
 			children = (
 				B95ED5201EC88DBE00EBD076 /* IRequest.swift */,
 			);
-			name = Common;
 			path = Common;
 			sourceTree = "<group>";
 		};
@@ -420,7 +410,6 @@
 			children = (
 				B95ED5241EC88E1F00EBD076 /* Parser.swift */,
 			);
-			name = Common;
 			path = Common;
 			sourceTree = "<group>";
 		};
@@ -534,6 +523,7 @@
 				B999037A1EB722380047313B /* ModelValidable.swift in Sources */,
 				B9D845361E9D263800D6373C /* Constants.swift in Sources */,
 				B9F04F321EC836FC00AEA713 /* FetchedResultsControllerProviderService.swift in Sources */,
+				B95ED5281EC891C500EBD076 /* GetImagesParser.swift in Sources */,
 				B926E33E1EB6115500EFF3AC /* Profile+CoreDataProperties.swift in Sources */,
 				B998147F1EAC90D400B95723 /* ConversationsListAssembly.swift in Sources */,
 				B91B03C11EC0758C0030E7E0 /* Conversation.swift in Sources */,
