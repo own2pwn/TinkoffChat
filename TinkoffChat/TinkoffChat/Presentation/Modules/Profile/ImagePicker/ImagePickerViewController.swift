@@ -114,8 +114,8 @@ final class ImagePickerViewController: UIViewController, IImagePickerViewControl
                 if let image = image
                 {
                     let compressedImage = UIImagePNGRepresentation(image)
-                    cachedImageData[row] = compressedImage
-                    updateUI
+                    self.cachedImageData[row] = compressedImage
+                    self.updateUI
                     {
                         self.imagesCollectionView.reloadItems(at: [indexPath])
                     }
@@ -140,8 +140,6 @@ final class ImagePickerViewController: UIViewController, IImagePickerViewControl
     }
 
     // MARK: - Private properties
-
-    private var cachedImages = [UIImage]()
 
     private var cachedImageData = [Int: Data?]()
 

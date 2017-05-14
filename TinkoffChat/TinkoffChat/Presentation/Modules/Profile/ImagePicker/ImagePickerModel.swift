@@ -19,7 +19,7 @@ protocol IImagePickerModel: class
                       completion: (() -> Void)?)
     
     func fetchImage(at index: Int,
-                    completion: (UIImage?) -> Void)
+                    completion: @escaping (UIImage?) -> Void)
 }
 
 final class ImagePickerModel: IImagePickerModel
@@ -52,10 +52,10 @@ final class ImagePickerModel: IImagePickerModel
     }
     
     func fetchImage(at index: Int,
-                    completion: (UIImage?) -> Void)
+                    completion: @escaping (UIImage?) -> Void)
     {
         let imageUrl = dataSource[index].webformatUrl
-        
+        imageLoader.loadImage(by: imageUrl, completion: completion)
     }
     
     // MARK: - Life cycle
