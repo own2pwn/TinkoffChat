@@ -12,10 +12,7 @@ protocol IImageLoaderService
 {
     func getImages(for query: String,
                    count: Int,
-                   completion: () -> Void)
-    
-    func getImagesCount(for request: String,
-                        completion: (Int) -> Void)
+                   completion: (ImageListApiModel?) -> Void)
 }
 
 final class ImageLoaderService: IImageLoaderService
@@ -24,15 +21,10 @@ final class ImageLoaderService: IImageLoaderService
     
     func getImages(for query: String,
                    count: Int,
-                   completion: () -> Void)
+                   completion: (ImageListApiModel?) -> Void)
     {
-        
-    }
-    
-    func getImagesCount(for request: String,
-                        completion: (Int) -> Void)
-    {
-        
+        let getImagesRequest =
+        GetRequestFactory.ImageLoaderGetRequests.getImagesCountRequest()
     }
     
     // MARK: - Life cycle

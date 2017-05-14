@@ -56,6 +56,8 @@
 		B95ED5211EC88DBE00EBD076 /* IRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5201EC88DBE00EBD076 /* IRequest.swift */; };
 		B95ED5251EC88E1F00EBD076 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5241EC88E1F00EBD076 /* Parser.swift */; };
 		B95ED5281EC891C500EBD076 /* GetImagesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5271EC891C500EBD076 /* GetImagesParser.swift */; };
+		B95ED52A1EC8938E00EBD076 /* GetImagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5291EC8938E00EBD076 /* GetImagesRequest.swift */; };
+		B95ED52C1EC893C800EBD076 /* PixabayGetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED52B1EC893C800EBD076 /* PixabayGetRequest.swift */; };
 		B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */; };
 		B998147F1EAC90D400B95723 /* ConversationsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */; };
 		B999037A1EB722380047313B /* ModelValidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99903791EB722380047313B /* ModelValidable.swift */; };
@@ -119,6 +121,8 @@
 		B95ED5201EC88DBE00EBD076 /* IRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IRequest.swift; sourceTree = "<group>"; };
 		B95ED5241EC88E1F00EBD076 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		B95ED5271EC891C500EBD076 /* GetImagesParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImagesParser.swift; sourceTree = "<group>"; };
+		B95ED5291EC8938E00EBD076 /* GetImagesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImagesRequest.swift; sourceTree = "<group>"; };
+		B95ED52B1EC893C800EBD076 /* PixabayGetRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixabayGetRequest.swift; sourceTree = "<group>"; };
 		B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCAssembly.swift; sourceTree = "<group>"; };
 		B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListAssembly.swift; sourceTree = "<group>"; };
 		B99903791EB722380047313B /* ModelValidable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelValidable.swift; sourceTree = "<group>"; };
@@ -384,6 +388,7 @@
 			isa = PBXGroup;
 			children = (
 				B95ED5231EC88E0600EBD076 /* Common */,
+				B95ED5291EC8938E00EBD076 /* GetImagesRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -401,6 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				B95ED5201EC88DBE00EBD076 /* IRequest.swift */,
+				B95ED52B1EC893C800EBD076 /* PixabayGetRequest.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -545,6 +551,7 @@
 				10BAAB171E87B76000104295 /* Extensions.swift in Sources */,
 				B95ED5211EC88DBE00EBD076 /* IRequest.swift in Sources */,
 				100B0B9F1E7C5A8E00DD181F /* ProfileViewController.swift in Sources */,
+				B95ED52A1EC8938E00EBD076 /* GetImagesRequest.swift in Sources */,
 				B91B03B81EC075320030E7E0 /* Message+CoreDataProperties.swift in Sources */,
 				B926E3441EB623C300EFF3AC /* IManagedObject.swift in Sources */,
 				B926E3461EB62C0D00EFF3AC /* CoreDataWorker.swift in Sources */,
@@ -562,6 +569,7 @@
 				B91BEF941EC0992200467798 /* CoreDataService.swift in Sources */,
 				B95ED5081EC879F200EBD076 /* ImagePickerViewController.swift in Sources */,
 				10BAAB141E87B3C900104295 /* ConversationsListCell.swift in Sources */,
+				B95ED52C1EC893C800EBD076 /* PixabayGetRequest.swift in Sources */,
 				B95ED51E1EC88D9A00EBD076 /* IRequestSender.swift in Sources */,
 				B91B03C01EC0758C0030E7E0 /* User+CoreDataProperties.swift in Sources */,
 				B9291BFB1EACEC5800B4358F /* ConversationModel.swift in Sources */,

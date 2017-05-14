@@ -33,3 +33,8 @@ enum KFetchRequestTemplates
     static let ConversationByUserId = "ConversationByUserId"
     static let UsersById = "UsersById"
 }
+
+enum CRequest
+{
+    static let pixabayApiBaseUrl = "https://pixabay.com/api"
+}
