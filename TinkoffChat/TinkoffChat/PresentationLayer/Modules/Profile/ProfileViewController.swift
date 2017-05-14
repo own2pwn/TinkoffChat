@@ -92,7 +92,6 @@ final class ProfileViewController: UIViewController
 
     func onuserProfileImageViewTap()
     {
-
         let profileImageActionActionSheet = UIAlertController(title: "Установить изображение профиля", message: "", preferredStyle: .actionSheet)
 
         let confirmDeleteAlertController = UIAlertController(title: "Удалить изображение профиля?", message: "Отменить это действие будет невозможно", preferredStyle: .alert)
@@ -119,6 +118,11 @@ final class ProfileViewController: UIViewController
             self.present(imagePicker, animated: true, completion: nil)
         }
 
+        let loadFromInternetAction = UIAlertAction(title: "Загрузить из интернета", style: .default)
+        { _ in
+            self.performSegue(withIdentifier: self.showImagePickerSegue, sender: self)
+        }
+
         let cancelAction = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
 
         let deleteAction = UIAlertAction(title: "Удалить фото", style: .destructive)
@@ -139,6 +143,8 @@ final class ProfileViewController: UIViewController
         profileImageActionActionSheet.addAction(chooseFromLibraryAction)
 
         if UIImagePickerController.isSourceTypeAvailable(.camera) { profileImageActionActionSheet.addAction(takePhotoAction) }
+
+        profileImageActionActionSheet.addAction(loadFromInternetAction)
 
         if isProfileImageSet { profileImageActionActionSheet.addAction(deleteAction) }
 
@@ -216,6 +222,18 @@ final class ProfileViewController: UIViewController
 
     // MARK: - Private properties
 
+    // MARK: Lazy
+
+    private lazy var assembly: ProfileAssembly = {
+        ProfileAssembly()
+    }()
+
+    private lazy var model: IProfileModel = {
+        self.assembly.profileModel()
+    }()
+
+    // MARK: Stored
+
     fileprivate var isProfileImageSet = false
 
     private var onViewTapGesture = UITapGestureRecognizer()
@@ -232,13 +250,7 @@ final class ProfileViewController: UIViewController
         }
     }
 
-    private lazy var assembly: ProfileAssembly = {
-        ProfileAssembly()
-    }()
-
-    private lazy var model: IProfileModel = {
-        self.assembly.profileModel()
-    }()
+    private let showImagePickerSegue = "idShowImagePickerSegue"
 }
 
 // MARK: - Extensions
