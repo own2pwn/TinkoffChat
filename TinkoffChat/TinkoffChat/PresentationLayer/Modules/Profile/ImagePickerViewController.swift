@@ -18,10 +18,18 @@ final class ImagePickerViewController: UIViewController,
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
 
     // MARK: - Life cycle
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        model = ImagePickerAssembly.imagePickerModel()
+        super.init(coder: aDecoder)
+    }
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
+
+        loadingSpinner.startAnimating()
     }
 
     // MARK: - UICollectionViewDataSource
@@ -68,4 +76,6 @@ final class ImagePickerViewController: UIViewController,
     private let insetSize: CGFloat = 10
 
     private let itemsPerRow: CGFloat = 3
+    
+    private let model: IImagePickerModel
 }

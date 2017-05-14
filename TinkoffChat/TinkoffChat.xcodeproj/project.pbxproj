@@ -46,6 +46,8 @@
 		B948204C1EAD1BF500052AA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B948204B1EAD1BF500052AA9 /* AppDelegate.swift */; };
 		B95ED5081EC879F200EBD076 /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5071EC879F200EBD076 /* ImagePickerViewController.swift */; };
 		B95ED50A1EC87CC700EBD076 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5091EC87CC700EBD076 /* ImageCell.swift */; };
+		B95ED50C1EC889A800EBD076 /* ImagePickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED50B1EC889A800EBD076 /* ImagePickerModel.swift */; };
+		B95ED50E1EC88AD900EBD076 /* ImagePickerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED50D1EC88AD900EBD076 /* ImagePickerAssembly.swift */; };
 		B99322731EB719BF0051FEBD /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99322721EB719BF0051FEBD /* Result.swift */; };
 		B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */; };
 		B998147F1EAC90D400B95723 /* ConversationsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */; };
@@ -100,6 +102,8 @@
 		B948204B1EAD1BF500052AA9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B95ED5071EC879F200EBD076 /* ImagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
 		B95ED5091EC87CC700EBD076 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		B95ED50B1EC889A800EBD076 /* ImagePickerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerModel.swift; sourceTree = "<group>"; };
+		B95ED50D1EC88AD900EBD076 /* ImagePickerAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerAssembly.swift; sourceTree = "<group>"; };
 		B99322721EB719BF0051FEBD /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCAssembly.swift; sourceTree = "<group>"; };
 		B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListAssembly.swift; sourceTree = "<group>"; };
@@ -302,6 +306,8 @@
 			children = (
 				B95ED5071EC879F200EBD076 /* ImagePickerViewController.swift */,
 				B95ED5091EC87CC700EBD076 /* ImageCell.swift */,
+				B95ED50B1EC889A800EBD076 /* ImagePickerModel.swift */,
+				B95ED50D1EC88AD900EBD076 /* ImagePickerAssembly.swift */,
 			);
 			name = ImagePicker;
 			sourceTree = "<group>";
@@ -428,6 +434,7 @@
 				B9C696E81EC7A2DA0021CCED /* MPCCoreDataHelper.swift in Sources */,
 				B91BEF991EC0AA2500467798 /* FetchRequestProvider.swift in Sources */,
 				B926E3421EB6234200EFF3AC /* ManagedObjectConvertible.swift in Sources */,
+				B95ED50E1EC88AD900EBD076 /* ImagePickerAssembly.swift in Sources */,
 				B91AEE211EC2243600B7AB3D /* CommunicationHelper.swift in Sources */,
 				B910A2F21EABC176005637C1 /* IMPCWorker.swift in Sources */,
 				10BAAB091E87B0D800104295 /* ConversationsListViewController.swift in Sources */,
@@ -438,6 +445,7 @@
 				B926E3461EB62C0D00EFF3AC /* CoreDataWorker.swift in Sources */,
 				B95ED50A1EC87CC700EBD076 /* ImageCell.swift in Sources */,
 				307B77CD1EB1024C0048B8EC /* CoreDataStack.swift in Sources */,
+				B95ED50C1EC889A800EBD076 /* ImagePickerModel.swift in Sources */,
 				B91B03BF1EC0758C0030E7E0 /* User.swift in Sources */,
 				10BAAB191E87C1B400104295 /* ConversationViewController.swift in Sources */,
 				B99322731EB719BF0051FEBD /* Result.swift in Sources */,
