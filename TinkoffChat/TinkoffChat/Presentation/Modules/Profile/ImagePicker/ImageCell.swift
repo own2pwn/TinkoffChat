@@ -34,4 +34,13 @@ class ImageCell: UICollectionViewCell, ImageCellModel
             imageView.image = newValue
         }
     }
+
+    // MARK: - Life cycle
+
+    override func awakeFromNib()
+    {
+        super.awakeFromNib()
+
+        imageView.contentMode = .scaleAspectFit
+    }
 }

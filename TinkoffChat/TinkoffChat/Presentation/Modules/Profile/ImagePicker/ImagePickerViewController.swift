@@ -36,6 +36,7 @@ final class ImagePickerViewController: UIViewController, IImagePickerViewControl
 
     func reloadDataSource()
     {
+        invalidateCache()
         DispatchQueue.main.async
         {
             self.imagesCollectionView.reloadData()
@@ -64,6 +65,7 @@ final class ImagePickerViewController: UIViewController, IImagePickerViewControl
     {
         // swiftlint:disable:next force_cast line_length
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellDequeueIdentifier, for: indexPath) as! ImageCell
+        cell.image = fetchImage(for: indexPath)
 
         return cell
     }
@@ -90,6 +92,8 @@ final class ImagePickerViewController: UIViewController, IImagePickerViewControl
 
     private func setupLogic()
     {
+        let dummyImageData = UIImagePNGRepresentation(#imageLiteral(resourceName: "profileImg"))
+        cachedImagesData.append(dummyImageData)
         loadingSpinner.hidesWhenStopped = true
         model.delegate = self
     }
@@ -102,6 +106,29 @@ final class ImagePickerViewController: UIViewController, IImagePickerViewControl
         }
     }
 
+    private func fetchImage(for indexPath: IndexPath) -> UIImage
+    {
+        let row = indexPath.row
+        guard cachedImagesData.indices.contains(row),
+            let imageData = cachedImagesData[row] else
+        {
+            cachedImagesData.insert(Data(), at: 55)
+            return #imageLiteral(resourceName: "profileImg")
+        }
+        let image = UIImage(data: imageData) ?? #imageLiteral(resourceName: "profileImg")
+        return image
+    }
+
+    private func invalidateCache()
+    {
+        let imagesCount = model.imagesCount
+        cachedImagesData.removeAll()
+        cachedImages.removeAll()
+
+        cachedImagesData.reserveCapacity(imagesCount)
+        cachedImages.reserveCapacity(imagesCount)
+    }
+
     // MARK: Outlet actions
 
     @IBAction func didTapNavBarCloseButton(_ sender: UIBarButtonItem)
@@ -110,6 +137,10 @@ final class ImagePickerViewController: UIViewController, IImagePickerViewControl
     }
 
     // MARK: - Private properties
+
+    private var cachedImages = [UIImage]()
+
+    private var cachedImagesData = [Data?]()
 
     private let queryString = "yellow flowers"
 
