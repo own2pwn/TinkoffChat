@@ -12,6 +12,6 @@ struct GetRequestFactory
 {
     struct ImageLoaderGetRequests
     {
-        
+        static func getImagesCountRequest
     }
 }
