@@ -18,6 +18,9 @@
 		10BAAB1B1E87C36E00104295 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB1A1E87C36E00104295 /* MessageCell.swift */; };
 		307B77CB1EB101AA0048B8EC /* ChatModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 307B77C91EB101AA0048B8EC /* ChatModel.xcdatamodeld */; };
 		307B77CD1EB1024C0048B8EC /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307B77CC1EB1024C0048B8EC /* CoreDataStack.swift */; };
+		B90A789A1EC8BFAB00344163 /* PixabayJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A78991EC8BFAB00344163 /* PixabayJsonParser.swift */; };
+		B90A789D1EC8DF6C00344163 /* LoadImageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A789C1EC8DF6C00344163 /* LoadImageParser.swift */; };
+		B90A78A01EC8DFB000344163 /* LoadImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A789F1EC8DFB000344163 /* LoadImageRequest.swift */; };
 		B910A2EB1EABBB82005637C1 /* ConversationsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2EA1EABBB82005637C1 /* ConversationsListModel.swift */; };
 		B910A2F01EABBD9D005637C1 /* MPCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2EF1EABBD9D005637C1 /* MPCService.swift */; };
 		B910A2F21EABC176005637C1 /* IMPCWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2F11EABC176005637C1 /* IMPCWorker.swift */; };
@@ -44,7 +47,21 @@
 		B9291C101EAD0F7F00B4358F /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291C0F1EAD0F7F00B4358F /* ProfileModel.swift */; };
 		B9291C121EAD10A500B4358F /* ProfileAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291C111EAD10A500B4358F /* ProfileAssembly.swift */; };
 		B948204C1EAD1BF500052AA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B948204B1EAD1BF500052AA9 /* AppDelegate.swift */; };
-		B99322731EB719BF0051FEBD /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99322721EB719BF0051FEBD /* Result.swift */; };
+		B95ED5081EC879F200EBD076 /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5071EC879F200EBD076 /* ImagePickerViewController.swift */; };
+		B95ED50A1EC87CC700EBD076 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5091EC87CC700EBD076 /* ImageCell.swift */; };
+		B95ED50C1EC889A800EBD076 /* ImagePickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED50B1EC889A800EBD076 /* ImagePickerModel.swift */; };
+		B95ED50E1EC88AD900EBD076 /* ImagePickerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED50D1EC88AD900EBD076 /* ImagePickerAssembly.swift */; };
+		B95ED5121EC88C9600EBD076 /* ImageLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5111EC88C9600EBD076 /* ImageLoaderService.swift */; };
+		B95ED5161EC88CE900EBD076 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5151EC88CE900EBD076 /* Result.swift */; };
+		B95ED5191EC88D0000EBD076 /* GetRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5181EC88D0000EBD076 /* GetRequestFactory.swift */; };
+		B95ED51C1EC88D4200EBD076 /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED51B1EC88D4200EBD076 /* RequestSender.swift */; };
+		B95ED51E1EC88D9A00EBD076 /* IRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED51D1EC88D9A00EBD076 /* IRequestSender.swift */; };
+		B95ED5211EC88DBE00EBD076 /* IRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5201EC88DBE00EBD076 /* IRequest.swift */; };
+		B95ED5251EC88E1F00EBD076 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5241EC88E1F00EBD076 /* Parser.swift */; };
+		B95ED5281EC891C500EBD076 /* GetImagesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5271EC891C500EBD076 /* GetImagesParser.swift */; };
+		B95ED52A1EC8938E00EBD076 /* GetImagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5291EC8938E00EBD076 /* GetImagesRequest.swift */; };
+		B95ED52C1EC893C800EBD076 /* PixabayGetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED52B1EC893C800EBD076 /* PixabayGetRequest.swift */; };
+		B95ED52E1EC896D800EBD076 /* PixabayRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED52D1EC896D800EBD076 /* PixabayRequestSender.swift */; };
 		B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */; };
 		B998147F1EAC90D400B95723 /* ConversationsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */; };
 		B999037A1EB722380047313B /* ModelValidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99903791EB722380047313B /* ModelValidable.swift */; };
@@ -70,6 +87,9 @@
 		10BAAB1A1E87C36E00104295 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		307B77CA1EB101AA0048B8EC /* ChatModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChatModel.xcdatamodel; sourceTree = "<group>"; };
 		307B77CC1EB1024C0048B8EC /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		B90A78991EC8BFAB00344163 /* PixabayJsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixabayJsonParser.swift; sourceTree = "<group>"; };
+		B90A789C1EC8DF6C00344163 /* LoadImageParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadImageParser.swift; sourceTree = "<group>"; };
+		B90A789F1EC8DFB000344163 /* LoadImageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadImageRequest.swift; sourceTree = "<group>"; };
 		B910A2EA1EABBB82005637C1 /* ConversationsListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListModel.swift; sourceTree = "<group>"; };
 		B910A2EF1EABBD9D005637C1 /* MPCService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCService.swift; sourceTree = "<group>"; };
 		B910A2F11EABC176005637C1 /* IMPCWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMPCWorker.swift; sourceTree = "<group>"; };
@@ -96,7 +116,21 @@
 		B9291C0F1EAD0F7F00B4358F /* ProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		B9291C111EAD10A500B4358F /* ProfileAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileAssembly.swift; sourceTree = "<group>"; };
 		B948204B1EAD1BF500052AA9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B99322721EB719BF0051FEBD /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		B95ED5071EC879F200EBD076 /* ImagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
+		B95ED5091EC87CC700EBD076 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		B95ED50B1EC889A800EBD076 /* ImagePickerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerModel.swift; sourceTree = "<group>"; };
+		B95ED50D1EC88AD900EBD076 /* ImagePickerAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerAssembly.swift; sourceTree = "<group>"; };
+		B95ED5111EC88C9600EBD076 /* ImageLoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoaderService.swift; sourceTree = "<group>"; };
+		B95ED5151EC88CE900EBD076 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		B95ED5181EC88D0000EBD076 /* GetRequestFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetRequestFactory.swift; sourceTree = "<group>"; };
+		B95ED51B1EC88D4200EBD076 /* RequestSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestSender.swift; sourceTree = "<group>"; };
+		B95ED51D1EC88D9A00EBD076 /* IRequestSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IRequestSender.swift; sourceTree = "<group>"; };
+		B95ED5201EC88DBE00EBD076 /* IRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IRequest.swift; sourceTree = "<group>"; };
+		B95ED5241EC88E1F00EBD076 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		B95ED5271EC891C500EBD076 /* GetImagesParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImagesParser.swift; sourceTree = "<group>"; };
+		B95ED5291EC8938E00EBD076 /* GetImagesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImagesRequest.swift; sourceTree = "<group>"; };
+		B95ED52B1EC893C800EBD076 /* PixabayGetRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixabayGetRequest.swift; sourceTree = "<group>"; };
+		B95ED52D1EC896D800EBD076 /* PixabayRequestSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixabayRequestSender.swift; sourceTree = "<group>"; };
 		B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCAssembly.swift; sourceTree = "<group>"; };
 		B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListAssembly.swift; sourceTree = "<group>"; };
 		B99903791EB722380047313B /* ModelValidable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelValidable.swift; sourceTree = "<group>"; };
@@ -140,9 +174,9 @@
 			isa = PBXGroup;
 			children = (
 				B9291C011EAD031A00B4358F /* Common */,
-				B93675451EA34AF500B69AC8 /* CoreLayer */,
-				B93675431EA34AE500B69AC8 /* PresentationLayer */,
-				B93675441EA34AEF00B69AC8 /* ServiceLayer */,
+				B93675451EA34AF500B69AC8 /* Core */,
+				B93675431EA34AE500B69AC8 /* Presentation */,
+				B93675441EA34AEF00B69AC8 /* Service */,
 				B948204B1EAD1BF500052AA9 /* AppDelegate.swift */,
 			);
 			path = TinkoffChat;
@@ -170,6 +204,32 @@
 				B926E3331EB60CCA00EFF3AC /* StorageManager.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		B90A789B1EC8DF4800344163 /* Pixabay */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED5271EC891C500EBD076 /* GetImagesParser.swift */,
+				B90A789C1EC8DF6C00344163 /* LoadImageParser.swift */,
+			);
+			name = Pixabay;
+			sourceTree = "<group>";
+		};
+		B90A789E1EC8DFA100344163 /* Pixabay */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED5291EC8938E00EBD076 /* GetImagesRequest.swift */,
+				B90A789F1EC8DFB000344163 /* LoadImageRequest.swift */,
+			);
+			name = Pixabay;
+			sourceTree = "<group>";
+		};
+		B90A78A11EC8E5D400344163 /* Pixabay */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED5111EC88C9600EBD076 /* ImageLoaderService.swift */,
+			);
+			name = Pixabay;
 			sourceTree = "<group>";
 		};
 		B910A2E91EABBA22005637C1 /* Conversations */ = {
@@ -246,7 +306,6 @@
 				100B0BA31E7C5A8E00DD181F /* Assets.xcassets */,
 				100B0BA81E7C5A8E00DD181F /* Info.plist */,
 				100B0BA51E7C5A8E00DD181F /* LaunchScreen.storyboard */,
-				B99322721EB719BF0051FEBD /* Result.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -254,6 +313,7 @@
 		B9291C021EAD03CF00B4358F /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				B95ED5061EC879DD00EBD076 /* ImagePicker */,
 				B9291C111EAD10A500B4358F /* ProfileAssembly.swift */,
 				B9291C0F1EAD0F7F00B4358F /* ProfileModel.swift */,
 				100B0B9E1E7C5A8E00DD181F /* ProfileViewController.swift */,
@@ -261,35 +321,138 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		B93675431EA34AE500B69AC8 /* PresentationLayer */ = {
+		B93675431EA34AE500B69AC8 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
 				B9E4189E1EAA47B100FE1EA3 /* Modules */,
 				10BAAB051E87B04000104295 /* Main.storyboard */,
 			);
-			path = PresentationLayer;
+			path = Presentation;
 			sourceTree = "<group>";
 		};
-		B93675441EA34AEF00B69AC8 /* ServiceLayer */ = {
+		B93675441EA34AEF00B69AC8 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				B91BEF931EC0992200467798 /* CoreDataService.swift */,
-				B91B03A31EC050590030E7E0 /* DataStoreService.swift */,
-				B9F04F311EC836FC00AEA713 /* FetchedResultsControllerProviderService.swift */,
-				B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */,
-				B910A2EF1EABBD9D005637C1 /* MPCService.swift */,
+				B90A78A11EC8E5D400344163 /* Pixabay */,
+				B95ED50F1EC88C4B00EBD076 /* Data */,
+				B95ED5101EC88C5600EBD076 /* MPC */,
 			);
-			path = ServiceLayer;
+			path = Service;
 			sourceTree = "<group>";
 		};
-		B93675451EA34AF500B69AC8 /* CoreLayer */ = {
+		B93675451EA34AF500B69AC8 /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				B91AEE1F1EC2242100B7AB3D /* Common */,
 				30A0EF7E1EB0F5F300296A3D /* CoreData */,
 				B926E33F1EB6230C00EFF3AC /* MPC */,
+				B95ED5131EC88CC400EBD076 /* Networking */,
 			);
-			path = CoreLayer;
+			path = Core;
+			sourceTree = "<group>";
+		};
+		B95ED5061EC879DD00EBD076 /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED5091EC87CC700EBD076 /* ImageCell.swift */,
+				B95ED50D1EC88AD900EBD076 /* ImagePickerAssembly.swift */,
+				B95ED50B1EC889A800EBD076 /* ImagePickerModel.swift */,
+				B95ED5071EC879F200EBD076 /* ImagePickerViewController.swift */,
+			);
+			path = ImagePicker;
+			sourceTree = "<group>";
+		};
+		B95ED50F1EC88C4B00EBD076 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B91BEF931EC0992200467798 /* CoreDataService.swift */,
+				B91B03A31EC050590030E7E0 /* DataStoreService.swift */,
+				B9F04F311EC836FC00AEA713 /* FetchedResultsControllerProviderService.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		B95ED5101EC88C5600EBD076 /* MPC */ = {
+			isa = PBXGroup;
+			children = (
+				B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */,
+				B910A2EF1EABBD9D005637C1 /* MPCService.swift */,
+			);
+			path = MPC;
+			sourceTree = "<group>";
+		};
+		B95ED5131EC88CC400EBD076 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED5141EC88CDC00EBD076 /* Common */,
+				B95ED5221EC88DEB00EBD076 /* Parsers */,
+				B95ED5171EC88CF700EBD076 /* RequestFactory */,
+				B95ED51A1EC88D2F00EBD076 /* RequestManager */,
+				B95ED51F1EC88DB300EBD076 /* Requests */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		B95ED5141EC88CDC00EBD076 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED5151EC88CE900EBD076 /* Result.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		B95ED5171EC88CF700EBD076 /* RequestFactory */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED5181EC88D0000EBD076 /* GetRequestFactory.swift */,
+			);
+			path = RequestFactory;
+			sourceTree = "<group>";
+		};
+		B95ED51A1EC88D2F00EBD076 /* RequestManager */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED51D1EC88D9A00EBD076 /* IRequestSender.swift */,
+				B95ED51B1EC88D4200EBD076 /* RequestSender.swift */,
+				B95ED52D1EC896D800EBD076 /* PixabayRequestSender.swift */,
+			);
+			path = RequestManager;
+			sourceTree = "<group>";
+		};
+		B95ED51F1EC88DB300EBD076 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				B90A789E1EC8DFA100344163 /* Pixabay */,
+				B95ED5231EC88E0600EBD076 /* Common */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		B95ED5221EC88DEB00EBD076 /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				B90A789B1EC8DF4800344163 /* Pixabay */,
+				B95ED5261EC88E2700EBD076 /* Common */,
+			);
+			path = Parsers;
+			sourceTree = "<group>";
+		};
+		B95ED5231EC88E0600EBD076 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED5201EC88DBE00EBD076 /* IRequest.swift */,
+				B95ED52B1EC893C800EBD076 /* PixabayGetRequest.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		B95ED5261EC88E2700EBD076 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED5241EC88E1F00EBD076 /* Parser.swift */,
+				B90A78991EC8BFAB00344163 /* PixabayJsonParser.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		B9E4189E1EAA47B100FE1EA3 /* Modules */ = {
@@ -394,6 +557,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B948204C1EAD1BF500052AA9 /* AppDelegate.swift in Sources */,
+				B90A789A1EC8BFAB00344163 /* PixabayJsonParser.swift in Sources */,
 				B926E33D1EB6115500EFF3AC /* Profile.swift in Sources */,
 				B91B03C31EC0758C0030E7E0 /* AppUser.swift in Sources */,
 				307B77CB1EB101AA0048B8EC /* ChatModel.xcdatamodeld in Sources */,
@@ -401,39 +565,55 @@
 				B926E3341EB60CCA00EFF3AC /* StorageManager.swift in Sources */,
 				B999037A1EB722380047313B /* ModelValidable.swift in Sources */,
 				B9D845361E9D263800D6373C /* Constants.swift in Sources */,
+				B90A78A01EC8DFB000344163 /* LoadImageRequest.swift in Sources */,
 				B9F04F321EC836FC00AEA713 /* FetchedResultsControllerProviderService.swift in Sources */,
+				B95ED5281EC891C500EBD076 /* GetImagesParser.swift in Sources */,
 				B926E33E1EB6115500EFF3AC /* Profile+CoreDataProperties.swift in Sources */,
 				B998147F1EAC90D400B95723 /* ConversationsListAssembly.swift in Sources */,
 				B91B03C11EC0758C0030E7E0 /* Conversation.swift in Sources */,
 				B9291C101EAD0F7F00B4358F /* ProfileModel.swift in Sources */,
+				B95ED52E1EC896D800EBD076 /* PixabayRequestSender.swift in Sources */,
+				B95ED5191EC88D0000EBD076 /* GetRequestFactory.swift in Sources */,
 				B91B03B71EC075320030E7E0 /* Message.swift in Sources */,
 				B9291BFD1EACEC6200B4358F /* ConversationAssembly.swift in Sources */,
 				B9291C121EAD10A500B4358F /* ProfileAssembly.swift in Sources */,
+				B95ED5251EC88E1F00EBD076 /* Parser.swift in Sources */,
 				B91B03C41EC0758C0030E7E0 /* AppUser+CoreDataProperties.swift in Sources */,
 				10BAAB1B1E87C36E00104295 /* MessageCell.swift in Sources */,
 				B9C696E81EC7A2DA0021CCED /* MPCCoreDataHelper.swift in Sources */,
 				B91BEF991EC0AA2500467798 /* FetchRequestProvider.swift in Sources */,
 				B926E3421EB6234200EFF3AC /* ManagedObjectConvertible.swift in Sources */,
+				B90A789D1EC8DF6C00344163 /* LoadImageParser.swift in Sources */,
+				B95ED50E1EC88AD900EBD076 /* ImagePickerAssembly.swift in Sources */,
 				B91AEE211EC2243600B7AB3D /* CommunicationHelper.swift in Sources */,
 				B910A2F21EABC176005637C1 /* IMPCWorker.swift in Sources */,
 				10BAAB091E87B0D800104295 /* ConversationsListViewController.swift in Sources */,
 				10BAAB171E87B76000104295 /* Extensions.swift in Sources */,
+				B95ED5211EC88DBE00EBD076 /* IRequest.swift in Sources */,
 				100B0B9F1E7C5A8E00DD181F /* ProfileViewController.swift in Sources */,
+				B95ED52A1EC8938E00EBD076 /* GetImagesRequest.swift in Sources */,
 				B91B03B81EC075320030E7E0 /* Message+CoreDataProperties.swift in Sources */,
 				B926E3441EB623C300EFF3AC /* IManagedObject.swift in Sources */,
 				B926E3461EB62C0D00EFF3AC /* CoreDataWorker.swift in Sources */,
+				B95ED5121EC88C9600EBD076 /* ImageLoaderService.swift in Sources */,
+				B95ED50A1EC87CC700EBD076 /* ImageCell.swift in Sources */,
 				307B77CD1EB1024C0048B8EC /* CoreDataStack.swift in Sources */,
+				B95ED50C1EC889A800EBD076 /* ImagePickerModel.swift in Sources */,
 				B91B03BF1EC0758C0030E7E0 /* User.swift in Sources */,
 				10BAAB191E87C1B400104295 /* ConversationViewController.swift in Sources */,
-				B99322731EB719BF0051FEBD /* Result.swift in Sources */,
+				B95ED51C1EC88D4200EBD076 /* RequestSender.swift in Sources */,
 				B910A2F01EABBD9D005637C1 /* MPCService.swift in Sources */,
 				B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */,
 				B9B9E88F1EABF74C009CA699 /* MPCWorker.swift in Sources */,
 				B91B03C21EC0758C0030E7E0 /* Conversation+CoreDataProperties.swift in Sources */,
 				B91BEF941EC0992200467798 /* CoreDataService.swift in Sources */,
+				B95ED5081EC879F200EBD076 /* ImagePickerViewController.swift in Sources */,
 				10BAAB141E87B3C900104295 /* ConversationsListCell.swift in Sources */,
+				B95ED52C1EC893C800EBD076 /* PixabayGetRequest.swift in Sources */,
+				B95ED51E1EC88D9A00EBD076 /* IRequestSender.swift in Sources */,
 				B91B03C01EC0758C0030E7E0 /* User+CoreDataProperties.swift in Sources */,
 				B9291BFB1EACEC5800B4358F /* ConversationModel.swift in Sources */,
+				B95ED5161EC88CE900EBD076 /* Result.swift in Sources */,
 				B91B03A41EC050590030E7E0 /* DataStoreService.swift in Sources */,
 				B910A2EB1EABBB82005637C1 /* ConversationsListModel.swift in Sources */,
 			);

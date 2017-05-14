@@ -20,6 +20,8 @@ protocol IFetchRequestProvider
     func conversationByUserId(_ userId: String) -> NSFetchRequest<NSFetchRequestResult>
 
     func userById(_ userId: String) -> NSFetchRequest<NSFetchRequestResult>
+    
+    func profile() -> NSFetchRequest<NSFetchRequestResult>
 }
 
 final class FetchRequestProvider: IFetchRequestProvider
@@ -60,6 +62,14 @@ final class FetchRequestProvider: IFetchRequestProvider
         let frt = model.fetchRequestFromTemplate(withName: KFetchRequestTemplates.UsersById, substitutionVariables: vars)!
         frt.fetchLimit = 1
 
+        return frt
+    }
+    
+    func profile() -> NSFetchRequest<NSFetchRequestResult>
+    {
+        let model = coreDataWorker.managedObjectModel
+        let frt = model.fetchRequestTemplate(forName: KFetchRequestTemplates.Profile)!
+        
         return frt
     }
 
