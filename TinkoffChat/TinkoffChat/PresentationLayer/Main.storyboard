@@ -396,10 +396,10 @@
             </objects>
             <point key="canvasLocation" x="1831.2" y="915.29235382308855"/>
         </scene>
-        <!--View Controller-->
+        <!--Image Picker View Controller-->
         <scene sceneID="ZnX-np-rBz">
             <objects>
-                <viewController id="RHh-6S-tZ7" sceneMemberID="viewController">
+                <viewController id="RHh-6S-tZ7" customClass="ImagePickerViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iTv-Z4-Gb7"/>
                         <viewControllerLayoutGuide type="bottom" id="aOK-FP-Uzp"/>
@@ -438,7 +438,13 @@
                                     <constraint firstAttribute="height" constant="64" id="FxF-Ua-70k"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem title="Изборажение профиля" id="62g-Jm-sQ8"/>
+                                    <navigationItem title="Изборажение профиля" id="62g-Jm-sQ8">
+                                        <barButtonItem key="leftBarButtonItem" title="X" id="Y19-ju-2pJ">
+                                            <connections>
+                                                <action selector="didTapNavBarCloseButton:" destination="RHh-6S-tZ7" id="yqd-Kv-jua"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                         </subviews>

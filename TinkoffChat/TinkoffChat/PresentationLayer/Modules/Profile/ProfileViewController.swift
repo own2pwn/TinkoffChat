@@ -52,7 +52,7 @@ final class ProfileViewController: UIViewController
 
     @IBAction func didTapCloseNavBarButton(_ sender: UIBarButtonItem)
     {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
 
     // MARK: - Private methods

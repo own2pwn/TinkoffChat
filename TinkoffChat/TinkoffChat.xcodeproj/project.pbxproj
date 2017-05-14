@@ -44,6 +44,7 @@
 		B9291C101EAD0F7F00B4358F /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291C0F1EAD0F7F00B4358F /* ProfileModel.swift */; };
 		B9291C121EAD10A500B4358F /* ProfileAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9291C111EAD10A500B4358F /* ProfileAssembly.swift */; };
 		B948204C1EAD1BF500052AA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B948204B1EAD1BF500052AA9 /* AppDelegate.swift */; };
+		B95ED5081EC879F200EBD076 /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95ED5071EC879F200EBD076 /* ImagePickerViewController.swift */; };
 		B99322731EB719BF0051FEBD /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99322721EB719BF0051FEBD /* Result.swift */; };
 		B998147B1EAC8F7B00B95723 /* MPCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */; };
 		B998147F1EAC90D400B95723 /* ConversationsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */; };
@@ -96,6 +97,7 @@
 		B9291C0F1EAD0F7F00B4358F /* ProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		B9291C111EAD10A500B4358F /* ProfileAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileAssembly.swift; sourceTree = "<group>"; };
 		B948204B1EAD1BF500052AA9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B95ED5071EC879F200EBD076 /* ImagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
 		B99322721EB719BF0051FEBD /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		B998147A1EAC8F7B00B95723 /* MPCAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCAssembly.swift; sourceTree = "<group>"; };
 		B998147E1EAC90D400B95723 /* ConversationsListAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsListAssembly.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 		B9291C021EAD03CF00B4358F /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				B95ED5061EC879DD00EBD076 /* ImagePicker */,
 				B9291C111EAD10A500B4358F /* ProfileAssembly.swift */,
 				B9291C0F1EAD0F7F00B4358F /* ProfileModel.swift */,
 				100B0B9E1E7C5A8E00DD181F /* ProfileViewController.swift */,
@@ -290,6 +293,14 @@
 				B926E33F1EB6230C00EFF3AC /* MPC */,
 			);
 			path = CoreLayer;
+			sourceTree = "<group>";
+		};
+		B95ED5061EC879DD00EBD076 /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				B95ED5071EC879F200EBD076 /* ImagePickerViewController.swift */,
+			);
+			name = ImagePicker;
 			sourceTree = "<group>";
 		};
 		B9E4189E1EAA47B100FE1EA3 /* Modules */ = {
@@ -431,6 +442,7 @@
 				B9B9E88F1EABF74C009CA699 /* MPCWorker.swift in Sources */,
 				B91B03C21EC0758C0030E7E0 /* Conversation+CoreDataProperties.swift in Sources */,
 				B91BEF941EC0992200467798 /* CoreDataService.swift in Sources */,
+				B95ED5081EC879F200EBD076 /* ImagePickerViewController.swift in Sources */,
 				10BAAB141E87B3C900104295 /* ConversationsListCell.swift in Sources */,
 				B91B03C01EC0758C0030E7E0 /* User+CoreDataProperties.swift in Sources */,
 				B9291BFB1EACEC5800B4358F /* ConversationModel.swift in Sources */,
