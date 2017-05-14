@@ -26,7 +26,10 @@ final class ImagePickerModel: IImagePickerModel
     
     func loadImages()
     {
-        
+        imageLoader.getImages(for: "test query", count: 5)
+        { imageListModel in
+            print(imageListModel)
+        }
     }
     
     // MARK: - Life cycle

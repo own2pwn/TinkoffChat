@@ -30,6 +30,7 @@ final class ImagePickerViewController: UIViewController,
         super.viewDidLoad()
 
         loadingSpinner.startAnimating()
+        model.loadImages()
     }
 
     // MARK: - UICollectionViewDataSource
