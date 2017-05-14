@@ -15,6 +15,8 @@ final class ImagePickerViewController: UIViewController,
 
     @IBOutlet weak var imagesCollectionView: UICollectionView!
 
+    @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
+
     // MARK: - Life cycle
 
     override func viewDidLoad()
