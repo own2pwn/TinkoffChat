@@ -24,6 +24,9 @@ final class GetImagesParser: Parser<ImageListApiModel>
 
     override func parse(response: Data) -> ImageListApiModel?
     {
+        let text = String(data: response, encoding: .utf8)
+        print(text)
+
         return nil
     }
 }

@@ -10,8 +10,19 @@ import Foundation
 
 final class ImagePickerAssembly
 {
-    static func imagePickerModel() -> IImagePickerModel
-    {
-        return imagePickerModel()
-    }
+    lazy var imagePickerModel: IImagePickerModel = {
+        ImagePickerModel(imageLoaderService: self.imageLoader)
+    }()
+
+    // MARK: - Private
+
+    // MARK: Services
+
+    private lazy var imageLoader: IImageLoaderService = {
+        ImageLoaderService(requestSender: self.requestSender)
+    }()
+
+    // MARK: Core objects
+
+    private let requestSender: IRequestSender = RequestSender()
 }
