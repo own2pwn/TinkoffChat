@@ -18,6 +18,9 @@
 		10BAAB1B1E87C36E00104295 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BAAB1A1E87C36E00104295 /* MessageCell.swift */; };
 		307B77CB1EB101AA0048B8EC /* ChatModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 307B77C91EB101AA0048B8EC /* ChatModel.xcdatamodeld */; };
 		307B77CD1EB1024C0048B8EC /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307B77CC1EB1024C0048B8EC /* CoreDataStack.swift */; };
+		30BEEE501ED8937000935A72 /* TinkoffChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BEEE4F1ED8937000935A72 /* TinkoffChatTests.swift */; };
+		30BEEE581ED8941200935A72 /* FactorialCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BEEE571ED8941200935A72 /* FactorialCalculator.swift */; };
+		30BEEE5A1ED8948000935A72 /* FactorialCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BEEE591ED8948000935A72 /* FactorialCalculatorTests.swift */; };
 		B90A789A1EC8BFAB00344163 /* PixabayJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A78991EC8BFAB00344163 /* PixabayJsonParser.swift */; };
 		B90A789D1EC8DF6C00344163 /* LoadImageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A789C1EC8DF6C00344163 /* LoadImageParser.swift */; };
 		B90A78A01EC8DFB000344163 /* LoadImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A789F1EC8DFB000344163 /* LoadImageRequest.swift */; };
@@ -73,6 +76,16 @@
 		B9F04F381EC860C800AEA713 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = B9F04F371EC860C800AEA713 /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		30BEEE521ED8937000935A72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 100B0B911E7C5A8E00DD181F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 100B0B981E7C5A8E00DD181F;
+			remoteInfo = TinkoffChat;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		100B0B991E7C5A8E00DD181F /* TinkoffChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		100B0B9E1E7C5A8E00DD181F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +100,11 @@
 		10BAAB1A1E87C36E00104295 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		307B77CA1EB101AA0048B8EC /* ChatModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChatModel.xcdatamodel; sourceTree = "<group>"; };
 		307B77CC1EB1024C0048B8EC /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		30BEEE4D1ED8937000935A72 /* TinkoffChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinkoffChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		30BEEE4F1ED8937000935A72 /* TinkoffChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkoffChatTests.swift; sourceTree = "<group>"; };
+		30BEEE511ED8937000935A72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30BEEE571ED8941200935A72 /* FactorialCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FactorialCalculator.swift; path = TinkoffChatTests/FactorialCalculator.swift; sourceTree = SOURCE_ROOT; };
+		30BEEE591ED8948000935A72 /* FactorialCalculatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FactorialCalculatorTests.swift; sourceTree = "<group>"; };
 		B90A78991EC8BFAB00344163 /* PixabayJsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixabayJsonParser.swift; sourceTree = "<group>"; };
 		B90A789C1EC8DF6C00344163 /* LoadImageParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadImageParser.swift; sourceTree = "<group>"; };
 		B90A789F1EC8DFB000344163 /* LoadImageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadImageRequest.swift; sourceTree = "<group>"; };
@@ -150,12 +168,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		30BEEE4A1ED8937000935A72 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		100B0B901E7C5A8E00DD181F = {
 			isa = PBXGroup;
 			children = (
+				30BEEE4E1ED8937000935A72 /* TinkoffChatTests */,
 				100B0B9A1E7C5A8E00DD181F /* Products */,
 				100B0B9B1E7C5A8E00DD181F /* TinkoffChat */,
 				B9F04F371EC860C800AEA713 /* .swiftlint.yml */,
@@ -166,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				100B0B991E7C5A8E00DD181F /* TinkoffChat.app */,
+				30BEEE4D1ED8937000935A72 /* TinkoffChatTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -178,6 +205,7 @@
 				B93675431EA34AE500B69AC8 /* Presentation */,
 				B93675441EA34AEF00B69AC8 /* Service */,
 				B948204B1EAD1BF500052AA9 /* AppDelegate.swift */,
+				30BEEE571ED8941200935A72 /* FactorialCalculator.swift */,
 			);
 			path = TinkoffChat;
 			sourceTree = "<group>";
@@ -204,6 +232,16 @@
 				B926E3331EB60CCA00EFF3AC /* StorageManager.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		30BEEE4E1ED8937000935A72 /* TinkoffChatTests */ = {
+			isa = PBXGroup;
+			children = (
+				30BEEE4F1ED8937000935A72 /* TinkoffChatTests.swift */,
+				30BEEE511ED8937000935A72 /* Info.plist */,
+				30BEEE591ED8948000935A72 /* FactorialCalculatorTests.swift */,
+			);
+			path = TinkoffChatTests;
 			sourceTree = "<group>";
 		};
 		B90A789B1EC8DF4800344163 /* Pixabay */ = {
@@ -486,13 +524,31 @@
 			productReference = 100B0B991E7C5A8E00DD181F /* TinkoffChat.app */;
 			productType = "com.apple.product-type.application";
 		};
+		30BEEE4C1ED8937000935A72 /* TinkoffChatTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30BEEE561ED8937000935A72 /* Build configuration list for PBXNativeTarget "TinkoffChatTests" */;
+			buildPhases = (
+				30BEEE491ED8937000935A72 /* Sources */,
+				30BEEE4A1ED8937000935A72 /* Frameworks */,
+				30BEEE4B1ED8937000935A72 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				30BEEE531ED8937000935A72 /* PBXTargetDependency */,
+			);
+			name = TinkoffChatTests;
+			productName = TinkoffChatTests;
+			productReference = 30BEEE4D1ED8937000935A72 /* TinkoffChatTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		100B0B911E7C5A8E00DD181F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0820;
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Evgeniy;
 				TargetAttributes = {
@@ -500,6 +556,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = VD97XKT54M;
 						ProvisioningStyle = Automatic;
+					};
+					30BEEE4C1ED8937000935A72 = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 100B0B981E7C5A8E00DD181F;
 					};
 				};
 			};
@@ -517,6 +578,7 @@
 			projectRoot = "";
 			targets = (
 				100B0B981E7C5A8E00DD181F /* TinkoffChat */,
+				30BEEE4C1ED8937000935A72 /* TinkoffChatTests */,
 			);
 		};
 /* End PBXProject section */
@@ -530,6 +592,13 @@
 				10BAAB061E87B04000104295 /* Main.storyboard in Resources */,
 				100B0BA71E7C5A8E00DD181F /* LaunchScreen.storyboard in Resources */,
 				100B0BA41E7C5A8E00DD181F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30BEEE4B1ED8937000935A72 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -619,7 +688,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		30BEEE491ED8937000935A72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30BEEE501ED8937000935A72 /* TinkoffChatTests.swift in Sources */,
+				30BEEE581ED8941200935A72 /* FactorialCalculator.swift in Sources */,
+				30BEEE5A1ED8948000935A72 /* FactorialCalculatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		30BEEE531ED8937000935A72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 100B0B981E7C5A8E00DD181F /* TinkoffChat */;
+			targetProxy = 30BEEE521ED8937000935A72 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		100B0BA51E7C5A8E00DD181F /* LaunchScreen.storyboard */ = {
@@ -759,6 +846,36 @@
 			};
 			name = Release;
 		};
+		30BEEE541ED8937000935A72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				INFOPLIST_FILE = TinkoffChatTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = own2pwn.pp.TinkoffChatTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TinkoffChat.app/TinkoffChat";
+			};
+			name = Debug;
+		};
+		30BEEE551ED8937000935A72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				INFOPLIST_FILE = TinkoffChatTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = own2pwn.pp.TinkoffChatTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TinkoffChat.app/TinkoffChat";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -779,6 +896,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		30BEEE561ED8937000935A72 /* Build configuration list for PBXNativeTarget "TinkoffChatTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30BEEE541ED8937000935A72 /* Debug */,
+				30BEEE551ED8937000935A72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 
